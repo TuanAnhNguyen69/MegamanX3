@@ -23,7 +23,7 @@ bool Texture::Initialize(LPDIRECT3DDEVICE9 device, LPCSTR textureFileName)
 {
 	std::string tempName(textureFileName);
 	name = std::string(tempName.begin(), tempName.end());
-	int pos = name.find_last_of("/");
+	size_t pos = name.find_last_of("/");
 	if (pos >= 0) {
 		name = name.substr(pos + 1, name.length());
 	}

@@ -24,6 +24,8 @@ private:
 	void Update();
 	void Render();
 
+	Sprite *sprite;
+	AnimatedSprite *animatedSprite;
 	LPD3DXSPRITE spriteHandler;
 	Graphics *graphics;
 	static Engine *instance;
