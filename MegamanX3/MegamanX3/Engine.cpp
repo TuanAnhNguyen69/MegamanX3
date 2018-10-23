@@ -8,6 +8,10 @@ Engine *Engine::instance = nullptr;
 Engine::Engine()
 {
 	graphics = nullptr;
+	entityManager = nullptr;
+	resourceManager = nullptr;
+	input = nullptr;
+	spriteHandler = nullptr;
 }
 
 Engine::~Engine()
@@ -21,6 +25,21 @@ Engine::~Engine()
 		spriteHandler->Release();
 		spriteHandler = nullptr;
 	}
+
+	if (input) {
+		delete input;
+		input = nullptr;
+	}
+
+	if (resourceManager) {
+		delete resourceManager;
+		resourceManager = nullptr;
+	}
+
+	if (entityManager) {
+		delete entityManager;
+		entityManager = nullptr;
+	}
 }
 
 bool Engine::InitializeGraphics(HWND hwnd)
@@ -32,12 +51,21 @@ bool Engine::InitializeGraphics(HWND hwnd)
 
 bool Engine::Initialize(HINSTANCE instance, HWND hwnd)
 {
+	entityManager = EntityManager::GetInstance();
+
+	resourceManager = ResourceManager::GetInstance();
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "mario-shell-sprite.png");
+	
+	input = new Input();
+	input->Initialize(instance, hwnd);
+
 	graphics->Initialize();
+
 	HRESULT result = D3DXCreateSprite(graphics->GetDevice(), &spriteHandler);
 	if (FAILED(result)) {
 		return false;
 	}
-	ResourceManager::GetInstance()->LoadTextureResource(graphics->GetDevice(), "mario-shell-sprite.png");
+	
 	animatedSprite = new AnimatedSprite(15, 1.0, true);
 	animatedSprite->Initialize(graphics->GetDevice(), "mario-shell-sprite", 3.0f, 3.0f, 85.0f, 64.0f);
 	
@@ -82,6 +110,8 @@ void Engine::Update()
 {
 	animatedSprite->Update();
 	sprite->Update();
+	entityManager->Update();
+	input->Update();
 }
 
 void Engine::Render()

@@ -55,6 +55,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SweptAABB.h">
+    <ClInclude Include="Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -96,6 +100,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EntityManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

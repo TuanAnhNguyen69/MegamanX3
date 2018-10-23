@@ -4,6 +4,9 @@
 #include "Graphics.h"
 #include "Sprite.h"
 #include "AnimatedSprite.h"
+#include "Input.h"
+#include "EntityManager.h"
+#include "ResourceManager.h"
 
 class Engine
 {
@@ -26,8 +29,13 @@ private:
 
 	Sprite *sprite;
 	AnimatedSprite *animatedSprite;
-	LPD3DXSPRITE spriteHandler;
+
+	Input *input;
+	ResourceManager *resourceManager;
+	EntityManager *entityManager;
 	Graphics *graphics;
+	LPD3DXSPRITE spriteHandler;
+
 	static Engine *instance;
 };
 
