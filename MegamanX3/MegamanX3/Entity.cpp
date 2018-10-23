@@ -18,16 +18,16 @@ Entity::~Entity()
 	}
 }
 
-void Entity::InitializeSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName)
+void Entity::InitializeSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float frameWidth, float frameHeight, float top, float left)
 {
-	sprite = new Sprite();
+	sprite = new Sprite(frameWidth, frameHeight, top, left);
 	sprite->Initialize(device, textureName);
 }
 
-void Entity::InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float animationSpeed, bool isLooping)
+void Entity::InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float maxFramesRow, float frameWidth, float frameHeight, float top, float left, float animationSpeed, bool isLooping)
 {
 	sprite = new AnimatedSprite(framesPerSecond, animationSpeed, isLooping);
-	((AnimatedSprite*)sprite)->Initialize(device, textureName);
+	((AnimatedSprite*)sprite)->Initialize(device, textureName, maxFramesRow, frameWidth, frameHeight, top, left);
 }
 
 void Entity::Update()

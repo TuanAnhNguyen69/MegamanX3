@@ -14,12 +14,17 @@ AnimatedSprite::~AnimatedSprite()
 {
 }
 
-void AnimatedSprite::Initialize(LPDIRECT3DDEVICE9 device, LPCTSTR textureName)
+void AnimatedSprite::Initialize(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float maxFrames, float maxFramesRow, float frameWidth, float frameHeight, float top, float left)
 {
 	Sprite::Initialize(device, textureName);
 	currentFrame = 0;
 	previousFrame = -1.0f;
-	maxFrames = 7;
+	this->maxFrames = maxFrames;
+	this->maxFramesRow = maxFramesRow;
+	this->frameWidth = frameWidth;
+	this->frameHeight = frameHeight;
+	this->initialTop = top;
+	this->initialLeft = left;
 }
 
 void AnimatedSprite::Update()
@@ -30,9 +35,8 @@ void AnimatedSprite::Update()
 
 	if (currentFrame < maxFrames) {
 		float dt = Timer::GetDeltaTime();
-		//std::cout << "Delta time: " << dt << std::endl;
 		currentSpeed += animationSpeed * dt;
-		//std::cout << "Current speed: " << currentSpeed << std::endl;
+		std::cout << "Current speed: " << currentSpeed << std::endl;
 
 		if (currentSpeed > framesPerSecond) {
 			currentFrame++;
@@ -49,20 +53,20 @@ void AnimatedSprite::Update()
 		}
 	}
 
-	//std::cout << "Current frames: " << currentFrame << std::endl;
+	std::cout << "Current frame: " << currentFrame << std::endl;
 
 	if (currentFrame == previousFrame) {
 		return;
 	}
 
 	previousFrame = currentFrame;
+
+	top = initialTop + ((int)(currentFrame / (maxFramesRow)) * frameHeight);
+	left = initialLeft + (((int)currentFrame % (int)maxFramesRow) * frameWidth);
+
 }
 
 void AnimatedSprite::Render(D3DXVECTOR3 position)
 {
-	rect.top = 400;
-	rect.left = (int)(currentFrame * 43) + 93;
-	rect.right = rect.left + 43;
-	rect.bottom = rect.top + 55;
-	Sprite::Render(position, rect);
+	Sprite::Render(position);
 }
