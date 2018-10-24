@@ -21,10 +21,11 @@ FrameWork::~FrameWork()
 	instance = nullptr;
 }
 
-bool FrameWork::Initialize() {
+bool FrameWork::Initialize(GameComponent *gameComponent) {
 	if (!CreateDxWindow((char *)"Megaman", WINDOW_POSX, WINDOW_POSY, SCREEN_WIDTH, SCREEN_HEIGHT)) {
 		return false;
 	}
+	Engine::GetEngine()->SetGameComponent(gameComponent);
 	if (!Engine::GetEngine()->Initialize(instance, Engine::GetEngine()->GetGraphics()->GetHwnd())) {
 		return false;
 	}
@@ -46,7 +47,6 @@ void FrameWork::Run() {
 		}
 	}
 }
-
 
 bool FrameWork::CreateDxWindow(char* windowTitle, int x, int y, int width, int height) {
 	HWND hwnd;

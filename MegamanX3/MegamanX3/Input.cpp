@@ -1,5 +1,5 @@
-#include "Input.h"
 #include "pch.h"
+#include "Input.h"
 
 Input::Input(void)
 {

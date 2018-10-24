@@ -11,7 +11,7 @@ public:
 	~Entity();
 
 	void InitializeSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float frameWidth, float frameHeight, float top = 0, float left = 0);
-	void InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float maxFramesRow, float frameWidth, float frameHeight, float top = 0, float left = 0, float animationSpeed = 1.0f, bool isLooping = true);
+	void InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float maxFrames, float maxFramesRow, float frameWidth, float frameHeight, float top = 0, float left = 0, float animationSpeed = 1.0f, bool isLooping = true);
 
 	void Update();
 	void Render();
@@ -22,8 +22,8 @@ private:
 	Entity(void);
 
 	D3DXMATRIX matrixTranslation;
-	D3DXVECTOR2 position;
-	D3DXVECTOR2 velocity;
+	D3DXVECTOR3 position;
+	D3DXVECTOR3 velocity;
 	Sprite *sprite;
 };
 

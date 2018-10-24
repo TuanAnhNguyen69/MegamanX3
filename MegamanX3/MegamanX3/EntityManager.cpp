@@ -23,6 +23,10 @@ void EntityManager::Update()
 
 void EntityManager::Render()
 {
+	int size = entities.size();
+	for (int index = 0; index < size; index++) {
+		entities[index]->Render();
+	}
 }
 
 Entity * EntityManager::AddEntity()

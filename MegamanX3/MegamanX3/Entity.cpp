@@ -5,8 +5,8 @@
 
 Entity::Entity()
 {
-	position = D3DXVECTOR2(0, 0);
-	velocity = D3DXVECTOR2(0, 0);
+	position = D3DXVECTOR3(0, 0, 0);
+	velocity = D3DXVECTOR3(0, 0, 0);
 	sprite = nullptr;
 }
 
@@ -24,10 +24,10 @@ void Entity::InitializeSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, flo
 	sprite->Initialize(device, textureName);
 }
 
-void Entity::InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float maxFramesRow, float frameWidth, float frameHeight, float top, float left, float animationSpeed, bool isLooping)
+void Entity::InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float maxFrames, float maxFramesRow, float frameWidth, float frameHeight, float top, float left, float animationSpeed, bool isLooping)
 {
 	sprite = new AnimatedSprite(framesPerSecond, animationSpeed, isLooping);
-	((AnimatedSprite*)sprite)->Initialize(device, textureName, maxFramesRow, frameWidth, frameHeight, top, left);
+	((AnimatedSprite*)sprite)->Initialize(device, textureName, maxFrames, maxFramesRow, frameWidth, frameHeight, top, left);
 }
 
 void Entity::Update()
@@ -46,6 +46,9 @@ void Entity::Update()
 
 void Entity::Render()
 {
+	if (sprite) {
+		sprite->Render(position);
+	}
 }
 
 void Entity::SetPosition(float x, float y)

@@ -12,11 +12,12 @@ public:
 	FrameWork();
 	~FrameWork();
 
-	bool Initialize();
+	bool Initialize(GameComponent *gameComponent);
 	void Run();
 
 private:
 	bool CreateDxWindow(char* windowTitle, int x, int y, int width, int height);
+	
 	char *applicationName;
 	HINSTANCE instance;
 };

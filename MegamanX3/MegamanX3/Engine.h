@@ -7,6 +7,7 @@
 #include "Input.h"
 #include "EntityManager.h"
 #include "ResourceManager.h"
+#include "GameComponent.h"
 
 class Engine
 {
@@ -18,6 +19,8 @@ public:
 	void Run();
 	void Release();
 
+	void SetGameComponent(GameComponent *gameComponent);
+	Input *GetInput();
 	Graphics * GetGraphics();
 	static Engine* GetEngine();
 	LPD3DXSPRITE GetSpriteHandler();
@@ -27,9 +30,7 @@ private:
 	void Update();
 	void Render();
 
-	Sprite *sprite;
-	AnimatedSprite *animatedSprite;
-
+	GameComponent *gameComponent;
 	Input *input;
 	ResourceManager *resourceManager;
 	EntityManager *entityManager;

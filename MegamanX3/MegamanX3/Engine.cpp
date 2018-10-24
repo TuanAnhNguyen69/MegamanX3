@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Engine.h"
 #include "ResourceManager.h"
+#include <iostream>
 
 Engine *Engine::instance = nullptr;
 
@@ -11,6 +12,7 @@ Engine::Engine()
 	entityManager = nullptr;
 	resourceManager = nullptr;
 	input = nullptr;
+	gameComponent = nullptr;
 	spriteHandler = nullptr;
 }
 
@@ -40,6 +42,11 @@ Engine::~Engine()
 		delete entityManager;
 		entityManager = nullptr;
 	}
+	
+	if (gameComponent) {
+		delete gameComponent;
+		gameComponent = nullptr;
+	}
 }
 
 bool Engine::InitializeGraphics(HWND hwnd)
@@ -66,11 +73,14 @@ bool Engine::Initialize(HINSTANCE instance, HWND hwnd)
 		return false;
 	}
 	
-	animatedSprite = new AnimatedSprite(15, 1.0, true);
-	animatedSprite->Initialize(graphics->GetDevice(), "mario-shell-sprite", 3.0f, 3.0f, 85.0f, 64.0f);
-	
-	sprite = new Sprite(80, 64);
-	sprite->Initialize(graphics->GetDevice(), "mario-shell-sprite");
+	if (gameComponent != nullptr) {
+		if (!gameComponent->Initialize()) {
+			return false;
+		}
+	}
+	else {
+		std::cout << "NO GAME COMPONENT" << std::endl;
+	}
 	return true;
 }
  
@@ -86,6 +96,16 @@ void Engine::Release()
 		delete instance;
 		instance = nullptr;
 	}
+}
+
+void Engine::SetGameComponent(GameComponent * gameComponent)
+{
+	this->gameComponent = gameComponent;
+}
+
+Input * Engine::GetInput()
+{
+	return input;
 }
 
 Graphics * Engine::GetGraphics()
@@ -108,8 +128,9 @@ LPD3DXSPRITE Engine::GetSpriteHandler()
 
 void Engine::Update()
 {
-	animatedSprite->Update();
-	sprite->Update();
+	if (gameComponent != nullptr) {
+		gameComponent->Update();
+	}
 	entityManager->Update();
 	input->Update();
 }
@@ -118,8 +139,12 @@ void Engine::Render()
 {
 	graphics->BeginScene(D3DCOLOR_ARGB(1, 0, 0, 0));
 	spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-	animatedSprite->Render(D3DXVECTOR3(300, 300, 0));
-	sprite->Render(D3DXVECTOR3(100, 100, 0));
+	
+	if (gameComponent != nullptr) {
+		gameComponent->Render();
+	}
+	entityManager->Render();
+
 	spriteHandler->End();
 	graphics->EndScene();
 }
