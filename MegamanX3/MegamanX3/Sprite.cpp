@@ -41,3 +41,13 @@ void Sprite::Render(D3DXVECTOR3 position)
 		Engine::GetEngine()->GetSpriteHandler()->Draw(texture->GetTexture(), &rect, nullptr, &position, color);
 	}
 }
+
+float Sprite::GetFrameWidth()
+{
+	return frameWidth;
+}
+
+float Sprite::GetFrameHeight()
+{
+	return frameHeight;
+}

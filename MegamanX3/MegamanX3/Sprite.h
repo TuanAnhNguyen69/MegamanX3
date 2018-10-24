@@ -15,6 +15,9 @@ public:
 	virtual void Update() {}
 	virtual void Render(D3DXVECTOR3 position);
 
+	float GetFrameWidth();
+	float GetFrameHeight();
+
 protected:
 	float frameHeight;
 	float frameWidth;

@@ -18,6 +18,7 @@ public:
 
 	void SetPosition(float x = 0.0f, float y = 0.0f);
 	void SetVelocity(float x = 0.0f, float y = 0.0f);
+	void SetReverse(bool reverse);
 private:
 	Entity(void);
 
@@ -25,6 +26,7 @@ private:
 	D3DXVECTOR3 position;
 	D3DXVECTOR3 velocity;
 	Sprite *sprite;
+	bool reverse;
 };
 
 #endif
