@@ -17,6 +17,8 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
@@ -37,6 +39,8 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="mario-shell-sprite.png" />

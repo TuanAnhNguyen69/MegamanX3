@@ -40,7 +40,12 @@ void Entity::Update()
 	position += velocity * dt;
 	velocity *= 0.96f;
 
-	D3DXMatrixTranslation(&matrixTranslation, position.x, position.y, 0);
+	D3DXVECTOR2 center(position.x + (sprite->GetFrameWidth() / 2), position.y + (sprite->GetFrameHeight() / 2));
+	D3DXVECTOR2 scale(1, 1);
+	if (reverse) {
+		scale.x = -1;
+	}
+	D3DXMatrixTransformation2D(&transformMatrix, &center, 0.0f, &scale, nullptr, 0.0f, nullptr);
 
 	if (sprite) {
 		sprite->Update();
@@ -54,20 +59,20 @@ void Entity::Render()
 
 		D3DXMATRIX oldMatrix;
 		spriteHandler->GetTransform(&oldMatrix);
-
-		D3DXMATRIX newMatrix;
-		D3DXVECTOR2 center(position.x + (sprite->GetFrameWidth() / 2), position.y + (sprite->GetFrameHeight() / 2));
-		D3DXVECTOR2 scale(1, 1);
-		if (reverse) {
-			scale.x = -1;
-		}
-		D3DXMatrixTransformation2D(&newMatrix, &center, 0.0f, &scale, nullptr, 0.0f, nullptr);
-		D3DXMATRIX finalMatrix = newMatrix * oldMatrix;
-
-		spriteHandler->SetTransform(&finalMatrix);
+		spriteHandler->SetTransform(&transformMatrix);
 		sprite->Render(position);
 		spriteHandler->SetTransform(&oldMatrix);
 	}
+}
+
+RECT Entity::GetBound()
+{
+	RECT bound;
+	bound.left = (long)(position.x - sprite->GetFrameWidth() / 2);
+	bound.right = (long)(position.x + sprite->GetFrameWidth() / 2);
+	bound.top = (long)(position.y - sprite->GetFrameHeight() / 2);
+	bound.bottom = (long)(position.y + sprite->GetFrameHeight() / 2);
+	return bound;
 }
 
 void Entity::SetPosition(float x, float y)
