@@ -28,18 +28,41 @@ bool Texture::Initialize(LPDIRECT3DDEVICE9 device, LPCSTR textureFileName)
 		name = name.substr(pos + 1, name.length());
 	}
 	name = name.substr(0, name.find_last_of("."));
-	std::cout << name;
+	std::cout << name << std::endl;
 
-	HRESULT result = D3DXCreateTextureFromFile(device, textureFileName, &texture);
+	HRESULT result;
+	D3DXIMAGE_INFO imageInfo;
+	result = D3DXGetImageInfoFromFileA(textureFileName, &imageInfo);
+
+	if (FAILED(result)) {
+		MessageBox(nullptr, "D3DXGetImageInfoFromFileA() failed", "Error", MB_OK);
+		return false;
+	}
+
+	this->width = imageInfo.Width;
+	this->height = imageInfo.Height;
+
+	result = D3DXCreateTextureFromFileExA(
+		device,
+		textureFileName,
+		imageInfo.Width,
+		imageInfo.Height,
+		1,
+		D3DUSAGE_DYNAMIC,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_DEFAULT,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_ARGB(1, 0, 0, 0),
+		&imageInfo,
+		nullptr,
+		&texture
+	);
+
 	if (FAILED(result)) {
 		MessageBox(nullptr, "D3DXCreateTextureFromFile() failed", "Error", MB_OK);
 		return false;
 	}
-
-	D3DSURFACE_DESC desc;
-	texture->GetLevelDesc(0, &desc);
-	width = desc.Width;
-	height = desc.Height;
 
 	return true;
 }

@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "GameScene.h"
 
-
 GameScene::GameScene()
 {
 }
@@ -17,6 +16,10 @@ GameScene::~GameScene()
 
 bool GameScene::Initialize()
 {
+	map = EntityManager::GetInstance()->AddEntity();
+	map->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "stage",
+		SCREEN_WIDTH, SCREEN_HEIGHT, 2800, 10);
+
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice());
 	return true;

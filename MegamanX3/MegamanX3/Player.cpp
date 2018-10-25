@@ -15,7 +15,7 @@ Player::~Player()
 void Player::Initialize(LPDIRECT3DDEVICE9 device)
 {
 	entity = EntityManager::GetInstance()->AddEntity();
-	entity->InitializeAnimatedSprite(device, "mario-shell-sprite", 15, 3, 3, 85, 64);
+	entity->InitializeAnimatedSprite(device, "mario-shell-sprite", 15, 3, 3, 64, 64);
 	entity->SetPosition(100, 100);
 }
 

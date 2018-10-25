@@ -68,7 +68,8 @@ bool Engine::Initialize(HINSTANCE instance, HWND hwnd)
 
 	resourceManager = ResourceManager::GetInstance();
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "mario-shell-sprite.png");
-	
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "stage.png");
+
 	input = new Input();
 	input->Initialize(instance, hwnd);
 

@@ -15,7 +15,8 @@ public:
 	void Update();
 	void Render();
 
-private: 
+private:
+	Entity *map;
 	Player *player;
 };
 
