@@ -36,7 +36,7 @@ void AnimatedSprite::Update()
 	if (currentFrame < maxFrames) {
 		float dt = Timer::GetDeltaTime();
 		currentSpeed += animationSpeed * dt;
-		std::cout << "Current speed: " << currentSpeed << std::endl;
+		//std::cout << "Current speed: " << currentSpeed << std::endl;
 
 		if (currentSpeed > framesPerSecond) {
 			currentFrame++;
@@ -53,7 +53,7 @@ void AnimatedSprite::Update()
 		}
 	}
 
-	std::cout << "Current frame: " << currentFrame << std::endl;
+	//std::cout << "Current frame: " << currentFrame << std::endl;
 
 	if (currentFrame == previousFrame) {
 		return;

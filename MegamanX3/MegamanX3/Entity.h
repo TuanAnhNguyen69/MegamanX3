@@ -16,7 +16,10 @@ public:
 	void Update();
 	void Render();
 
+	void SetSpritePosition(float left, float top);
+	D3DXVECTOR3 GetPosition();
 	RECT GetBound();
+	void SetScale(float x = 1.0f, float y = 1.0f);
 	void SetPosition(float x = 0.0f, float y = 0.0f);
 	void SetVelocity(float x = 0.0f, float y = 0.0f);
 	void SetReverse(bool reverse);
@@ -24,6 +27,7 @@ private:
 	Entity(void);
 
 	D3DXMATRIX transformMatrix;
+	D3DXVECTOR2 scale;
 	D3DXVECTOR3 position;
 	D3DXVECTOR3 velocity;
 	Sprite *sprite;
