@@ -15,6 +15,7 @@ enum EnumID
 {
     // Player
     Megaman,
+    MegamanBullet,
 
     // Boss
     BlastHornet,
@@ -29,17 +30,20 @@ enum EnumID
     Hangerter,
     Bee,
 
-
     // Ground
+    Cargo,
     Door,
     Ladder,
-    Elevator,
+    BigElevator,
+    SmallElevator,
     Conveyor,
     Thorn,
     Box,
-    BreakWall,
+    BreakableWall,
     Roof,
     BreakPlatform,
+    UpGround,
+    DownGround,
 
     //weapon
     Canon,
