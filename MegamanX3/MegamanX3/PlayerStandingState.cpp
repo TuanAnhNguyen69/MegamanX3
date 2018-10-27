@@ -10,9 +10,14 @@ PlayerStandingState::PlayerStandingState(PlayerStateHandler *handler, Entity *en
 		7, 9, 10, 50, 50);
 }
 
-
 PlayerStandingState::~PlayerStandingState()
 {
+	if (handler->GetCurrentStateName() != PlayerStateHandler::StateName::Standing) {
+		if (sprite) {
+			delete sprite;
+			sprite = nullptr;
+		}
+	}
 }
 
 void PlayerStandingState::Load()

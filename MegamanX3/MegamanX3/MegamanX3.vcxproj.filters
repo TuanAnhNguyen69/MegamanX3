@@ -31,6 +31,12 @@
     <ClCompile Include="PlayerStandingState.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerFallingState.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJumpingState.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
@@ -66,6 +72,12 @@
       <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerStandingState.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerFallingState.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJumpingState.h">
       <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>

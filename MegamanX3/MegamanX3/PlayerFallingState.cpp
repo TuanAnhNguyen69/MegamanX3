@@ -1,18 +1,18 @@
 #include "pch.h"
-#include "PlayerRunningState.h"
+#include "PlayerFallingState.h"
 #include "Engine.h"
 
-PlayerRunningState::PlayerRunningState(PlayerStateHandler *handler, Entity *entity) : PlayerState(handler, entity)
+PlayerFallingState::PlayerFallingState(PlayerStateHandler *handler, Entity *entity) : PlayerState(handler, entity)
 {
-	sprite = new AnimatedSprite(15);
+	sprite = new AnimatedSprite(15, 0.4);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
-		14, 23, 10, 50, 50);
+		37, 40, 10, 50, 50);
 }
 
 
-PlayerRunningState::~PlayerRunningState()
+PlayerFallingState::~PlayerFallingState()
 {
-	if (handler->GetCurrentStateName() != PlayerStateHandler::StateName::Running) {
+	if (handler->GetCurrentStateName() != PlayerStateHandler::StateName::Falling) {
 		if (sprite) {
 			delete sprite;
 			sprite = nullptr;
@@ -20,17 +20,27 @@ PlayerRunningState::~PlayerRunningState()
 	}
 }
 
-void PlayerRunningState::Load()
+void PlayerFallingState::Load()
 {
 	entity->SetSprite(sprite);
-	acceleratorX = 25.0f;
+	acceleratorY = 15.0f;
+	acceleratorX = 8.0f;
 }
 
-void PlayerRunningState::Update()
+void PlayerFallingState::Update()
 {
+	entity->AddVelocityY(acceleratorY);
+	if (entity->GetVelocity().y > 480.0f) {
+		entity->SetVelocityY(480.0f);
+	}
+
+	// For testing
+	if (entity->GetPosition().y > (SCREEN_HEIGHT / 2)) {
+		handler->ChangeState(PlayerStateHandler::StateName::Standing);
+	}
 }
 
-void PlayerRunningState::UpdateInput()
+void PlayerFallingState::UpdateInput()
 {
 	Input *input = Engine::GetEngine()->GetInput();
 	if (input == nullptr) {
@@ -55,8 +65,4 @@ void PlayerRunningState::UpdateInput()
 			}
 		}
 	}
-	else {
-		handler->ChangeState(PlayerStateHandler::StateName::Standing);
-	}
 }
-

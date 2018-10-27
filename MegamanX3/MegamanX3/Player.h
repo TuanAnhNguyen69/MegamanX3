@@ -25,10 +25,10 @@ public:
 
 private:
 	PlayerState *currentState;
-	PlayerState *standingState, *runningState;
+	PlayerState *standingState, *runningState, *jumpingState, *fallingState;
 	PlayerStateHandler::StateName currentStateName;
-	void UpdateInput();
 	Entity *entity;
+	bool allowJump;
 };
 
 #endif
