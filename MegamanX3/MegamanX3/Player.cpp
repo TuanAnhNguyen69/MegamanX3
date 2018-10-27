@@ -23,9 +23,6 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device)
 void Player::Update()
 {
 	UpdateInput();
-	D3DXVECTOR3 position = entity->GetPosition();
-	std::cout << "Update camera to: " << position.x << ", " << position.y << std::endl;
-	Engine::GetEngine()->GetCamera()->SetCenter(entity->GetPosition());
 }
 
 void Player::UpdateInput()
@@ -53,4 +50,14 @@ void Player::UpdateInput()
 		entity->SetReverse(true);
 		entity->SetVelocity(-150.0f, 0.0f);
 	}
+}
+
+void Player::SetPosition(int x, int y)
+{
+	entity->SetPosition(x, y);
+}
+
+D3DXVECTOR3 Player::GetPosition()
+{
+	return entity->GetPosition();
 }

@@ -18,11 +18,11 @@ public:
 	float GetFrameWidth();
 	float GetFrameHeight();
 
-	float top;
-	float left;
 protected:
 	float frameHeight;
 	float frameWidth;
+	float top;
+	float left;
 
 private: 
 	Texture *texture;

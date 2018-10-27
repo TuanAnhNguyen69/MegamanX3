@@ -8,7 +8,6 @@
 #include "EntityManager.h"
 #include "ResourceManager.h"
 #include "GameComponent.h"
-#include "Camera.h"
 
 class Engine
 {
@@ -22,7 +21,6 @@ public:
 
 	void SetGameComponent(GameComponent *gameComponent);
 	Input *GetInput();
-	Camera *GetCamera();
 	Graphics * GetGraphics();
 	static Engine* GetEngine();
 	LPD3DXSPRITE GetSpriteHandler();
@@ -32,7 +30,6 @@ private:
 	void Update();
 	void Render();
 
-	Camera *camera;
 	GameComponent *gameComponent;
 	Input *input;
 	ResourceManager *resourceManager;

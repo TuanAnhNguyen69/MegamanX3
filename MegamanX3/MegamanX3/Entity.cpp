@@ -3,6 +3,7 @@
 #include "Timer.h"
 #include "AnimatedSprite.h"
 #include "Engine.h"
+#include "Map.h"
 #include <iostream>
 
 Entity::Entity()
@@ -60,7 +61,6 @@ void Entity::Render()
 {
 	if (sprite) {
 		//std::cout << "Render to : " << position.x << ", " << position.y << std::endl;
-		std::cout << "Sprite RECT to: " << sprite->left << ", " << sprite->top << std::endl;
 		LPD3DXSPRITE spriteHandler = Engine::GetEngine()->GetSpriteHandler();
 
 		D3DXMATRIX oldMatrix;
@@ -69,12 +69,6 @@ void Entity::Render()
 		sprite->Render(position);
 		spriteHandler->SetTransform(&oldMatrix);
 	}
-}
-
-void Entity::SetSpritePosition(float left, float top)
-{
-	sprite->top = top;
-	sprite->left = left;
 }
 
 D3DXVECTOR3 Entity::GetPosition()

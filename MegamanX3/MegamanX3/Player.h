@@ -15,6 +15,9 @@ public:
 	void Update();
 	void UpdateInput();
 
+	void SetPosition(int x, int y);
+	D3DXVECTOR3 GetPosition();
+
 private:
 	Entity *entity;
 };

@@ -19,6 +19,7 @@
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
@@ -41,6 +42,7 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Map.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="mario-shell-sprite.png" />

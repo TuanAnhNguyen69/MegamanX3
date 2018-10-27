@@ -3,6 +3,8 @@
 
 #include "GameComponent.h"
 #include "Player.h"
+#include "Camera.h"
+#include "Map.h"
 
 class GameScene :
 	public GameComponent
@@ -16,7 +18,8 @@ public:
 	void Render();
 
 private:
-	Entity *map;
+	Camera *camera;
+	Map *map;
 	Player *player;
 };
 

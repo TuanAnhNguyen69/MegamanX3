@@ -14,7 +14,6 @@ Engine::Engine()
 	input = nullptr;
 	gameComponent = nullptr;
 	spriteHandler = nullptr;
-	camera = nullptr;
 }
 
 Engine::~Engine()
@@ -48,11 +47,6 @@ Engine::~Engine()
 		delete gameComponent;
 		gameComponent = nullptr;
 	}
-
-	if (camera) {
-		delete camera;
-		camera = nullptr;
-	}
 }
 
 bool Engine::InitializeGraphics(HWND hwnd)
@@ -72,9 +66,6 @@ bool Engine::Initialize(HINSTANCE instance, HWND hwnd)
 
 	input = new Input();
 	input->Initialize(instance, hwnd);
-
-	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
-	camera->SetCenter(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
 	graphics->Initialize();
 
@@ -116,11 +107,6 @@ void Engine::SetGameComponent(GameComponent * gameComponent)
 Input * Engine::GetInput()
 {
 	return input;
-}
-
-Camera * Engine::GetCamera()
-{
-	return camera;
 }
 
 Graphics * Engine::GetGraphics()

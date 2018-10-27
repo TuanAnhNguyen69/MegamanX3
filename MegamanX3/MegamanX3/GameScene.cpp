@@ -12,26 +12,37 @@ GameScene::~GameScene()
 		delete player;
 		player = nullptr;
 	}
+
+	if (camera) {
+		delete camera;
+		camera = nullptr;
+	}
+
+	if (map) {
+		delete map;
+		map = nullptr;
+	}
 }
 
 bool GameScene::Initialize()
 {
-	map = EntityManager::GetInstance()->AddEntity();
-	map->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "stage",
-		SCREEN_WIDTH, SCREEN_HEIGHT, 2695, -190);
-	map->SetScale(2, 2);
+	// 2695, -190
+	map = new Map();
+	map->Initialize("abc");
+
+	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
+	camera->SetCenter(SCREEN_WIDTH / 2, map->GetHeight() - camera->GetHeight());
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice());
+	player->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	return true;
 }
 
 void GameScene::Update()
 {
+	camera->SetCenter(player->GetPosition());
 	player->Update();
-	RECT bound = Engine::GetEngine()->GetCamera()->GetBound();
-	std::cout << "Update map to: " << (-190 + bound.left) << ", " << (2695 + bound.top) << std::endl;
-	map->SetSpritePosition(-190 + bound.left, 2695 + bound.top);
 }
 
 void GameScene::Render()
