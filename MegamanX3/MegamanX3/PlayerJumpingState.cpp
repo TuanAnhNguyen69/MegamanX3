@@ -4,7 +4,7 @@
 
 PlayerJumpingState::PlayerJumpingState(PlayerStateHandler *handler, Entity *entity) : PlayerState(handler, entity)
 {
-	sprite = new AnimatedSprite(15, 0.3);
+	sprite = new AnimatedSprite(15, 0.5, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x", 
 		34, 36, 10, 50, 50);
 }
@@ -23,14 +23,16 @@ PlayerJumpingState::~PlayerJumpingState()
 void PlayerJumpingState::Load()
 {
 	entity->SetSprite(sprite);
-	entity->SetVelocityY(-480.0f);
+	entity->SetVelocityY(Define::PLAYER_MIN_JUMP_VELOCITY);
 	acceleratorX = 14.0f;
 	acceleratorY = 15.0f;
 	noPressed = false;
+	sprite->ResetFrame();
 }
 
 void PlayerJumpingState::Update()
 {
+	sprite->SetFrameRange(34, 36);
 	entity->AddVelocityY(acceleratorY);
 
 	if (entity->GetVelocity().y >= 0) {
@@ -65,22 +67,26 @@ void PlayerJumpingState::UpdateInput()
 		return;
 	}
 
+	if (input->IsKeyDown(DIK_J)) {
+		sprite->SetFrameRange(41, 43);
+	}
+
 	if (input->IsKeyDown(DIK_D)) {
 		entity->SetReverse(false);
-		if (entity->GetVelocity().x < 350.0f) {
+		if (entity->GetVelocity().x < Define::PLAYER_MAX_RUNNING_SPEED) {
 			entity->AddVelocityX(acceleratorX);
-			if (entity->GetVelocity().x >= 350.0f) {
-				entity->SetVelocityX(350.0f);
+			if (entity->GetVelocity().x >= Define::PLAYER_MAX_RUNNING_SPEED) {
+				entity->SetVelocityX(Define::PLAYER_MAX_RUNNING_SPEED);
 			}
 		}
 		noPressed = false;
 	}
 	else if (input->IsKeyDown(DIK_A)) {
 		entity->SetReverse(true);
-		if (entity->GetVelocity().x > -350.0f) {
+		if (entity->GetVelocity().x > -Define::PLAYER_MAX_RUNNING_SPEED) {
 			entity->AddVelocityX(-acceleratorX);
-			if (entity->GetVelocity().x < -350.0f) {
-				entity->SetVelocityX(-350.0f);
+			if (entity->GetVelocity().x < -Define::PLAYER_MAX_RUNNING_SPEED) {
+				entity->SetVelocityX(-Define::PLAYER_MAX_RUNNING_SPEED);
 			}
 		}
 		noPressed = false;

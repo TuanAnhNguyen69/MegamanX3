@@ -72,3 +72,16 @@ void AnimatedSprite::Render(D3DXVECTOR3 position)
 {
 	Sprite::Render(position);
 }
+
+void AnimatedSprite::SetFrameRange(float startFrame, float endFrame)
+{
+	this->startFrame = startFrame;
+	this->endFrame = endFrame;
+	this->maxFrames = endFrame - startFrame + 1;
+}
+
+void AnimatedSprite::ResetFrame()
+{
+	currentFrame = 0;
+	previousFrame = -1.0f;
+}

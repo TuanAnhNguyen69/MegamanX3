@@ -28,6 +28,7 @@ void PlayerRunningState::Load()
 
 void PlayerRunningState::Update()
 {
+	sprite->SetFrameRange(14, 23);
 }
 
 void PlayerRunningState::UpdateInput()
@@ -37,21 +38,25 @@ void PlayerRunningState::UpdateInput()
 		return;
 	}
 
+	if (input->IsKeyDown(DIK_J)) {
+		sprite->SetFrameRange(24, 33);
+	}
+
 	if (input->IsKeyDown(DIK_D)) {
 		entity->SetReverse(false);
-		if (entity->GetVelocity().x < 350.0f) {
+		if (entity->GetVelocity().x < Define::PLAYER_MAX_RUNNING_SPEED) {
 			entity->AddVelocityX(acceleratorX);
-			if (entity->GetVelocity().x >= 350.0f) {
-				entity->SetVelocityX(350.0f);
+			if (entity->GetVelocity().x >= Define::PLAYER_MAX_RUNNING_SPEED) {
+				entity->SetVelocityX(Define::PLAYER_MAX_RUNNING_SPEED);
 			}
 		}
 	}
 	else if (input->IsKeyDown(DIK_A)) {
 		entity->SetReverse(true);
-		if (entity->GetVelocity().x > -350.0f) {
+		if (entity->GetVelocity().x > -Define::PLAYER_MAX_RUNNING_SPEED) {
 			entity->AddVelocityX(-acceleratorX);
-			if (entity->GetVelocity().x < -350.0f) {
-				entity->SetVelocityX(-350.0f);
+			if (entity->GetVelocity().x < -Define::PLAYER_MAX_RUNNING_SPEED) {
+				entity->SetVelocityX(-Define::PLAYER_MAX_RUNNING_SPEED);
 			}
 		}
 	}

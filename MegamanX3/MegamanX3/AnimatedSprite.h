@@ -14,6 +14,9 @@ public:
 	void Update();
 	void Render(D3DXVECTOR3 position);
 
+	void SetFrameRange(float startFrame, float endFrame);
+	void ResetFrame();
+
 private:
 	float currentFrame;
 	float previousFrame;
