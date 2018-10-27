@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Player.h"
+#include "PlayerStandingState.h"
+#include "PlayerRunningState.h"
 #include <iostream>
 
 Player::Player()
@@ -15,14 +17,21 @@ Player::~Player()
 void Player::Initialize(LPDIRECT3DDEVICE9 device)
 {
 	entity = EntityManager::GetInstance()->AddEntity();
-	entity->InitializeAnimatedSprite(device, "x", 15, 14, 23, 10, 50, 50);
 	entity->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	entity->SetScale(2, 2);
+
+	standingState = new PlayerStandingState(this, entity);
+	runningState = new PlayerRunningState(this, entity);
+
+	ChangeState(Standing);
 }
 
 void Player::Update()
 {
-	UpdateInput();
+	if (currentState) {
+		currentState->Update();
+		currentState->UpdateInput();
+	}
 }
 
 void Player::UpdateInput()
@@ -60,4 +69,24 @@ void Player::SetPosition(int x, int y)
 D3DXVECTOR3 Player::GetPosition()
 {
 	return entity->GetPosition();
+}
+
+PlayerStateHandler::StateName Player::GetCurrentStateName() {
+	return this->currentStateName;
+}
+
+void Player::ChangeState(PlayerStateHandler::StateName stateName) {
+	switch (stateName) {
+	case Standing:
+		currentState = standingState;
+		break;
+	case Running:
+		currentState = runningState;
+		break;
+	}
+	currentState->Load();
+}
+
+PlayerStateHandler::MoveDirection Player::GetMoveDirection() {
+	return PlayerStateHandler::MoveDirection::None;
 }

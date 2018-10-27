@@ -86,6 +86,16 @@ RECT Entity::GetBound()
 	return bound;
 }
 
+D3DXVECTOR3 Entity::GetVelocity()
+{
+	return velocity;
+}
+
+void Entity::SetSprite(Sprite * sprite)
+{
+	this->sprite = sprite;
+}
+
 void Entity::SetScale(float x, float y)
 {
 	scale.x = x;
@@ -107,4 +117,24 @@ void Entity::SetVelocity(float x, float y)
 void Entity::SetReverse(bool reverse)
 {
 	this->reverse = reverse;
+}
+
+void Entity::SetVelocityX(float x)
+{
+	velocity.x = x;
+}
+
+void Entity::SetVelocityY(float y)
+{
+	velocity.y = y;
+}
+
+void Entity::AddVelocityX(float x)
+{
+	velocity.x += x;
+}
+
+void Entity::AddVelocityY(float y)
+{
+	velocity.y += y;
 }

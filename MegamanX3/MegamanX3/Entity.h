@@ -18,12 +18,18 @@ public:
 
 	D3DXVECTOR3 GetPosition();
 	RECT GetBound();
+	D3DXVECTOR3 GetVelocity();
 
-	void SetSpritePosition(float left, float top);
+	void SetSprite(Sprite *sprite);
 	void SetScale(float x = 1.0f, float y = 1.0f);
 	void SetPosition(float x = 0.0f, float y = 0.0f);
 	void SetVelocity(float x = 0.0f, float y = 0.0f);
 	void SetReverse(bool reverse);
+
+	void SetVelocityX(float x);
+	void SetVelocityY(float y);
+	void AddVelocityX(float x);
+	void AddVelocityY(float y);
 private:
 	Entity(void);
 
