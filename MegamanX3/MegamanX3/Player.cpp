@@ -15,8 +15,9 @@ Player::~Player()
 void Player::Initialize(LPDIRECT3DDEVICE9 device)
 {
 	entity = EntityManager::GetInstance()->AddEntity();
-	entity->InitializeAnimatedSprite(device, "mario-shell-sprite", 15, 3, 3, 64, 64);
+	entity->InitializeAnimatedSprite(device, "x", 15, 14, 23, 10, 50, 50);
 	entity->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	entity->SetScale(2, 2);
 }
 
 void Player::Update()
@@ -44,12 +45,12 @@ void Player::UpdateInput()
 	}
 
 	if (input->IsKeyDown(DIK_D)) {
-		entity->SetReverse(true);
+		entity->SetReverse(false);
 		entity->SetVelocity(150.0f, 0.0f);
 	}
 
 	if (input->IsKeyDown(DIK_A)) {
-		entity->SetReverse(false);
+		entity->SetReverse(true);
 		entity->SetVelocity(-150.0f, 0.0f);
 	}
 }

@@ -28,10 +28,10 @@ void Entity::InitializeSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, flo
 	sprite->Initialize(device, textureName);
 }
 
-void Entity::InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float maxFrames, float maxFramesRow, float frameWidth, float frameHeight, float top, float left, float animationSpeed, bool isLooping)
+void Entity::InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float startFrame, float endFrame, float maxFramesRow, float frameWidth, float frameHeight, float animationSpeed, bool isLooping)
 {
 	sprite = new AnimatedSprite(framesPerSecond, animationSpeed, isLooping);
-	((AnimatedSprite*)sprite)->Initialize(device, textureName, maxFrames, maxFramesRow, frameWidth, frameHeight, top, left);
+	((AnimatedSprite*)sprite)->Initialize(device, textureName, startFrame, endFrame, maxFramesRow, frameWidth, frameHeight);
 }
 
 void Entity::Update()

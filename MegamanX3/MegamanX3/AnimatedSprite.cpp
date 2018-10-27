@@ -14,17 +14,17 @@ AnimatedSprite::~AnimatedSprite()
 {
 }
 
-void AnimatedSprite::Initialize(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float maxFrames, float maxFramesRow, float frameWidth, float frameHeight, float top, float left)
+void AnimatedSprite::Initialize(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float startFrame, float endFrame, float maxFramesRow, float frameWidth, float frameHeight)
 {
 	Sprite::Initialize(device, textureName);
 	currentFrame = 0;
 	previousFrame = -1.0f;
-	this->maxFrames = maxFrames;
+	this->startFrame = startFrame;
+	this->endFrame = endFrame;
+	this->maxFrames = endFrame - startFrame + 1;
 	this->maxFramesRow = maxFramesRow;
 	this->frameWidth = frameWidth;
 	this->frameHeight = frameHeight;
-	this->initialTop = top;
-	this->initialLeft = left;
 }
 
 void AnimatedSprite::Update()
@@ -61,9 +61,11 @@ void AnimatedSprite::Update()
 
 	previousFrame = currentFrame;
 
-	top = initialTop + ((int)(currentFrame / (maxFramesRow)) * frameHeight);
-	left = initialLeft + (((int)currentFrame % (int)maxFramesRow) * frameWidth);
+	int row = (long)((startFrame + currentFrame) / maxFramesRow);
+	int column = (long)(startFrame + currentFrame) % (long)maxFramesRow;
 
+	top = row * frameHeight;
+	left = column * frameWidth;
 }
 
 void AnimatedSprite::Render(D3DXVECTOR3 position)

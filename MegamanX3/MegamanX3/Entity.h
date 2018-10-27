@@ -11,14 +11,15 @@ public:
 	~Entity();
 
 	void InitializeSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float frameWidth, float frameHeight, float top = 0, float left = 0);
-	void InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float maxFrames, float maxFramesRow, float frameWidth, float frameHeight, float top = 0, float left = 0, float animationSpeed = 1.0f, bool isLooping = true);
+	void InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float startFrame, float endFrame, float maxFramesRow, float frameWidth, float frameHeight, float animationSpeed = 1.0f, bool isLooping = true);
 
 	void Update();
 	void Render();
 
-	void SetSpritePosition(float left, float top);
 	D3DXVECTOR3 GetPosition();
 	RECT GetBound();
+
+	void SetSpritePosition(float left, float top);
 	void SetScale(float x = 1.0f, float y = 1.0f);
 	void SetPosition(float x = 0.0f, float y = 0.0f);
 	void SetVelocity(float x = 0.0f, float y = 0.0f);

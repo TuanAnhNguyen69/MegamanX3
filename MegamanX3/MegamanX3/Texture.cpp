@@ -19,7 +19,7 @@ Texture::~Texture()
 	name.clear();
 }
 
-bool Texture::Initialize(LPDIRECT3DDEVICE9 device, LPCSTR textureFileName)
+bool Texture::Initialize(LPDIRECT3DDEVICE9 device, LPCSTR textureFileName, D3DCOLOR transColor)
 {
 	std::string tempName(textureFileName);
 	name = std::string(tempName.begin(), tempName.end());
@@ -53,7 +53,7 @@ bool Texture::Initialize(LPDIRECT3DDEVICE9 device, LPCSTR textureFileName)
 		D3DPOOL_DEFAULT,
 		D3DX_DEFAULT,
 		D3DX_DEFAULT,
-		D3DCOLOR_ARGB(1, 0, 0, 0),
+		transColor,
 		&imageInfo,
 		nullptr,
 		&texture

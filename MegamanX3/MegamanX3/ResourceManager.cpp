@@ -17,10 +17,10 @@ ResourceManager::~ResourceManager()
 	}
 }
 
-void ResourceManager::LoadTextureResource(LPDIRECT3DDEVICE9 device, LPCSTR textureFileName)
+void ResourceManager::LoadTextureResource(LPDIRECT3DDEVICE9 device, LPCSTR textureFileName, D3DCOLOR transColor)
 {
 	Texture *texture = new Texture();
-	if (!texture->Initialize(device, textureFileName)) {
+	if (!texture->Initialize(device, textureFileName, transColor)) {
 		delete texture;
 		return;
 	}
