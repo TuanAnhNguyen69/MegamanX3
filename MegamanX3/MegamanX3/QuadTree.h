@@ -18,13 +18,15 @@ public:
 	void GetAllEntities(std::vector<Entity*> &returnEntities);
 	void GetEntitiesCollideAble(std::vector<Entity*> &returnEntities, Entity* entity);
 	int GetTotalEntities();
+	RECT GetBound();
+	QuadTree **GetNodes();
+
 private:
 	int level;
 	RECT bound;
 	std::vector<Entity*> entities;
 	QuadTree** nodes;
 
-	int GetIndex(RECT body);
 	void Split();
 	bool IsContain(Entity *entity);
 };

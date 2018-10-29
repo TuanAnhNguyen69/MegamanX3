@@ -28,7 +28,7 @@ void PlayerStandingState::Load()
 
 void PlayerStandingState::Update()
 {
-	sprite->SetFrameRange(7, 9);
+
 }
 
 void PlayerStandingState::UpdateInput()
@@ -40,6 +40,9 @@ void PlayerStandingState::UpdateInput()
 
 	if (input->IsKeyDown(DIK_J)) {
 		sprite->SetFrameRange(10, 12);
+	}
+	else {
+		sprite->SetFrameRange(7, 9);
 	}
 
 	if (input->IsKeyDown(DIK_D) || input->IsKeyDown(DIK_A)) {

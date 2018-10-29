@@ -11,6 +11,7 @@ Entity::Entity()
 	position = D3DXVECTOR3(0, 0, 0);
 	velocity = D3DXVECTOR3(0, 0, 0);
 	scale = D3DXVECTOR2(1, 1);
+	translation = D3DXVECTOR2(0, 0);
 	reverse = false;
 	sprite = nullptr;
 }
@@ -42,11 +43,11 @@ void Entity::Update()
 	position += velocity * dt;
 	velocity *= 0.96f;
 
-	D3DXVECTOR2 center(position.x + (sprite->GetFrameWidth() / 2), position.y + (sprite->GetFrameHeight() / 2));
+	D3DXVECTOR2 center(position.x, position.y);
 	if (reverse) {
 		scale.x = -scale.x;
 	}
-	D3DXMatrixTransformation2D(&transformMatrix, &center, 0.0f, &scale, nullptr, 0.0f, nullptr);
+	D3DXMatrixTransformation2D(&transformMatrix, &center, 0.0f, &scale, nullptr, 0.0f, &translation);
 
 	if (sprite) {
 		sprite->Update();
@@ -60,7 +61,6 @@ void Entity::Update()
 void Entity::Render()
 {
 	if (sprite) {
-		//std::cout << "Render to : " << position.x << ", " << position.y << std::endl;
 		LPD3DXSPRITE spriteHandler = Engine::GetEngine()->GetSpriteHandler();
 
 		D3DXMATRIX oldMatrix;
@@ -79,10 +79,10 @@ D3DXVECTOR3 Entity::GetPosition()
 RECT Entity::GetBound()
 {
 	RECT bound;
-	bound.left = (long)(position.x - sprite->GetFrameWidth() / 2);
-	bound.right = (long)(position.x + sprite->GetFrameWidth() / 2);
-	bound.top = (long)(position.y - sprite->GetFrameHeight() / 2);
-	bound.bottom = (long)(position.y + sprite->GetFrameHeight() / 2);
+	bound.left = position.x - sprite->GetFrameWidth() * scale.x / 2;
+	bound.right = bound.left + sprite->GetFrameWidth() * scale.x;
+	bound.top = position.y - sprite->GetFrameHeight() * scale.y / 2;
+	bound.bottom = bound.top + sprite->GetFrameHeight() * scale.y;
 	return bound;
 }
 
@@ -91,9 +91,25 @@ D3DXVECTOR3 Entity::GetVelocity()
 	return velocity;
 }
 
+float Entity::GetWidth()
+{
+	return sprite->GetFrameWidth();
+}
+
+float Entity::GetHeight()
+{
+	return sprite->GetFrameHeight();
+}
+
 void Entity::SetSprite(Sprite * sprite)
 {
 	this->sprite = sprite;
+}
+
+void Entity::SetTranslation(float x, float y)
+{
+	translation.x = x;
+	translation.y = y;
 }
 
 void Entity::SetScale(float x, float y)
@@ -137,4 +153,14 @@ void Entity::AddVelocityX(float x)
 void Entity::AddVelocityY(float y)
 {
 	velocity.y += y;
+}
+
+void Entity::AddPosition(float x, float y)
+{
+	position.x += x;
+	position.y += y;
+}
+
+void Entity::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+{
 }

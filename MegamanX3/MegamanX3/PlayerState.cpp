@@ -24,3 +24,7 @@ void PlayerState::Update()
 void PlayerState::UpdateInput()
 {
 }
+
+void PlayerState::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+{
+}

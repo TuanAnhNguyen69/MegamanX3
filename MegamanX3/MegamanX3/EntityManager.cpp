@@ -89,3 +89,8 @@ EntityManager * EntityManager::GetInstance()
 	}
 	return instance;
 }
+
+std::vector<Entity*> EntityManager::GetAllEntities()
+{
+	return entities;
+}

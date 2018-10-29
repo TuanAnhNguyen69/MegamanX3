@@ -19,12 +19,13 @@ public:
 
 	bool ContainsEntity(Entity *entity);
 	bool ContainsEntity(Entity *entity, int &index);
+	std::vector<Entity*> GetAllEntities();
 
 	static EntityManager *GetInstance();
 
 private:
-	EntityManager();
 	std::vector<Entity*> entities;
+	EntityManager();
 	static EntityManager *instance;
 };
 

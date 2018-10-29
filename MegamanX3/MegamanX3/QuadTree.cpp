@@ -28,23 +28,43 @@ void QuadTree::Clear()
 
 void QuadTree::Insert(Entity * entity)
 {
-	int index = GetIndex(entity->GetBound());
-
-	if (nodes != nullptr) {
-		if (index != -1) {
-			nodes[index]->Insert(entity);
-			return;
+	if (nodes) {
+		if (nodes[0]->IsContain(entity)) {
+			nodes[0]->Insert(entity);
 		}
+		if (nodes[1]->IsContain(entity)) {
+			nodes[1]->Insert(entity);
+		}
+		if (nodes[2]->IsContain(entity)) {
+			nodes[2]->Insert(entity);
+		}
+		if (nodes[3]->IsContain(entity)) {
+			nodes[3]->Insert(entity);
+		}
+		return;
 	}
 
-	if (index == -1) {
-		this->entities.push_back(entity);
+	if (this->IsContain(entity)) {
+		entities.push_back(entity);
 	}
-	else {
-		if (nodes == nullptr) {
-			Split();
+
+	if (entities.size() > MAX_OBJECT_IN_REGION && level < MAX_LEVEL) {
+		Split();
+		while (!entities.empty()) {
+			if (nodes[0]->IsContain(entities.back())) {
+				nodes[0]->Insert(entities.back());
+			}
+			if (nodes[1]->IsContain(entities.back())) {
+				nodes[1]->Insert(entities.back());
+			}
+			if (nodes[2]->IsContain(entities.back())) {
+				nodes[2]->Insert(entities.back());
+			}
+			if (nodes[3]->IsContain(entities.back())) {
+				nodes[3]->Insert(entities.back());
+			}
+			entities.pop_back();
 		}
-		nodes[index]->Insert(entity);
 	}
 }
 
@@ -62,18 +82,28 @@ void QuadTree::GetAllEntities(std::vector<Entity*>& returnEntities)
 
 void QuadTree::GetEntitiesCollideAble(std::vector<Entity*>& returnEntities, Entity * entity)
 {
-	int index = this->GetIndex(entity->GetBound());
-	if (index != -1) {
-		for (auto child : entities) {
-			returnEntities.push_back(child);
+	if (nodes) {
+		if (nodes[0]->IsContain(entity)) {
+			nodes[0]->GetEntitiesCollideAble(returnEntities, entity);
 		}
-
-		if (nodes != nullptr) {
-			nodes[index]->GetEntitiesCollideAble(returnEntities, entity);
+		if (nodes[1]->IsContain(entity)) {
+			nodes[1]->GetEntitiesCollideAble(returnEntities, entity);
 		}
+		if (nodes[2]->IsContain(entity)) {
+			nodes[2]->GetEntitiesCollideAble(returnEntities, entity);
+		}
+		if (nodes[3]->IsContain(entity)) {
+			nodes[3]->GetEntitiesCollideAble(returnEntities, entity);
+		}
+		return;
 	}
-	else {
-		GetAllEntities(returnEntities);
+
+	if (this->IsContain(entity)) {
+		for (auto child : entities) {
+			if (entity != child) {
+				returnEntities.push_back(child);
+			}
+		}
 	}
 }
 
@@ -88,28 +118,14 @@ int QuadTree::GetTotalEntities()
 	return total;
 }
 
-int QuadTree::GetIndex(RECT body)
+RECT QuadTree::GetBound()
 {
-	float middleVertical = bound.left + (bound.right - bound.left) / 2.0f;
-	float middleHorizontal = bound.top + (bound.bottom - bound.top) / 2.0f;
-	
-	if (body.top > bound.top && body.bottom < middleHorizontal) {
-		if (body.left > bound.left && body.right < middleVertical) {
-			return 0;
-		}
-		else if (body.left > middleVertical && body.right < bound.right) {
-			return 1;
-		}
-	}
-	else if (body.top > middleHorizontal && body.bottom < bound.bottom) {
-		if (body.left > bound.left && body.right < middleVertical) {
-			return 2;
-		}
-		else if (body.left > middleVertical && body.right < bound.right) {
-			return 3;
-		}
-	}
-	return -1;
+	return bound;
+}
+
+QuadTree ** QuadTree::GetNodes()
+{
+	return nodes;
 }
 
 void QuadTree::Split()

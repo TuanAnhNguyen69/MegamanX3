@@ -4,6 +4,7 @@
 #include "Engine.h"
 #include "PlayerStateHandler.h"
 #include "PlayerState.h"
+#include "Camera.h"
 
 class Entity;
 
@@ -13,21 +14,25 @@ public:
 	Player();
 	~Player();
 
-	void Initialize(LPDIRECT3DDEVICE9 device);
+	void Initialize(LPDIRECT3DDEVICE9 device, Camera *camera);
 	void Update();
 
 	void SetPosition(int x, int y);
 	D3DXVECTOR3 GetPosition();
 
+	Entity *GetEntity();
 	StateName GetCurrentStateName();
 	void ChangeState(StateName stateName);
 	MoveDirection GetMoveDirection();
+	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
+	void OnNoCollisionWithBottom();
 
 private:
 	PlayerState *currentState;
 	PlayerState *standingState, *runningState, *jumpingState, *fallingState;
 	PlayerStateHandler::StateName currentStateName;
 	Entity *entity;
+	Camera *camera;
 	bool allowJump;
 };
 

@@ -32,7 +32,6 @@ void PlayerJumpingState::Load()
 
 void PlayerJumpingState::Update()
 {
-	sprite->SetFrameRange(34, 36);
 	entity->AddVelocityY(acceleratorY);
 
 	if (entity->GetVelocity().y >= 0) {
@@ -70,6 +69,9 @@ void PlayerJumpingState::UpdateInput()
 	if (input->IsKeyDown(DIK_J)) {
 		sprite->SetFrameRange(41, 43);
 	}
+	else {
+		sprite->SetFrameRange(34, 36);
+	}
 
 	if (input->IsKeyDown(DIK_D)) {
 		entity->SetReverse(false);
@@ -93,5 +95,40 @@ void PlayerJumpingState::UpdateInput()
 	}
 	else {
 		noPressed = true;
+	}
+}
+
+void PlayerJumpingState::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+{
+	switch (side)
+	{
+	case Entity::Left:
+	{
+		entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+		entity->SetVelocityX(0);
+		break;
+	}
+
+	case Entity::Right:
+	{
+		entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+		entity->SetVelocityX(0);
+		break;
+	}
+
+	case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
+	{
+		entity->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top);
+		entity->SetVelocityY(0);
+		break;
+	}
+
+	case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
+	{
+		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+	}
+
+	default:
+		break;
 	}
 }

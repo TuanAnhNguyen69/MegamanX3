@@ -7,6 +7,25 @@
 class Entity
 {
 public:
+	enum SideCollisions
+	{
+		Left, //0
+		Right, //1
+		Top, //2
+		Bottom, //3
+		TopLeft, //4
+		TopRight, //5
+		BottomLeft, //6
+		BottomRight, //7
+		NotKnow
+	};
+
+	struct CollisionReturn
+	{
+		bool IsCollided;
+		RECT RegionCollision;
+	};
+
 	friend class EntityManager;
 	~Entity();
 
@@ -19,8 +38,11 @@ public:
 	D3DXVECTOR3 GetPosition();
 	RECT GetBound();
 	D3DXVECTOR3 GetVelocity();
+	float GetWidth();
+	float GetHeight();
 
 	void SetSprite(Sprite *sprite);
+	void SetTranslation(float x = 0.0f, float y = 0.0f);
 	void SetScale(float x = 1.0f, float y = 1.0f);
 	void SetPosition(float x = 0.0f, float y = 0.0f);
 	void SetVelocity(float x = 0.0f, float y = 0.0f);
@@ -30,11 +52,16 @@ public:
 	void SetVelocityY(float y);
 	void AddVelocityX(float x);
 	void AddVelocityY(float y);
+
+	void AddPosition(float x, float y);
+
+	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
 private:
 	Entity(void);
 
 	D3DXMATRIX transformMatrix;
 	D3DXVECTOR2 scale;
+	D3DXVECTOR2 translation;
 	D3DXVECTOR3 position;
 	D3DXVECTOR3 velocity;
 	Sprite *sprite;

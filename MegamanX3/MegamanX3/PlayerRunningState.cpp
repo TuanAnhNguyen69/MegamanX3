@@ -28,7 +28,7 @@ void PlayerRunningState::Load()
 
 void PlayerRunningState::Update()
 {
-	sprite->SetFrameRange(14, 23);
+
 }
 
 void PlayerRunningState::UpdateInput()
@@ -40,6 +40,9 @@ void PlayerRunningState::UpdateInput()
 
 	if (input->IsKeyDown(DIK_J)) {
 		sprite->SetFrameRange(24, 33);
+	}
+	else {
+		sprite->SetFrameRange(14, 23);
 	}
 
 	if (input->IsKeyDown(DIK_D)) {
@@ -62,6 +65,48 @@ void PlayerRunningState::UpdateInput()
 	}
 	else {
 		handler->ChangeState(PlayerStateHandler::StateName::Standing);
+	}
+}
+
+void PlayerRunningState::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+{
+	switch (side) {
+	case Entity::Left:
+	{
+		//va cham phia ben trai player
+		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
+		{
+			//day Player ra phia ben phai de cho player khong bi xuyen qua object
+			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+
+			handler->ChangeState(PlayerStateHandler::Standing);
+		}
+
+		return;
+	}
+
+	case Entity::Right:
+	{
+		//va cham phia ben phai player
+		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
+		{
+			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+			handler->ChangeState(PlayerStateHandler::Standing);
+		} 
+		return;
+	}
+
+	case Entity::Top:
+		break;
+
+	case Entity::Bottom: case Entity::BottomLeft: case Entity::BottomRight:
+	{
+		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+
+		entity->SetVelocityY(0);
+
+		return;
+	}
 	}
 }
 

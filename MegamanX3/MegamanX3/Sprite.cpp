@@ -38,7 +38,10 @@ void Sprite::Render(D3DXVECTOR3 position)
 		rect.left = (long)left;
 		rect.bottom = (long)(rect.top + frameHeight);
 		rect.right = (long)(rect.left + frameWidth);
-		Engine::GetEngine()->GetSpriteHandler()->Draw(texture->GetTexture(), &rect, nullptr, &position, color);
+
+		D3DXVECTOR3 center = D3DXVECTOR3(frameWidth / 2, frameHeight / 2, 0);
+
+		Engine::GetEngine()->GetSpriteHandler()->Draw(texture->GetTexture(), &rect, &center, &position, color);
 	}
 }
 

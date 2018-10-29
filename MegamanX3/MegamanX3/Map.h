@@ -25,7 +25,6 @@ public:
 
 private:
 	QuadTree *quadTree;
-	std::map<int, Sprite*> tileSet;
 };
 
 #endif

@@ -28,8 +28,10 @@ Player::~Player()
 	}
 }
 
-void Player::Initialize(LPDIRECT3DDEVICE9 device)
+void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 {
+	this->camera = camera;
+
 	entity = EntityManager::GetInstance()->AddEntity();
 	entity->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	entity->SetScale(2, 2);
@@ -46,8 +48,8 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device)
 void Player::Update()
 {
 	if (currentState) {
-		currentState->Update();
 		currentState->UpdateInput();
+		currentState->Update();
 	}
 
 	Input *input = Engine::GetEngine()->GetInput();
@@ -67,6 +69,11 @@ void Player::Update()
 	if (input->IsKeyHit(DIK_SPACE)) {
 		allowJump = true;
 	}
+
+	if (camera) {
+		entity->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
+	}
 }
 
 void Player::SetPosition(int x, int y)
@@ -77,6 +84,11 @@ void Player::SetPosition(int x, int y)
 D3DXVECTOR3 Player::GetPosition()
 {
 	return entity->GetPosition();
+}
+
+Entity * Player::GetEntity()
+{
+	return entity;
 }
 
 PlayerStateHandler::StateName Player::GetCurrentStateName() {
@@ -113,4 +125,18 @@ PlayerStateHandler::MoveDirection Player::GetMoveDirection() {
 		return MoveDirection::MoveToLeft;
 	}
 	return MoveDirection::None;
+}
+
+void Player::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+{
+	if (currentState) {
+		currentState->OnCollision(impactor, side, data);
+	}
+}
+
+void Player::OnNoCollisionWithBottom()
+{
+	if (currentStateName != Jumping && currentStateName != Falling) {
+		ChangeState(Falling);
+	}
 }

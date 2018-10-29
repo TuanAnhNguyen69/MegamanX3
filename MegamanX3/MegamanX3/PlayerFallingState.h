@@ -12,10 +12,12 @@ public:
 	void Load();
 	void Update();
 	void UpdateInput();
+	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
 
 protected:
 	float acceleratorX;
 	float acceleratorY;
+	bool isLeftOrRightKeyPressed;
 };
 
 #endif

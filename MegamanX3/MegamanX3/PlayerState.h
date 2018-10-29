@@ -14,6 +14,7 @@ public:
 	virtual void Load();
 	virtual void Update();
 	virtual void UpdateInput();
+	virtual void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
 
 protected:
 	AnimatedSprite *sprite;
