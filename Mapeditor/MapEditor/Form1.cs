@@ -619,14 +619,17 @@ namespace MapEditor
                 if (curentType != EnumID.Platform)
                 {
                     Draw(curentType);
+                } else
+                {
+                    Bitmap bm = new Bitmap(Path.Combine(Application.StartupPath, @"resource\platform.png"));
+                    DrawImage(pictureBox1.Image, bm, startMouse, new Rectangle(0, 0, currentMouse.X - startMouse.X, currentMouse.Y - startMouse.Y));
+                    bm.Dispose();
+                    pictureBox1.Refresh();
+              
                 }
-                return;
 
             }
-            if (e.Button.Equals(MouseButtons.Middle))
-            {
-                removeObject(currentMouse);
-            }
+       
         }
 
         private void drawItem(String path, EnumID ID)
@@ -664,6 +667,15 @@ namespace MapEditor
         private void platformToolStripMenuItem_Click(object sender, EventArgs e)
         {
             curentType = EnumID.Platform;
+        }
+
+        private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            textBox1.Text = curentType.ToString();
+            currentMouse = new Point(e.X, e.Y);
+          
+            removeObject(currentMouse);
+            return;
         }
 
         void addObject(ObjectGame obj)

@@ -63,6 +63,7 @@
             this.upGroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downGroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groundToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.platformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.smallEnergyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bigEnergyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -119,7 +120,6 @@
             this.fireToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.platformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -204,12 +204,15 @@
             // pictureBox1
             // 
             this.pictureBox1.ContextMenuStrip = this.contextMenuStrip1;
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(300, 150);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.WaitOnLoad = true;
+            this.pictureBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDoubleClick);
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown_1);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
@@ -219,7 +222,7 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(97, 26);
             // 
             // addToolStripMenuItem
             // 
@@ -229,7 +232,7 @@
             this.groundToolStripMenuItem1,
             this.itemToolStripMenuItem1});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.addToolStripMenuItem.Text = "Add";
             // 
             // bossToolStripMenuItem1
@@ -239,7 +242,7 @@
             this.byteToolStripMenuItem,
             this.shurikeinToolStripMenuItem});
             this.bossToolStripMenuItem1.Name = "bossToolStripMenuItem1";
-            this.bossToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.bossToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
             this.bossToolStripMenuItem1.Text = "Boss";
             // 
             // blastHornetToolStripMenuItem
@@ -268,7 +271,7 @@
             this.notoBangerToolStripMenuItem,
             this.hangerterToolStripMenuItem});
             this.enemyToolStripMenuItem1.Name = "enemyToolStripMenuItem1";
-            this.enemyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.enemyToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
             this.enemyToolStripMenuItem1.Text = "Enemy";
             // 
             // headGunnerToolStripMenuItem
@@ -314,92 +317,99 @@
             this.groundToolStripMenuItem2,
             this.platformToolStripMenuItem});
             this.groundToolStripMenuItem1.Name = "groundToolStripMenuItem1";
-            this.groundToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.groundToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
             this.groundToolStripMenuItem1.Text = "Ground";
             // 
             // cargoToolStripMenuItem
             // 
             this.cargoToolStripMenuItem.Name = "cargoToolStripMenuItem";
-            this.cargoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cargoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.cargoToolStripMenuItem.Text = "Cargo";
             // 
             // doorToolStripMenuItem
             // 
             this.doorToolStripMenuItem.Name = "doorToolStripMenuItem";
-            this.doorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.doorToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.doorToolStripMenuItem.Text = "Door";
             // 
             // ladderToolStripMenuItem
             // 
             this.ladderToolStripMenuItem.Name = "ladderToolStripMenuItem";
-            this.ladderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ladderToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.ladderToolStripMenuItem.Text = "Ladder";
             // 
             // bigElevatorToolStripMenuItem
             // 
             this.bigElevatorToolStripMenuItem.Name = "bigElevatorToolStripMenuItem";
-            this.bigElevatorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bigElevatorToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.bigElevatorToolStripMenuItem.Text = "BigElevator";
             // 
             // smallElevatorToolStripMenuItem
             // 
             this.smallElevatorToolStripMenuItem.Name = "smallElevatorToolStripMenuItem";
-            this.smallElevatorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.smallElevatorToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.smallElevatorToolStripMenuItem.Text = "SmallElevator";
             // 
             // conveyorToolStripMenuItem
             // 
             this.conveyorToolStripMenuItem.Name = "conveyorToolStripMenuItem";
-            this.conveyorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.conveyorToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.conveyorToolStripMenuItem.Text = "Conveyor";
             // 
             // thornToolStripMenuItem
             // 
             this.thornToolStripMenuItem.Name = "thornToolStripMenuItem";
-            this.thornToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.thornToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.thornToolStripMenuItem.Text = "Thorn";
             // 
             // boxToolStripMenuItem
             // 
             this.boxToolStripMenuItem.Name = "boxToolStripMenuItem";
-            this.boxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.boxToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.boxToolStripMenuItem.Text = "Box";
             // 
             // breakableWallToolStripMenuItem
             // 
             this.breakableWallToolStripMenuItem.Name = "breakableWallToolStripMenuItem";
-            this.breakableWallToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.breakableWallToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.breakableWallToolStripMenuItem.Text = "BreakableWall";
             // 
             // roofToolStripMenuItem
             // 
             this.roofToolStripMenuItem.Name = "roofToolStripMenuItem";
-            this.roofToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.roofToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.roofToolStripMenuItem.Text = "Roof";
             // 
             // breakablePlatformToolStripMenuItem
             // 
             this.breakablePlatformToolStripMenuItem.Name = "breakablePlatformToolStripMenuItem";
-            this.breakablePlatformToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.breakablePlatformToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.breakablePlatformToolStripMenuItem.Text = "BreakablePlatform";
             // 
             // upGroundToolStripMenuItem
             // 
             this.upGroundToolStripMenuItem.Name = "upGroundToolStripMenuItem";
-            this.upGroundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.upGroundToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.upGroundToolStripMenuItem.Text = "UpGround";
             // 
             // downGroundToolStripMenuItem
             // 
             this.downGroundToolStripMenuItem.Name = "downGroundToolStripMenuItem";
-            this.downGroundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.downGroundToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.downGroundToolStripMenuItem.Text = "DownGround";
             // 
             // groundToolStripMenuItem2
             // 
             this.groundToolStripMenuItem2.Name = "groundToolStripMenuItem2";
-            this.groundToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.groundToolStripMenuItem2.Size = new System.Drawing.Size(171, 22);
             this.groundToolStripMenuItem2.Text = "Ground";
+            // 
+            // platformToolStripMenuItem
+            // 
+            this.platformToolStripMenuItem.Name = "platformToolStripMenuItem";
+            this.platformToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.platformToolStripMenuItem.Text = "Platform";
+            this.platformToolStripMenuItem.Click += new System.EventHandler(this.platformToolStripMenuItem_Click);
             // 
             // itemToolStripMenuItem1
             // 
@@ -408,7 +418,7 @@
             this.bigEnergyToolStripMenuItem,
             this.chimeraArmorToolStripMenuItem});
             this.itemToolStripMenuItem1.Name = "itemToolStripMenuItem1";
-            this.itemToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.itemToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
             this.itemToolStripMenuItem1.Text = "Item";
             // 
             // smallEnergyToolStripMenuItem
@@ -692,13 +702,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // platformToolStripMenuItem
-            // 
-            this.platformToolStripMenuItem.Name = "platformToolStripMenuItem";
-            this.platformToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.platformToolStripMenuItem.Text = "Platform";
-            this.platformToolStripMenuItem.Click += new System.EventHandler(this.platformToolStripMenuItem_Click);
             // 
             // Form1
             // 
