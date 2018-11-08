@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-enum EnumID
+public enum EnumID
 {
     // Player
     Megaman,
@@ -44,6 +44,7 @@ enum EnumID
     BreakPlatform,
     UpGround,
     DownGround,
+    Platform,
 
     //weapon
     Canon,
@@ -87,6 +88,7 @@ namespace MapEditor
         string writeMatrix,readMatrix;
         string fileDirectory; 
         String fileName;
+        Point startMouse;
         Point currentMouse;
        // QuadNode rootNode;
         private void btn_New_Click(object sender, EventArgs e)
@@ -204,10 +206,10 @@ namespace MapEditor
                 foreach (ObjectGame obj in listobjmap)
                 {
                     s += obj.ID + "\r\n";
-                    s += obj.location.X + "\r\n";
-                    s += obj.location.Y + "\r\n";
-                    s += obj.bm.Width + "\r\n";
-                    s += obj.bm.Height + "\r\n";
+                    s += obj.topLeft.X + "\r\n";
+                    s += obj.topLeft.Y + "\r\n";
+                    s += obj.width + "\r\n";
+                    s += obj.height + "\r\n";
                     s += "\r\n";
                 }
                 writer.Write(s);
@@ -278,13 +280,12 @@ namespace MapEditor
             currentIndex = readObj.IndexOf("\r\n\r\n", currentIndex) + 4;
             for (int i=0;i<numOfObj; i++)
             {
-                int id = int.Parse(readObj.Substring(currentIndex, readObj.IndexOf("\r\n", currentIndex) - currentIndex));
+                EnumID id = (EnumID) int.Parse(readObj.Substring(currentIndex, readObj.IndexOf("\r\n", currentIndex) - currentIndex));
                 currentIndex = readObj.IndexOf("\r\n", currentIndex) + 2;
                 int x = int.Parse(readObj.Substring(currentIndex, readObj.IndexOf("\r\n", currentIndex) - currentIndex));
                 currentIndex = readObj.IndexOf("\r\n", currentIndex) + 2;
                 int y = int.Parse(readObj.Substring(currentIndex, readObj.IndexOf("\r\n", currentIndex) - currentIndex));
-                ObjectGame obj = new ObjectGame(getImage((EnumID)id),id);
-                obj.SetLocation(x, y);
+                ObjectGame obj = new ObjectGame(getImage((EnumID)id),id, new Point(x,y));
                 listobjmap.Add(obj);
                 currentIndex = readObj.IndexOf("\r\n\r\n", currentIndex) + 4;
             }
@@ -295,62 +296,73 @@ namespace MapEditor
         {
             switch (ID)
             {
-                case EnumID.Megaman:
-                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\image\item\tripleshot.png"));
-
-                    break;
-                case EnumID.BlastHornet:
-                    break;
-                case EnumID.Byte:
-                    break;
-                case EnumID.Shurikein:
-                    break;
-                case EnumID.CarryArm:
-                    break;
-                case EnumID.HeadGunner:
-                    break;
-                case EnumID.Helit:
-                    break;
-                case EnumID.NotoBanger:
-                    break;
-                case EnumID.Hangerter:
-                    break;
-                case EnumID.Bee:
-                    break;
-                case EnumID.Door:
-                    break;
-                case EnumID.Ladder:
-                    break;
-                case EnumID.Elevator:
-                    break;
-                case EnumID.Conveyor:
-                    break;
-                case EnumID.Thorn:
-                    break;
-                case EnumID.Box:
-                    break;
-                case EnumID.BreakWall:
-                    break;
-                case EnumID.Roof:
-                    break;
-                case EnumID.BreakPlatform:
-                    break;
-                case EnumID.Canon:
-                    break;
-                case EnumID.GunnerRocket:
-                    break;
-                case EnumID.HeliRocket:
-                    break;
-                case EnumID.ByteBomb:
-                    break;
-                case EnumID.SmallEnergy:
-                    break;
-                case EnumID.BigEnergy:
-                    break;
-                case EnumID.ChimeraArmor:
-                    break;
+                //case EnumID.Megaman:
+                //    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\image\item\tripleshot.png"));
+                //    break;
+                //case EnumID.BlastHornet:
+                //    break;
+                //case EnumID.Byte:
+                //    break;
+                //case EnumID.Shurikein:
+                //    break;
+                //case EnumID.CarryArm:
+                //    break;
+                //case EnumID.HeadGunner:
+                //    break;
+                //case EnumID.Helit:
+                //    break;
+                //case EnumID.NotoBanger:
+                //    break;
+                //case EnumID.Hangerter:
+                //    break;
+                //case EnumID.Bee:
+                //    break;
+                //case EnumID.Door:
+                //    break;
+                //case EnumID.Ladder:
+                //    break;
+                //case EnumID.BigElevator:
+                //    break;
+                //case EnumID.Conveyor:
+                //    break;
+                //case EnumID.Thorn:
+                //    break;
+                //case EnumID.Box:
+                //    break;
+                //case EnumID.Roof:
+                //    break;
+                //case EnumID.BreakPlatform:
+                //    break;
+                //case EnumID.Canon:
+                //    break;
+                //case EnumID.GunnerRocket:
+                //    break;
+                //case EnumID.HeliRocket:
+                //    break;
+                //case EnumID.ByteBomb:
+                //    break;
+                //case EnumID.SmallEnergy:
+                //    break;
+                //case EnumID.BigEnergy:
+                //    break;
+                //case EnumID.ChimeraArmor:
+                //    break;
+                //case EnumID.MegamanBullet:
+                //    break;
+                //case EnumID.Cargo:
+                //    break;
+                //case EnumID.SmallElevator:
+                //    break;
+                //case EnumID.BreakableWall:
+                //    break;
+                //case EnumID.UpGround:
+                //    break;
+                //case EnumID.DownGround:
+                //    break;
+                case EnumID.Platform:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\platform.png"));
                 default:
-                    break;
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\platform.png"));
             }
         }
 
@@ -375,7 +387,7 @@ namespace MapEditor
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             for (int i=0;i< listobjmap.Count();i++)
             {
-                DrawImage(pictureBox1.Image, listobjmap[i].bm, listobjmap[i].location, new Rectangle(0, 0, listobjmap[i].bm.Width, listobjmap[i].bm.Height));
+                DrawImage(pictureBox1.Image, listobjmap[i].bm, listobjmap[i].topLeft, new Rectangle(0, 0, listobjmap[i].bm.Width, listobjmap[i].bm.Height));
             }
             pictureBox1.Refresh();
         }
@@ -505,12 +517,10 @@ namespace MapEditor
 
         private EnumID curentType;
 
-        private void Draw(EnumID type)
-        {
+        private void Draw(EnumID type) {
             switch (type)
             {
                 case EnumID.Megaman:
-                    drawItem(@"resource\image\item\watch.png", (int)EnumID.StopWatch_ID);                    break;
                 case EnumID.BlastHornet:
                     break;
                 case EnumID.Byte:
@@ -533,15 +543,11 @@ namespace MapEditor
                     break;
                 case EnumID.Ladder:
                     break;
-                case EnumID.Elevator:
-                    break;
                 case EnumID.Conveyor:
                     break;
                 case EnumID.Thorn:
                     break;
                 case EnumID.Box:
-                    break;
-                case EnumID.BreakWall:
                     break;
                 case EnumID.Roof:
                     break;
@@ -561,6 +567,22 @@ namespace MapEditor
                     break;
                 case EnumID.ChimeraArmor:
                     break;
+                case EnumID.MegamanBullet:
+                    break;
+                case EnumID.Cargo:
+                    break;
+                case EnumID.BigElevator:
+                    break;
+                case EnumID.SmallElevator:
+                    break;
+                case EnumID.BreakableWall:
+                    break;
+                case EnumID.UpGround:
+                    break;
+                case EnumID.DownGround:
+                    break;
+                case EnumID.Platform:
+                    drawItem(@"resource\platform.png", type); break;
                 default:
                     break;
             }
@@ -570,15 +592,20 @@ namespace MapEditor
         private void pictureBox1_MouseDown_1(object sender, MouseEventArgs e)
         {
             textBox1.Text = curentType.ToString();
+            startMouse = new Point(e.X, e.Y);
             currentMouse = new Point(e.X, e.Y);
             if (e.Button.Equals(MouseButtons.Left))
             {
-                Draw(curentType);
+                if (curentType != EnumID.Platform) {
+                    Draw(curentType);
+                }
+                return;
             }
 
             if (e.Button.Equals(MouseButtons.Middle))
             {
                 removeObject(currentMouse);
+                return;
             }
         }
 
@@ -589,7 +616,11 @@ namespace MapEditor
             currentMouse = new Point(e.X, e.Y);
             if (e.Button.Equals(MouseButtons.Left))
             {
-                Draw(curentType);
+                if (curentType != EnumID.Platform)
+                {
+                    Draw(curentType);
+                }
+                return;
 
             }
             if (e.Button.Equals(MouseButtons.Middle))
@@ -598,35 +629,52 @@ namespace MapEditor
             }
         }
 
-        private void drawItem(String path,int ID)
+        private void drawItem(String path, EnumID ID)
         {
-            string pa = Path.Combine(Application.StartupPath, path);
             Bitmap bm = new Bitmap(Path.Combine(Application.StartupPath, path));
-            if(true)
-            {
-                currentMouse = new Point((currentMouse.X / 32) * 32, (currentMouse.Y / 32) * 32);
+            ObjectGame obj;
+            if (curentType == EnumID.Platform) {
+                if (startMouse.X >= currentMouse.X || startMouse.Y >= currentMouse.Y) {
+                    return;
+                }
+                DrawImage(pictureBox1.Image, bm, startMouse, new Rectangle(0, 0, currentMouse.X - startMouse.X, currentMouse.Y - startMouse.Y));
+                obj = new ObjectGame(ID, startMouse, currentMouse);
+            } else {
+                DrawImage(pictureBox1.Image, bm, currentMouse, new Rectangle(0, 0, bm.Width, bm.Height));
+                obj = new ObjectGame(bm, ID, currentMouse);
             }
-            DrawImage(pictureBox1.Image, bm, currentMouse, new Rectangle(0, 0, bm.Width, bm.Height));
             pictureBox1.Refresh();
-            ObjectGame obj = new ObjectGame(bm, ID);
-            obj.SetLocation(currentMouse.X, currentMouse.Y);
+           
             addObject(obj);
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
+            currentMouse = new Point(e.X, e.Y);
+            if (e.Button.Equals(MouseButtons.Left))
+            {
+                if (curentType == EnumID.Platform)
+                {
+                    Draw(curentType);
+                }
+                return;
+            }
+        }
 
+        private void platformToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.Platform;
         }
 
         void addObject(ObjectGame obj)
         {
-            foreach (ObjectGame objectGame in listobjmap)
-            {
-                if (obj == objectGame)
-                {
-                    return;
-                }
-            }
+            //foreach (ObjectGame objectGame in listobjmap)
+            //{
+            //    if (obj == objectGame)
+            //    {
+            //        return;
+            //    }
+            //}
             listobjmap.Add(obj);
 
         }
@@ -641,12 +689,12 @@ namespace MapEditor
 
                     int numOfCol = objectGame.bm.Width / 32;
                     int numOfRow = objectGame.bm.Height / 32;
-                    if ((objectGame.location.X + objectGame.bm.Width) % 32 != 0)
+                    if ((objectGame.topLeft.X + objectGame.bm.Width) % 32 != 0)
                     {
                         numOfCol++;
                     }
 
-                    if ((objectGame.location.Y + objectGame.bm.Height) % 32 != 0)
+                    if ((objectGame.topLeft.Y + objectGame.bm.Height) % 32 != 0)
                     {
                         numOfRow++;
                     }
@@ -655,8 +703,8 @@ namespace MapEditor
                     {
                         for (int row = 0; row < numOfRow; row++)
                         {
-                            Point point = new Point((objectGame.location.X / 32) * 32 + col * 32, (objectGame.location.Y / 32) * 32 + row * 32);
-                            int bitmapIndex = matTile[objectGame.location.Y / 32 + row, objectGame.location.X / 32 + col];
+                            Point point = new Point((objectGame.topLeft.X / 32) * 32 + col * 32, (objectGame.topLeft.Y / 32) * 32 + row * 32);
+                            int bitmapIndex = matTile[objectGame.topLeft.Y / 32 + row, objectGame.topLeft.X / 32 + col];
                             Bitmap bm = listTile[bitmapIndex];
                             DrawImage(pictureBox1.Image, bm, point, new Rectangle(0, 0, bm.Width, bm.Height));
                         }
@@ -669,7 +717,7 @@ namespace MapEditor
                             float[] dashValue = { 5, 2 };
                             Pen p = new Pen(Color.Silver);
                             p.DashPattern = dashValue;
-                            g.DrawRectangle(p, (objectGame.location.X / 32) * 32 + col * 32, (objectGame.location.Y / 32) * 32 + row * 32, 32, 32);
+                            g.DrawRectangle(p, (objectGame.topLeft.X / 32) * 32 + col * 32, (objectGame.topLeft.Y / 32) * 32 + row * 32, 32, 32);
                         }
                     }
 
@@ -684,7 +732,7 @@ namespace MapEditor
 
         bool objInRange(Point clickPoint, ObjectGame obj)
         {
-            if (clickPoint.X < obj.location.X || clickPoint.X > obj.location.X + obj.bm.Width || clickPoint.Y > obj.location.Y + obj.bm.Height || clickPoint.Y < obj.location.Y)
+            if (clickPoint.X < obj.topLeft.X || clickPoint.X > obj.topLeft.X + obj.bm.Width || clickPoint.Y > obj.topLeft.Y + obj.bm.Height || clickPoint.Y < obj.topLeft.Y)
             {
                 return false;
             }

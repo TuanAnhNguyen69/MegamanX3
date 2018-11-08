@@ -52,7 +52,7 @@ namespace MapEditor
                 return;
             foreach (ObjectGame o in listObj)
             {
-                Rectangle r = new Rectangle(o.location.X, o.location.Y, o.bm.Width, o.bm.Height);
+                Rectangle r = new Rectangle(o.topLeft.X, o.topLeft.Y, o.bm.Width, o.bm.Height);
                 if (LeftTop.rec.IntersectsWith(r))
                 {
                     LeftTop.listObj.Add(o);
@@ -81,7 +81,7 @@ namespace MapEditor
 
         public void Insert(ObjectGame obj)
         {
-            Rectangle r = new Rectangle(obj.location.X, obj.location.Y, obj.bm.Width, obj.bm.Height);
+            Rectangle r = new Rectangle(obj.topLeft.X, obj.topLeft.Y, obj.bm.Width, obj.bm.Height);
 
             if (LeftBot == null)
                 CreateSubNode();

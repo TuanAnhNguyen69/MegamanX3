@@ -12,31 +12,39 @@ namespace MapEditor
     public class ObjectGame
     {
         public Bitmap bm;
-        public int ID;
-        public int indexanotherobj;
+        public EnumID ID;
         public int index;
-        public Point location;
+        public Point topLeft;
+        public int width;
+        public int height;
         public List<String> listIDInTree;
        
-        public Rectangle moveSpace;
         public ObjectGame()
         { }
-        public ObjectGame(Bitmap b, int id)
+
+        public ObjectGame(Bitmap bm, EnumID ID, Point topLeft)
         {
-            bm = b;
-            ID = id;
-            moveSpace = new Rectangle();
-            indexanotherobj = -1;
+            this.bm = bm;
+            this.ID = ID;
+            this.topLeft = topLeft;
+            width = bm.Width;
+            height = bm.Height;
         }
 
-        public void SetLocation(int x, int y)
+        public ObjectGame(EnumID ID, Point topLeft, Point botRight)
         {
-            location = new Point(x, y);
+            int a = Math.Abs(botRight.X - topLeft.X);
+            int b = Math.Abs(botRight.Y - topLeft.Y);
+            bm = new Bitmap(Math.Abs(botRight.X - topLeft.X), Math.Abs(botRight.Y - topLeft.Y));
+            this.ID = ID;
+            this.topLeft = topLeft;
+            width = bm.Width;
+            height = bm.Height;
         }
 
         public Point GetLocation()
         {
-            return new Point(location.X, location.Y);
+            return new Point(topLeft.X, topLeft.Y);
         }
 
         //public Point GetLocation()
@@ -50,7 +58,7 @@ namespace MapEditor
             {
                 return false;
             }
-            if (firstObject.location != secondObject.location)
+            if (firstObject.topLeft != secondObject.topLeft)
             {
                 return false;
             }
@@ -63,7 +71,7 @@ namespace MapEditor
             {
                 return true;
             }
-            if (firstObject.location != secondObject.location)
+            if (firstObject.topLeft != secondObject.topLeft)
             {
                 return true;
             }
