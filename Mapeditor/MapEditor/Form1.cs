@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 public enum EnumID
@@ -27,7 +23,6 @@ public enum EnumID
     HeadGunner,
     Helit,
     NotoBanger,
-    Hangerter,
     Bee,
 
     // Ground
@@ -36,10 +31,13 @@ public enum EnumID
     Ladder,
     BigElevator,
     SmallElevator,
-    Conveyor,
+    BlueConveyor,
+    YellowConveyor,
+    SmallConveyor,
+
     Thorn,
     Box,
-    BreakableWall,
+    BoxWall,
     Roof,
     BreakPlatform,
     UpGround,
@@ -84,16 +82,16 @@ namespace MapEditor
         QuadNode rootNode;
         int[,] listMatrix;
 
-        int countMatrixCol,countMatrixRow;
-        string writeMatrix,readMatrix;
-        string fileDirectory; 
+        int countMatrixCol, countMatrixRow;
+        string writeMatrix, readMatrix;
+        string fileDirectory;
         String fileName;
         Point startMouse;
         Point currentMouse;
-       // QuadNode rootNode;
+        // QuadNode rootNode;
         private void btn_New_Click(object sender, EventArgs e)
         {
-            
+
             openFileDialog1.ShowDialog();
             try
             {
@@ -105,9 +103,9 @@ namespace MapEditor
                 matTile = new int[countRow, countCol];
                 pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
-                DrawDash(countRow,countCol);
-               Cut(pictureBox1.BackgroundImage);
-           
+                DrawDash(countRow, countCol);
+                Cut(pictureBox1.BackgroundImage);
+
             }
             catch
             {
@@ -121,7 +119,7 @@ namespace MapEditor
             Graphics g = Graphics.FromImage(pictureBox1.Image);
             float[] dashValue = { 5, 2 };
 
-            
+
             Pen p = new Pen(Color.Silver);
             p.DashPattern = dashValue;
             for (int i = 0; i < col; i++)
@@ -173,39 +171,39 @@ namespace MapEditor
 
         void DrawImage(Image bmDrawTo, Image bmDraw, Point pos, Rectangle rectClip) //ve
         {
-            
-            Graphics.FromImage(bmDrawTo).DrawImage(bmDraw, new Rectangle(pos.X, pos.Y, rectClip.Width, rectClip.Height), rectClip, GraphicsUnit.Pixel );
+
+            Graphics.FromImage(bmDrawTo).DrawImage(bmDraw, new Rectangle(pos.X, pos.Y, rectClip.Width, rectClip.Height), rectClip, GraphicsUnit.Pixel);
         }
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-           // saveFileDialog1.Filter = "Images|*.bmp;";
+            // saveFileDialog1.Filter = "Images|*.bmp;";
             ImageFormat format = ImageFormat.Png;
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 fileDirectory = Path.GetDirectoryName(saveFileDialog1.FileName);
                 fileName = Path.GetFileName(saveFileDialog1.FileName);
                 format = ImageFormat.Bmp;
-                pictureBox2.BackgroundImage.Save(Path.Combine(fileDirectory,fileName+".bmp"), format);
+                pictureBox2.BackgroundImage.Save(Path.Combine(fileDirectory, fileName + ".bmp"), format);
                 //  StreamWriter writer = new StreamWriter(Path.Combine(fileDirectory,Name+"txt"));
                 string text = "";
                 text += listTile.Count + "\r\n";
                 text += countRow + "\r\n";
                 text += countCol + "\r\n";
                 text += writeMatrix;
-                File.WriteAllText(Path.Combine(fileDirectory,fileName+".txt"),text);
+                File.WriteAllText(Path.Combine(fileDirectory, fileName + ".txt"), text);
 
 
                 String s = "";
 
-                StreamWriter writer = new StreamWriter(saveFileDialog1.FileName+"OBJ.txt");
+                StreamWriter writer = new StreamWriter(saveFileDialog1.FileName + "OBJ.txt");
 
                 s += listobjmap.Count + "\r\n" + "\r\n";
 
                 foreach (ObjectGame obj in listobjmap)
                 {
-                    s += obj.ID + "\r\n";
+                    s += (int) obj.ID + "\r\n";
                     s += obj.topLeft.X + "\r\n";
                     s += obj.topLeft.Y + "\r\n";
                     s += obj.width + "\r\n";
@@ -242,19 +240,19 @@ namespace MapEditor
                 pictureBox2.BackgroundImage = Image.FromFile(openFileDialog1.FileName);
                 pictureBox2.Width = pictureBox2.BackgroundImage.Width;
                 pictureBox2.Height = pictureBox2.BackgroundImage.Height;
-                readMatrix=File.ReadAllText(Path.Combine(fileDirectory, fileName + ".txt"));
+                readMatrix = File.ReadAllText(Path.Combine(fileDirectory, fileName + ".txt"));
                 countRow = pictureBox2.Height / 32;
                 countCol = pictureBox2.Width / 32;
                 matTile = new int[countRow, countCol];
-                
+
                 Cut(pictureBox2.BackgroundImage);
                 decodeMatrix();
 
 
-               // FileStream fileStream = new FileStream("")
-                String readObj = File.ReadAllText(Path.Combine(fileDirectory,fileName+"OBJ.txt"));
+                // FileStream fileStream = new FileStream("")
+                String readObj = File.ReadAllText(Path.Combine(fileDirectory, fileName + "OBJ.txt"));
                 decodeObj(readObj);
-               
+
                 buildBackground();
                 //pictureBox1.Width = pictureBox1.BackgroundImage.Width;
                 //pictureBox1.Height = pictureBox1.BackgroundImage.Height;
@@ -265,7 +263,7 @@ namespace MapEditor
                 DrawDash(countMatrixRow, countMatrixCol);
             }
 
-            
+
             catch
             {
 
@@ -278,14 +276,14 @@ namespace MapEditor
             int currentIndex = 0;
             int numOfObj = int.Parse(readObj.Substring(currentIndex, readObj.IndexOf("\r\n\r\n", currentIndex) - currentIndex));
             currentIndex = readObj.IndexOf("\r\n\r\n", currentIndex) + 4;
-            for (int i=0;i<numOfObj; i++)
+            for (int i = 0; i < numOfObj; i++)
             {
-                EnumID id = (EnumID) int.Parse(readObj.Substring(currentIndex, readObj.IndexOf("\r\n", currentIndex) - currentIndex));
+                EnumID id = (EnumID)int.Parse(readObj.Substring(currentIndex, readObj.IndexOf("\r\n", currentIndex) - currentIndex));
                 currentIndex = readObj.IndexOf("\r\n", currentIndex) + 2;
                 int x = int.Parse(readObj.Substring(currentIndex, readObj.IndexOf("\r\n", currentIndex) - currentIndex));
                 currentIndex = readObj.IndexOf("\r\n", currentIndex) + 2;
                 int y = int.Parse(readObj.Substring(currentIndex, readObj.IndexOf("\r\n", currentIndex) - currentIndex));
-                ObjectGame obj = new ObjectGame(getImage((EnumID)id),id, new Point(x,y));
+                ObjectGame obj = new ObjectGame(getImage((EnumID)id), id, new Point(x, y));
                 listobjmap.Add(obj);
                 currentIndex = readObj.IndexOf("\r\n\r\n", currentIndex) + 4;
             }
@@ -296,71 +294,52 @@ namespace MapEditor
         {
             switch (ID)
             {
-                //case EnumID.Megaman:
-                //    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\image\item\tripleshot.png"));
-                //    break;
-                //case EnumID.BlastHornet:
-                //    break;
-                //case EnumID.Byte:
-                //    break;
-                //case EnumID.Shurikein:
-                //    break;
-                //case EnumID.CarryArm:
-                //    break;
-                //case EnumID.HeadGunner:
-                //    break;
-                //case EnumID.Helit:
-                //    break;
-                //case EnumID.NotoBanger:
-                //    break;
-                //case EnumID.Hangerter:
-                //    break;
-                //case EnumID.Bee:
-                //    break;
-                //case EnumID.Door:
-                //    break;
-                //case EnumID.Ladder:
-                //    break;
-                //case EnumID.BigElevator:
-                //    break;
-                //case EnumID.Conveyor:
-                //    break;
-                //case EnumID.Thorn:
-                //    break;
-                //case EnumID.Box:
-                //    break;
-                //case EnumID.Roof:
-                //    break;
-                //case EnumID.BreakPlatform:
-                //    break;
-                //case EnumID.Canon:
-                //    break;
-                //case EnumID.GunnerRocket:
-                //    break;
-                //case EnumID.HeliRocket:
-                //    break;
-                //case EnumID.ByteBomb:
-                //    break;
-                //case EnumID.SmallEnergy:
-                //    break;
-                //case EnumID.BigEnergy:
-                //    break;
-                //case EnumID.ChimeraArmor:
-                //    break;
-                //case EnumID.MegamanBullet:
-                //    break;
-                //case EnumID.Cargo:
-                //    break;
-                //case EnumID.SmallElevator:
-                //    break;
-                //case EnumID.BreakableWall:
-                //    break;
-                //case EnumID.UpGround:
-                //    break;
-                //case EnumID.DownGround:
-                //    break;
                 case EnumID.Platform:
                     return new Bitmap(Path.Combine(Application.StartupPath, @"resource\platform.png"));
+                case EnumID.BlastHornet:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\blast_hornet.png"));
+                case EnumID.Shurikein:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\shurikein.png"));
+                case EnumID.CarryArm:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\carry_arm.png"));
+                case EnumID.HeadGunner:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\head_gunner.png"));
+                case EnumID.Helit:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\helit.png"));
+                case EnumID.NotoBanger:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\notor_banger.png"));
+                case EnumID.Cargo:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\cargo.png"));
+                case EnumID.Door:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\door.png"));
+                case EnumID.BigElevator:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\big_elevetor.png"));
+                case EnumID.SmallElevator:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\small_elevetor.png"));
+                case EnumID.BlueConveyor:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\blue_conveyor.png"));
+                case EnumID.YellowConveyor:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\yellow_conveyor.png"));
+                case EnumID.SmallConveyor:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\small_conveyor.png"));
+                case EnumID.Thorn:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\thorn.png"));
+                case EnumID.Box:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\box.png"));
+                case EnumID.BoxWall:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\box_wall.png"));
+                case EnumID.Roof:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\roof.png"));
+                case EnumID.UpGround:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\up_ground.png"));
+                case EnumID.DownGround:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\down_ground.png"));
+                case EnumID.SmallEnergy:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\small_energy.png"));
+                case EnumID.BigEnergy:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\big_energy.png"));
+                case EnumID.ChimeraArmor:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\chimera.png"));
                 default:
                     return new Bitmap(Path.Combine(Application.StartupPath, @"resource\platform.png"));
             }
@@ -371,21 +350,21 @@ namespace MapEditor
             pictureBox1.Width = 32 * countMatrixCol;
             pictureBox1.Height = 32 * countMatrixRow;
             pictureBox1.BackgroundImage = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            for(int i=0;i<countMatrixRow; i++)
+            for (int i = 0; i < countMatrixRow; i++)
             {
-                for(int j=0;j<countMatrixCol;j++)
+                for (int j = 0; j < countMatrixCol; j++)
                 {
                     int x = i;
                     int a = listMatrix[i, j];
                     Bitmap tile = listTile[a];
-                    DrawImage(pictureBox1.BackgroundImage, tile, new Point(j*32, i*32), new Rectangle(0, 0, 32, 32));
-               
+                    DrawImage(pictureBox1.BackgroundImage, tile, new Point(j * 32, i * 32), new Rectangle(0, 0, 32, 32));
+
                 }
             }
             pictureBox1.Width = pictureBox1.BackgroundImage.Width;
             pictureBox1.Height = pictureBox1.BackgroundImage.Height;
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            for (int i=0;i< listobjmap.Count();i++)
+            for (int i = 0; i < listobjmap.Count(); i++)
             {
                 DrawImage(pictureBox1.Image, listobjmap[i].bm, listobjmap[i].topLeft, new Rectangle(0, 0, listobjmap[i].bm.Width, listobjmap[i].bm.Height));
             }
@@ -394,15 +373,15 @@ namespace MapEditor
 
         private void decodeMatrix()
         {
-            
+
             int currentIndex = 0;
-            countMatrixRow = int.Parse(readMatrix.Substring(0,readMatrix.IndexOf("\r\n",currentIndex)-currentIndex));
-            currentIndex = readMatrix.IndexOf("\r\n", currentIndex)+2;
-            
-            countMatrixCol = int.Parse(readMatrix.Substring(currentIndex, readMatrix.IndexOf("\r\n", currentIndex)-currentIndex));
-            currentIndex = readMatrix.IndexOf("\r\n", currentIndex)+2;
+            countMatrixRow = int.Parse(readMatrix.Substring(0, readMatrix.IndexOf("\r\n", currentIndex) - currentIndex));
+            currentIndex = readMatrix.IndexOf("\r\n", currentIndex) + 2;
+
+            countMatrixCol = int.Parse(readMatrix.Substring(currentIndex, readMatrix.IndexOf("\r\n", currentIndex) - currentIndex));
+            currentIndex = readMatrix.IndexOf("\r\n", currentIndex) + 2;
             listMatrix = new int[countMatrixRow, countMatrixCol];
-            for (int i=0;i < countMatrixRow; i++)
+            for (int i = 0; i < countMatrixRow; i++)
             {
                 string row = "";
                 row = readMatrix.Substring(currentIndex, readMatrix.IndexOf("\r\n", currentIndex) - currentIndex);
@@ -417,7 +396,7 @@ namespace MapEditor
                     currentRowIndex = row.IndexOf(" ", currentRowIndex) + 1;
 
                 }
-                currentIndex = readMatrix.IndexOf("\r\n", currentIndex)+2; 
+                currentIndex = readMatrix.IndexOf("\r\n", currentIndex) + 2;
             }
         }
 
@@ -441,14 +420,14 @@ namespace MapEditor
                             indexOf = listTile.IndexOf(bm);
                             matTile[i, j] = (int)bm.Tag;
                         }
-                            
+
                     }
                     if (allowAdd)
                     {
                         b.Tag = listTile.Count;
                         listTile.Add(b);
                         matTile[i, j] = (int)b.Tag;
-                        writeMatrix += b.Tag+" ";
+                        writeMatrix += b.Tag + " ";
 
                     }
                     else
@@ -517,39 +496,48 @@ namespace MapEditor
 
         private EnumID curentType;
 
-        private void Draw(EnumID type) {
+        private void Draw(EnumID type)
+        {
             switch (type)
             {
                 case EnumID.Megaman:
+                    break;
                 case EnumID.BlastHornet:
+                    drawItem(@"resource\blast_hornet.png");
                     break;
                 case EnumID.Byte:
+
                     break;
                 case EnumID.Shurikein:
+                    drawItem(@"resource\shurikein.png");
                     break;
                 case EnumID.CarryArm:
+                    drawItem(@"resource\carry_arm.png");
                     break;
                 case EnumID.HeadGunner:
+                    drawItem(@"resource\head_gunner.png");
                     break;
                 case EnumID.Helit:
+                    drawItem(@"resource\helit.png");
                     break;
                 case EnumID.NotoBanger:
-                    break;
-                case EnumID.Hangerter:
+                    drawItem(@"resource\notor_banger.png");
                     break;
                 case EnumID.Bee:
                     break;
                 case EnumID.Door:
+                    drawItem(@"resource\door.png");
                     break;
                 case EnumID.Ladder:
                     break;
-                case EnumID.Conveyor:
-                    break;
                 case EnumID.Thorn:
+                    drawItem(@"resource\thorn.png");
                     break;
                 case EnumID.Box:
+                    drawItem(@"resource\box.png");
                     break;
                 case EnumID.Roof:
+                    drawItem(@"resource\roof.png");
                     break;
                 case EnumID.BreakPlatform:
                     break;
@@ -562,28 +550,48 @@ namespace MapEditor
                 case EnumID.ByteBomb:
                     break;
                 case EnumID.SmallEnergy:
+                    drawItem(@"resource\small_energy.png");
                     break;
                 case EnumID.BigEnergy:
+                    drawItem(@"resource\big_energy.png");
                     break;
                 case EnumID.ChimeraArmor:
+                    drawItem(@"resource\chimera.png");
                     break;
                 case EnumID.MegamanBullet:
                     break;
                 case EnumID.Cargo:
+                    drawItem(@"resource\cargo.png");
                     break;
                 case EnumID.BigElevator:
+                    drawItem(@"resource\big_elevator.png");
                     break;
                 case EnumID.SmallElevator:
+                    drawItem(@"resource\small_elevator.png");
                     break;
-                case EnumID.BreakableWall:
+                case EnumID.BoxWall:
+                    drawItem(@"resource\box_wall.png");
                     break;
                 case EnumID.UpGround:
+                    drawItem(@"resource\up_ground.png");
                     break;
                 case EnumID.DownGround:
+                    drawItem(@"resource\down_ground.png");
                     break;
                 case EnumID.Platform:
-                    drawItem(@"resource\platform.png", type); break;
+                    drawItem(@"resource\platform.png");
+                    break;
+                case EnumID.BlueConveyor:
+                    drawItem(@"resource\blue_conveyor.png");
+                    break;
+                case EnumID.YellowConveyor:
+                    drawItem(@"resource\yellow_conveyor.png");
+                    break;
+                case EnumID.SmallConveyor:
+                    drawItem(@"resource\small_conveyor.png");
+                    break;
                 default:
+                    drawItem(@"resource\platform.png");
                     break;
             }
 
@@ -596,7 +604,8 @@ namespace MapEditor
             currentMouse = new Point(e.X, e.Y);
             if (e.Button.Equals(MouseButtons.Left))
             {
-                if (curentType != EnumID.Platform) {
+                if (curentType != EnumID.Platform)
+                {
                     Draw(curentType);
                 }
                 return;
@@ -604,13 +613,16 @@ namespace MapEditor
 
             if (e.Button.Equals(MouseButtons.Middle))
             {
+                textBox1.Text = curentType.ToString();
+                currentMouse = new Point(e.X, e.Y);
+
                 removeObject(currentMouse);
                 return;
             }
         }
 
 
-     
+
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             currentMouse = new Point(e.X, e.Y);
@@ -618,36 +630,41 @@ namespace MapEditor
             {
                 if (curentType != EnumID.Platform)
                 {
-                    Draw(curentType);
-                } else
+                    return;
+                }
+                else
                 {
                     Bitmap bm = new Bitmap(Path.Combine(Application.StartupPath, @"resource\platform.png"));
                     DrawImage(pictureBox1.Image, bm, startMouse, new Rectangle(0, 0, currentMouse.X - startMouse.X, currentMouse.Y - startMouse.Y));
                     bm.Dispose();
                     pictureBox1.Refresh();
-              
+
                 }
 
             }
-       
+
         }
 
-        private void drawItem(String path, EnumID ID)
+        private void drawItem(String path)
         {
             Bitmap bm = new Bitmap(Path.Combine(Application.StartupPath, path));
             ObjectGame obj;
-            if (curentType == EnumID.Platform) {
-                if (startMouse.X >= currentMouse.X || startMouse.Y >= currentMouse.Y) {
+            if (curentType == EnumID.Platform)
+            {
+                if (startMouse.X >= currentMouse.X || startMouse.Y >= currentMouse.Y)
+                {
                     return;
                 }
                 DrawImage(pictureBox1.Image, bm, startMouse, new Rectangle(0, 0, currentMouse.X - startMouse.X, currentMouse.Y - startMouse.Y));
-                obj = new ObjectGame(ID, startMouse, currentMouse);
-            } else {
+                obj = new ObjectGame(curentType, startMouse, currentMouse);
+            }
+            else
+            {
                 DrawImage(pictureBox1.Image, bm, currentMouse, new Rectangle(0, 0, bm.Width, bm.Height));
-                obj = new ObjectGame(bm, ID, currentMouse);
+                obj = new ObjectGame(bm, curentType, currentMouse);
             }
             pictureBox1.Refresh();
-           
+
             addObject(obj);
         }
 
@@ -673,9 +690,124 @@ namespace MapEditor
         {
             textBox1.Text = curentType.ToString();
             currentMouse = new Point(e.X, e.Y);
-          
+
             removeObject(currentMouse);
             return;
+        }
+
+        private void conveyorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void blastHornetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.BlastHornet;
+        }
+
+        private void shurikeinToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.Shurikein;
+        }
+
+        private void headGunnerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.HeadGunner;
+        }
+
+        private void helitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.Helit;
+        }
+
+        private void notoBangerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.NotoBanger;
+        }
+
+        private void carryArmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.CarryArm;
+        }
+
+        private void cargoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.Cargo;
+        }
+
+        private void doorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.Door;
+        }
+
+        private void bigElevatorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.BigElevator;
+        }
+
+        private void smallElevatorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.SmallElevator;
+        }
+
+        private void yellowConveyorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.YellowConveyor;
+        }
+
+        private void smallConveyorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.SmallConveyor;
+        }
+
+        private void conveyorToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            curentType = EnumID.BlueConveyor;
+        }
+
+        private void thornToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.Thorn;
+        }
+
+        private void boxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.Box;
+        }
+
+        private void breakableWallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.BoxWall;
+        }
+
+        private void roofToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.Roof;
+        }
+
+        private void upGroundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.UpGround;
+        }
+
+        private void downGroundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.DownGround;
+        }
+
+        private void smallEnergyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.SmallEnergy;
+        }
+
+        private void bigEnergyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.BigEnergy;
+        }
+
+        private void chimeraArmorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.ChimeraArmor;
         }
 
         void addObject(ObjectGame obj)
@@ -724,7 +856,7 @@ namespace MapEditor
                     for (int col = 0; col < numOfCol; col++)
                     {
                         for (int row = 0; row < numOfRow; row++)
-                        { 
+                        {
                             Graphics g = Graphics.FromImage(pictureBox1.Image);
                             float[] dashValue = { 5, 2 };
                             Pen p = new Pen(Color.Silver);
