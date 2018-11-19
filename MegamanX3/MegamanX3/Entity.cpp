@@ -101,6 +101,11 @@ float Entity::GetHeight()
 	return sprite->GetFrameHeight();
 }
 
+bool Entity::GetReverse()
+{
+	return this->reverse;
+}
+
 void Entity::SetSprite(Sprite * sprite)
 {
 	this->sprite = sprite;

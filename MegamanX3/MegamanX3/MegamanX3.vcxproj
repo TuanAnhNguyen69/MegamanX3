@@ -173,9 +173,11 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerDamagedState.h" />
     <ClInclude Include="PlayerFallingState.h" />
     <ClInclude Include="PlayerJumpingState.h" />
     <ClInclude Include="PlayerRunningState.h" />
+    <ClInclude Include="PlayerSlidingState.h" />
     <ClInclude Include="PlayerStandingState.h" />
     <ClInclude Include="PlayerStateHandler.h" />
     <ClInclude Include="PlayerState.h" />
@@ -209,9 +211,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerDamagedState.cpp" />
     <ClCompile Include="PlayerFallingState.cpp" />
     <ClCompile Include="PlayerJumpingState.cpp" />
     <ClCompile Include="PlayerRunningState.cpp" />
+    <ClCompile Include="PlayerSlidingState.cpp" />
     <ClCompile Include="PlayerStandingState.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="QuadTree.cpp" />

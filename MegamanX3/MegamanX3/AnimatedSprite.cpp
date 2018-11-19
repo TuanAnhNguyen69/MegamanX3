@@ -47,7 +47,7 @@ void AnimatedSprite::Update()
 					currentFrame = 0.0f;
 				}
 				else {
-					currentFrame = maxFrames;
+					currentFrame = maxFrames - 1;
 				}
 			}
 		}
@@ -84,4 +84,9 @@ void AnimatedSprite::ResetFrame()
 {
 	currentFrame = 0;
 	previousFrame = -1.0f;
+}
+
+bool AnimatedSprite::IsFinished()
+{
+	return currentFrame == maxFrames - 1;
 }

@@ -5,7 +5,7 @@
 
 PlayerStandingState::PlayerStandingState(PlayerStateHandler *handler, Entity *entity) : PlayerState(handler, entity)
 {
-	sprite = new AnimatedSprite(15, 0.3);
+	sprite = new AnimatedSprite(15, 0.3, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
 		7, 9, 10, 50, 50);
 }

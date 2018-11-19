@@ -4,6 +4,9 @@
 #include "PlayerRunningState.h"
 #include "PlayerJumpingState.h"
 #include "PlayerFallingState.h"
+#include "PlayerSlidingState.h"
+#include "PlayerDamagedState.h"
+
 #include <iostream>
 
 Player::Player()
@@ -12,6 +15,10 @@ Player::Player()
 	currentState = nullptr;
 	standingState = nullptr;
 	runningState = nullptr;
+	jumpingState = nullptr;
+	fallingState = nullptr;
+	slidingState = nullptr;
+	damagedState = nullptr;
 }
 
 
@@ -40,7 +47,8 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 	runningState = new PlayerRunningState(this, entity);
 	jumpingState = new PlayerJumpingState(this, entity);
 	fallingState = new PlayerFallingState(this, entity);
-
+	slidingState = new PlayerSlidingState(this, entity);
+	damagedState = new PlayerDamagedState(this, entity);
 	ChangeState(Standing);
 	allowJump = true;
 }
@@ -55,6 +63,14 @@ void Player::Update()
 	Input *input = Engine::GetEngine()->GetInput();
 	if (input == nullptr) {
 		return;
+	}
+
+	if (input->IsKeyDown(DIK_H)) {
+		ChangeState(Damaged);
+	}
+
+	if (input->IsKeyDown(DIK_Z)) {
+		ChangeState(Sliding);
 	}
 
 	if (input->IsKeyDown(DIK_SPACE)) {
@@ -112,6 +128,14 @@ void Player::ChangeState(PlayerStateHandler::StateName stateName) {
 	case Falling:
 		currentState = fallingState;
 		currentStateName = Falling;
+		break;
+	case Sliding:
+		currentState = slidingState;
+		currentStateName = Sliding;
+		break;
+	case Damaged:
+		currentState = damagedState;
+		currentStateName = Damaged;
 		break;
 	}
 	currentState->Load();

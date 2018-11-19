@@ -40,6 +40,7 @@ public:
 	D3DXVECTOR3 GetVelocity();
 	float GetWidth();
 	float GetHeight();
+	bool GetReverse();
 
 	void SetSprite(Sprite *sprite);
 	void SetTranslation(float x = 0.0f, float y = 0.0f);

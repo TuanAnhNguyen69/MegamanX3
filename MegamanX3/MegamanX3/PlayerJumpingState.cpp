@@ -26,7 +26,7 @@ void PlayerJumpingState::Load()
 	entity->SetVelocityY(Define::PLAYER_MIN_JUMP_VELOCITY);
 	acceleratorX = 14.0f;
 	acceleratorY = 15.0f;
-	noPressed = false;
+	noPressed = true;
 	sprite->ResetFrame();
 }
 
@@ -126,7 +126,10 @@ void PlayerJumpingState::OnCollision(Entity * impactor, Entity::SideCollisions s
 	case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
 	{
 		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+		noPressed = false;
+		entity->SetVelocityY(0);
 	}
+
 
 	default:
 		break;

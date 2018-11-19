@@ -16,6 +16,7 @@ public:
 
 	void SetFrameRange(float startFrame, float endFrame);
 	void ResetFrame();
+	bool IsFinished();
 
 private:
 	float currentFrame;

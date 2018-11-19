@@ -75,6 +75,12 @@
     <ClCompile Include="DebugDraw.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerDamagedState.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSlidingState.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -161,6 +167,12 @@
     </ClInclude>
     <ClInclude Include="DebugDraw.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDamagedState.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSlidingState.h">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

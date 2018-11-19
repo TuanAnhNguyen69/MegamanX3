@@ -23,7 +23,7 @@ void Map::Initialize(LPCTSTR filePath)
 
 	Entity *entity = EntityManager::GetInstance()->AddEntity();
 	entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-		"PlayerPaper", 56, 86, 0, 0);
+		"PlayerPaper", 500, 86, 0, 0);
 	//entity->SetScale(2, 2);
 	entity->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 100);
 
