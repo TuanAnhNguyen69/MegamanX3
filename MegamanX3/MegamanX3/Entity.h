@@ -4,6 +4,53 @@
 #include <d3d9.h>
 #include "Sprite.h"
 
+enum EntityId{
+	// Player
+	Megaman,
+	MegamanBullet,
+
+	// Boss
+	BlastHornet,
+	Byte,
+	Shurikein,
+
+	// Creep
+	CarryArm,
+	HeadGunner,
+	Helit,
+	NotoBanger,
+	Bee,
+
+	// Ground
+	Cargo,
+	Door,
+	Ladder,
+	BigElevator,
+	SmallElevator,
+	BlueConveyor,
+	YellowConveyor,
+	SmallConveyor,
+	Thorn,
+	Box,
+	BoxWall,
+	Roof,
+	BreakPlatform,
+	UpGround,
+	DownGround,
+	Platform,
+
+	//weapon
+	Canon,
+	GunnerRocket,
+	HeliRocket,
+	ByteBomb,
+
+	//Item
+	SmallEnergy,
+	BigEnergy,
+	ChimeraArmor
+};
+
 class Entity
 {
 public:
@@ -58,13 +105,14 @@ public:
 
 	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
 private:
-	Entity(void);
+	Entity(EntityId entityId);
 
 	D3DXMATRIX transformMatrix;
 	D3DXVECTOR2 scale;
 	D3DXVECTOR2 translation;
 	D3DXVECTOR3 position;
 	D3DXVECTOR3 velocity;
+	EntityId entityId;
 	Sprite *sprite;
 	bool reverse;
 };

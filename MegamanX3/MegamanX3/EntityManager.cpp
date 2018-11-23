@@ -29,9 +29,9 @@ void EntityManager::Render()
 	}
 }
 
-Entity * EntityManager::AddEntity()
+Entity * EntityManager::AddEntity(EntityId entityId)
 {
-	Entity *entity = new Entity();
+	Entity *entity = new Entity(entityId);
 	entities.push_back(entity);
 	return entity;
 }

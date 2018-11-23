@@ -13,7 +13,7 @@ public:
 	void Update();
 	void Render();
 		
-	Entity *AddEntity();
+	Entity *AddEntity(EntityId entityId);
 	void RemoveEntity(Entity *entity);
 	void RemoveAllEntities();
 

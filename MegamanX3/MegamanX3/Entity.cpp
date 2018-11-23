@@ -6,8 +6,9 @@
 #include "Map.h"
 #include <iostream>
 
-Entity::Entity()
+Entity::Entity(EntityId entityId)
 {
+	this->entityId = entityId;
 	position = D3DXVECTOR3(0, 0, 0);
 	velocity = D3DXVECTOR3(0, 0, 0);
 	scale = D3DXVECTOR2(1, 1);

@@ -39,7 +39,7 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 {
 	this->camera = camera;
 
-	entity = EntityManager::GetInstance()->AddEntity();
+	entity = EntityManager::GetInstance()->AddEntity(EntityId::Megaman);
 	entity->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	entity->SetScale(2, 2);
 

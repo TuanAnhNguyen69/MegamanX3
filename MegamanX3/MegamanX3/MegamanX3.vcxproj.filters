@@ -197,5 +197,14 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{1b280b5a-576c-4e23-99dd-afa6af513317}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{48d15e3b-a7f3-47e6-a8d7-7f366816b643}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemy">
+      <UniqueIdentifier>{1e98a3be-5707-4592-bb2f-b38391d83745}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Ground">
+      <UniqueIdentifier>{df43c6b1-6e39-453f-8a44-adf82eb63ae3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

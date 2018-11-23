@@ -21,7 +21,7 @@ void Map::Initialize(LPCTSTR filePath)
 {
 	quadTree = new QuadTree(1, {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT});
 
-	Entity *entity = EntityManager::GetInstance()->AddEntity();
+	Entity *entity = EntityManager::GetInstance()->AddEntity(EntityId::Platform);
 	entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"PlayerPaper", 500, 86, 0, 0);
 	//entity->SetScale(2, 2);
