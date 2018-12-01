@@ -4,6 +4,10 @@
 #include "QuadTree.h"
 #include "Sprite.h"
 #include <map>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <random>
 
 class Map
 {
