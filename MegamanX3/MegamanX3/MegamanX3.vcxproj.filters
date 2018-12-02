@@ -144,6 +144,9 @@
     <ClCompile Include="NotorBangerState.cpp">
       <Filter>Entities\Enemy\NotorBanger</Filter>
     </ClCompile>
+    <ClCompile Include="HeadGunnerState.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -305,6 +308,12 @@
     </ClInclude>
     <ClInclude Include="NotorBangerStateHandler.h">
       <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerStateHandler.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerState.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
