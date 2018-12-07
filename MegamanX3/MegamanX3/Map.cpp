@@ -8,7 +8,6 @@ Map::Map()
 	quadTree = nullptr;
 }
 
-
 Map::~Map()
 {
 	if (quadTree) {
@@ -17,45 +16,41 @@ Map::~Map()
 	}
 }
 
-void Map::Initialize(LPCTSTR filePath)
+void Map::Initialize(LPCTSTR fileName)
 {
-	std::ifstream map(filePath);
+	std::string objFilePath("Map/");
+	objFilePath.append(fileName).append("OBJ.txt");
+	std::string mapFilePath("Map/");
+	mapFilePath.append(fileName).append(".txt");
 
+	std::ifstream map(mapFilePath);
 	if (map.is_open())
+	{
+
+	}
+	std::ifstream objects(objFilePath);
+	quadTree = new QuadTree(1, { 0, 0, 7936, 2048 });
+	std::cout << objects.is_open();
+
+	if (objects.is_open())
 	{
 		float posX, posY; int width, height;
 		int count;
-		map >> count;
-		int id;
-		int x = 0;
-
-
-		// duyệt từng dòng của file Stage
+		objects >> count;
+		std::cout << count;
 		for (int i = 0; i < count; i++)
 		{
 			float enumValue;
-			map >> id >> posX >> posY >> width >> height;
-			//posY = G_MapHeight - posY - 16;
-			if (id > 20) {
-				int a = 0;
-			}
-			// ứng với giá trị value tương ứng để khởi tạo các object tương tứng
-			switch (id)
-			{
-
-			}
+			int id;
+			objects >> id >> posX >> posY >> width >> height;
+			EntityId entityId = (EntityId)id;
+			Entity *entity = EntityManager::GetInstance()->AddEntity(entityId);
+			entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
+				this->GetTextureName(entityId), width, height);
+			entity->SetPosition(posX + width/2, posY + height/2);			
+			quadTree->Insert(entity);
 		}
 	}
-
-	quadTree = new QuadTree(1, {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT});
-
-	Entity *entity = EntityManager::GetInstance()->AddEntity(EntityId::Platform);
-	entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-		"PlayerPaper", 500, 86, 0, 0);
-	//entity->SetScale(2, 2);
-	entity->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 100);
-
-	quadTree->Insert(entity);
 }
 
 void Map::Update()
@@ -68,12 +63,12 @@ void Map::Render()
 
 int Map::GetWidth()
 {
-	return 32 * 100;
+	return 7936;
 }
 
 int Map::GetHeight()
 {
-	return 32 * 100;
+	return 2048;
 }
 
 int Map::GetTileWidth()
@@ -89,4 +84,81 @@ int Map::GetTileHeight()
 QuadTree * Map::GetQuadTree()
 {
 	return quadTree;
+}
+
+LPCTSTR Map::GetTextureName(EntityId entityId)
+{
+	switch (entityId)
+	{
+	case EntityId::Megaman:
+		break;
+	case EntityId::BlastHornet:
+		break;
+	case EntityId::Byte:
+		break;
+	case EntityId::Shurikein:
+		break;
+	case EntityId::CarryArm:
+		break;
+	case EntityId::HeadGunner:
+		break;
+	case EntityId::Helit:
+		break;
+	case EntityId::NotoBanger:
+		break;
+	case EntityId::Bee:
+		break;
+	case EntityId::Door:
+		break;
+	case EntityId::Ladder:
+		break;
+	case EntityId::Thorn:
+		break;
+	case EntityId::Box:
+		break;
+	case EntityId::Roof:
+		break;
+	case EntityId::BreakPlatform:
+		break;
+	case EntityId::Canon:
+		break;
+	case EntityId::GunnerRocket:
+		break;
+	case EntityId::HeliRocket:
+		break;
+	case EntityId::ByteBomb:
+		break;
+	case EntityId::SmallEnergy:
+		break;
+	case EntityId::BigEnergy:
+		break;
+	case EntityId::ChimeraArmor:
+		break;
+	case EntityId::MegamanBullet:
+		break;
+	case EntityId::Cargo:
+		break;
+	case EntityId::BigElevator:
+		break;
+	case EntityId::SmallElevator:
+		break;
+	case EntityId::BoxWall:
+		break;
+	case EntityId::UpGround:
+		break;
+	case EntityId::DownGround:
+		break;
+	case EntityId::Platform:
+		return "PlayerPaper";
+		break;
+	case EntityId::BlueConveyor:
+		break;
+	case EntityId::YellowConveyor:
+		break;
+	case EntityId::SmallConveyor:
+		break;
+	default:
+		return "PlayerPaper";
+		break;
+	}
 }

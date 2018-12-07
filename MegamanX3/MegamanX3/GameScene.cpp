@@ -30,14 +30,14 @@ bool GameScene::Initialize()
 {
 	// 2695, -190
 	map = new Map();
-	map->Initialize("abc");
+	map->Initialize("test_tree");
 
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 	camera->SetCenter(SCREEN_WIDTH / 2, map->GetHeight() - camera->GetHeight());
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	player->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT /2);
 
 	debugDraw = new DebugDraw();
 	return true;

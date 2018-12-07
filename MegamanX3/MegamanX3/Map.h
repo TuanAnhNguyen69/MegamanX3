@@ -29,6 +29,7 @@ public:
 
 private:
 	QuadTree *quadTree;
+	LPCTSTR GetTextureName(EntityId entityId);
 };
 
 #endif
