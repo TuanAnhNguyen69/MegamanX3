@@ -23,7 +23,7 @@
     <ProjectGuid>{E42C9130-1CC9-448D-91FD-3531680F95EE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>MegamanX3</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -183,11 +183,14 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="HeadGunner.h" />
+    <ClInclude Include="HeadGunnerState.h" />
+    <ClInclude Include="HeadGunnerStateHandler.h" />
     <ClInclude Include="Helit.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Life.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="NotorBanger.h" />
+    <ClInclude Include="NotorBangerStateHandler.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
@@ -203,6 +206,7 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Shurikein.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="NotorBangerState.h" />
     <ClInclude Include="SweptAABB.h" />
     <ClInclude Include="SystemDefs.h" />
     <ClInclude Include="Texture.h" />
@@ -235,6 +239,7 @@
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="HeadGunner.cpp" />
+    <ClCompile Include="HeadGunnerState.cpp" />
     <ClCompile Include="Helit.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Life.cpp" />
@@ -260,6 +265,7 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Shurikein.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="NotorBangerState.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Thorn.cpp" />
     <ClCompile Include="Timer.cpp" />

@@ -141,6 +141,12 @@
     <ClCompile Include="BlastHornetState.cpp">
       <Filter>Entities\Enemy\BlastHornet</Filter>
     </ClCompile>
+    <ClCompile Include="NotorBangerState.cpp">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadGunnerState.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -296,6 +302,18 @@
     </ClInclude>
     <ClInclude Include="BlastHornetStateHandler.h">
       <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBangerState.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBangerStateHandler.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerStateHandler.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerState.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
