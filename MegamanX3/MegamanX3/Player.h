@@ -29,7 +29,7 @@ public:
 
 private:
 	PlayerState *currentState;
-	PlayerState *standingState, *runningState, *jumpingState, *fallingState, *damagedState, *slidingState;
+	PlayerState *standingState, *runningState, *jumpingState, *fallingState, *damagedState, *slidingState, *climbingState;
 	PlayerStateHandler::StateName currentStateName;
 	Entity *entity;
 	Camera *camera;

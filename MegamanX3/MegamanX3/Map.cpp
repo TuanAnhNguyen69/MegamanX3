@@ -104,7 +104,7 @@ LPCTSTR Map::GetTextureName(EntityId entityId)
 		break;
 	case EntityId::Helit:
 		break;
-	case EntityId::NotoBanger:
+	case EntityId::NotorBanger:
 		break;
 	case EntityId::Bee:
 		break;

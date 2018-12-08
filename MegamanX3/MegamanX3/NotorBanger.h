@@ -10,10 +10,10 @@ class Entity;
 class NotorBanger : NotorBangerStateHandler
 {
 public:
-	NotorBanger();
+	NotorBanger(float positionX, float positionY, float scaleX, float scaleY);
 	~NotorBanger();
 
-	void Initialize(LPDIRECT3DDEVICE9 device, Camera *camera);
+	void Initialize();
 	void Update();
 	
 
@@ -27,11 +27,15 @@ public:
 	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
 	void OnNoCollisionWithBottom();
 
+	bool GetAction();
+	void SetAction(bool action);
+
 private:
 	NotorBangerState * currentState;
-	NotorBangerState *standingState, *fireState, *jumpState, *dieState, *damagedState;
+	NotorBangerState *standingState, *fireState, *jumpState, *dieState, *damagedState, *fallingState;
 	NotorBangerStateHandler::StateName currentStateName;
 	Entity *entity;
 	Camera *camera;
+	NotorBangerStateHandler::StateName preAction;
 };
 

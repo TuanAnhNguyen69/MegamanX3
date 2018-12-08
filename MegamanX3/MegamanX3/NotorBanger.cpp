@@ -2,13 +2,26 @@
 #include "NotorBanger.h"
 
 
-NotorBanger::NotorBanger() 
+NotorBanger::NotorBanger(float positionX, float positionY, float scaleX, float scaleY)
 {
-	entity = nullptr;
+	/*
 	fireState = nullptr;
 	jumpState = nullptr;
 	damagedState = nullptr;
 	dieState = nullptr;
+	fallingState = nullptr;
+	*/
+
+	entity = EntityManager::GetInstance()->AddEntity(EntityId::NotorBanger);
+	entity->SetPosition(positionX, positionX);
+	entity->SetScale(scaleX, scaleY);
+
+	standingState = new NotorBangerStanding(this, entity);
+	fireState = new NotorBangerFire(this, entity);
+	jumpState = new NotorBangerJump(this, entity);
+	damagedState = new NotorBangerDamaged(this, entity);
+	dieState = new NotorBangerDie(this, entity);
+	fallingState = new NotorBangerFalling(this, entity);
 }
 
 
@@ -16,19 +29,8 @@ NotorBanger::~NotorBanger()
 {
 }
 
-void NotorBanger::Initialize(LPDIRECT3DDEVICE9 device, Camera * camera)
+void NotorBanger::Initialize()
 {
-	this->camera = camera;
-
-	entity = EntityManager::GetInstance()->AddEntity(EntityId::NotorBanger);
-	entity->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-	entity->SetScale(2, 2);
-
-	standingState = new NotorBangerStanding(this, entity);
-	fireState = new NotorBangerFire(this, entity);
-	jumpState = new NotorBangerJump(this, entity);
-	damagedState = new NotorBangerDamaged(this, entity);
-	dieState = new NotorBangerDie(this, entity);
 
 }
 
@@ -41,16 +43,17 @@ void NotorBanger::Update()
 
 void NotorBanger::SetPosition(int x, int y)
 {
+	entity->SetPosition(x, y);
 }
 
 D3DXVECTOR3 NotorBanger::GetPosition()
 {
-	return D3DXVECTOR3();
+	return entity->GetPosition();
 }
 
 Entity * NotorBanger::GetEntity()
 {
-	return nullptr;
+	return entity;
 }
 
 NotorBangerStateHandler::StateName NotorBanger::GetCurrentStateName()
@@ -65,7 +68,32 @@ void NotorBanger::ChangeState(StateName stateName)
 		currentState = standingState;
 		currentStateName = Standing;
 		break;
+	case Fire:
+		currentState = fireState;
+		currentStateName = Fire;
+		break;
+	case Jump:
+		currentState = jumpState;
+		currentStateName = Jump;
+		break;
+	case Damaged:
+		currentState = damagedState;
+		currentStateName = Damaged;
+		break;
+	case Die:
+		currentState = dieState;
+		currentStateName = Die;
+		break;
+	case Falling:
+		currentState = fallingState;
+		currentStateName = Falling;
+		break;
+	default:
+		currentState = standingState;
+		currentStateName = Standing;
+		break;
 	}
+	currentState->Load();
 }
 
 NotorBangerStateHandler::MoveDirection NotorBanger::GetMoveDirection()
@@ -81,8 +109,22 @@ NotorBangerStateHandler::MoveDirection NotorBanger::GetMoveDirection()
 
 void NotorBanger::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
 {
+	if (currentState)
+	{
+		currentState->OnCollision(impactor, side, data);
+	}
 }
 
 void NotorBanger::OnNoCollisionWithBottom()
 {
+}
+
+bool NotorBanger::GetAction()
+{
+	return action;
+}
+
+void NotorBanger::SetAction(bool _action)
+{
+	action = _action;
 }

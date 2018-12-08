@@ -76,3 +76,13 @@ public:
 	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
 };
 
+class NotorBangerFalling : public NotorBangerState
+{
+public:
+	NotorBangerFalling(NotorBangerStateHandler *handler, Entity *entity);
+	~NotorBangerFalling();
+
+	void Load();
+	void Update();
+	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
+};

@@ -65,6 +65,11 @@ void PlayerFallingState::UpdateInput()
 				entity->SetVelocityX(Define::PLAYER_MAX_RUNNING_SPEED);
 			}
 		}
+		if (blockType == BlockRight)
+		{
+			handler->ChangeState(PlayerStateHandler::StateName::Climbing);
+			return;
+		}
 	}
 	else if (input->IsKeyDown(DIK_A)) {
 		isLeftOrRightKeyPressed = true;
@@ -74,6 +79,11 @@ void PlayerFallingState::UpdateInput()
 			if (entity->GetVelocity().x < -Define::PLAYER_MAX_RUNNING_SPEED) {
 				entity->SetVelocityX(-Define::PLAYER_MAX_RUNNING_SPEED);
 			}
+		}
+		if (blockType == BlockLeft)
+		{
+			handler->ChangeState(PlayerStateHandler::StateName::Climbing);
+			return;
 		}
 	}
 	else {
@@ -88,6 +98,7 @@ void PlayerFallingState::OnCollision(Entity * impactor, Entity::SideCollisions s
 	case Entity::Left:
 		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
 		{
+			blockType = BlockLeft;
 			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
 			entity->SetVelocityX(0);
 		}
@@ -96,6 +107,7 @@ void PlayerFallingState::OnCollision(Entity * impactor, Entity::SideCollisions s
 	case Entity::Right:
 		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
 		{
+			blockType = BlockRight;
 			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
 			entity->SetVelocityX(0);
 		}

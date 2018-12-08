@@ -6,6 +6,7 @@
 #include "PlayerFallingState.h"
 #include "PlayerSlidingState.h"
 #include "PlayerDamagedState.h"
+#include "PlayerClimbingState.h"
 
 #include <iostream>
 
@@ -19,6 +20,7 @@ Player::Player()
 	fallingState = nullptr;
 	slidingState = nullptr;
 	damagedState = nullptr;
+	climbingState = nullptr;
 }
 
 
@@ -49,6 +51,7 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 	fallingState = new PlayerFallingState(this, entity);
 	slidingState = new PlayerSlidingState(this, entity);
 	damagedState = new PlayerDamagedState(this, entity);
+	climbingState = new PlayerClimbingState(this, entity);
 	ChangeState(Standing);
 	allowJump = true;
 }
@@ -137,6 +140,10 @@ void Player::ChangeState(PlayerStateHandler::StateName stateName) {
 		currentState = damagedState;
 		currentStateName = Damaged;
 		break;
+	case Climbing:
+		currentState = climbingState;
+		currentStateName = Climbing;
+		break;
 	}
 	currentState->Load();
 }
@@ -160,7 +167,7 @@ void Player::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::
 
 void Player::OnNoCollisionWithBottom()
 {
-	if (currentStateName != Jumping && currentStateName != Falling) {
+	if (currentStateName != Jumping && currentStateName != Falling && currentStateName != Climbing) {
 		ChangeState(Falling);
 	}
 }
