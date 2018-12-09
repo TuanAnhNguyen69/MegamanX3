@@ -31,7 +31,7 @@ HeadGunnerStanding::HeadGunnerStanding(HeadGunnerStateHandler *handler, Entity *
 {
 	sprite = new AnimatedSprite(15, 0.3, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "head_gunner",
-		0, 7, 2, 50, 50);
+		0, 1, 2, 50, 50);
 }
 HeadGunnerStanding::~HeadGunnerStanding()
 {
@@ -60,15 +60,25 @@ void HeadGunnerStanding::OnCollision(Entity * impactor, Entity::SideCollisions s
 /*******************Fire***************************************/
 HeadGunnerFire::HeadGunnerFire(HeadGunnerStateHandler *handler, Entity *entity) : HeadGunnerState(handler, entity)
 {
-
+	sprite = new AnimatedSprite(15, 0.3, true);
+	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "head_gunner",
+		0, 7, 2, 50, 50);
 }
 
 HeadGunnerFire::~HeadGunnerFire()
 {
+	if (handler->GetCurrentStateName() != HeadGunnerStateHandler::StateName::Standing) {
+		if (sprite) {
+			delete sprite;
+			sprite = nullptr;
+		}
+	}
 }
 
 void HeadGunnerFire::Load()
 {
+	entity->SetSprite(sprite);
+	entity->SetVelocity(0, 0);
 }
 
 void HeadGunnerFire::Update()
@@ -83,14 +93,24 @@ void HeadGunnerFire::OnCollision(Entity *impactor, Entity::SideCollisions side, 
 /*******************Damaged***************************************/
 HeadGunnerDamaged::HeadGunnerDamaged(HeadGunnerStateHandler *handler, Entity *entity) : HeadGunnerState(handler, entity)
 {
-
+	sprite = new AnimatedSprite(15, 0.3, true);
+	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "head_gunner",
+		0, 1, 2, 50, 50);
 }
 HeadGunnerDamaged::~HeadGunnerDamaged()
 {
+	if (handler->GetCurrentStateName() != HeadGunnerStateHandler::StateName::Standing) {
+		if (sprite) {
+			delete sprite;
+			sprite = nullptr;
+		}
+	}
 }
 
 void HeadGunnerDamaged::Load()
 {
+	entity->SetSprite(sprite);
+	entity->SetVelocity(0, 0);
 }
 
 void HeadGunnerDamaged::Update()
@@ -110,18 +130,22 @@ HeadGunnerDie::HeadGunnerDie(HeadGunnerStateHandler *handler, Entity *entity) : 
 }
 HeadGunnerDie::~HeadGunnerDie()
 {
+
 }
 
 void HeadGunnerDie::Load()
 {
+
 }
 
 void HeadGunnerDie::Update()
 {
+
 }
 
 void HeadGunnerDie::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
 {
+
 }
 
 
