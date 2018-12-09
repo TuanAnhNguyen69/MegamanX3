@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -67,11 +68,65 @@ namespace MapEditor
             InitializeComponent();
             listTile = new List<Bitmap>();
             listobjmap = new List<ObjectGame>();
+            initWorker();
         }
 
+        private void initWorker()
+        {
+            if (worker != null)
+            {
+                worker.Dispose();
+            }
+
+            worker = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+            worker.DoWork += DoWork;
+            worker.RunWorkerCompleted += RunWorkerCompleted;
+        }
+
+        void DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (worker.CancellationPending)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                Cut(image);
+            }
+        }
+
+        void RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+            {
+                // Display some message to the user that task has been
+                // cancelled
+            }
+            else if (e.Error != null)
+            {
+                // Do something with the error
+            }
+
+            pictureBox2.Width = 32 * listTile.Count;
+            pictureBox2.Height = 32;
+            pictureBox2.BackgroundImage = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+
+
+            for (int i = 0; i < listTile.Count; i++)
+            {
+                DrawImage(pictureBox2.BackgroundImage, listTile[i], new Point(i * 32, 0), new Rectangle(0, 0, 32, 32));
+            }
+            canSave = true;
+            pictureBox2.Refresh();
+        }
         // ObjectGame curObj;
 
         List<Bitmap> listTile;
+        Image image;
         int[,] matTile;
         int countCol, countRow;
         Bitmap curTile;
@@ -88,24 +143,26 @@ namespace MapEditor
         String fileName;
         Point startMouse;
         Point currentMouse;
+        BackgroundWorker worker;
+        bool canSave = false;
+
         // QuadNode rootNode;
         private void btn_New_Click(object sender, EventArgs e)
         {
-
             openFileDialog1.ShowDialog();
             try
             {
                 pictureBox1.BackgroundImage = Image.FromFile(openFileDialog1.FileName);
+                image = (Image) pictureBox1.BackgroundImage.Clone();
                 pictureBox1.Width = pictureBox1.BackgroundImage.Width;
                 pictureBox1.Height = pictureBox1.BackgroundImage.Height;
                 countCol = pictureBox1.Width / 32;
                 countRow = pictureBox1.Height / 32;
                 matTile = new int[countRow, countCol];
                 pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-
                 DrawDash(countRow, countCol);
-                Cut(pictureBox1.BackgroundImage);
-
+                canSave = false;
+                worker.RunWorkerAsync();
             }
             catch
             {
@@ -171,12 +228,17 @@ namespace MapEditor
 
         void DrawImage(Image bmDrawTo, Image bmDraw, Point pos, Rectangle rectClip) //ve
         {
-
             Graphics.FromImage(bmDrawTo).DrawImage(bmDraw, new Rectangle(pos.X, pos.Y, rectClip.Width, rectClip.Height), rectClip, GraphicsUnit.Pixel);
         }
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
+            if (!canSave)
+            {
+                MessageBox.Show("Image cutting is processing, Please wait!", "Inprogress", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             // saveFileDialog1.Filter = "Images|*.bmp;";
             ImageFormat format = ImageFormat.Png;
@@ -404,59 +466,62 @@ namespace MapEditor
         {
             //int a = 0;
             writeMatrix = "";
+            long a = 0;
+            long b = 0;
+            long c = 0;
+            long d = 0;
             for (int i = 0; i < countRow; i++)
             {
                 for (int j = 0; j < countCol; j++)
                 {
-                    Bitmap b = new Bitmap(32, 32);
+                    Bitmap bitMap = new Bitmap(32, 32);
                     int indexOf = 0;
-                    DrawImage(b, Image, new Point(0, 0), new Rectangle(j * 32, i * 32, 32, 32));
+                    a = DateTime.Now.Millisecond;
+                    DrawImage(bitMap, Image, new Point(0, 0), new Rectangle(j * 32, i * 32, 32, 32));
+                    b = DateTime.Now.Millisecond;
                     bool allowAdd = true;
                     foreach (Bitmap bm in listTile)
                     {
-                        if (Compare(b, bm))
+                        c = DateTime.Now.Millisecond;
+
+                        if (Compare(bitMap, bm))
                         {
+                            d =DateTime.Now.Millisecond;
+
                             allowAdd = false;
                             indexOf = listTile.IndexOf(bm);
                             matTile[i, j] = (int)bm.Tag;
+                            break;
                         }
 
                     }
                     if (allowAdd)
                     {
-                        b.Tag = listTile.Count;
-                        listTile.Add(b);
-                        matTile[i, j] = (int)b.Tag;
-                        writeMatrix += b.Tag + " ";
+                        bitMap.Tag = listTile.Count;
+                        listTile.Add(bitMap);
+                        matTile[i, j] = (int)bitMap.Tag;
+                        writeMatrix += bitMap.Tag + " ";
 
                     }
                     else
                     {
                         writeMatrix += indexOf + " ";
                     }
-
-
                 }
+                int x = i;
                 writeMatrix += Environment.NewLine;
             }
 
-            //string text = "";
-            //text += countRow + "\r\n";
-            //text += countCol + "\r\n";
-            //text += writeMatrix;
-            //readMatrix = text;
-            //decodeMatrix();
+            //pictureBox2.Width = 32 * listTile.Count;
+            //pictureBox2.Height = 32;
+            //pictureBox2.BackgroundImage = new Bitmap(pictureBox2.Width, pictureBox2.Height);
 
 
-            pictureBox2.Width = 32 * listTile.Count;
-            pictureBox2.Height = 32;
-            pictureBox2.BackgroundImage = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+            //for (int i = 0; i < listTile.Count; i++)
+            //{
+            //    DrawImage(pictureBox2.BackgroundImage, listTile[i], new Point(i * 32, 0), new Rectangle(0, 0, 32, 32));
+            //}
 
-
-            for (int i = 0; i < listTile.Count; i++)
-            {
-                DrawImage(pictureBox2.BackgroundImage, listTile[i], new Point(i * 32, 0), new Rectangle(0, 0, 32, 32));
-            }
         }
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e) //tao vien vuong luc chon tile
