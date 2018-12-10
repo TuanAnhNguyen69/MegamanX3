@@ -28,16 +28,18 @@ GameScene::~GameScene()
 
 bool GameScene::Initialize()
 {
-	// 2695, -190
+
 	map = new Map();
-	map->Initialize("test_tree");
+	map->Initialize("qqq");
 
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
-	camera->SetCenter(SCREEN_WIDTH / 2, map->GetHeight() - camera->GetHeight());
+	camera->SetCenter(SCREEN_WIDTH / 2, 0);
+	
+	EntityManager::GetInstance()->Initialize(camera);
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT /2);
+	player->SetPosition(SCREEN_WIDTH / 2, 200);
 
 	debugDraw = new DebugDraw();
 	return true;
@@ -137,4 +139,5 @@ void GameScene::Render()
 	for (int index = 0; index < list.size(); index++) {
 		debugDraw->DrawRect(list.at(index)->GetBound(), camera);
 	}
+	map->RenderBackground(camera);
 }

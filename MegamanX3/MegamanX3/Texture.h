@@ -10,7 +10,7 @@ public:
 	Texture();
 	~Texture();
 
-	bool Initialize(LPDIRECT3DDEVICE9 device, LPCSTR textureFileName, D3DCOLOR transColor);
+	bool Initialize(LPDIRECT3DDEVICE9 device, LPCSTR textureFileName, D3DCOLOR transColor = D3DCOLOR_XRGB(0, 0, 0));
 
 	LPDIRECT3DTEXTURE9 GetTexture();
 	std::string GetName();

@@ -17,6 +17,10 @@ void EntityManager::Update()
 {
 	int size = entities.size();
 	for (int index = 0; index < size; index++) {
+		if (camera) {
+			entities[index]->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+				SCREEN_HEIGHT / 2 - camera->GetCenter().y);
+		}
 		entities[index]->Update();
 	}
 }
@@ -88,6 +92,11 @@ EntityManager * EntityManager::GetInstance()
 		instance = new EntityManager();
 	}
 	return instance;
+}
+
+void EntityManager::Initialize(Camera * camera)
+{
+	this->camera = camera;
 }
 
 std::vector<Entity*> EntityManager::GetAllEntities()

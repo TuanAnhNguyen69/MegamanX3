@@ -120,6 +120,18 @@ namespace MapEditor
             {
                 DrawImage(pictureBox2.BackgroundImage, listTile[i], new Point(i * 32, 0), new Rectangle(0, 0, 32, 32));
             }
+
+            Graphics g = Graphics.FromImage(pictureBox2.BackgroundImage);
+            float[] dashValue = { 5, 2 };
+
+
+            Pen p = new Pen(Color.Silver);
+            p.DashPattern = dashValue;
+            for (int i = 0; i < listTile.Count; i++)
+            {
+                g.DrawLine(p, new Point(i * 32, 0), new Point(i * 32, pictureBox2.Height));
+            }
+
             canSave = true;
             pictureBox2.Refresh();
         }
@@ -171,6 +183,7 @@ namespace MapEditor
 
 
         }
+
         void DrawDash(int row, int col) //ve luoi
         {
             Graphics g = Graphics.FromImage(pictureBox1.Image);
@@ -476,36 +489,29 @@ namespace MapEditor
                 {
                     Bitmap bitMap = new Bitmap(32, 32);
                     int indexOf = 0;
-                    a = DateTime.Now.Millisecond;
                     DrawImage(bitMap, Image, new Point(0, 0), new Rectangle(j * 32, i * 32, 32, 32));
-                    b = DateTime.Now.Millisecond;
                     bool allowAdd = true;
                     foreach (Bitmap bm in listTile)
                     {
-                        c = DateTime.Now.Millisecond;
-
                         if (Compare(bitMap, bm))
                         {
-                            d =DateTime.Now.Millisecond;
-
                             allowAdd = false;
                             indexOf = listTile.IndexOf(bm);
                             matTile[i, j] = (int)bm.Tag;
                             break;
                         }
-
                     }
                     if (allowAdd)
                     {
                         bitMap.Tag = listTile.Count;
                         listTile.Add(bitMap);
                         matTile[i, j] = (int)bitMap.Tag;
-                        writeMatrix += bitMap.Tag + " ";
+                        writeMatrix += bitMap.Tag + "\t";
 
                     }
                     else
                     {
-                        writeMatrix += indexOf + " ";
+                        writeMatrix += indexOf + "\t";
                     }
                 }
                 int x = i;

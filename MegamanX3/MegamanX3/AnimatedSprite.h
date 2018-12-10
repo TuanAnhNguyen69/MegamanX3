@@ -15,6 +15,8 @@ public:
 	void Render(D3DXVECTOR3 position);
 
 	void SetFrameRange(float startFrame, float endFrame);
+	void SetFrame(float frame);
+
 	void ResetFrame();
 	bool IsFinished();
 

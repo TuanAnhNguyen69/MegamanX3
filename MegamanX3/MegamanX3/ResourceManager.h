@@ -9,7 +9,7 @@ class ResourceManager
 public:
 	~ResourceManager();
 	void LoadTextureResource(LPDIRECT3DDEVICE9 device, LPCSTR textureFileName, D3DCOLOR transColor = D3DCOLOR_XRGB(0, 0, 0));
-	Texture* GetTextureByName(char *name);
+	Texture* GetTextureByName(const char *name);
 
 	static ResourceManager* GetInstance();
 private:

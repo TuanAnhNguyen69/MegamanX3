@@ -27,7 +27,7 @@ void ResourceManager::LoadTextureResource(LPDIRECT3DDEVICE9 device, LPCSTR textu
 	textures.push_back(texture);
 }
 
-Texture * ResourceManager::GetTextureByName(char * name)
+Texture * ResourceManager::GetTextureByName(const char * name)
 {
 	for (unsigned int index = 0; index < textures.size(); index++) {
 		Texture *texture = textures[index];

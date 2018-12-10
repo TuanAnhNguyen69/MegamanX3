@@ -80,6 +80,11 @@ void AnimatedSprite::SetFrameRange(float startFrame, float endFrame)
 	this->maxFrames = endFrame - startFrame + 1;
 }
 
+void AnimatedSprite::SetFrame(float frame)
+{
+	currentFrame = frame;
+}
+
 void AnimatedSprite::ResetFrame()
 {
 	currentFrame = 0;

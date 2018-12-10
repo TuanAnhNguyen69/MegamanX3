@@ -1,13 +1,16 @@
-#ifndef _MAP_H
+﻿#ifndef _MAP_H
 #define _MAP_H
 
 #include "QuadTree.h"
 #include "Sprite.h"
 #include <map>
+#include <list>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <random>
+#include "Tile.h"
+#include "Camera.h"
 
 class Map
 {
@@ -17,8 +20,7 @@ public:
 
 	void Initialize(LPCTSTR filePath);
 	void Update();
-	void Render();
-
+	void RenderBackground(Camera *camera);
 	int GetWidth();
 	int GetHeight();
 
@@ -28,8 +30,15 @@ public:
 	QuadTree *GetQuadTree();
 
 private:
+	Sprite * backgroundSprite;
+	std::map<int, Tile*> *tiles; // tất cả tiles từ file
 	QuadTree *quadTree;
 	LPCTSTR GetTextureName(EntityId entityId);
+	void LoadQuadtree(LPCTSTR filePath);
+	void LoadBackground(LPCTSTR filePath);
+	std::list<int> *GetAvailableTiles(RECT viewport);
+	int tilesColCount;
+	int tilesRowCount;
 };
 
 #endif

@@ -147,6 +147,9 @@
     <ClCompile Include="HeadGunnerState.cpp">
       <Filter>Entities\Enemy\HeadGunner</Filter>
     </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -314,6 +317,9 @@
     </ClInclude>
     <ClInclude Include="HeadGunnerState.h">
       <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>World</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
