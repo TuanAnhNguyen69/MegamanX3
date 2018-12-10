@@ -29,11 +29,17 @@ void NotorBangerState::OnCollision(Entity *impactor, Entity::SideCollisions side
 NotorBangerStanding::NotorBangerStanding(NotorBangerStateHandler *handler, Entity *entity) : NotorBangerState(handler, entity)
 {
 	sprite = new AnimatedSprite(15, 0.3, true);
-	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
-		7, 9, 10, 50, 50);
+	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "notor_banger",
+		0, 0, 2, 50, 50);
 }
 NotorBangerStanding::~NotorBangerStanding()
 {
+	if (handler->GetCurrentStateName() != NotorBangerStateHandler::StateName::Standing) {
+		if (sprite) {
+			delete sprite;
+			sprite = nullptr;
+		}
+	}
 }
 
 void NotorBangerStanding::Load()
@@ -44,6 +50,8 @@ void NotorBangerStanding::Load()
 
 void NotorBangerStanding::Update()
 {
+	if (handler->GetAction())
+		handler->ChangeState(NotorBangerStateHandler::StateName::Fire);
 }
 
 void NotorBangerStanding::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
@@ -53,19 +61,37 @@ void NotorBangerStanding::OnCollision(Entity * impactor, Entity::SideCollisions 
 /*******************Fire***************************************/
 NotorBangerFire::NotorBangerFire(NotorBangerStateHandler *handler, Entity *entity) : NotorBangerState(handler, entity)
 {
-
+	sprite = new AnimatedSprite(15, 0.3, false);
+	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "notor_banger",
+		4, 5, 2, 50, 50);
 }
 
 NotorBangerFire::~NotorBangerFire()
 {
+	if (handler->GetCurrentStateName() != NotorBangerStateHandler::StateName::Fire) {
+		if (sprite) {
+			delete sprite;
+			sprite = nullptr;
+		}
+	}
 }
 
 void NotorBangerFire::Load()
 {
+	entity->SetSprite(sprite);
 }
 
 void NotorBangerFire::Update()
 {
+	for (int count = 0; count < 3; count++)
+	{
+		sprite->SetFrameRange(4, 5);
+		//new NotorBangerCanon(entity->GetPosition(), entity.HP);
+		if (sprite->IsFinished())
+		{
+			sprite->ResetFrame();
+		}
+	}
 }
 
 void NotorBangerFire::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
@@ -76,14 +102,23 @@ void NotorBangerFire::OnCollision(Entity *impactor, Entity::SideCollisions side,
 /*******************Jump***************************************/
 NotorBangerJump::NotorBangerJump(NotorBangerStateHandler *handler, Entity *entity) : NotorBangerState(handler, entity)
 {
-
+	sprite = new AnimatedSprite(15, 0.3, false);
+	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "notor_banger",
+		0, 3, 2, 50, 50);
 }
 NotorBangerJump::~NotorBangerJump()
 {
+	if (handler->GetCurrentStateName() != NotorBangerStateHandler::StateName::Jump) {
+		if (sprite) {
+			delete sprite;
+			sprite = nullptr;
+		}
+	}
 }
 
 void NotorBangerJump::Load()
 {
+	entity->SetSprite(sprite);
 }
 
 void NotorBangerJump::Update()
@@ -102,6 +137,12 @@ NotorBangerDamaged::NotorBangerDamaged(NotorBangerStateHandler *handler, Entity 
 }
 NotorBangerDamaged::~NotorBangerDamaged()
 {
+	if (handler->GetCurrentStateName() != NotorBangerStateHandler::StateName::Damaged) {
+		if (sprite) {
+			delete sprite;
+			sprite = nullptr;
+		}
+	}
 }
 
 void NotorBangerDamaged::Load()
@@ -125,6 +166,12 @@ NotorBangerDie::NotorBangerDie(NotorBangerStateHandler *handler, Entity *entity)
 }
 NotorBangerDie::~NotorBangerDie()
 {
+	if (handler->GetCurrentStateName() != NotorBangerStateHandler::StateName::Die) {
+		if (sprite) {
+			delete sprite;
+			sprite = nullptr;
+		}
+	}
 }
 
 void NotorBangerDie::Load()
@@ -139,4 +186,29 @@ void NotorBangerDie::OnCollision(Entity *impactor, Entity::SideCollisions side, 
 {
 }
 
+/*******************Falling***************************************/
+NotorBangerFalling::NotorBangerFalling(NotorBangerStateHandler *handler, Entity *entity) : NotorBangerState(handler, entity)
+{
+}
 
+NotorBangerFalling::~NotorBangerFalling()
+{
+	if (handler->GetCurrentStateName() != NotorBangerStateHandler::StateName::Falling) {
+		if (sprite) {
+			delete sprite;
+			sprite = nullptr;
+		}
+	}
+}
+
+void NotorBangerFalling::Load()
+{
+}
+
+void NotorBangerFalling::Update()
+{
+}
+
+void NotorBangerFalling::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+{
+}

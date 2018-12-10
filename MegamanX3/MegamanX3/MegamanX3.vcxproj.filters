@@ -150,6 +150,9 @@
     <ClCompile Include="Tile.cpp">
       <Filter>World</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerClimbingState.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -320,6 +323,9 @@
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerClimbingState.h">
+      <Filter>Entities\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
