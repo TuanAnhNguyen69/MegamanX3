@@ -30,7 +30,7 @@ bool GameScene::Initialize()
 {
 
 	map = new Map();
-	map->Initialize("qqq");
+	map->Initialize("aaa");
 
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 	camera->SetCenter(SCREEN_WIDTH / 2, 0);
@@ -81,31 +81,36 @@ void GameScene::CheckCollision()
 	map->GetQuadTree()->GetEntitiesCollideAble(listCollision, player->GetEntity());
 	
 	for (size_t index = 0; index < listCollision.size(); index++) {
-		Entity::CollisionReturn r = Collision::RectAndRect(
-			player->GetEntity()->GetBound(),
-			listCollision.at(index)->GetBound());
+		RECT broadphase = Collision::GetSweptBroadphaseRect(player->GetEntity());
+		if (Collision::IsCollide(broadphase, listCollision.at(index)->GetBound()))
+		{
+			Entity::CollisionReturn collideData;
+			float collisionTime = Collision::SweptAABB(player->GetEntity(), listCollision.at(index), collideData);
+			if (collisionTime < 1.0f) //collisiontime > 0 &&
+			{
+				Entity::SideCollisions sidePlayer = Collision::GetSideCollision(player->GetEntity(), collideData);
+				Entity::SideCollisions sideImpactor = Collision::GetSideCollision(listCollision.at(index), collideData);
 
-		if (r.IsCollided) {
-			
-			Entity::SideCollisions sidePlayer = Collision::GetSideCollision(player->GetEntity(), r);
-			Entity::SideCollisions sideImpactor = Collision::GetSideCollision(listCollision.at(index), r);
-			
-			player->OnCollision(listCollision.at(index), sidePlayer, r);
-			listCollision.at(index)->OnCollision(player->GetEntity(), sideImpactor, r);
+				player->OnCollision(listCollision.at(index), sidePlayer, collideData);
+				listCollision.at(index)->OnCollision(player->GetEntity(), sideImpactor, collideData);
 
-			if (sidePlayer == Entity::Bottom || sidePlayer == Entity::BottomLeft
-				|| sidePlayer == Entity::BottomRight) {
-				int bot = r.RegionCollision.right - r.RegionCollision.left;
-				if (bot > widthBottom) {
-					widthBottom = bot;
+				if (sidePlayer == Entity::Bottom || sidePlayer == Entity::BottomLeft
+					|| sidePlayer == Entity::BottomRight) {
+					int bot = collideData.RegionCollision.right - collideData.RegionCollision.left;
+					if (bot > widthBottom) {
+						widthBottom = bot;
+					}
 				}
 			}
 		}
+
+			
+			
 	}
 
-	if (widthBottom < Define::PLAYER_BOTTOM_RANGE_FALLING) {
-		player->OnNoCollisionWithBottom();
-	}
+	//if (widthBottom < Define::PLAYER_BOTTOM_RANGE_FALLING) {
+	//	player->OnNoCollisionWithBottom();
+	//}
 }
 
 void GameScene::CheckCamera() {

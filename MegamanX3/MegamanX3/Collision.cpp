@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Collision.h"
 
 
@@ -197,3 +197,135 @@ bool Collision::IsCollide(RECT rect1, RECT rect2)
 
 	return true;
 }
+
+RECT Collision::GetSweptBroadphaseRect(Entity * entity)
+{
+	RECT boardPhase;
+	boardPhase.left = entity->GetVelocity().x > 0 ? entity->GetBound().left : entity->GetBound().left + entity->GetVelocity().x / 30;
+	boardPhase.top = entity->GetVelocity().y > 0 ? entity->GetBound().top : entity->GetBound().top + entity->GetVelocity().y / 30;
+	boardPhase.right = entity->GetBound().right + abs(entity->GetVelocity().x / 30);
+	boardPhase.bottom = entity->GetBound().bottom + abs(entity->GetVelocity().y / 30);
+
+	return boardPhase;
+}
+
+float Collision::SweptAABB(Entity *e1, Entity *e2, Entity::CollisionReturn & data)
+{
+	float dxEntry, dxExit;
+	float dyEntry, dyExit;
+
+	// tìm khoảng cách các cạnh tương ứng
+	if (e1->GetVelocity().x > 0.0f)
+	{
+		dxEntry = e2->GetBound().left - (e1->GetBound().left + e1->GetBound().right - e1->GetBound().left);
+		dxExit = (e2->GetBound().left + e2->GetBound().right - e2->GetBound().left) - e1->GetBound().left;
+	}
+	else
+	{
+		dxEntry = (e2->GetBound().left + e2->GetBound().right - e2->GetBound().left) - e1->GetBound().left;
+		dxExit = e2->GetBound().left - (e1->GetBound().left + e1->GetBound().right - e1->GetBound().left);
+	}
+
+	if (e1->GetVelocity().y > 0.0f)
+	{
+		dyEntry = e2->GetBound().top - (e1->GetBound().top + e1->GetBound().bottom - e1->GetBound().top);
+		dyExit = (e2->GetBound().top + e2->GetBound().bottom - e2->GetBound().top) - e1->GetBound().top;
+	}
+	else
+	{
+		dyEntry = (e2->GetBound().top + e2->GetBound().bottom - e2->GetBound().top) - e1->GetBound().top;
+		dyExit = e2->GetBound().top - (e1->GetBound().top + e1->GetBound().bottom - e1->GetBound().top);
+	}
+
+	// tính thời gian từ khoảng cách tính được và vận tốc của đối tượng
+	// vận tốc này là trong 1 frame hình nha
+	float xEntry, yEntry;
+	float xExit, yExit;
+	if (e1->GetVelocity().x == 0.0f)
+	{
+		// đang đứng yên thì bằng vô cực (chia cho  0)
+		xEntry = -std::numeric_limits<float>::infinity();
+		xExit = std::numeric_limits<float>::infinity();
+	}
+	else
+	{
+		xEntry = dxEntry / e1->GetVelocity().x;
+		xExit = dxExit / e1->GetVelocity().x;
+	}
+
+	if (e1->GetVelocity().y == 0.0f)
+	{
+		yEntry = -std::numeric_limits<float>::infinity();
+		yExit = std::numeric_limits<float>::infinity();
+	}
+	else
+	{
+		yEntry = dyEntry / e1->GetVelocity().y;
+		yExit = dyExit / e1->GetVelocity().y;
+	}
+
+	// thời gian va chạm là thời gian lớn nhất của 2 trục (2 trục phải cùng tiếp xúc thì mới va chạm)
+	float entryTime = xEntry > yEntry ? xEntry : yEntry;
+	// thời gian hết va chạm là thời gian của 2 trục, (1 cái ra khỏi là object hết va chạm)
+	float exitTime = xExit < yExit ? xExit : yExit;
+
+	if (entryTime < 0 && exitTime > 0) {
+		data.IsCollided = true;
+		//chon max Left
+		data.RegionCollision.left = e1->GetBound().left > e2->GetBound().left ? e1->GetBound().left : e2->GetBound().left;
+		//chon max right
+		data.RegionCollision.right = e1->GetBound().right < e2->GetBound().right ? e1->GetBound().right : e2->GetBound().right;
+		//chon min bottom
+		data.RegionCollision.bottom = e1->GetBound().bottom < e2->GetBound().bottom ? e1->GetBound().bottom : e2->GetBound().bottom;
+		//chon max top
+		data.RegionCollision.top = e1->GetBound().top > e2->GetBound().top ? e1->GetBound().top : e2->GetBound().top;
+
+		return entryTime;
+	}
+
+	// kiểm tra xem có thể va chạm không, mình xét ngược lại cho nhanh
+	if (entryTime > exitTime || (xEntry < 0.0f && yEntry < 0.0f) || xEntry > 1.0f || yEntry > 1.0f)
+	{
+		return 1.0f;
+		data.IsCollided = false;
+	}
+
+	//// lấy hướng va chạm
+	//if (xEntry > yEntry)
+	//{
+	//	if (dxEntry > 0.0f)
+	//	{
+	//		result = Entity::SideCollisions::Right;
+	//	}
+	//	else
+	//	{
+	//		result = Entity::SideCollisions::Left;
+	//	}
+	//}
+	//else
+	//{
+	//	if (dyEntry > 0.0f)
+	//	{
+	//		result = Entity::SideCollisions::Top;
+	//	}
+	//	else
+	//	{
+	//		result = Entity::SideCollisions::Bottom;
+	//	}
+	//}
+
+	// có thì lấy thời gian
+
+	data.IsCollided = true;
+	//chon max Left
+	data.RegionCollision.left = e1->GetBound().left > e2->GetBound().left ? e1->GetBound().left : e2->GetBound().left;
+	//chon max right
+	data.RegionCollision.right = e1->GetBound().right < e2->GetBound().right ? e1->GetBound().right : e2->GetBound().right;
+	//chon min bottom
+	data.RegionCollision.bottom = e1->GetBound().bottom < e2->GetBound().bottom ? e1->GetBound().bottom : e2->GetBound().bottom;
+	//chon max top
+	data.RegionCollision.top = e1->GetBound().top > e2->GetBound().top ? e1->GetBound().top : e2->GetBound().top;
+
+	return entryTime;
+}
+

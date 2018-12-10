@@ -52,12 +52,14 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 	slidingState = new PlayerSlidingState(this, entity);
 	damagedState = new PlayerDamagedState(this, entity);
 	climbingState = new PlayerClimbingState(this, entity);
-	ChangeState(Standing);
+	ChangeState(Falling);
 	allowJump = true;
 }
 
 void Player::Update()
 {
+	std::cout << currentStateName << std::endl;
+
 	if (currentState) {
 		currentState->UpdateInput();
 		currentState->Update();
@@ -160,6 +162,7 @@ PlayerStateHandler::MoveDirection Player::GetMoveDirection() {
 
 void Player::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
 {
+	std::cout << currentStateName << "onCollide" << std::endl;
 	if (currentState) {
 		currentState->OnCollision(impactor, side, data);
 	}

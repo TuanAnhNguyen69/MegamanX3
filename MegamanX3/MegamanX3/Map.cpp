@@ -154,7 +154,7 @@ void Map::LoadQuadtree(LPCTSTR filePath)
 	objFilePath.append(filePath).append("OBJ.txt");
 	std::ifstream objects(objFilePath);
 
-	quadTree = new QuadTree(1, { 0, 0, this->GetWidth(), this->GetHeight() });
+	quadTree = new QuadTree(1, { 0, 0, this->GetWidth(), this->GetHeight()});
 	if (objects.is_open())
 	{
 		float posX, posY; int width, height;
