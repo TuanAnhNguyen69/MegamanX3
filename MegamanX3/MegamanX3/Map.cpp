@@ -2,6 +2,7 @@
 #include "Map.h"
 #include "EntityManager.h"
 #include "Engine.h"
+#include "NotorBanger.h"
 
 Map::Map()
 {
@@ -25,23 +26,22 @@ void Map::Initialize(LPCTSTR fileName)
 
 void Map::Update()
 {
-
 }
 
 void Map::RenderBackground(Camera *camera)
 {
 	if (backgroundSprite) {
 		D3DXMATRIX transformMatrix;
-		D3DXVECTOR2 scale = D3DXVECTOR2(1, 1);
+		D3DXVECTOR2 scale = D3DXVECTOR2(2, 2);
 		D3DXVECTOR2 translation = D3DXVECTOR2(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
-		D3DXVECTOR2 center = D3DXVECTOR2(backgroundSprite->GetFrameWidth() / 2, backgroundSprite->GetFrameHeight() / 2);
+		D3DXVECTOR2 center = D3DXVECTOR2(backgroundSprite->GetFrameWidth(), backgroundSprite->GetFrameHeight());
 		D3DXMatrixTransformation2D(&transformMatrix, &center, 0.0f, &scale, nullptr, 0.0f, &translation);
 		LPD3DXSPRITE spriteHandler = Engine::GetEngine()->GetSpriteHandler();
 		D3DXMATRIX oldMatrix;
 		spriteHandler->GetTransform(&oldMatrix);
 		spriteHandler->SetTransform(&transformMatrix);
-		backgroundSprite->Render(D3DXVECTOR3(backgroundSprite->GetFrameWidth() / 2, backgroundSprite->GetFrameHeight() / 2, 0));
+		backgroundSprite->Render(D3DXVECTOR3(backgroundSprite->GetFrameWidth(), backgroundSprite->GetFrameHeight(), 0));
 		spriteHandler->SetTransform(&oldMatrix);
 	}
 }
@@ -86,10 +86,12 @@ LPCTSTR Map::GetTextureName(EntityId entityId)
 	case EntityId::CarryArm:
 		break;
 	case EntityId::HeadGunner:
+		return "head_gunner";
 		break;
 	case EntityId::Helit:
 		break;
-	case EntityId::NotorBanger:
+	case EntityId::NotorBanger_ID:
+		return "noto_banger";
 		break;
 	case EntityId::Bee:
 		break;
@@ -154,7 +156,7 @@ void Map::LoadQuadtree(LPCTSTR filePath)
 	objFilePath.append(filePath).append("OBJ.txt");
 	std::ifstream objects(objFilePath);
 
-	quadTree = new QuadTree(1, { 0, 0, this->GetWidth(), this->GetHeight()});
+	quadTree = new QuadTree(1, { 0, 0, this->GetWidth(), this->GetHeight() });
 	if (objects.is_open())
 	{
 		float posX, posY; int width, height;
@@ -168,10 +170,97 @@ void Map::LoadQuadtree(LPCTSTR filePath)
 			objects >> id >> posX >> posY >> width >> height;
 			EntityId entityId = (EntityId)id;
 			Entity *entity = EntityManager::GetInstance()->AddEntity(entityId);
-			entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-				this->GetTextureName(entityId), width, height);
-			entity->SetPosition(posX + width / 2, posY + height / 2);
-			quadTree->Insert(entity);
+			switch (entityId)
+			{
+				/*	case EntityId::Megaman:
+						break;
+					case EntityId::BlastHornet:
+						break;
+					case EntityId::Byte:
+						break;
+					case EntityId::Shurikein:
+						break;
+					case EntityId::CarryArm:
+						break;*/
+			case EntityId::HeadGunner:
+				entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
+					this->GetTextureName(entityId), width, height);
+				entity->SetPosition(posX + width / 2, posY + height / 2);
+				break;
+
+			case EntityId::NotorBanger_ID:
+			{
+				//NotorBanger * notoBanger = new NotorBanger(posX + width / 2, posY + height / 2, 2, 2);
+				entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
+					this->GetTextureName(entityId), width, height);
+				entity->SetPosition(posX + width / 2, posY + height / 2);
+			}
+				break;
+				/*case EntityId::Bee:
+					break;
+					case EntityId::Helit:
+					break;
+				case EntityId::Door:
+					break;
+				case EntityId::Ladder:
+					break;
+				case EntityId::Thorn:
+					break;
+				case EntityId::Box:
+					break;
+				case EntityId::Roof:
+					break;
+				case EntityId::BreakPlatform:
+					break;
+				case EntityId::Canon:
+					break;
+				case EntityId::GunnerRocket:
+					break;
+				case EntityId::HeliRocket:
+					break;
+				case EntityId::ByteBomb:
+					break;
+				case EntityId::SmallEnergy:
+					break;
+				case EntityId::BigEnergy:
+					break;
+				case EntityId::ChimeraArmor:
+					break;
+				case EntityId::MegamanBullet:
+					break;
+				case EntityId::Cargo:
+					break;
+				case EntityId::BigElevator:
+					break;
+				case EntityId::SmallElevator:
+					break;
+				case EntityId::BoxWall:
+					break;
+				case EntityId::UpGround:
+					break;
+				case EntityId::DownGround:
+					break;*/
+			case EntityId::Platform:
+				entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
+					this->GetTextureName(entityId), width, height);
+				entity->SetPosition(posX + width / 2, posY + height / 2);
+				break;
+				/*case EntityId::BlueConveyor:
+					break;
+				case EntityId::YellowConveyor:
+					break;
+				case EntityId::SmallConveyor:
+					break;*/
+			default:
+				entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
+					this->GetTextureName(entityId), width, height);
+				entity->SetPosition(posX + width / 2, posY + height / 2);
+				break;
+			}
+		}
+
+		for (auto child : EntityManager::GetInstance()->GetAllEntities()) {
+			quadTree->Insert(child);
 		}
 	}
 }
@@ -199,7 +288,7 @@ void Map::LoadBackground(LPCTSTR fileName)
 		map >> count;
 
 		map >> row >> col;
-	
+
 		int tileID;
 		int value = 0;
 		for (int rowIndex = 1; rowIndex <= row; rowIndex++)

@@ -65,6 +65,8 @@ bool Engine::Initialize(HINSTANCE instance, HWND hwnd)
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "PlayerPaper.png");
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "platform.png");
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "x.png");
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "head_gunner.png");
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "noto_banger.png");
 	//D3DCOLOR_XRGB(50, 96, 166)
 
 	input = new Input();

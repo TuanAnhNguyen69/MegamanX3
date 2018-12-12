@@ -30,7 +30,7 @@ bool GameScene::Initialize()
 {
 
 	map = new Map();
-	map->Initialize("aaa");
+	map->Initialize("aaaaa");
 
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 	camera->SetCenter(SCREEN_WIDTH / 2, 0);

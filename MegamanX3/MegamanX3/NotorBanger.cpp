@@ -12,7 +12,7 @@ NotorBanger::NotorBanger(float positionX, float positionY, float scaleX, float s
 	fallingState = nullptr;
 	*/
 
-	entity = EntityManager::GetInstance()->AddEntity(EntityId::NotorBanger);
+	entity = EntityManager::GetInstance()->AddEntity(EntityId::NotorBanger_ID);
 	entity->SetPosition(positionX, positionX);
 	entity->SetScale(scaleX, scaleY);
 

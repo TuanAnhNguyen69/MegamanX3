@@ -18,7 +18,7 @@ enum EntityId{
 	CarryArm,
 	HeadGunner,
 	Helit,
-	NotorBanger,
+	NotorBanger_ID,
 	Bee,
 
 	// Ground

@@ -174,7 +174,7 @@ namespace MapEditor
                 pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
                 DrawDash(countRow, countCol);
                 canSave = false;
-                worker.RunWorkerAsync();
+                //worker.RunWorkerAsync();
             }
             catch
             {
@@ -246,28 +246,28 @@ namespace MapEditor
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            if (!canSave)
-            {
-                MessageBox.Show("Image cutting is processing, Please wait!", "Inprogress", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            //if (!canSave)
+            //{
+            //    MessageBox.Show("Image cutting is processing, Please wait!", "Inprogress", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             // saveFileDialog1.Filter = "Images|*.bmp;";
             ImageFormat format = ImageFormat.Png;
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                fileDirectory = Path.GetDirectoryName(saveFileDialog1.FileName);
-                fileName = Path.GetFileName(saveFileDialog1.FileName);
-                format = ImageFormat.Bmp;
-                pictureBox2.BackgroundImage.Save(Path.Combine(fileDirectory, fileName + ".bmp"), format);
-                //  StreamWriter writer = new StreamWriter(Path.Combine(fileDirectory,Name+"txt"));
-                string text = "";
-                text += listTile.Count + "\r\n";
-                text += countRow + "\r\n";
-                text += countCol + "\r\n";
-                text += writeMatrix;
-                File.WriteAllText(Path.Combine(fileDirectory, fileName + ".txt"), text);
+                //fileDirectory = Path.GetDirectoryName(saveFileDialog1.FileName);
+                //fileName = Path.GetFileName(saveFileDialog1.FileName);
+                //format = ImageFormat.Bmp;
+                //pictureBox2.BackgroundImage.Save(Path.Combine(fileDirectory, fileName + ".bmp"), format);
+                ////  StreamWriter writer = new StreamWriter(Path.Combine(fileDirectory,Name+"txt"));
+                //string text = "";
+                //text += listTile.Count + "\r\n";
+                //text += countRow + "\r\n";
+                //text += countCol + "\r\n";
+                //text += writeMatrix;
+                //File.WriteAllText(Path.Combine(fileDirectory, fileName + ".txt"), text);
 
 
                 String s = "";
