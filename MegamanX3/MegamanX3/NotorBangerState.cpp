@@ -1,12 +1,13 @@
 #include "pch.h"
 #include "NotorBangerState.h"
+#include "NotorBanger.h"
 
 
 /*******************State***************************************/
 NotorBangerState::NotorBangerState(NotorBangerStateHandler *handler, Entity *entity)
 {
 	this->handler = handler;
-	this->entity = entity;
+	this->entity = (NotorBanger*)entity;
 }
 
 NotorBangerState::~NotorBangerState()

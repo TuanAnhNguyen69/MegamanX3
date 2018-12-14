@@ -8,7 +8,7 @@
 
 class Entity;
 
-class Player : public PlayerStateHandler
+class Player : public PlayerStateHandler, public Entity
 {
 public:
 	Player();
@@ -17,10 +17,10 @@ public:
 	void Initialize(LPDIRECT3DDEVICE9 device, Camera *camera);
 	void Update();
 
-	void SetPosition(int x, int y);
-	D3DXVECTOR3 GetPosition();
+	//void SetPosition(int x, int y);
+	//D3DXVECTOR3 GetPosition();
 
-	Entity *GetEntity();
+	//Entity *GetEntity();
 	StateName GetCurrentStateName();
 	void ChangeState(StateName stateName);
 	MoveDirection GetMoveDirection();
@@ -31,7 +31,7 @@ private:
 	PlayerState *currentState;
 	PlayerState *standingState, *runningState, *jumpingState, *fallingState, *damagedState, *slidingState, *climbingState;
 	PlayerStateHandler::StateName currentStateName;
-	Entity *entity;
+	//Entity *entity;
 	Camera *camera;
 	bool allowJump;
 };

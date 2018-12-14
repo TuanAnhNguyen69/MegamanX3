@@ -7,7 +7,7 @@
 
 class Entity;
 
-class NotorBanger : NotorBangerStateHandler
+class NotorBanger : public NotorBangerStateHandler, public Entity
 {
 public:
 	NotorBanger(float positionX, float positionY, float scaleX, float scaleY);
@@ -17,10 +17,10 @@ public:
 	void Update();
 	
 
-	void SetPosition(int x, int y);
-	D3DXVECTOR3 GetPosition();
+	/*void SetPosition(int x, int y);
+	D3DXVECTOR3 GetPosition();*/
 
-	Entity *GetEntity();
+	//Entity *GetEntity();
 	NotorBangerStateHandler::StateName GetCurrentStateName();
 	void ChangeState(StateName stateName);
 	NotorBangerStateHandler::MoveDirection GetMoveDirection();
@@ -34,7 +34,7 @@ private:
 	NotorBangerState * currentState;
 	NotorBangerState *standingState, *fireState, *jumpState, *dieState, *damagedState, *fallingState;
 	NotorBangerStateHandler::StateName currentStateName;
-	Entity *entity;
+	//Entity *entity;
 	Camera *camera;
 	NotorBangerStateHandler::StateName preAction;
 };

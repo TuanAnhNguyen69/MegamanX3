@@ -1,11 +1,12 @@
 #include "pch.h"
 #include "PlayerState.h"
+#include "Player.h"
 
 
 PlayerState::PlayerState(PlayerStateHandler *handler, Entity *entity)
 {
 	this->handler = handler;
-	this->entity = entity;
+	this->entity = (Player*)entity;
 }
 
 PlayerState::~PlayerState()

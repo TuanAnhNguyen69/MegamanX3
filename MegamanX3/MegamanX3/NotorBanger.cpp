@@ -2,7 +2,7 @@
 #include "NotorBanger.h"
 
 
-NotorBanger::NotorBanger(float positionX, float positionY, float scaleX, float scaleY)
+NotorBanger::NotorBanger(float positionX, float positionY, float scaleX, float scaleY) : Entity(EntityId::NotorBanger_ID)
 {
 	/*
 	fireState = nullptr;
@@ -12,16 +12,19 @@ NotorBanger::NotorBanger(float positionX, float positionY, float scaleX, float s
 	fallingState = nullptr;
 	*/
 
-	entity = EntityManager::GetInstance()->AddEntity(EntityId::NotorBanger_ID);
+	//entity = EntityManager::GetInstance()->AddEntity(EntityId::NotorBanger_ID);
+	Entity *entity = EntityManager::GetInstance()->AddEntity(EntityId::NotorBanger_ID);
+	entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
+		"notor_banger", 50, 50);
 	entity->SetPosition(positionX, positionX);
 	entity->SetScale(scaleX, scaleY);
 
-	standingState = new NotorBangerStanding(this, entity);
-	fireState = new NotorBangerFire(this, entity);
-	jumpState = new NotorBangerJump(this, entity);
-	damagedState = new NotorBangerDamaged(this, entity);
-	dieState = new NotorBangerDie(this, entity);
-	fallingState = new NotorBangerFalling(this, entity);
+	standingState = new NotorBangerStanding(this, this);
+	fireState = new NotorBangerFire(this, this);
+	jumpState = new NotorBangerJump(this, this);
+	damagedState = new NotorBangerDamaged(this, this);
+	dieState = new NotorBangerDie(this, this);
+	fallingState = new NotorBangerFalling(this, this);
 }
 
 
@@ -36,25 +39,26 @@ void NotorBanger::Initialize()
 
 void NotorBanger::Update()
 {
+	Entity::Update();
 	if (currentState) {
 		currentState->Update();
 	}
 }
 
-void NotorBanger::SetPosition(int x, int y)
-{
-	entity->SetPosition(x, y);
-}
-
-D3DXVECTOR3 NotorBanger::GetPosition()
-{
-	return entity->GetPosition();
-}
-
-Entity * NotorBanger::GetEntity()
-{
-	return entity;
-}
+//void NotorBanger::SetPosition(int x, int y)
+//{
+//	entity->SetPosition(x, y);
+//}
+//
+//D3DXVECTOR3 NotorBanger::GetPosition()
+//{
+//	return entity->GetPosition();
+//}
+//
+//Entity * NotorBanger::GetEntity()
+//{
+//	return entity;
+//}
 
 NotorBangerStateHandler::StateName NotorBanger::GetCurrentStateName()
 {
@@ -98,10 +102,10 @@ void NotorBanger::ChangeState(StateName stateName)
 
 NotorBangerStateHandler::MoveDirection NotorBanger::GetMoveDirection()
 {
-	if (entity->GetVelocity().x > 0) {
+	if (this->GetVelocity().x > 0) {
 		return MoveDirection::MoveToRight;
 	}
-	else if (entity->GetVelocity().x < 0) {
+	else if (this->GetVelocity().x < 0) {
 		return MoveDirection::MoveToLeft;
 	}
 	return MoveDirection::None;

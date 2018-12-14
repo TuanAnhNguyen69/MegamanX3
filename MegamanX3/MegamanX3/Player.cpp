@@ -10,9 +10,9 @@
 
 #include <iostream>
 
-Player::Player()
+Player::Player() : Entity(EntityId::Megaman)
 {
-	entity = nullptr;
+	//entity = nullptr;
 	currentState = nullptr;
 	standingState = nullptr;
 	runningState = nullptr;
@@ -41,23 +41,27 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 {
 	this->camera = camera;
 
-	entity = EntityManager::GetInstance()->AddEntity(EntityId::Megaman);
-	entity->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-	entity->SetScale(2, 2);
+	//entity = EntityManager::GetInstance()->AddEntity(EntityId::Megaman);
+	Entity *entity = EntityManager::GetInstance()->AddEntity(EntityId::Megaman);
+	entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
+		"x", 50, 50);
+	this->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	this->SetScale(2, 2);
 
-	standingState = new PlayerStandingState(this, entity);
-	runningState = new PlayerRunningState(this, entity);
-	jumpingState = new PlayerJumpingState(this, entity);
-	fallingState = new PlayerFallingState(this, entity);
-	slidingState = new PlayerSlidingState(this, entity);
-	damagedState = new PlayerDamagedState(this, entity);
-	climbingState = new PlayerClimbingState(this, entity);
+	standingState = new PlayerStandingState(this, this);
+	runningState = new PlayerRunningState(this, this);
+	jumpingState = new PlayerJumpingState(this, this);
+	fallingState = new PlayerFallingState(this, this);
+	slidingState = new PlayerSlidingState(this, this);
+	damagedState = new PlayerDamagedState(this, this);
+	climbingState = new PlayerClimbingState(this, this);
 	ChangeState(Falling);
 	allowJump = true;
 }
 
 void Player::Update()
 {
+	Entity::Update();
 	std::cout << currentStateName << std::endl;
 
 	if (currentState) {
@@ -92,25 +96,25 @@ void Player::Update()
 	}
 
 	if (camera) {
-		entity->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+		this->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
 	}
 }
 
-void Player::SetPosition(int x, int y)
-{
-	entity->SetPosition(x, y);
-}
-
-D3DXVECTOR3 Player::GetPosition()
-{
-	return entity->GetPosition();
-}
-
-Entity * Player::GetEntity()
-{
-	return entity;
-}
+//void Player::SetPosition(int x, int y)
+//{
+//	entity->SetPosition(x, y);
+//}
+//
+//D3DXVECTOR3 Player::GetPosition()
+//{
+//	return entity->GetPosition();
+//}
+//
+//Entity * Player::GetEntity()
+//{
+//	return entity;
+//}
 
 PlayerStateHandler::StateName Player::GetCurrentStateName() {
 	return this->currentStateName;
@@ -151,10 +155,10 @@ void Player::ChangeState(PlayerStateHandler::StateName stateName) {
 }
 
 PlayerStateHandler::MoveDirection Player::GetMoveDirection() {
-	if (entity->GetVelocity().x > 0) {
+	if (this->GetVelocity().x > 0) {
 		return MoveDirection::MoveToRight;
 	}
-	else if (entity->GetVelocity().x < 0) {
+	else if (this->GetVelocity().x < 0) {
 		return MoveDirection::MoveToLeft;
 	}
 	return MoveDirection::None;

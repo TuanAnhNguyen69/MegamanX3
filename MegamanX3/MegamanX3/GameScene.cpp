@@ -78,21 +78,21 @@ void GameScene::CheckCollision()
 {
 	std::vector<Entity *> listCollision;
 	int widthBottom = 0;
-	map->GetQuadTree()->GetEntitiesCollideAble(listCollision, player->GetEntity());
+	map->GetQuadTree()->GetEntitiesCollideAble(listCollision, player);
 	
 	for (size_t index = 0; index < listCollision.size(); index++) {
-		RECT broadphase = Collision::GetSweptBroadphaseRect(player->GetEntity());
+		RECT broadphase = Collision::GetSweptBroadphaseRect(player);
 		if (Collision::IsCollide(broadphase, listCollision.at(index)->GetBound()))
 		{
 			Entity::CollisionReturn collideData;
-			float collisionTime = Collision::SweptAABB(player->GetEntity(), listCollision.at(index), collideData);
+			float collisionTime = Collision::SweptAABB(player, listCollision.at(index), collideData);
 			if (collisionTime < 1.0f) //collisiontime > 0 &&
 			{
-				Entity::SideCollisions sidePlayer = Collision::GetSideCollision(player->GetEntity(), collideData);
+				Entity::SideCollisions sidePlayer = Collision::GetSideCollision(player, collideData);
 				Entity::SideCollisions sideImpactor = Collision::GetSideCollision(listCollision.at(index), collideData);
 
 				player->OnCollision(listCollision.at(index), sidePlayer, collideData);
-				listCollision.at(index)->OnCollision(player->GetEntity(), sideImpactor, collideData);
+				listCollision.at(index)->OnCollision(player, sideImpactor, collideData);
 
 				if (sidePlayer == Entity::Bottom || sidePlayer == Entity::BottomLeft
 					|| sidePlayer == Entity::BottomRight) {

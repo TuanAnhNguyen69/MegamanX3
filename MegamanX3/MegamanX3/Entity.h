@@ -74,12 +74,13 @@ public:
 	};
 
 	friend class EntityManager;
+	Entity(EntityId entityId);
 	~Entity();
 
 	void InitializeSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float frameWidth, float frameHeight, float top = 0, float left = 0);
 	void InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float startFrame, float endFrame, float maxFramesRow, float frameWidth, float frameHeight, float animationSpeed = 1.0f, bool isLooping = true);
 
-	void Update();
+	virtual void Update();
 	void Render();
 
 	D3DXVECTOR3 GetPosition();
@@ -103,9 +104,9 @@ public:
 
 	void AddPosition(float x, float y);
 
-	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
+	virtual void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
 private:
-	Entity(EntityId entityId);
+	
 
 	D3DXMATRIX transformMatrix;
 	D3DXVECTOR2 scale;
