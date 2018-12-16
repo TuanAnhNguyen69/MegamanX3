@@ -23,11 +23,14 @@ void HeadGunnerShoot::Load()
 {
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
+
 }
 
 void HeadGunnerShoot::Update()
 {
-	sprite->SetFrameRange(0, 7);
+	if (handler->GetCurrentStateName() != HeadGunnerStateHandler::StateName::Standing) {
+		handler->ChangeState(HeadGunnerStateHandler::StateName::Standing);
+	}
 }
 
 void HeadGunnerShoot::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)

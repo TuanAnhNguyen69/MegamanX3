@@ -11,7 +11,7 @@ class BlastHornetStateHandler
 {
 public:
 	enum StateName {
-	
+		
 	};
 
 	enum MoveDirection
