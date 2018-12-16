@@ -180,6 +180,21 @@
     <ClCompile Include="HeadGunnerStanding.cpp">
       <Filter>Entities\Enemy\HeadGunner</Filter>
     </ClCompile>
+    <ClCompile Include="HelitState.cpp">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClCompile>
+    <ClCompile Include="HelitDamaged.cpp">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClCompile>
+    <ClCompile Include="HelitDie.cpp">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClCompile>
+    <ClCompile Include="HelitFlying.cpp">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClCompile>
+    <ClCompile Include="HelitShooting.cpp">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -383,6 +398,24 @@
     </ClInclude>
     <ClInclude Include="HeadGunnerStanding.h">
       <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="HelitState.h">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClInclude>
+    <ClInclude Include="HelitDamaged.h">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClInclude>
+    <ClInclude Include="HelitDie.h">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClInclude>
+    <ClInclude Include="HelitFlying.h">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClInclude>
+    <ClInclude Include="HelitShooting.h">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClInclude>
+    <ClInclude Include="HelitStateHandler.h">
+      <Filter>Entities\Enemy\Helit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
