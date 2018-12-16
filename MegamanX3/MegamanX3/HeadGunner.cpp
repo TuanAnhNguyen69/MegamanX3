@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "HeadGunner.h"
+#include <ctime>
 
 
 HeadGunner::HeadGunner() : Entity(EntityId::HeadGunner_ID)
@@ -16,7 +17,8 @@ HeadGunner::HeadGunner() : Entity(EntityId::HeadGunner_ID)
 	shootState = new HeadGunnerShoot(this, this);
 	damagedState = new HeadGunnerDamaged(this, this);
 	dieState = new HeadGunnerDie(this, this);
-	currentState = standingState;
+	//currentState = standingState;
+	//this->ChangeState(Standing);
 }
 
 
@@ -31,15 +33,16 @@ HeadGunner::~HeadGunner()
 void HeadGunner::Initialize(int width, int height)
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-		"head_gunner", width, height);
+		"head_gunner", 50, 50);
+	this->ChangeState(HeadGunnerStateHandler::StateName::Standing);
 }
 
 void HeadGunner::Update()
 {
-	ChangeState(Shoot);
+	//ChangeState(Shoot);
 	Entity::Update();
 	if (currentState) {
-		currentState->Update();
+			currentState->Update();
 	}
 }
 
