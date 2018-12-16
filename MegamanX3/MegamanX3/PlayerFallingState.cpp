@@ -4,7 +4,7 @@
 
 PlayerFallingState::PlayerFallingState(PlayerStateHandler *handler, Entity *entity) : PlayerState(handler, entity)
 {
-	sprite = new AnimatedSprite(15, 0.5, false);
+	sprite = new AnimatedSprite(222, 0.5, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
 		37, 40, 10, 50, 50);
 }

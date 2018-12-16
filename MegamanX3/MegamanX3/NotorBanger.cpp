@@ -2,7 +2,7 @@
 #include "NotorBanger.h"
 
 
-NotorBanger::NotorBanger(float positionX, float positionY, float scaleX, float scaleY) : Entity(EntityId::NotorBanger_ID)
+NotorBanger::NotorBanger() : Entity(EntityId::NotorBanger_ID)
 {
 	/*
 	fireState = nullptr;
@@ -13,12 +13,7 @@ NotorBanger::NotorBanger(float positionX, float positionY, float scaleX, float s
 	*/
 
 	//entity = EntityManager::GetInstance()->AddEntity(EntityId::NotorBanger_ID);
-	Entity *entity = EntityManager::GetInstance()->AddEntity(EntityId::NotorBanger_ID);
-	entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-		"notor_banger", 50, 50);
-	entity->SetPosition(positionX, positionX);
-	entity->SetScale(scaleX, scaleY);
-
+	
 	standingState = new NotorBangerStanding(this, this);
 	fireState = new NotorBangerFire(this, this);
 	jumpState = new NotorBangerJump(this, this);
@@ -32,9 +27,10 @@ NotorBanger::~NotorBanger()
 {
 }
 
-void NotorBanger::Initialize()
+void NotorBanger::Initialize(int width, int height)
 {
-
+	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
+		"notor_banger", 50, 50);
 }
 
 void NotorBanger::Update()
@@ -44,21 +40,6 @@ void NotorBanger::Update()
 		currentState->Update();
 	}
 }
-
-//void NotorBanger::SetPosition(int x, int y)
-//{
-//	entity->SetPosition(x, y);
-//}
-//
-//D3DXVECTOR3 NotorBanger::GetPosition()
-//{
-//	return entity->GetPosition();
-//}
-//
-//Entity * NotorBanger::GetEntity()
-//{
-//	return entity;
-//}
 
 NotorBangerStateHandler::StateName NotorBanger::GetCurrentStateName()
 {

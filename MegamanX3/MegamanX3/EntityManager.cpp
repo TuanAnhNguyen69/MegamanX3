@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "EntityManager.h"
+#include <iostream>
 
 EntityManager *EntityManager::instance = nullptr;
 
@@ -33,11 +34,9 @@ void EntityManager::Render()
 	}
 }
 
-Entity * EntityManager::AddEntity(EntityId entityId)
+void EntityManager::AddEntity(Entity * entity)
 {
-	Entity *entity = new Entity(entityId);
 	entities.push_back(entity);
-	return entity;
 }
 
 void EntityManager::RemoveEntity(Entity * entity)

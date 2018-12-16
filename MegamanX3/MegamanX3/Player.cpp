@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-Player::Player() : Entity(EntityId::Megaman)
+Player::Player() : Entity(EntityId::Megaman_ID)
 {
 	//entity = nullptr;
 	currentState = nullptr;
@@ -41,12 +41,9 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 {
 	this->camera = camera;
 
-	//entity = EntityManager::GetInstance()->AddEntity(EntityId::Megaman);
-	Entity *entity = EntityManager::GetInstance()->AddEntity(EntityId::Megaman);
-	entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-		"x", 50, 50);
 	this->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	this->SetScale(2, 2);
+	this->SetBound(30,50);
 
 	standingState = new PlayerStandingState(this, this);
 	runningState = new PlayerRunningState(this, this);
@@ -61,8 +58,12 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 
 void Player::Update()
 {
+	if (camera) {
+		this->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
+	}
+
 	Entity::Update();
-	std::cout << currentStateName << std::endl;
 
 	if (currentState) {
 		currentState->UpdateInput();
@@ -93,11 +94,6 @@ void Player::Update()
 	
 	if (input->IsKeyHit(DIK_SPACE)) {
 		allowJump = true;
-	}
-
-	if (camera) {
-		this->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
-			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
 	}
 }
 
@@ -166,7 +162,6 @@ PlayerStateHandler::MoveDirection Player::GetMoveDirection() {
 
 void Player::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
 {
-	std::cout << currentStateName << "onCollide" << std::endl;
 	if (currentState) {
 		currentState->OnCollision(impactor, side, data);
 	}

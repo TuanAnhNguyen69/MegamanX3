@@ -10,10 +10,10 @@ class Entity;
 class HeadGunner : public HeadGunnerStateHandler, public Entity
 {
 public:
-	HeadGunner(float positionX, float positionY, float scaleX, float scaleY);
+	HeadGunner();
 	~HeadGunner();
 
-	void Initialize();
+	void Initialize(int width, int height);
 	void Update();
 
 

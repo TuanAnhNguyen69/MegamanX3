@@ -26,7 +26,6 @@ void HeadGunnerState::OnCollision(Entity *impactor, Entity::SideCollisions side,
 {
 }
 
-/*******************Standing***************************************/
 HeadGunnerStanding::HeadGunnerStanding(HeadGunnerStateHandler *handler, Entity *entity) : HeadGunnerState(handler, entity)
 {
 	sprite = new AnimatedSprite(15, 0.3, true);
@@ -57,7 +56,6 @@ void HeadGunnerStanding::OnCollision(Entity * impactor, Entity::SideCollisions s
 {
 }
 
-/*******************Fire***************************************/
 HeadGunnerFire::HeadGunnerFire(HeadGunnerStateHandler *handler, Entity *entity) : HeadGunnerState(handler, entity)
 {
 	sprite = new AnimatedSprite(15, 0.3, true);

@@ -327,6 +327,9 @@
     <ClInclude Include="PlayerClimbingState.h">
       <Filter>Entities\Player</Filter>
     </ClInclude>
+    <ClInclude Include="EntityImport.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

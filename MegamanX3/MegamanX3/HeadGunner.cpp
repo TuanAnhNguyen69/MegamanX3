@@ -2,7 +2,7 @@
 #include "HeadGunner.h"
 
 
-HeadGunner::HeadGunner(float positionX, float positionY, float scaleX, float scaleY) : Entity(EntityId::HeadGunner)
+HeadGunner::HeadGunner() : Entity(EntityId::HeadGunner_ID)
 {
 	/*
 	fireState = nullptr;
@@ -11,14 +11,7 @@ HeadGunner::HeadGunner(float positionX, float positionY, float scaleX, float sca
 	dieState = nullptr;
 	fallingState = nullptr;
 	*/
-
-	//entity = EntityManager::GetInstance()->AddEntity(EntityId::HeadGunner_ID);
-	Entity *entity = EntityManager::GetInstance()->AddEntity(EntityId::HeadGunner);
-	entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-		"head_gunner", 50, 50);
-	entity->SetPosition(positionX, positionX);
-	entity->SetScale(scaleX, scaleY);
-
+	
 	standingState = new HeadGunnerStanding(this, this);
 	fireState = new HeadGunnerFire(this, this);
 	damagedState = new HeadGunnerDamaged(this, this);
@@ -30,9 +23,10 @@ HeadGunner::~HeadGunner()
 {
 }
 
-void HeadGunner::Initialize()
+void HeadGunner::Initialize(int width, int height)
 {
-
+	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
+		"head_gunner", width, height);
 }
 
 void HeadGunner::Update()

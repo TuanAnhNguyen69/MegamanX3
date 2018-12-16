@@ -6,49 +6,49 @@
 
 enum EntityId{
 	// Player
-	Megaman,
-	MegamanBullet,
+	Megaman_ID,
+	MegamanBullet_ID,
 
 	// Boss
-	BlastHornet,
-	Byte,
-	Shurikein,
+	BlastHornet_ID,
+	Byte_ID,
+	Shurikein_ID,
 
 	// Creep
-	CarryArm,
-	HeadGunner,
-	Helit,
+	CarryArm_ID,
+	HeadGunner_ID,
+	Helit_ID,
 	NotorBanger_ID,
-	Bee,
+	Bee_ID,
 
 	// Ground
-	Cargo,
-	Door,
-	Ladder,
-	BigElevator,
-	SmallElevator,
-	BlueConveyor,
-	YellowConveyor,
-	SmallConveyor,
-	Thorn,
-	Box,
-	BoxWall,
-	Roof,
-	BreakPlatform,
-	UpGround,
-	DownGround,
-	Platform,
+	Cargo_ID,
+	Door_ID,
+	Ladder_ID,
+	BigElevator_ID,
+	SmallElevator_ID,
+	BlueConveyor_ID,
+	YellowConveyor_ID,
+	SmallConveyor_ID,
+	Thorn_ID,
+	Box_ID,
+	BoxWall_ID,
+	Roof_ID,
+	BreakPlatform_ID,
+	UpGround_ID,
+	DownGround_ID,
+	Platform_ID,
 
 	//weapon
-	Canon,
-	GunnerRocket,
-	HeliRocket,
-	ByteBomb,
+	Canon_ID,
+	GunnerRocket_ID,
+	HeliRocket_ID,
+	ByteBomb_ID,
 
 	//Item
-	SmallEnergy,
-	BigEnergy,
-	ChimeraArmor
+	SmallEnergy_ID,
+	BigEnergy_ID,
+	ChimeraArmor_ID
 };
 
 class Entity
@@ -80,7 +80,7 @@ public:
 	void InitializeSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float frameWidth, float frameHeight, float top = 0, float left = 0);
 	void InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float startFrame, float endFrame, float maxFramesRow, float frameWidth, float frameHeight, float animationSpeed = 1.0f, bool isLooping = true);
 
-	virtual void Update();
+	void Update();
 	void Render();
 
 	D3DXVECTOR3 GetPosition();
@@ -94,6 +94,7 @@ public:
 	void SetTranslation(float x = 0.0f, float y = 0.0f);
 	void SetScale(float x = 1.0f, float y = 1.0f);
 	void SetPosition(float x = 0.0f, float y = 0.0f);
+	void SetBound(int width, int height);
 	void SetVelocity(float x = 0.0f, float y = 0.0f);
 	void SetReverse(bool reverse);
 
@@ -105,9 +106,10 @@ public:
 	void AddPosition(float x, float y);
 
 	virtual void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
+protected:
+	int width;
+	int height;
 private:
-	
-
 	D3DXMATRIX transformMatrix;
 	D3DXVECTOR2 scale;
 	D3DXVECTOR2 translation;

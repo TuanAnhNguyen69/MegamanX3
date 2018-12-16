@@ -39,7 +39,7 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(SCREEN_WIDTH / 2, 200);
+	player->SetPosition(SCREEN_WIDTH / 2, 0);
 
 	debugDraw = new DebugDraw();
 	return true;
@@ -76,23 +76,20 @@ void GameScene::Update()
 
 void GameScene::CheckCollision()
 {
-	std::vector<Entity *> listCollision;
 	int widthBottom = 0;
-	map->GetQuadTree()->GetEntitiesCollideAble(listCollision, player);
-	
-	for (size_t index = 0; index < listCollision.size(); index++) {
+	for (size_t index = 0; index < EntityManager::GetInstance()->GetAllEntities().size(); index++) {
 		RECT broadphase = Collision::GetSweptBroadphaseRect(player);
-		if (Collision::IsCollide(broadphase, listCollision.at(index)->GetBound()))
+		if (Collision::IsCollide(broadphase,  EntityManager::GetInstance()->GetAllEntities().at(index)->GetBound()))
 		{
 			Entity::CollisionReturn collideData;
-			float collisionTime = Collision::SweptAABB(player, listCollision.at(index), collideData);
+			float collisionTime = Collision::SweptAABB(player,  EntityManager::GetInstance()->GetAllEntities().at(index), collideData);
 			if (collisionTime < 1.0f) //collisiontime > 0 &&
 			{
 				Entity::SideCollisions sidePlayer = Collision::GetSideCollision(player, collideData);
-				Entity::SideCollisions sideImpactor = Collision::GetSideCollision(listCollision.at(index), collideData);
+				Entity::SideCollisions sideImpactor = Collision::GetSideCollision( EntityManager::GetInstance()->GetAllEntities().at(index), collideData);
 
-				player->OnCollision(listCollision.at(index), sidePlayer, collideData);
-				listCollision.at(index)->OnCollision(player, sideImpactor, collideData);
+				player->OnCollision( EntityManager::GetInstance()->GetAllEntities().at(index), sidePlayer, collideData);
+				 EntityManager::GetInstance()->GetAllEntities().at(index)->OnCollision(player, sideImpactor, collideData);
 
 				if (sidePlayer == Entity::Bottom || sidePlayer == Entity::BottomLeft
 					|| sidePlayer == Entity::BottomRight) {
@@ -145,4 +142,5 @@ void GameScene::Render()
 		debugDraw->DrawRect(list.at(index)->GetBound(), camera);
 	}
 	map->RenderBackground(camera);
+	player->Render();
 }

@@ -33,7 +33,6 @@ private:
 	Sprite * backgroundSprite;
 	std::map<int, Tile*> *tiles; // tất cả tiles từ file
 	QuadTree *quadTree;
-	LPCTSTR GetTextureName(EntityId entityId);
 	void LoadQuadtree(LPCTSTR filePath);
 	void LoadBackground(LPCTSTR filePath);
 	std::list<int> *GetAvailableTiles(RECT viewport);

@@ -1,8 +1,7 @@
 ﻿#include "pch.h"
 #include "Map.h"
-#include "EntityManager.h"
 #include "Engine.h"
-#include "NotorBanger.h"
+#include "EntityImport.h"
 
 Map::Map()
 {
@@ -71,85 +70,6 @@ QuadTree * Map::GetQuadTree()
 	return quadTree;
 }
 
-LPCTSTR Map::GetTextureName(EntityId entityId)
-{
-	switch (entityId)
-	{
-	case EntityId::Megaman:
-		break;
-	case EntityId::BlastHornet:
-		break;
-	case EntityId::Byte:
-		break;
-	case EntityId::Shurikein:
-		break;
-	case EntityId::CarryArm:
-		break;
-	case EntityId::HeadGunner:
-		return "head_gunner";
-		break;
-	case EntityId::Helit:
-		break;
-	case EntityId::NotorBanger_ID:
-		return "noto_banger";
-		break;
-	case EntityId::Bee:
-		break;
-	case EntityId::Door:
-		break;
-	case EntityId::Ladder:
-		break;
-	case EntityId::Thorn:
-		break;
-	case EntityId::Box:
-		break;
-	case EntityId::Roof:
-		break;
-	case EntityId::BreakPlatform:
-		break;
-	case EntityId::Canon:
-		break;
-	case EntityId::GunnerRocket:
-		break;
-	case EntityId::HeliRocket:
-		break;
-	case EntityId::ByteBomb:
-		break;
-	case EntityId::SmallEnergy:
-		break;
-	case EntityId::BigEnergy:
-		break;
-	case EntityId::ChimeraArmor:
-		break;
-	case EntityId::MegamanBullet:
-		break;
-	case EntityId::Cargo:
-		break;
-	case EntityId::BigElevator:
-		break;
-	case EntityId::SmallElevator:
-		break;
-	case EntityId::BoxWall:
-		break;
-	case EntityId::UpGround:
-		break;
-	case EntityId::DownGround:
-		break;
-	case EntityId::Platform:
-		return "platform";
-		break;
-	case EntityId::BlueConveyor:
-		break;
-	case EntityId::YellowConveyor:
-		break;
-	case EntityId::SmallConveyor:
-		break;
-	default:
-		return "platform";
-		break;
-	}
-}
-
 void Map::LoadQuadtree(LPCTSTR filePath)
 {
 	std::string objFilePath("Map/");
@@ -169,7 +89,6 @@ void Map::LoadQuadtree(LPCTSTR filePath)
 			int id;
 			objects >> id >> posX >> posY >> width >> height;
 			EntityId entityId = (EntityId)id;
-			Entity *entity = EntityManager::GetInstance()->AddEntity(entityId);
 			switch (entityId)
 			{
 				/*	case EntityId::Megaman:
@@ -182,86 +101,101 @@ void Map::LoadQuadtree(LPCTSTR filePath)
 						break;
 					case EntityId::CarryArm:
 						break;*/
-			case EntityId::HeadGunner:
-				entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-					this->GetTextureName(entityId), width, height);
-				entity->SetPosition(posX + width / 2, posY + height / 2);
-				break;
+			case EntityId::HeadGunner_ID:
+				{
+					HeadGunner * headGunner = new HeadGunner();
+					headGunner->SetPosition(posX + width / 2, posY + height / 2);
+					headGunner->SetScale(2, 2);
+					headGunner->SetBound(width, height);
+					EntityManager::GetInstance()->AddEntity(headGunner);
+					break;
+				}
 
 			case EntityId::NotorBanger_ID:
-			{
-				//NotorBanger * notoBanger = new NotorBanger(posX + width / 2, posY + height / 2, 2, 2);
-				entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-					this->GetTextureName(entityId), width, height);
-				entity->SetPosition(posX + width / 2, posY + height / 2);
-			}
+				{
+					NotorBanger * notoBanger = new NotorBanger();
+					notoBanger->SetPosition(posX + width / 2, posY + height / 2);
+					notoBanger->SetScale(2, 2);
+					notoBanger->SetBound(width, height);
+					EntityManager::GetInstance()->AddEntity(notoBanger);
+					break;
+				}
+			/*case EntityId::Bee:
 				break;
-				/*case EntityId::Bee:
-					break;
-					case EntityId::Helit:
-					break;
-				case EntityId::Door:
-					break;
-				case EntityId::Ladder:
-					break;
-				case EntityId::Thorn:
-					break;
-				case EntityId::Box:
-					break;
-				case EntityId::Roof:
-					break;
-				case EntityId::BreakPlatform:
-					break;
-				case EntityId::Canon:
-					break;
-				case EntityId::GunnerRocket:
-					break;
-				case EntityId::HeliRocket:
-					break;
-				case EntityId::ByteBomb:
-					break;
-				case EntityId::SmallEnergy:
-					break;
-				case EntityId::BigEnergy:
-					break;
-				case EntityId::ChimeraArmor:
-					break;
-				case EntityId::MegamanBullet:
-					break;
-				case EntityId::Cargo:
-					break;
-				case EntityId::BigElevator:
-					break;
-				case EntityId::SmallElevator:
-					break;
-				case EntityId::BoxWall:
-					break;
-				case EntityId::UpGround:
-					break;
-				case EntityId::DownGround:
-					break;*/
-			case EntityId::Platform:
-				entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-					this->GetTextureName(entityId), width, height);
-				entity->SetPosition(posX + width / 2, posY + height / 2);
+				case EntityId::Helit:
 				break;
-				/*case EntityId::BlueConveyor:
+			case EntityId::Door:
+				break;
+			case EntityId::Ladder:
+				break;
+			case EntityId::Thorn:
+				break;
+			case EntityId::Box:
+				break;
+			case EntityId::Roof:
+				break;
+			case EntityId::BreakPlatform:
+				break;
+			case EntityId::Canon:
+				break;
+			case EntityId::GunnerRocket:
+				break;
+			case EntityId::HeliRocket:
+				break;
+			case EntityId::ByteBomb:
+				break;
+			case EntityId::SmallEnergy:
+				break;
+			case EntityId::BigEnergy:
+				break;
+			case EntityId::ChimeraArmor:
+				break;
+			case EntityId::MegamanBullet:
+				break;
+			case EntityId::Cargo:
+				break;
+			case EntityId::BigElevator:
+				break;
+			case EntityId::SmallElevator:
+				break;
+			case EntityId::BoxWall:
+				break;
+			case EntityId::UpGround:
+				break;
+			case EntityId::DownGround:
+				break;*/
+			case EntityId::Platform_ID:
+				{				
+					Platform * platform = new Platform();
+					platform->SetPosition(posX + width / 2, posY + height / 2);
+					platform->SetBound(width, height);
+					platform->Initialize();
+					EntityManager::GetInstance()->AddEntity(platform);
 					break;
-				case EntityId::YellowConveyor:
-					break;
-				case EntityId::SmallConveyor:
-					break;*/
+				}
+
+			/*case EntityId::BlueConveyor:
+				break;
+			case EntityId::YellowConveyor:
+				break;
+			case EntityId::SmallConveyor:
+				break;*/
 			default:
-				entity->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-					this->GetTextureName(entityId), width, height);
-				entity->SetPosition(posX + width / 2, posY + height / 2);
-				break;
+				{
+					Platform * platform = new Platform();
+					platform->SetPosition(posX + width / 2, posY + height / 2);
+					platform->SetBound(width, height);
+					platform->Initialize();
+					EntityManager::GetInstance()->AddEntity(platform);
+					break;
+				}
 			}
 		}
 
 		for (auto child : EntityManager::GetInstance()->GetAllEntities()) {
 			quadTree->Insert(child);
 		}
+		int a = 0;
 	}
 }
 

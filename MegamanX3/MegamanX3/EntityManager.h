@@ -15,7 +15,7 @@ public:
 	void Update();
 	void Render();
 		
-	Entity *AddEntity(EntityId entityId);
+	void AddEntity(Entity *entity);
 	void RemoveEntity(Entity *entity);
 	void RemoveAllEntities();
 

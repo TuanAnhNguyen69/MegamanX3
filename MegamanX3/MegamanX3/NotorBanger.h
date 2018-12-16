@@ -10,10 +10,10 @@ class Entity;
 class NotorBanger : public NotorBangerStateHandler, public Entity
 {
 public:
-	NotorBanger(float positionX, float positionY, float scaleX, float scaleY);
+	NotorBanger();
 	~NotorBanger();
 
-	void Initialize();
+	void Initialize(int width, int height);
 	void Update();
 	
 

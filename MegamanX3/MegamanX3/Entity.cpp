@@ -80,10 +80,10 @@ D3DXVECTOR3 Entity::GetPosition()
 RECT Entity::GetBound()
 {
 	RECT bound;
-	bound.left = position.x - sprite->GetFrameWidth() * scale.x / 2;
-	bound.right = bound.left + sprite->GetFrameWidth() * scale.x;
-	bound.top = position.y - sprite->GetFrameHeight() * scale.y / 2;
-	bound.bottom = bound.top + sprite->GetFrameHeight() * scale.y;
+	bound.left = position.x - width * scale.x / 2;
+	bound.right = bound.left + width * scale.x;
+	bound.top = position.y - height * scale.y / 2;
+	bound.bottom = bound.top + height * scale.y;
 	return bound;
 }
 
@@ -94,12 +94,12 @@ D3DXVECTOR3 Entity::GetVelocity()
 
 float Entity::GetWidth()
 {
-	return sprite->GetFrameWidth();
+	return width;
 }
 
 float Entity::GetHeight()
 {
-	return sprite->GetFrameHeight();
+	return height;
 }
 
 bool Entity::GetReverse()
@@ -128,6 +128,12 @@ void Entity::SetPosition(float x, float y)
 {
 	position.x = x;
 	position.y = y;
+}
+
+void Entity::SetBound(int width, int height)
+{
+	this->width = width;
+	this->height = height;
 }
 
 void Entity::SetVelocity(float x, float y)
