@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Entity.h"
 #include "AnimatedSprite.h"
 #include "NotorBangerStateHandler.h"
@@ -52,6 +52,9 @@ public:
 	void Load();
 	void Update();
 	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
+private:
+	float acceleratorX;
+	float acceleratorY;
 };
 
 class NotorBangerDamaged : public NotorBangerState
@@ -76,6 +79,7 @@ public:
 	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
 };
 
+//Gộp chung jump và falling lại thành jump, nên ko xử lý fall
 class NotorBangerFalling : public NotorBangerState
 {
 public:
@@ -85,4 +89,7 @@ public:
 	void Load();
 	void Update();
 	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
+private:
+	float acceleratorX;
+	float acceleratorY;
 };

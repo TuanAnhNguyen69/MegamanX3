@@ -1,4 +1,13 @@
 #pragma once
+
+namespace Define
+{
+	const float NOTORBANGER_MAX_JUMP_VELOCITY = 300.0f; //van toc nhay lon nhat
+	const float NOTORBANGER_MIN_JUMP_VELOCITY = -300.0f; //van toc nhay thap nhat
+	const float NOTORBANGER_MAX_RUNNING_SPEED = 350.0f; //toc do chay nhanh nhat
+	const float NOTORBANGER_BOTTOM_RANGE_FALLING = 6.0f; // do dai va cham voi bottom neu nhu va cham bottom nho hon thi se bi roi xuong
+}
+
 class NotorBangerStateHandler
 {
 protected:
