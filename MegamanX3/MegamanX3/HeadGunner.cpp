@@ -16,11 +16,16 @@ HeadGunner::HeadGunner() : Entity(EntityId::HeadGunner_ID)
 	shootState = new HeadGunnerShoot(this, this);
 	damagedState = new HeadGunnerDamaged(this, this);
 	dieState = new HeadGunnerDie(this, this);
+	currentState = standingState;
 }
 
 
 HeadGunner::~HeadGunner()
 {
+	if (standingState) {
+		delete standingState;
+		standingState = nullptr;
+	}
 }
 
 void HeadGunner::Initialize(int width, int height)
@@ -31,6 +36,7 @@ void HeadGunner::Initialize(int width, int height)
 
 void HeadGunner::Update()
 {
+	ChangeState(Shoot);
 	Entity::Update();
 	if (currentState) {
 		currentState->Update();
@@ -57,7 +63,7 @@ HeadGunnerStateHandler::StateName HeadGunner::GetCurrentStateName()
 	return this->currentStateName;
 }
 
-void HeadGunner::ChangeState(StateName stateName)
+void HeadGunner::ChangeState(HeadGunnerStateHandler::StateName stateName)
 {
 	switch (stateName) {
 	case Standing:
