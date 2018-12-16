@@ -5,7 +5,7 @@ public:
 
 	enum StateName {
 		Damaged,
-		Fire,
+		Shoot,
 		Die,
 		Standing
 	};

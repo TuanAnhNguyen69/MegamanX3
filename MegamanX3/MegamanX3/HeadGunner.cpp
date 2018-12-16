@@ -13,7 +13,7 @@ HeadGunner::HeadGunner() : Entity(EntityId::HeadGunner_ID)
 	*/
 	
 	standingState = new HeadGunnerStanding(this, this);
-	fireState = new HeadGunnerFire(this, this);
+	shootState = new HeadGunnerShoot(this, this);
 	damagedState = new HeadGunnerDamaged(this, this);
 	dieState = new HeadGunnerDie(this, this);
 }
@@ -64,9 +64,9 @@ void HeadGunner::ChangeState(StateName stateName)
 		currentState = standingState;
 		currentStateName = Standing;
 		break;
-	case Fire:
-		currentState = fireState;
-		currentStateName = Fire;
+	case Shoot:
+		currentState = shootState;
+		currentStateName = Shoot;
 		break;
 	case Damaged:
 		currentState = damagedState;

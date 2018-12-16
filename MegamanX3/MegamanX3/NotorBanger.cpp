@@ -15,11 +15,10 @@ NotorBanger::NotorBanger() : Entity(EntityId::NotorBanger_ID)
 	//entity = EntityManager::GetInstance()->AddEntity(EntityId::NotorBanger_ID);
 	
 	standingState = new NotorBangerStanding(this, this);
-	fireState = new NotorBangerFire(this, this);
+	shootState = new NotorBangerShoot(this, this);
 	jumpState = new NotorBangerJump(this, this);
 	damagedState = new NotorBangerDamaged(this, this);
 	dieState = new NotorBangerDie(this, this);
-	fallingState = new NotorBangerFalling(this, this);
 }
 
 
@@ -53,9 +52,9 @@ void NotorBanger::ChangeState(StateName stateName)
 		currentState = standingState;
 		currentStateName = Standing;
 		break;
-	case Fire:
-		currentState = fireState;
-		currentStateName = Fire;
+	case Shoot:
+		currentState = shootState;
+		currentStateName = Shoot;
 		break;
 	case Jump:
 		currentState = jumpState;

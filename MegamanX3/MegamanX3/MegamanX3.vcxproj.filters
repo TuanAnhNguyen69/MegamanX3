@@ -153,6 +153,33 @@
     <ClCompile Include="PlayerClimbingState.cpp">
       <Filter>Entities\Player</Filter>
     </ClCompile>
+    <ClCompile Include="NotorBangerDamaged.cpp">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClCompile>
+    <ClCompile Include="NotorBangerDie.cpp">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClCompile>
+    <ClCompile Include="NotorBangerJump.cpp">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClCompile>
+    <ClCompile Include="NotorBangerShoot.cpp">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClCompile>
+    <ClCompile Include="NotorBangerStanding.cpp">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadGunnerDamaged.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadGunnerDie.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadGunnerShoot.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadGunnerStanding.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -329,6 +356,33 @@
     </ClInclude>
     <ClInclude Include="EntityImport.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBangerDamaged.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBangerDie.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBangerJump.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBangerShoot.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBangerStanding.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerDamaged.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerDie.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerShoot.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerStanding.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

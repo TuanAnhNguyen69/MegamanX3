@@ -3,6 +3,10 @@
 #include "Camera.h"
 #include "HeadGunnerState.h"
 #include "HeadGunnerStateHandler.h"
+#include "HeadGunnerDamaged.h"
+#include "HeadGunnerDie.h"
+#include "HeadGunnerShoot.h"
+#include "HeadGunnerStanding.h"
 #include <list>
 
 class Entity;
@@ -32,7 +36,7 @@ public:
 
 private:
 	HeadGunnerState * currentState;
-	HeadGunnerState *standingState, *fireState, *jumpState, *dieState, *damagedState, *fallingState;
+	HeadGunnerState *standingState, *shootState, *jumpState, *dieState, *damagedState, *fallingState;
 	HeadGunnerStateHandler::StateName currentStateName;
 	//Entity *entity;
 	Camera *camera;

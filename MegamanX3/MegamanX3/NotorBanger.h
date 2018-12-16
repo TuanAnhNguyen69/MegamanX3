@@ -3,6 +3,11 @@
 #include "Camera.h"
 #include "NotorBangerState.h"
 #include "NotorBangerStateHandler.h"
+#include "NotorBangerDamaged.h"
+#include "NotorBangerDie.h"
+#include "NotorBangerJump.h"
+#include "NotorBangerShoot.h"
+#include "NotorBangerStanding.h"
 #include <list>
 
 class Entity;
@@ -32,7 +37,7 @@ public:
 
 private:
 	NotorBangerState * currentState;
-	NotorBangerState *standingState, *fireState, *jumpState, *dieState, *damagedState, *fallingState;
+	NotorBangerState *standingState, *shootState, *jumpState, *dieState, *damagedState, *fallingState;
 	NotorBangerStateHandler::StateName currentStateName;
 	//Entity *entity;
 	Camera *camera;

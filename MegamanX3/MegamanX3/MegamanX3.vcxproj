@@ -184,6 +184,10 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="HeadGunner.h" />
+    <ClInclude Include="HeadGunnerDamaged.h" />
+    <ClInclude Include="HeadGunnerDie.h" />
+    <ClInclude Include="HeadGunnerShoot.h" />
+    <ClInclude Include="HeadGunnerStanding.h" />
     <ClInclude Include="HeadGunnerState.h" />
     <ClInclude Include="HeadGunnerStateHandler.h" />
     <ClInclude Include="Helit.h" />
@@ -191,6 +195,11 @@
     <ClInclude Include="Life.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="NotorBanger.h" />
+    <ClInclude Include="NotorBangerDamaged.h" />
+    <ClInclude Include="NotorBangerDie.h" />
+    <ClInclude Include="NotorBangerJump.h" />
+    <ClInclude Include="NotorBangerShoot.h" />
+    <ClInclude Include="NotorBangerStanding.h" />
     <ClInclude Include="NotorBangerStateHandler.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Platform.h" />
@@ -242,6 +251,10 @@
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="HeadGunner.cpp" />
+    <ClCompile Include="HeadGunnerDamaged.cpp" />
+    <ClCompile Include="HeadGunnerDie.cpp" />
+    <ClCompile Include="HeadGunnerShoot.cpp" />
+    <ClCompile Include="HeadGunnerStanding.cpp" />
     <ClCompile Include="HeadGunnerState.cpp" />
     <ClCompile Include="Helit.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -249,6 +262,11 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MegamanX3.cpp" />
     <ClCompile Include="NotorBanger.cpp" />
+    <ClCompile Include="NotorBangerDamaged.cpp" />
+    <ClCompile Include="NotorBangerDie.cpp" />
+    <ClCompile Include="NotorBangerJump.cpp" />
+    <ClCompile Include="NotorBangerShoot.cpp" />
+    <ClCompile Include="NotorBangerStanding.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -16,7 +16,7 @@ public:
 	enum StateName {
 		Jump,
 		Damaged,
-		Fire,
+		Shoot,
 		Die,
 		Standing,
 		Falling,

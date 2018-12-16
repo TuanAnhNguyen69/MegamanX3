@@ -1,7 +1,5 @@
 #include "pch.h"
 #include "PlayerDamagedState.h"
-
-
 #include "Engine.h"
 
 PlayerDamagedState::PlayerDamagedState(PlayerStateHandler *handler, Entity *entity) : PlayerState(handler, entity)
