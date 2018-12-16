@@ -140,7 +140,9 @@ void GameScene::Render()
 	auto list = EntityManager::GetInstance()->GetAllEntities();
 	for (int index = 0; index < list.size(); index++) {
 		debugDraw->DrawRect(list.at(index)->GetBound(), camera);
+		//list.at(index)->Render();
 	}
+	EntityManager::GetInstance()->Render();
 	map->RenderBackground(camera);
 	player->Render();
 }

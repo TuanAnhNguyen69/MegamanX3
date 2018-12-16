@@ -25,6 +25,7 @@ void Map::Initialize(LPCTSTR fileName)
 
 void Map::Update()
 {
+
 }
 
 void Map::RenderBackground(Camera *camera)
@@ -104,9 +105,11 @@ void Map::LoadQuadtree(LPCTSTR filePath)
 			case EntityId::HeadGunner_ID:
 				{
 					HeadGunner * headGunner = new HeadGunner();
-					headGunner->SetPosition(posX + width / 2, posY + height / 2);
+					headGunner->Initialize(50, 50);
+					headGunner->SetPosition(posX + 50 / 2, posY + 50 / 2);
 					headGunner->SetScale(2, 2);
-					headGunner->SetBound(width, height);
+					headGunner->SetBound(50, 50);
+					headGunner->Update();
 					EntityManager::GetInstance()->AddEntity(headGunner);
 					break;
 				}
@@ -114,9 +117,11 @@ void Map::LoadQuadtree(LPCTSTR filePath)
 			case EntityId::NotorBanger_ID:
 				{
 					NotorBanger * notoBanger = new NotorBanger();
+					notoBanger->Initialize(width, height);
 					notoBanger->SetPosition(posX + width / 2, posY + height / 2);
 					notoBanger->SetScale(2, 2);
 					notoBanger->SetBound(width, height);
+					notoBanger->Update();
 					EntityManager::GetInstance()->AddEntity(notoBanger);
 					break;
 				}

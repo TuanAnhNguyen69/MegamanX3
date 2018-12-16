@@ -1,11 +1,12 @@
 #include "pch.h"
 #include "HeadGunnerState.h"
+#include "HeadGunner.h"
 
 
 HeadGunnerState::HeadGunnerState(HeadGunnerStateHandler *handler, Entity *entity)
 {
 	this->handler = handler;
-	this->entity = entity;
+	this->entity = (HeadGunner*)entity;
 }
 
 HeadGunnerState::~HeadGunnerState()

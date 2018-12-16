@@ -4,7 +4,7 @@
 
 HeadGunnerShoot::HeadGunnerShoot(HeadGunnerStateHandler *handler, Entity *entity) : HeadGunnerState(handler, entity)
 {
-	sprite = new AnimatedSprite(15, 0.3, true);
+	sprite = new AnimatedSprite(5);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "head_gunner",
 		0, 7, 2, 50, 50);
 }
@@ -27,6 +27,7 @@ void HeadGunnerShoot::Load()
 
 void HeadGunnerShoot::Update()
 {
+	sprite->SetFrameRange(0, 7);
 }
 
 void HeadGunnerShoot::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
