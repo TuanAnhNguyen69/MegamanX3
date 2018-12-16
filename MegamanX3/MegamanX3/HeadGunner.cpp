@@ -16,7 +16,7 @@ HeadGunner::HeadGunner() : Entity(EntityId::HeadGunner_ID)
 	shootState = new HeadGunnerShoot(this, this);
 	damagedState = new HeadGunnerDamaged(this, this);
 	dieState = new HeadGunnerDie(this, this);
-	currentState = standingState;
+	ChangeState(Standing);
 }
 
 
@@ -28,35 +28,21 @@ HeadGunner::~HeadGunner()
 	}
 }
 
-void HeadGunner::Initialize(int width, int height)
+void HeadGunner::Initialize()
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-		"head_gunner", width, height);
+		"head_gunner", 50, 50);
+	ChangeState(Shoot);
+
 }
 
 void HeadGunner::Update()
 {
-	ChangeState(Shoot);
 	Entity::Update();
 	if (currentState) {
 		currentState->Update();
 	}
 }
-
-//void HeadGunner::SetPosition(int x, int y)
-//{
-//	entity->SetPosition(x, y);
-//}
-//
-//D3DXVECTOR3 HeadGunner::GetPosition()
-//{
-//	return entity->GetPosition();
-//}
-//
-//Entity * HeadGunner::GetEntity()
-//{
-//	return entity;
-//}
 
 HeadGunnerStateHandler::StateName HeadGunner::GetCurrentStateName()
 {

@@ -18,14 +18,9 @@ public:
 	NotorBanger();
 	~NotorBanger();
 
-	void Initialize(int width, int height);
+	void Initialize();
 	void Update();
-	
 
-	/*void SetPosition(int x, int y);
-	D3DXVECTOR3 GetPosition();*/
-
-	//Entity *GetEntity();
 	NotorBangerStateHandler::StateName GetCurrentStateName();
 	void ChangeState(StateName stateName);
 	NotorBangerStateHandler::MoveDirection GetMoveDirection();
@@ -39,7 +34,6 @@ private:
 	NotorBangerState * currentState;
 	NotorBangerState *standingState, *shootState, *jumpState, *dieState, *damagedState, *fallingState;
 	NotorBangerStateHandler::StateName currentStateName;
-	//Entity *entity;
 	Camera *camera;
 	NotorBangerStateHandler::StateName preAction;
 };

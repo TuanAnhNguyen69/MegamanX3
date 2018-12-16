@@ -3,17 +3,7 @@
 
 
 NotorBanger::NotorBanger() : Entity(EntityId::NotorBanger_ID)
-{
-	/*
-	fireState = nullptr;
-	jumpState = nullptr;
-	damagedState = nullptr;
-	dieState = nullptr;
-	fallingState = nullptr;
-	*/
-
-	//entity = EntityManager::GetInstance()->AddEntity(EntityId::NotorBanger_ID);
-	
+{	
 	standingState = new NotorBangerStanding(this, this);
 	shootState = new NotorBangerShoot(this, this);
 	jumpState = new NotorBangerJump(this, this);
@@ -26,10 +16,11 @@ NotorBanger::~NotorBanger()
 {
 }
 
-void NotorBanger::Initialize(int width, int height)
+void NotorBanger::Initialize()
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"notor_banger", 50, 50);
+	ChangeState(Standing);
 }
 
 void NotorBanger::Update()
