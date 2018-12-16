@@ -23,7 +23,11 @@
     <ProjectGuid>{E42C9130-1CC9-448D-91FD-3531680F95EE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>MegamanX3</RootNamespace>
+<<<<<<< HEAD
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+=======
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+>>>>>>> 45c22c6e31660f3923c01e15172f26257105ba42
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -191,6 +195,12 @@
     <ClInclude Include="HeadGunnerState.h" />
     <ClInclude Include="HeadGunnerStateHandler.h" />
     <ClInclude Include="Helit.h" />
+    <ClInclude Include="HelitDamaged.h" />
+    <ClInclude Include="HelitDie.h" />
+    <ClInclude Include="HelitFlying.h" />
+    <ClInclude Include="HelitShooting.h" />
+    <ClInclude Include="HelitState.h" />
+    <ClInclude Include="HelitStateHandler.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Life.h" />
     <ClInclude Include="Map.h" />
@@ -257,6 +267,11 @@
     <ClCompile Include="HeadGunnerStanding.cpp" />
     <ClCompile Include="HeadGunnerState.cpp" />
     <ClCompile Include="Helit.cpp" />
+    <ClCompile Include="HelitDamaged.cpp" />
+    <ClCompile Include="HelitDie.cpp" />
+    <ClCompile Include="HelitFlying.cpp" />
+    <ClCompile Include="HelitShooting.cpp" />
+    <ClCompile Include="HelitState.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Life.cpp" />
     <ClCompile Include="Map.cpp" />
