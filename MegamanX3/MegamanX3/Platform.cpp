@@ -5,6 +5,11 @@ Platform::Platform() : Entity(EntityId::Platform_ID)
 {
 }
 
+void Platform::Update()
+{
+	Entity::Update();
+}
+
 Platform::~Platform()
 {
 }

@@ -8,7 +8,12 @@ HeadGunnerDie::HeadGunnerDie(HeadGunnerStateHandler *handler, Entity *entity) : 
 }
 HeadGunnerDie::~HeadGunnerDie()
 {
-
+	if (handler->GetCurrentStateName() != HeadGunnerStateHandler::StateName::Die) {
+		if (sprite) {
+			delete sprite;
+			sprite = nullptr;
+		}
+	}
 }
 
 void HeadGunnerDie::Load()

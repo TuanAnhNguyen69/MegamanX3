@@ -9,6 +9,7 @@ class Platform : public Entity
 {
 public:
 	Platform();
+	void Update();
 	~Platform();
 	void Initialize();
 };

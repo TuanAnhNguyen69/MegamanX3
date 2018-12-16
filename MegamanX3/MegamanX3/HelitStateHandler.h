@@ -1,23 +1,19 @@
 #pragma once
-#ifndef _BLAST_HORNET_STATE_HANDLER_H
-#define _BLAST_HORNET_STATE_HANDLER_H
-
-namespace Define
-{
-	
-}
-
-class BlastHornetStateHandler
+class HelitStateHandler
 {
 public:
+
 	enum StateName {
-		
+		Damaged,
+		Shooting,
+		Die,
+		Flying
 	};
 
 	enum MoveDirection
 	{
-		MoveToLeft,
-		MoveToRight,
+		MoveToTop,
+		MoveToBottom,
 		None
 	};
 
@@ -26,4 +22,3 @@ public:
 	virtual MoveDirection GetMoveDirection() = 0;
 };
 
-#endif

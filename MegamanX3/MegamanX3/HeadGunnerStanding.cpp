@@ -4,9 +4,9 @@
 
 HeadGunnerStanding::HeadGunnerStanding(HeadGunnerStateHandler *handler, Entity *entity) : HeadGunnerState(handler, entity)
 {
-	sprite = new AnimatedSprite(10, true);
+	sprite = new AnimatedSprite(5, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "head_gunner",
-		0, 1, 4, 50, 50);
+		0, 0, 4, 50, 50);
 }
 HeadGunnerStanding::~HeadGunnerStanding()
 {
@@ -22,17 +22,18 @@ void HeadGunnerStanding::Load()
 {
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
-	timeChangeState = time(0);
+	startState = clock();
 }
 
 void HeadGunnerStanding::Update()
 {
-	//time_t cout = time(0);
-	//if (((cout - timeChangeState) > 4 && (cout - timeChangeState) % 4 == 0))
-	//{
+	clock_t cout = clock();
+	int dt = (cout - startState) / 40;
+	if ((dt > 4)
+		&& (dt % 4 == 0))
+	{
 		handler->ChangeState(HeadGunnerStateHandler::StateName::Shoot);
-		//return;
-	//}
+	}
 }
 
 void HeadGunnerStanding::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)

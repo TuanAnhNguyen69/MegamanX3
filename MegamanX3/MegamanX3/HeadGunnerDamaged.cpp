@@ -10,7 +10,7 @@ HeadGunnerDamaged::HeadGunnerDamaged(HeadGunnerStateHandler *handler, Entity *en
 }
 HeadGunnerDamaged::~HeadGunnerDamaged()
 {
-	if (handler->GetCurrentStateName() != HeadGunnerStateHandler::StateName::Standing) {
+	if (handler->GetCurrentStateName() != HeadGunnerStateHandler::StateName::Damaged) {
 		if (sprite) {
 			delete sprite;
 			sprite = nullptr;

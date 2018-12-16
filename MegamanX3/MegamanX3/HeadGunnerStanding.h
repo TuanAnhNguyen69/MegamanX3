@@ -1,6 +1,7 @@
 #pragma once
 #include "HeadGunnerState.h"
 #include <ctime>
+#include <time.h>
 
 class HeadGunnerStanding : public HeadGunnerState
 {
@@ -12,6 +13,6 @@ public:
 	void Update();
 	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
 private:
-	time_t timeChangeState;
+	clock_t startState;
 };
 
