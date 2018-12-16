@@ -11,7 +11,7 @@ HeadGunnerShoot::HeadGunnerShoot(HeadGunnerStateHandler *handler, Entity *entity
 
 HeadGunnerShoot::~HeadGunnerShoot()
 {
-	if (handler->GetCurrentStateName() != HeadGunnerStateHandler::StateName::Standing) {
+	if (handler->GetCurrentStateName() != HeadGunnerStateHandler::StateName::Shoot) {
 		if (sprite) {
 			delete sprite;
 			sprite = nullptr;
