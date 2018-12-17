@@ -39,9 +39,10 @@ void EntityManager::Render()
 	}
 }
 
-void EntityManager::AddEntity(Entity * entity)
+int EntityManager::AddEntity(Entity * entity)
 {
 	entities.push_back(entity);
+	return entities.size() - 1;
 }
 
 void EntityManager::RemoveEntity(Entity * entity)

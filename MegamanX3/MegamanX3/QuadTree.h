@@ -14,21 +14,20 @@ public:
 	~QuadTree();
 
 	void Clear();
-	void Insert(Entity *entity);
-	void GetAllEntities(std::vector<Entity*> &returnEntities);
-	void GetEntitiesCollideAble(std::vector<Entity*> &returnEntities, Entity* entity);
-	int GetTotalEntities();
+	void Insert(int index, Entity *entity);
+	void GetInBoundEntities(std::vector<int> &returnEntities, RECT bound);
 	RECT GetBound();
 	QuadTree **GetNodes();
 
 private:
 	int level;
 	RECT bound;
-	std::vector<Entity*> entities;
+	std::vector<int> entityIndexs;
 	QuadTree** nodes;
 
 	void Split();
-	bool IsContain(Entity *entity);
+	bool IsContain(RECT bound);
+	int id;
 };
 
 #endif

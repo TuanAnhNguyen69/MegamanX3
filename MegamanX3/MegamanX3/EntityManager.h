@@ -22,7 +22,7 @@ public:
 	void Update();
 	void Render();
 
-	void AddEntity(Entity *entity);
+	int AddEntity(Entity *entity);
 	void RemoveEntity(Entity *entity);
 	void RemoveAllEntities();
 
