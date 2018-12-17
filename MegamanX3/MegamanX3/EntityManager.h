@@ -4,17 +4,24 @@
 #include "Entity.h"
 #include "Camera.h"
 #include "SystemDefs.h"
+#include "QuadTree.h"
 #include <vector>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include"Player.h"
+
+class Player;
 
 class EntityManager
 {
 public:
-	
+
 	~EntityManager();
 
 	void Update();
 	void Render();
-		
+
 	void AddEntity(Entity *entity);
 	void RemoveEntity(Entity *entity);
 	void RemoveAllEntities();
@@ -24,13 +31,17 @@ public:
 	std::vector<Entity*> GetAllEntities();
 
 	static EntityManager *GetInstance();
-	void Initialize(Camera *camera);
+	QuadTree *GetQuadTree();
+	void Initialize(Player *player, Camera *camera, LPCTSTR fileName, int mapWidth, int mapHeight);
 
 private:
 	std::vector<Entity*> entities;
 	EntityManager();
 	static EntityManager *instance;
 	Camera *camera;
+	QuadTree *quadTree;
+	void LoadQuadtree(LPCTSTR filePath);
+	Player * player;
 };
 
 #endif

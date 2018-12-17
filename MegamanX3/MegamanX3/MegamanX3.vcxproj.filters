@@ -195,6 +195,7 @@
     <ClCompile Include="HelitShooting.cpp">
       <Filter>Entities\Enemy\Helit</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -417,6 +418,7 @@
     <ClInclude Include="HelitStateHandler.h">
       <Filter>Entities\Enemy\Helit</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

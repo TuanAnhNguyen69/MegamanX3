@@ -79,7 +79,7 @@ void PlayerRunningState::OnCollision(Entity * impactor, Entity::SideCollisions s
 			//day Player ra phia ben phai de cho player khong bi xuyen qua object
 			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
 
-			handler->ChangeState(PlayerStateHandler::Standing);
+			//handler->ChangeState(PlayerStateHandler::Standing);
 		}
 
 		return;
@@ -91,7 +91,7 @@ void PlayerRunningState::OnCollision(Entity * impactor, Entity::SideCollisions s
 		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
 		{
 			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
-			handler->ChangeState(PlayerStateHandler::Standing);
+			//handler->ChangeState(PlayerStateHandler::Standing);
 		} 
 		return;
 	}

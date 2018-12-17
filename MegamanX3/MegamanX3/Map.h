@@ -26,14 +26,10 @@ public:
 
 	int GetTileWidth();
 	int GetTileHeight();
-
-	QuadTree *GetQuadTree();
-
 private:
 	Sprite * backgroundSprite;
 	std::map<int, Tile*> *tiles; // tất cả tiles từ file
 	QuadTree *quadTree;
-	void LoadQuadtree(LPCTSTR filePath);
 	void LoadBackground(LPCTSTR filePath);
 	std::list<int> *GetAvailableTiles(RECT viewport);
 	int tilesColCount;

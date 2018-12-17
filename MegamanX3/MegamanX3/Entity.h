@@ -81,6 +81,8 @@ public:
 	void InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float startFrame, float endFrame, float maxFramesRow, float frameWidth, float frameHeight, float animationSpeed = 1.0f, bool isLooping = true);
 
 	virtual void Update();
+	virtual void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
+
 	void Render();
 
 	D3DXVECTOR3 GetPosition();
@@ -89,6 +91,8 @@ public:
 	float GetWidth();
 	float GetHeight();
 	bool GetReverse();
+	EntityId GetEntityId();
+
 
 	void SetSprite(Sprite *sprite);
 	void SetTranslation(float x = 0.0f, float y = 0.0f);
@@ -105,7 +109,6 @@ public:
 
 	void AddPosition(float x, float y);
 
-	virtual void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
 protected:
 	int width;
 	int height;
