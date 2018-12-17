@@ -43,7 +43,7 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 
 	this->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	this->SetScale(2, 2);
-	this->SetBound(30,50);
+	this->SetBound(60,100);
 
 	standingState = new PlayerStandingState(this, this);
 	runningState = new PlayerRunningState(this, this);

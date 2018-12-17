@@ -3,9 +3,9 @@
 
 NotorBangerJump::NotorBangerJump(NotorBangerStateHandler *handler, Entity *entity) : NotorBangerState(handler, entity)
 {
-	sprite = new AnimatedSprite(10, 0.3, false);
+	sprite = new AnimatedSprite(5, 1, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "notor_banger",
-		0, 3, 2, 50, 50);
+		0, 4, 5, 50, 50);
 }
 NotorBangerJump::~NotorBangerJump()
 {
@@ -19,50 +19,39 @@ NotorBangerJump::~NotorBangerJump()
 
 void NotorBangerJump::Load()
 {
+	//Jump
 	entity->SetSprite(sprite);
 	entity->SetVelocityY(Define::NOTORBANGER_MIN_JUMP_VELOCITY);
-	acceleratorX = 14.0f;
-	acceleratorY = 15.0f;
+	acceleratorX = 20.0f;
+	acceleratorY = 20.0f;
 	sprite->ResetFrame();
 
 	//Gán giá trị preAction là Jump tiếp tục thực hiện Shoot
 	handler->SetPreAction(NotorBangerStateHandler::StateName::Jump);
+
+	//Fall
+	//acceleratorX = 8.0f;
 }
 
 void NotorBangerJump::Update()
 {
+	//Jump
 	entity->AddVelocityY(acceleratorY);
 
 	if (entity->GetVelocity().y >= 0) {
+		//Fall
+		acceleratorX = 8.0f;
 		entity->AddVelocityY(acceleratorY);
 		if (entity->GetVelocity().y > Define::NOTORBANGER_MAX_JUMP_VELOCITY) {
 			entity->SetVelocityY(Define::NOTORBANGER_MAX_JUMP_VELOCITY);
 		}
-
-		//Truyền vị trí Megaman để NotorBanger nhảy về hướng đó
-		//Nếu bên trái
-		if (true)
-		{
-			entity->SetReverse(false);
-			if (entity->GetVelocity().x > -Define::NOTORBANGER_MAX_RUNNING_SPEED) {
-				entity->AddVelocityX(-acceleratorX);
-				if (entity->GetVelocity().x < -Define::NOTORBANGER_MAX_RUNNING_SPEED) {
-					entity->SetVelocityX(-Define::NOTORBANGER_MAX_RUNNING_SPEED);
-				}
+		if (entity->GetVelocity().x > -Define::NOTORBANGER_MAX_RUNNING_SPEED) {
+			entity->AddVelocityX(-acceleratorX);
+			if (entity->GetVelocity().x < -Define::NOTORBANGER_MAX_RUNNING_SPEED) {
+				entity->SetVelocityX(-Define::NOTORBANGER_MAX_RUNNING_SPEED);
 			}
 		}
-		//Nếu bên phải
-		else
-		{
-			entity->SetReverse(true);
-			if (entity->GetVelocity().x < Define::NOTORBANGER_MAX_RUNNING_SPEED) {
-				entity->AddVelocityX(acceleratorX);
-				if (entity->GetVelocity().x >= Define::NOTORBANGER_MAX_RUNNING_SPEED) {
-					entity->SetVelocityX(Define::NOTORBANGER_MAX_RUNNING_SPEED);
-				}
-			}
-		}
-		
+		return;
 	}
 
 	if (handler->GetMoveDirection() == NotorBangerStateHandler::MoveDirection::MoveToLeft) {
@@ -73,17 +62,31 @@ void NotorBangerJump::Update()
 			}
 		}
 	}
-	else if (handler->GetMoveDirection() == NotorBangerStateHandler::MoveDirection::MoveToRight) {
+	/*else if (handler->GetMoveDirection() == NotorBangerStateHandler::MoveDirection::MoveToRight) {
 		if (entity->GetVelocity().x > 0) {
 			entity->AddVelocityX(-acceleratorX);
 			if (entity->GetVelocity().x < 0) {
 				entity->SetVelocityX(0);
 			}
 		}
-	}
+	}*/
 
-	//Vd
-	sprite->SetFrameRange(3, 5);
+		/*entity->SetReverse(false);
+		if (entity->GetVelocity().x < Define::NOTORBANGER_MAX_RUNNING_SPEED) {
+			entity->AddVelocityX(acceleratorX);
+			if (entity->GetVelocity().x >= Define::NOTORBANGER_MAX_RUNNING_SPEED) {
+				entity->SetVelocityX(Define::NOTORBANGER_MAX_RUNNING_SPEED);
+			}
+		}*/
+	
+		entity->SetReverse(false);
+		if (entity->GetVelocity().x > -Define::NOTORBANGER_MAX_RUNNING_SPEED) {
+			entity->AddVelocityX(-acceleratorX);
+			if (entity->GetVelocity().x < -Define::NOTORBANGER_MAX_RUNNING_SPEED) {
+				entity->SetVelocityX(-Define::NOTORBANGER_MAX_RUNNING_SPEED);
+			}
+		}
+
 
 }
 
@@ -91,7 +94,7 @@ void NotorBangerJump::OnCollision(Entity *impactor, Entity::SideCollisions side,
 {
 	switch (side)
 	{
-	case Entity::Left:
+	/*case Entity::Left:
 	{
 		entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
 		entity->SetVelocityX(0);
@@ -110,16 +113,20 @@ void NotorBangerJump::OnCollision(Entity *impactor, Entity::SideCollisions side,
 		entity->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top);
 		entity->SetVelocityY(0);
 		break;
-	}
+	}*/
 
 	case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
 	{
-		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
-		entity->SetVelocityY(0);
+		//if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
+		{
+			entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+			entity->SetVelocityY(0);
+			handler->ChangeState(NotorBangerStateHandler::StateName::Standing);
+		}
+		return;
+		
 	}
 
 
-	default:
-		break;
 	}
 }

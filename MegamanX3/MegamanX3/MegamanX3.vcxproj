@@ -164,6 +164,7 @@
     <ClInclude Include="Box.h" />
     <ClInclude Include="BoxWall.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Canon.h" />
     <ClInclude Include="Cargo.h" />
     <ClInclude Include="CarryArm.h" />
     <ClInclude Include="Collision.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="DXManager.h" />
     <ClInclude Include="Elevator.h" />
     <ClInclude Include="BlastHornetState.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Energy.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Entity.h" />
@@ -241,6 +243,7 @@
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="BoxWall.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Canon.cpp" />
     <ClCompile Include="Cargo.cpp" />
     <ClCompile Include="CarryArm.cpp" />
     <ClCompile Include="Collision.cpp" />
@@ -251,6 +254,7 @@
     <ClCompile Include="DXManager.cpp" />
     <ClCompile Include="Elevator.cpp" />
     <ClCompile Include="BlastHornetState.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Energy.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Entity.cpp" />

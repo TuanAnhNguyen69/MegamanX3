@@ -64,11 +64,11 @@ bool Engine::Initialize(HINSTANCE instance, HWND hwnd)
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "stage.png");
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "PlayerPaper.png");
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "platform.png");
-	resourceManager->LoadTextureResource(graphics->GetDevice(), "x.png");
-	resourceManager->LoadTextureResource(graphics->GetDevice(), "head_gunner.png");
-	resourceManager->LoadTextureResource(graphics->GetDevice(), "noto_banger.png");
-	resourceManager->LoadTextureResource(graphics->GetDevice(), "head_gunner_rocket.png");
-	resourceManager->LoadTextureResource(graphics->GetDevice(), "notor_banger.png");
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "head_gunner_rocket.png",D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "x.png", D3DCOLOR_XRGB(50, 96, 166));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "head_gunner.png", D3DCOLOR_XRGB(50, 96, 166));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "notor_banger.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "canon.png", D3DCOLOR_XRGB(255, 255, 255));
 	//D3DCOLOR_XRGB(50, 96, 166)
 
 	input = new Input();
@@ -139,7 +139,7 @@ void Engine::Update()
 	if (gameComponent != nullptr) {
 		gameComponent->Update();
 	}
-	entityManager->Update();
+	//entityManager->Update();
 	input->Update();
 }
 
@@ -151,7 +151,7 @@ void Engine::Render()
 	if (gameComponent != nullptr) {
 		gameComponent->Render();
 	}
-	entityManager->Render();
+	//entityManager->Render();
 
 	spriteHandler->End();
 	graphics->EndScene();

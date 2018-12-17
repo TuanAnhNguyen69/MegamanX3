@@ -2,13 +2,15 @@
 #include "NotorBanger.h"
 
 
-NotorBanger::NotorBanger() : Entity(EntityId::NotorBanger_ID)
+NotorBanger::NotorBanger(Player *_player) : Enemy(EntityId::NotorBanger_ID, _player)
 {	
 	standingState = new NotorBangerStanding(this, this);
 	shootState = new NotorBangerShoot(this, this);
 	jumpState = new NotorBangerJump(this, this);
 	damagedState = new NotorBangerDamaged(this, this);
 	dieState = new NotorBangerDie(this, this);
+	changeBarrel = new NotorBangerChangeBarrel(this, this);
+	player = _player;
 }
 
 
@@ -29,6 +31,24 @@ void NotorBanger::Initialize()
 
 void NotorBanger::Update()
 {
+	if (this->GetPosition().x > player->GetPosition().x)
+	{
+		targetIsLeft = true;
+	}
+	else
+	{
+		targetIsLeft = false;
+	}
+
+	if (player->GetPosition().y > (this->GetPosition().y - this->GetHeight() * 2))
+	{
+		targetIsAbove = true;
+	}
+	else
+	{
+		targetIsAbove = false;
+	}
+
 	Entity::Update();
 	if (currentState) {
 		currentState->Update();
@@ -63,13 +83,14 @@ void NotorBanger::ChangeState(StateName stateName)
 		currentState = dieState;
 		currentStateName = Die;
 		break;
-	case Falling:
+	/*case Falling:
 		currentState = fallingState;
 		currentStateName = Falling;
-		break;
+		break;*/
 	case ChangeBarrel:
 		currentState = changeBarrel;
 		currentStateName = ChangeBarrel;
+		break;
 	default:
 		currentState = standingState;
 		currentStateName = Standing;
@@ -119,4 +140,14 @@ void NotorBanger::SetBarrelState(BarrelState bt)
 NotorBangerStateHandler::BarrelState NotorBanger::GetBarrelState()
 {
 	return barrelState;
+}
+
+bool NotorBanger::GetLeftTarget()
+{
+	return targetIsLeft;
+}
+
+bool NotorBanger::GetAboveTarget()
+{
+	return targetIsAbove;
 }

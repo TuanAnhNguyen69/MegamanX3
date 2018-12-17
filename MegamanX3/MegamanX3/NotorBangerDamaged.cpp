@@ -6,7 +6,7 @@ NotorBangerDamaged::NotorBangerDamaged(NotorBangerStateHandler *handler, Entity 
 {
 	sprite = new AnimatedSprite(15, 1.5, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "notor_banger",
-		0, 8, 10, 50, 50);
+		0, 0, 10, 50, 50);
 }
 NotorBangerDamaged::~NotorBangerDamaged()
 {
@@ -20,8 +20,8 @@ NotorBangerDamaged::~NotorBangerDamaged()
 
 void NotorBangerDamaged::Load()
 {
-	entity->SetSprite(sprite);
-	sprite->ResetFrame();
+	//entity->SetSprite(sprite);
+	//sprite->ResetFrame();
 }
 
 void NotorBangerDamaged::Update()

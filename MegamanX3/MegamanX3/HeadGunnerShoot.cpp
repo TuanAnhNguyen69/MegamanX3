@@ -24,6 +24,8 @@ void HeadGunnerShoot::Load()
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	hadShoot = false;
+	isRocket = true;
+	armor = 5;
 }
 
 void HeadGunnerShoot::Update()
@@ -45,7 +47,22 @@ void HeadGunnerShoot::Update()
 		hadShoot = false;
 	}
 	if (sprite->IsFinished()) {
-		handler->ChangeState(HeadGunnerStateHandler::StateName::Standing);
+		/*sprite->SetFrameRange(0, 0);
+		if (armor > 0)
+		{
+			Canon *canon = new Canon();
+			canon->SetPosition(entity->GetPosition().x + 10, entity->GetPosition().y + 5);
+			canon->Initialize(false);
+			canon->SetScale(2, 2);
+			canon->SetBound(9, 9);
+			EntityManager::GetInstance()->AddEntity(canon);
+			hadShoot = true;
+			armor--;
+		}
+		else*/
+		{
+			handler->ChangeState(HeadGunnerStateHandler::StateName::Standing);
+		}
 	}
 }
 

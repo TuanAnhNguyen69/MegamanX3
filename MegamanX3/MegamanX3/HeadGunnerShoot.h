@@ -1,6 +1,7 @@
 #pragma once
 #include "HeadGunnerState.h"
 #include "HeadGunnerRocket.h"
+#include "Canon.h"
 
 class HeadGunnerShoot : public HeadGunnerState
 {
@@ -13,5 +14,7 @@ public:
 	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
 private:
 	bool hadShoot;
+	bool isRocket;
+	int armor;
 };
 

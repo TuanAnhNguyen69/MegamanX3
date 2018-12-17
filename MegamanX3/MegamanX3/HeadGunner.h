@@ -7,14 +7,16 @@
 #include "HeadGunnerDie.h"
 #include "HeadGunnerShoot.h"
 #include "HeadGunnerStanding.h"
+#include "Enemy.h"
+#include "Player.h"
 #include <list>
 
 class Entity;
 
-class HeadGunner : public HeadGunnerStateHandler, public Entity
+class HeadGunner : public HeadGunnerStateHandler, public Enemy
 {
 public:
-	HeadGunner();
+	HeadGunner(Player * player);
 	~HeadGunner();
 
 	void Initialize();

@@ -8,14 +8,16 @@
 #include "NotorBangerJump.h"
 #include "NotorBangerShoot.h"
 #include "NotorBangerStanding.h"
+#include "NotorBangerChangeBarrel.h"
+#include "Enemy.h"
 #include <list>
 
 class Entity;
 
-class NotorBanger : public NotorBangerStateHandler, public Entity
+class NotorBanger : public NotorBangerStateHandler, public Enemy
 {
 public:
-	NotorBanger();
+	NotorBanger(Player *player);
 	~NotorBanger();
 
 	void Initialize();
@@ -33,6 +35,10 @@ public:
 	void SetBarrelState(BarrelState bt);
 	BarrelState GetBarrelState();
 
+	bool GetLeftTarget();
+	bool GetAboveTarget();
+
+	Player *player;
 private:
 	NotorBangerState * currentState;
 	NotorBangerState *standingState, *shootState, *jumpState, *dieState, *damagedState, *fallingState, *changeBarrel;
@@ -40,5 +46,7 @@ private:
 	Camera *camera;
 	NotorBangerStateHandler::StateName preAction;
 	BarrelState barrelState;
+	
+
 };
 

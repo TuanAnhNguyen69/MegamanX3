@@ -21,15 +21,22 @@ void NotorBangerStanding::Load()
 {
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
-	hadStraight = true;
 }
 
 void NotorBangerStanding::Update()
 {
 	handler->SetPreAction(NotorBangerStateHandler::StateName::Jump);
 	handler->ChangeState(NotorBangerStateHandler::StateName::ChangeBarrel);
+	//handler->ChangeState(NotorBangerStateHandler::StateName::Jump);
 }
 
 void NotorBangerStanding::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
 {
+	//if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
+	{
+		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+		entity->SetVelocityY(0);
+		handler->ChangeState(NotorBangerStateHandler::StateName::Standing);
+	}
+	return;
 }

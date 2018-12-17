@@ -3,7 +3,7 @@
 #include <ctime>
 
 
-HeadGunner::HeadGunner() : Entity(EntityId::HeadGunner_ID)
+HeadGunner::HeadGunner(Player * player) : Enemy(EntityId::HeadGunner_ID, player)
 {
 	/*
 	fireState = nullptr;

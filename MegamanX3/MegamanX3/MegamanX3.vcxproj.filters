@@ -201,6 +201,12 @@
     <ClCompile Include="NotorBangerChangeBarrel.cpp">
       <Filter>Entities\Enemy\NotorBanger</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Entities\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Canon.cpp">
+      <Filter>Entities\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -428,6 +434,12 @@
     </ClInclude>
     <ClInclude Include="NotorBangerChangeBarrel.h">
       <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Entities\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Canon.h">
+      <Filter>Entities\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

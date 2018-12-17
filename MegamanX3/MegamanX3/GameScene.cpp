@@ -34,14 +34,17 @@ bool GameScene::Initialize()
 
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 	camera->SetCenter(SCREEN_WIDTH / 2, 0);
-	
-	EntityManager::GetInstance()->Initialize(camera);
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(SCREEN_WIDTH / 2, 0);
+	player->SetPosition(1115, 1630);
 
+	EntityManager::GetInstance()->Initialize(player, camera, "aaaaa", map->GetWidth(), map->GetHeight());
+
+	
 	debugDraw = new DebugDraw();
+	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));
+	debugDraw->SetLineSize(5);
 	return true;
 }
 
@@ -82,6 +85,9 @@ void GameScene::CheckCollision()
 		RECT broadphase = Collision::GetSweptBroadphaseRect(player);
 		if (Collision::IsCollide(broadphase,  EntityManager::GetInstance()->GetAllEntities().at(index)->GetBound()))
 		{
+			if (EntityManager::GetInstance()->GetAllEntities().at(index)->GetEntityId() == EntityId::HeadGunner_ID) {
+				int a = 0;
+			}
 			Entity::CollisionReturn collideData;
 			float collisionTime = Collision::SweptAABB(player,  EntityManager::GetInstance()->GetAllEntities().at(index), collideData);
 			if (collisionTime < 1.0f) //collisiontime > 0 &&
@@ -90,7 +96,7 @@ void GameScene::CheckCollision()
 				Entity::SideCollisions sideImpactor = Collision::GetSideCollision( EntityManager::GetInstance()->GetAllEntities().at(index), collideData);
 
 				player->OnCollision( EntityManager::GetInstance()->GetAllEntities().at(index), sidePlayer, collideData);
-				 EntityManager::GetInstance()->GetAllEntities().at(index)->OnCollision(player, sideImpactor, collideData);
+				EntityManager::GetInstance()->GetAllEntities().at(index)->OnCollision(player, sideImpactor, collideData);
 
 				if (sidePlayer == Entity::Bottom || sidePlayer == Entity::BottomLeft
 					|| sidePlayer == Entity::BottomRight) {
@@ -138,12 +144,11 @@ void GameScene::CheckCamera() {
 
 void GameScene::Render()
 {
+	map->RenderBackground(camera);
+	EntityManager::GetInstance()->Render();
+	player->Render();
 	auto list = EntityManager::GetInstance()->GetAllEntities();
 	for (int index = 0; index < list.size(); index++) {
 		debugDraw->DrawRect(list.at(index)->GetBound(), camera);
-		//list.at(index)->Render();
 	}
-	EntityManager::GetInstance()->Render();
-	map->RenderBackground(camera);
-	player->Render();
 }
