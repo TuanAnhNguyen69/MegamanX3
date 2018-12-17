@@ -103,7 +103,7 @@ void Map::LoadQuadtree(LPCTSTR filePath)
 					case EntityId::CarryArm:
 						break;*/
 			case EntityId::HeadGunner_ID:
-				{
+				/*{
 					HeadGunner * headGunner = new HeadGunner();
 					headGunner->Initialize();
 					headGunner->SetPosition(posX + width / 2, posY + height / 2);
@@ -111,16 +111,26 @@ void Map::LoadQuadtree(LPCTSTR filePath)
 					headGunner->SetBound(width, height);
 					EntityManager::GetInstance()->AddEntity(headGunner);
 					break;
+				}*/
+				{
+					NotorBanger * notorBanger = new NotorBanger();
+					notorBanger->Initialize();
+					notorBanger->SetPosition(posX + width / 2, posY + height / 2);
+					notorBanger->SetScale(2, 2);
+					notorBanger->SetBound(width, height);
+					EntityManager::GetInstance()->AddEntity(notorBanger);
+					break;
 				}
+
 
 			case EntityId::NotorBanger_ID:
 				{
-					NotorBanger * notoBanger = new NotorBanger();
-					notoBanger->Initialize();
-					notoBanger->SetPosition(posX + width / 2, posY + height / 2);
-					notoBanger->SetScale(2, 2);
-					notoBanger->SetBound(width, height);
-					EntityManager::GetInstance()->AddEntity(notoBanger);
+					NotorBanger * notorBanger = new NotorBanger();
+					notorBanger->Initialize();
+					notorBanger->SetPosition(posX + width / 2, posY + height / 2);
+					notorBanger->SetScale(2, 2);
+					notorBanger->SetBound(width, height);
+					EntityManager::GetInstance()->AddEntity(notorBanger);
 					break;
 				}
 			/*case EntityId::Bee:

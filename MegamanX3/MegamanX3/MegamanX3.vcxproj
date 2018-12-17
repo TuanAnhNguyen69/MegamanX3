@@ -186,6 +186,7 @@
     <ClInclude Include="HeadGunner.h" />
     <ClInclude Include="HeadGunnerDamaged.h" />
     <ClInclude Include="HeadGunnerDie.h" />
+    <ClInclude Include="HeadGunnerRocket.h" />
     <ClInclude Include="HeadGunnerShoot.h" />
     <ClInclude Include="HeadGunnerStanding.h" />
     <ClInclude Include="HeadGunnerState.h" />
@@ -201,6 +202,7 @@
     <ClInclude Include="Life.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="NotorBanger.h" />
+    <ClInclude Include="NotorBangerChangeBarrel.h" />
     <ClInclude Include="NotorBangerDamaged.h" />
     <ClInclude Include="NotorBangerDie.h" />
     <ClInclude Include="NotorBangerJump.h" />
@@ -259,6 +261,7 @@
     <ClCompile Include="HeadGunner.cpp" />
     <ClCompile Include="HeadGunnerDamaged.cpp" />
     <ClCompile Include="HeadGunnerDie.cpp" />
+    <ClCompile Include="HeadGunnerRocket.cpp" />
     <ClCompile Include="HeadGunnerShoot.cpp" />
     <ClCompile Include="HeadGunnerStanding.cpp" />
     <ClCompile Include="HeadGunnerState.cpp" />
@@ -273,6 +276,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MegamanX3.cpp" />
     <ClCompile Include="NotorBanger.cpp" />
+    <ClCompile Include="NotorBangerChangeBarrel.cpp" />
     <ClCompile Include="NotorBangerDamaged.cpp" />
     <ClCompile Include="NotorBangerDie.cpp" />
     <ClCompile Include="NotorBangerJump.cpp" />

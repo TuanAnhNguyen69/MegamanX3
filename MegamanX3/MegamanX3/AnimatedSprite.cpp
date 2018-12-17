@@ -95,3 +95,8 @@ bool AnimatedSprite::IsFinished()
 {
 	return currentFrame == maxFrames - 1;
 }
+
+int AnimatedSprite::GetCurrentFrame()
+{
+	return currentFrame;
+}

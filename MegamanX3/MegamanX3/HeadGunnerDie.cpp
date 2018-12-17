@@ -18,7 +18,7 @@ HeadGunnerDie::~HeadGunnerDie()
 
 void HeadGunnerDie::Load()
 {
-
+	EntityManager::GetInstance()->RemoveEntity(entity);
 }
 
 void HeadGunnerDie::Update()

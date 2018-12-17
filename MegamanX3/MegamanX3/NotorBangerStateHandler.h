@@ -11,7 +11,6 @@ namespace Define
 class NotorBangerStateHandler
 {
 protected:
-	bool action;
 public:
 	enum StateName {
 		Jump,
@@ -20,6 +19,7 @@ public:
 		Die,
 		Standing,
 		Falling,
+		ChangeBarrel,
 	};
 
 	enum MoveDirection
@@ -28,10 +28,19 @@ public:
 		MoveToRight,
 		None
 	};
+	
+	enum BarrelState
+	{
+		Straight,
+		Inclined,
+		Horizontal
+	};
 
-	virtual bool GetAction() = 0;
-	virtual void SetAction(bool action) = 0;
+	//virtual bool GetAction() = 0;
+	//virtual void SetAction(bool action) = 0;
 	virtual StateName GetCurrentStateName() = 0;
 	virtual void ChangeState(StateName state) = 0;
 	virtual MoveDirection GetMoveDirection() = 0;
+	virtual void SetPreAction(StateName action) = 0;
+	virtual StateName GetPreAction() = 0;
 };

@@ -3,7 +3,7 @@
 
 NotorBangerJump::NotorBangerJump(NotorBangerStateHandler *handler, Entity *entity) : NotorBangerState(handler, entity)
 {
-	sprite = new AnimatedSprite(15, 0.3, false);
+	sprite = new AnimatedSprite(10, 0.3, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "notor_banger",
 		0, 3, 2, 50, 50);
 }
@@ -24,6 +24,9 @@ void NotorBangerJump::Load()
 	acceleratorX = 14.0f;
 	acceleratorY = 15.0f;
 	sprite->ResetFrame();
+
+	//Gán giá trị preAction là Jump tiếp tục thực hiện Shoot
+	handler->SetPreAction(NotorBangerStateHandler::StateName::Jump);
 }
 
 void NotorBangerJump::Update()

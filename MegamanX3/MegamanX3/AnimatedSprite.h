@@ -20,6 +20,8 @@ public:
 	void ResetFrame();
 	bool IsFinished();
 
+	int GetCurrentFrame();
+
 private:
 	float currentFrame;
 	float previousFrame;

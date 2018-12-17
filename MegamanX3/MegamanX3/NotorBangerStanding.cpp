@@ -5,7 +5,7 @@ NotorBangerStanding::NotorBangerStanding(NotorBangerStateHandler *handler, Entit
 {
 	sprite = new AnimatedSprite(15, 0.3, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "notor_banger",
-		0, 0, 2, 50, 50);
+		0, 0, 5, 50, 50);
 }
 NotorBangerStanding::~NotorBangerStanding()
 {
@@ -21,12 +21,13 @@ void NotorBangerStanding::Load()
 {
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
+	hadStraight = true;
 }
 
 void NotorBangerStanding::Update()
 {
-	if (handler->GetAction())
-		handler->ChangeState(NotorBangerStateHandler::StateName::Shoot);
+	handler->SetPreAction(NotorBangerStateHandler::StateName::Jump);
+	handler->ChangeState(NotorBangerStateHandler::StateName::ChangeBarrel);
 }
 
 void NotorBangerStanding::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)

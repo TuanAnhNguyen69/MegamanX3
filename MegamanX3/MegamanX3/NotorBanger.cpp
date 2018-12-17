@@ -14,6 +14,10 @@ NotorBanger::NotorBanger() : Entity(EntityId::NotorBanger_ID)
 
 NotorBanger::~NotorBanger()
 {
+	if (standingState) {
+		delete standingState;
+		standingState = nullptr;
+	}
 }
 
 void NotorBanger::Initialize()
@@ -63,6 +67,9 @@ void NotorBanger::ChangeState(StateName stateName)
 		currentState = fallingState;
 		currentStateName = Falling;
 		break;
+	case ChangeBarrel:
+		currentState = changeBarrel;
+		currentStateName = ChangeBarrel;
 	default:
 		currentState = standingState;
 		currentStateName = Standing;
@@ -94,12 +101,22 @@ void NotorBanger::OnNoCollisionWithBottom()
 {
 }
 
-bool NotorBanger::GetAction()
+NotorBangerStateHandler::StateName NotorBanger::GetPreAction()
 {
-	return action;
+	return preAction;
 }
 
-void NotorBanger::SetAction(bool _action)
+void NotorBanger::SetPreAction(StateName action)
 {
-	action = _action;
+	preAction = action;
+}
+
+void NotorBanger::SetBarrelState(BarrelState bt)
+{
+	barrelState = bt;
+}
+
+NotorBangerStateHandler::BarrelState NotorBanger::GetBarrelState()
+{
+	return barrelState;
 }

@@ -27,14 +27,18 @@ public:
 	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
 	void OnNoCollisionWithBottom();
 
-	bool GetAction();
-	void SetAction(bool action);
+	StateName GetPreAction();
+	void SetPreAction(StateName action);
+
+	void SetBarrelState(BarrelState bt);
+	BarrelState GetBarrelState();
 
 private:
 	NotorBangerState * currentState;
-	NotorBangerState *standingState, *shootState, *jumpState, *dieState, *damagedState, *fallingState;
+	NotorBangerState *standingState, *shootState, *jumpState, *dieState, *damagedState, *fallingState, *changeBarrel;
 	NotorBangerStateHandler::StateName currentStateName;
 	Camera *camera;
 	NotorBangerStateHandler::StateName preAction;
+	BarrelState barrelState;
 };
 

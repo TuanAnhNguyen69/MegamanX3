@@ -23,11 +23,27 @@ void HeadGunnerShoot::Load()
 {
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
-
+	hadShoot = false;
 }
 
 void HeadGunnerShoot::Update()
 {
+	if (sprite->GetCurrentFrame() == 2 || sprite->GetCurrentFrame() == 6)
+	{
+		if (!hadShoot) {
+			HeadGunnerRocket *rocket = new HeadGunnerRocket(true, true);
+			rocket->SetPosition(entity->GetPosition().x, entity->GetPosition().y - 10);
+			rocket->Initialize();
+			rocket->SetScale(2, 2);
+			rocket->SetBound(25, 9);
+			EntityManager::GetInstance()->AddEntity(rocket);
+			hadShoot = true;
+		}
+	}
+	else
+	{
+		hadShoot = false;
+	}
 	if (sprite->IsFinished()) {
 		handler->ChangeState(HeadGunnerStateHandler::StateName::Standing);
 	}

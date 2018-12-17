@@ -4,6 +4,7 @@
 #include "NotorBangerStateHandler.h"
 #include "Engine.h"
 #include <iostream>
+#include "HeadGunnerRocket.h"
 
 class NotorBangerState
 {
@@ -19,4 +20,8 @@ protected:
 	AnimatedSprite * sprite;
 	NotorBangerStateHandler *handler;
 	Entity *entity;
+
+	//Biến để test các hoạt động của NotorBanger, sau này truyền player vào sẽ bỏ đi
+	bool hadStraight;
+	bool hadShoot;
 };
