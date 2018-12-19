@@ -75,6 +75,7 @@ void GameScene::Update()
 	map->Update();
 	player->Update();
 	CheckCamera();
+	//EntityManager::GetInstance()->Update();
 }
 
 void GameScene::CheckCollision()

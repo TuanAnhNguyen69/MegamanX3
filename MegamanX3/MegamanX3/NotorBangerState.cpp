@@ -7,7 +7,7 @@ NotorBangerState::NotorBangerState(NotorBangerStateHandler *handler, Entity *ent
 	this->handler = handler;
 	this->entity = (NotorBanger*)entity;
 }
-#
+
 NotorBangerState::~NotorBangerState()
 {
 }

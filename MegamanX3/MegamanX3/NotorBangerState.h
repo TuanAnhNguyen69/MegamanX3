@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include "Entity.h"
 #include "AnimatedSprite.h"
-#include "NotorBangerStateHandler.h"
 #include "Engine.h"
+#include "NotorBangerStateHandler.h"
 #include <iostream>
 #include "HeadGunnerRocket.h"
 #include "Canon.h"

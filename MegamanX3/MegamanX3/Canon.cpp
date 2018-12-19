@@ -23,7 +23,7 @@ void Canon::Initialize(bool _isHigh)
 	//x0 = this->GetPosition().x;
 	//y0 = this->GetPosition().y;
 	this->SetVelocityX(-300.0f);
-	this->SetVelocityY(CANON_MIN_JUMP_VELOCITY);
+	this->SetVelocityY(-400.0f);
 }
 
 void Canon::Update()
@@ -54,8 +54,6 @@ void Canon::Update()
 	//float relaDistance = 4.0f;			//chiều xa tương đối : càng lớn xa 
 
 	//this->SetPosition(this->GetVelocity().x, -relaHeight*(dx*dx) + relaDistance*dx + y0);
-
-
 }
 
 
