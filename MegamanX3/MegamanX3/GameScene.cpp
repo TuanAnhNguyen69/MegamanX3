@@ -72,10 +72,10 @@ void GameScene::DrawQuadtree(QuadTree *quadtree)
 void GameScene::Update()
 {
 	CheckCollision();
-	map->Update();
-	player->Update();
+	EntityManager::GetInstance()->CheckCollide();
 	CheckCamera();
-	//EntityManager::GetInstance()->Update();
+	player->Update();
+	EntityManager::GetInstance()->Update();
 }
 
 void GameScene::CheckCollision()
@@ -83,6 +83,8 @@ void GameScene::CheckCollision()
 	int widthBottom = 0;
 	std::vector<Entity*> collidableEntity;
 	EntityManager::GetInstance()->GetQuadTree()->GetEntitiesCollideAble(collidableEntity, player);
+	collidableEntity.clear();
+	EntityManager::GetInstance()->GetQuadTree()->GetAllEntities(collidableEntity);
 	for (size_t index = 0; index < collidableEntity.size(); index++) {
 		RECT broadphase = Collision::GetSweptBroadphaseRect(player);
 		if (Collision::IsCollide(broadphase, collidableEntity.at(index)->GetBound()))
@@ -149,5 +151,6 @@ void GameScene::Render()
 	for (int index = 0; index < list.size(); index++) {
 		debugDraw->DrawRect(list.at(index)->GetBound(), camera);
 	}
+	EntityManager::GetInstance()->Render();
 	DrawQuadtree(EntityManager::GetInstance()->GetQuadTree());
 }
