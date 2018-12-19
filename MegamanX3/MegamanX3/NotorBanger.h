@@ -43,7 +43,6 @@ private:
 	NotorBangerState * currentState;
 	NotorBangerState *standingState, *shootState, *jumpState, *dieState, *damagedState, *fallingState, *changeBarrel;
 	NotorBangerStateHandler::StateName currentStateName;
-	Camera *camera;
 	NotorBangerStateHandler::StateName preAction;
 	BarrelState barrelState;
 	

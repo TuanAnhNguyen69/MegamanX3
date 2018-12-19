@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "QuadTree.h"
+#include <set>
 
 QuadTree::~QuadTree()
 {
@@ -8,7 +9,6 @@ QuadTree::~QuadTree()
 QuadTree::QuadTree(int level, RECT bound)
 {
 	//chia lam 4
-
 	this->bound = bound;
 	this->level = level;
 }
@@ -209,7 +209,16 @@ void QuadTree::GetEntitiesCollideAble(std::vector<Entity*> &entitiesOut, Entity 
 		//nhung Entity o day se la nam tren 2 node con nen chung ta cung se lay de set va cham
 		for (auto child : entities)
 		{
-			entitiesOut.push_back(child);
+			/*bool exist = false;
+			for (auto entity : entitiesOut) {
+				if (child == entity) {
+					exist = true;
+					break;
+				}
+			}
+			if (!exist) {*/
+				entitiesOut.push_back(child);
+			//}
 		}
 
 		if (nodes != NULL)

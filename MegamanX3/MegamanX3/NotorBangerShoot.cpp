@@ -57,7 +57,7 @@ void NotorBangerShoot::Update()
 				canon->SetPosition(entity->GetPosition().x+10, entity->GetPosition().y+5);
 				canon->Initialize(false);
 				canon->SetScale(2, 2);
-				canon->SetBound(9, 9);
+				canon->SetBound(7, 7);
 				EntityManager::GetInstance()->AddEntity(canon);
 				hadShoot = true;
 				armor--;

@@ -70,6 +70,8 @@ bool Engine::Initialize(HINSTANCE instance, HWND hwnd)
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "notor_banger.png", D3DCOLOR_XRGB(255, 255, 255));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "canon.png", D3DCOLOR_XRGB(255, 255, 255));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "helit.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "byte.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "byte_bomb.png", D3DCOLOR_XRGB(255, 255, 255));
 	//D3DCOLOR_XRGB(50, 96, 166)
 
 	input = new Input();
@@ -140,8 +142,8 @@ void Engine::Update()
 	if (gameComponent != nullptr) {
 		gameComponent->Update();
 	}
-	entityManager->Update();
-	entityManager->CheckCollide();
+	//entityManager->Update();
+	//entityManager->CheckCollide();
 	input->Update();
 }
 
@@ -153,7 +155,7 @@ void Engine::Render()
 	if (gameComponent != nullptr) {
 		gameComponent->Render();
 	}
-	entityManager->Render();
+	//entityManager->Render();
 
 	spriteHandler->End();
 	graphics->EndScene();

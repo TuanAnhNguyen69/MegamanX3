@@ -29,6 +29,11 @@ void EntityManager::Update()
 			collidableEntity[index]->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 				SCREEN_HEIGHT / 2 - camera->GetCenter().y);
 		}
+
+		if (collidableEntity[index]->entityId == Canon_ID) {
+			int a = 0;
+		}
+
 		collidableEntity[index]->Update();
 	}
 }
@@ -39,30 +44,37 @@ void EntityManager::Render()
 	quadTree->GetEntitiesCollideAble(collidableEntity, player);
 	int size = collidableEntity.size();
 	for (int index = 0; index < size; index++) {
+		if (collidableEntity[index]->entityId == Canon_ID) {
+			int a = 0;
+		}
 		collidableEntity[index]->Render();
 	}
 }
 
 void EntityManager::CheckCollide()
 {
-	std::vector<Entity*> collidableEntity;
-	EntityManager::GetInstance()->GetQuadTree()->GetEntitiesCollideAble(collidableEntity, player);
-	for (size_t index = 0; index < collidableEntity.size(); index++) {
+	std::vector<Entity*> playerCollidableEntity;
+	quadTree->GetEntitiesCollideAble(playerCollidableEntity, player);
+	for (size_t index = 0; index < playerCollidableEntity.size(); index++) {
+		std::vector<Entity*> collidableEntity;
+		quadTree->GetEntitiesCollideAble(collidableEntity, playerCollidableEntity.at(index));
 		for (size_t otherIndex = 0; otherIndex < collidableEntity.size(); otherIndex++) {
-			if (index != otherIndex) {
-				RECT broadphase = Collision::GetSweptBroadphaseRect(collidableEntity.at(index));
-				if (Collision::IsCollide(broadphase, collidableEntity.at(otherIndex)->GetBound()))
-				{
-					Entity::CollisionReturn collideData;
-					float collisionTime = Collision::SweptAABB(collidableEntity.at(index), collidableEntity.at(otherIndex), collideData);
-					if (collisionTime < 1.0f) //collisiontime > 0 &&
-					{
-						Entity::CollisionSide entitySide = Collision::GetSideCollision(collidableEntity.at(index), collideData);
-						Entity::CollisionSide impactorSide = Collision::GetSideCollision(collidableEntity.at(otherIndex), collideData);
+			if (playerCollidableEntity.at(index) == collidableEntity.at(otherIndex)) {
+				continue;
+			}
 
-						collidableEntity.at(index)->OnCollision(collidableEntity.at(otherIndex), entitySide, collideData);
-						collidableEntity.at(otherIndex)->OnCollision(collidableEntity.at(index), impactorSide, collideData);
-					}
+			RECT broadphase = Collision::GetSweptBroadphaseRect(playerCollidableEntity.at(index));
+			if (Collision::IsCollide(broadphase, collidableEntity.at(otherIndex)->GetBound()))
+			{
+				Entity::CollisionReturn collideData;
+				float collisionTime = Collision::SweptAABB(playerCollidableEntity.at(index), collidableEntity.at(otherIndex), collideData);
+				if (collisionTime < 1.0f) //collisiontime > 0 &&
+				{
+					Entity::CollisionSide entitySide = Collision::GetSideCollision(playerCollidableEntity.at(index), collideData);
+					Entity::CollisionSide impactorSide = Collision::GetSideCollision(collidableEntity.at(otherIndex), collideData);
+
+					playerCollidableEntity.at(index)->OnCollision(collidableEntity.at(otherIndex), entitySide, collideData);
+					collidableEntity.at(otherIndex)->OnCollision(playerCollidableEntity.at(index), impactorSide, collideData);
 				}
 			}
 		}
@@ -72,6 +84,7 @@ void EntityManager::CheckCollide()
 int EntityManager::AddEntity(Entity * entity)
 {
 	entities.push_back(entity);
+	quadTree->Insert(entity);
 	return entities.size() - 1;
 }
 
@@ -181,21 +194,21 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				headGunner->SetBound(width, height);
 				AddEntity(headGunner);
 				break;*/
-				/*NotorBanger * notoBanger = new NotorBanger(player);
+				NotorBanger * notoBanger = new NotorBanger(player);
 				notoBanger->Initialize();
 				notoBanger->SetPosition(posX + width / 2, posY + height / 2);
 				notoBanger->SetScale(2, 2);
 				notoBanger->SetBound(width, height);
 				AddEntity(notoBanger);
-				break;*/
+				break;
 
-				Helit * helit = new Helit(player);
+				/*Helit * helit = new Helit(player);
 				helit->Initialize();
 				helit->SetPosition(posX + width / 2, posY + height / 2);
 				helit->SetScale(2, 2);
 				helit->SetBound(width, height);
 				AddEntity(helit);
-				break;
+				break;*/
 			}
 
 			case EntityId::NotorBanger_ID:
@@ -279,11 +292,6 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			}
 			}
 		}
-
-		for (auto child : GetAllEntities()) {
-			quadTree->Insert(child);
-		}
-		int a = 0;
 	}
 }
 

@@ -210,6 +210,27 @@
     <ClCompile Include="Canon.cpp">
       <Filter>Entities\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Byte.cpp">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteState.cpp">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteAttack.cpp">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteDie.cpp">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteStanding.cpp">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteThrow.cpp">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteBomb.cpp">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -447,6 +468,30 @@
     <ClInclude Include="Canon.h">
       <Filter>Entities\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Byte.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteStateHandler.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteState.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteAttack.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteDie.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteStanding.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteThrow.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteBomb.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
@@ -502,6 +547,9 @@
     </Filter>
     <Filter Include="Entities\Player">
       <UniqueIdentifier>{7564f464-34bb-4ac0-97c2-4b61affc44f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemy\Byte">
+      <UniqueIdentifier>{e4d925f7-3923-4289-bf2d-288df3e55766}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
