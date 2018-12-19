@@ -4,9 +4,9 @@
 
 HelitFlying::HelitFlying(HelitStateHandler *handler, Entity *entity) : HelitState(handler, entity)
 {
-	sprite = new AnimatedSprite(15, 0.3, true);
+	sprite = new AnimatedSprite(15, 1, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "helit",
-		0, 4, 2, 50, 50);
+		0, 4, 5, 50, 50);
 }
 HelitFlying::~HelitFlying()
 {

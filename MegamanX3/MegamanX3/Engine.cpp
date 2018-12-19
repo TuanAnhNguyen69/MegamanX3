@@ -69,6 +69,7 @@ bool Engine::Initialize(HINSTANCE instance, HWND hwnd)
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "head_gunner.png", D3DCOLOR_XRGB(50, 96, 166));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "notor_banger.png", D3DCOLOR_XRGB(255, 255, 255));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "canon.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "helit.png", D3DCOLOR_XRGB(255, 255, 255));
 	//D3DCOLOR_XRGB(50, 96, 166)
 
 	input = new Input();

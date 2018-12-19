@@ -144,13 +144,13 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 						break;*/
 			case EntityId::HeadGunner_ID:
 			{
-				HeadGunner * headGunner = new HeadGunner(this->player);
+				/*HeadGunner * headGunner = new HeadGunner(this->player);
 				headGunner->Initialize();
 				headGunner->SetPosition(posX + width / 2, posY + height / 2);
 				headGunner->SetScale(2, 2);
 				headGunner->SetBound(width, height);
 				AddEntity(headGunner);
-				break;
+				break;*/
 				/*NotorBanger * notoBanger = new NotorBanger(player);
 				notoBanger->Initialize();
 				notoBanger->SetPosition(posX + width / 2, posY + height / 2);
@@ -158,6 +158,14 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				notoBanger->SetBound(width, height);
 				AddEntity(notoBanger);
 				break;*/
+
+				Helit * helit = new Helit(player);
+				helit->Initialize();
+				helit->SetPosition(posX + width / 2, posY + height / 2);
+				helit->SetScale(2, 2);
+				helit->SetBound(width, height);
+				AddEntity(helit);
+				break;
 			}
 
 			case EntityId::NotorBanger_ID:

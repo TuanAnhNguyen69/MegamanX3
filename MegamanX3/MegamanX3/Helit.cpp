@@ -2,7 +2,8 @@
 #include "Helit.h"
 
 
-Helit::Helit() : Entity(EntityId::Helit_ID)
+
+Helit::Helit(Player *_player) : Enemy(EntityId::Helit_ID, _player)
 {
 	/*
 	shootingState = nullptr;
@@ -15,6 +16,8 @@ Helit::Helit() : Entity(EntityId::Helit_ID)
 	shootingState = new HelitShooting(this, this);
 	damagedState = new HelitDamaged(this, this);
 	dieState = new HelitDie(this, this);
+
+	player = _player;
 }
 
 
@@ -22,17 +25,21 @@ Helit::~Helit()
 {
 }
 
-void Helit::Initialize(int width, int height)
+void Helit::Initialize()
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-		"helit", width, height);
+		"helit", 50, 50);
+	this->ChangeState(HelitStateHandler::StateName::Flying);
 }
 
 void Helit::Update()
 {
-	Entity::Update();
-	if (currentState) {
-		currentState->Update();
+	//if (IsAction())
+	{
+		Entity::Update();
+		if (currentState) {
+			currentState->Update();
+		}
 	}
 }
 
@@ -104,6 +111,26 @@ void Helit::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::
 
 void Helit::OnNoCollisionWithBottom()
 {
+}
+
+bool Helit::IsAction()
+{
+	if (abs(player->GetPosition().x - this->GetPosition().x) <= 200 && 
+		abs(player->GetPosition().y - this->GetPosition().y) <= 200)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Helit::IsShoot()
+{
+	if (abs(player->GetPosition().x - this->GetPosition().x) <= 75 &&
+		(this->GetPosition().y >= player->GetPosition().y));
+	{
+		return true;
+	}
+	return false;
 }
 
 //bool Helit::GetAction()

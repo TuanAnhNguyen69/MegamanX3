@@ -7,17 +7,21 @@
 #include "HelitDie.h"
 #include "HelitShooting.h"
 #include "HelitFlying.h"
+#include "Enemy.h"
 #include <list>
+#include <cmath>
 
 class Entity;
 
-class Helit : public HelitStateHandler, public Entity
+using namespace std;
+
+class Helit : public HelitStateHandler, public Enemy
 {
 public:
-	Helit();
+	Helit(Player*player);
 	~Helit();
 
-	void Initialize(int width, int height);
+	void Initialize();
 	void Update();
 
 
@@ -33,6 +37,9 @@ public:
 
 	//bool GetAction();
 	//void SetAction(bool action);
+	Player* player;
+	bool IsAction();
+	bool IsShoot();
 
 private:
 	HelitState * currentState;
