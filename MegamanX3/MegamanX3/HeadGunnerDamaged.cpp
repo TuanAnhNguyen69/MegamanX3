@@ -29,6 +29,6 @@ void HeadGunnerDamaged::Update()
 }
 
 
-void HeadGunnerDamaged::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void HeadGunnerDamaged::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 }

@@ -84,7 +84,7 @@ void NotorBangerJump::Update()
 
 }
 
-void NotorBangerJump::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void NotorBangerJump::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	switch (side)
 	{

@@ -48,9 +48,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>World</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>World</Filter>
-    </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -195,7 +192,15 @@
     <ClCompile Include="HelitShooting.cpp">
       <Filter>Entities\Enemy\Helit</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Background.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBullet.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Entities\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -245,9 +250,6 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="QuadTree.h">
-      <Filter>World</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
       <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
@@ -418,7 +420,15 @@
     <ClInclude Include="HelitStateHandler.h">
       <Filter>Entities\Enemy\Helit</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Background.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBullet.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Entities\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

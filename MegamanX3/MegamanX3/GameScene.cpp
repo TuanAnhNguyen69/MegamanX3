@@ -29,15 +29,15 @@ GameScene::~GameScene()
 bool GameScene::Initialize()
 {
 
-	map = new Map();
-	map->Initialize("aaaaa");
+	map = new Background();
+	map->Initialize("aaaaa", 2);
 
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 	camera->SetCenter(SCREEN_WIDTH / 2, 0);
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(SCREEN_WIDTH / 2, 0);
+	player->SetPosition(300, 1800);
 
 	EntityManager::GetInstance()->Initialize(player, camera, "aaaaa", map->GetWidth(), map->GetHeight());
 
@@ -75,28 +75,29 @@ void GameScene::Update()
 	map->Update();
 	player->Update();
 	CheckCamera();
-	EntityManager::GetInstance()->Update();
 }
 
 void GameScene::CheckCollision()
 {
 	int widthBottom = 0;
-	for (size_t index = 0; index < EntityManager::GetInstance()->GetAllEntities().size(); index++) {
+	std::vector<Entity*> collidableEntity;
+	EntityManager::GetInstance()->GetQuadTree()->GetEntitiesCollideAble(collidableEntity, player);
+	for (size_t index = 0; index < collidableEntity.size(); index++) {
 		RECT broadphase = Collision::GetSweptBroadphaseRect(player);
-		if (Collision::IsCollide(broadphase,  EntityManager::GetInstance()->GetAllEntities().at(index)->GetBound()))
+		if (Collision::IsCollide(broadphase, collidableEntity.at(index)->GetBound()))
 		{
-			if (EntityManager::GetInstance()->GetAllEntities().at(index)->GetEntityId() == EntityId::HeadGunner_ID) {
+			if (collidableEntity.at(index)->GetEntityId() == EntityId::HeadGunner_ID) {
 				int a = 0;
 			}
 			Entity::CollisionReturn collideData;
-			float collisionTime = Collision::SweptAABB(player,  EntityManager::GetInstance()->GetAllEntities().at(index), collideData);
+			float collisionTime = Collision::SweptAABB(player, collidableEntity.at(index), collideData);
 			if (collisionTime < 1.0f) //collisiontime > 0 &&
 			{
-				Entity::SideCollisions sidePlayer = Collision::GetSideCollision(player, collideData);
-				Entity::SideCollisions sideImpactor = Collision::GetSideCollision( EntityManager::GetInstance()->GetAllEntities().at(index), collideData);
+				Entity::CollisionSide sidePlayer = Collision::GetSideCollision(player, collideData);
+				Entity::CollisionSide sideImpactor = Collision::GetSideCollision(collidableEntity.at(index), collideData);
 
-				player->OnCollision( EntityManager::GetInstance()->GetAllEntities().at(index), sidePlayer, collideData);
-				 EntityManager::GetInstance()->GetAllEntities().at(index)->OnCollision(player, sideImpactor, collideData);
+				player->OnCollision( collidableEntity.at(index), sidePlayer, collideData);
+				collidableEntity.at(index)->OnCollision(player, sideImpactor, collideData);
 
 				if (sidePlayer == Entity::Bottom || sidePlayer == Entity::BottomLeft
 					|| sidePlayer == Entity::BottomRight) {
@@ -107,14 +108,11 @@ void GameScene::CheckCollision()
 				}
 			}
 		}
-
-			
-			
 	}
 
-	//if (widthBottom < Define::PLAYER_BOTTOM_RANGE_FALLING) {
-	//	player->OnNoCollisionWithBottom();
-	//}
+	if (widthBottom < Define::PLAYER_BOTTOM_RANGE_FALLING) {
+		player->OnNoCollisionWithBottom();
+	}
 }
 
 void GameScene::CheckCamera() {
@@ -145,10 +143,10 @@ void GameScene::CheckCamera() {
 void GameScene::Render()
 {
 	map->RenderBackground(camera);
-	EntityManager::GetInstance()->Render();
 	player->Render();
 	auto list = EntityManager::GetInstance()->GetAllEntities();
 	for (int index = 0; index < list.size(); index++) {
 		debugDraw->DrawRect(list.at(index)->GetBound(), camera);
 	}
+	DrawQuadtree(EntityManager::GetInstance()->GetQuadTree());
 }

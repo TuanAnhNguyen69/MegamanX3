@@ -19,7 +19,7 @@ public:
 	void Load();
 	void Update();
 	void UpdateInput();
-	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
+	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 
 protected:
 	BlockType blockType;

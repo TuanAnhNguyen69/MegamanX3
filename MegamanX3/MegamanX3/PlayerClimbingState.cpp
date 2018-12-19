@@ -80,12 +80,12 @@ void PlayerClimbingState::UpdateInput()
 
 }
 
-void PlayerClimbingState::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void PlayerClimbingState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	Input *input = Engine::GetEngine()->GetInput();
 	switch (side)
 	{
-	case Entity::SideCollisions::Left:
+	case Entity::CollisionSide::Left:
 		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
 		{
 			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
@@ -100,7 +100,7 @@ void PlayerClimbingState::OnCollision(Entity * impactor, Entity::SideCollisions 
 			handler->ChangeState(PlayerStateHandler::StateName::Falling);
 		}
 		break;
-	case Entity::SideCollisions::Right:
+	case Entity::CollisionSide::Right:
 		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
 		{
 			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
@@ -115,9 +115,9 @@ void PlayerClimbingState::OnCollision(Entity * impactor, Entity::SideCollisions 
 			handler->ChangeState(PlayerStateHandler::StateName::Falling);
 		}
 		break;
-	case Entity::SideCollisions::Top:
+	case Entity::CollisionSide::Top:
 		break;
-	case Entity::SideCollisions::Bottom:
+	case Entity::CollisionSide::Bottom:
 	//case Entity::TopRight:
 	//case Entity::BottomLeft:
 		isStanding = true;

@@ -200,7 +200,7 @@
     <ClInclude Include="HelitStateHandler.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Life.h" />
-    <ClInclude Include="Map.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="NotorBanger.h" />
     <ClInclude Include="NotorBangerDamaged.h" />
     <ClInclude Include="NotorBangerDie.h" />
@@ -211,6 +211,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="PlayerClimbingState.h" />
     <ClInclude Include="PlayerDamagedState.h" />
     <ClInclude Include="PlayerFallingState.h" />
@@ -272,7 +273,7 @@
     <ClCompile Include="HelitState.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Life.cpp" />
-    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="MegamanX3.cpp" />
     <ClCompile Include="NotorBanger.cpp" />
     <ClCompile Include="NotorBangerDamaged.cpp" />
@@ -288,6 +289,7 @@
     </ClCompile>
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="PlayerClimbingState.cpp" />
     <ClCompile Include="PlayerDamagedState.cpp" />
     <ClCompile Include="PlayerFallingState.cpp" />

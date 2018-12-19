@@ -4,7 +4,7 @@
 #include "GameComponent.h"
 #include "Player.h"
 #include "Camera.h"
-#include "Map.h"
+#include "Background.h"
 #include "DebugDraw.h"
 
 class GameScene :
@@ -25,7 +25,7 @@ private:
 
 	DebugDraw *debugDraw;
 	Camera *camera;
-	Map *map;
+	Background *map;
 	Player *player;
 };
 

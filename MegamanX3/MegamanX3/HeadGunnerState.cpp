@@ -22,7 +22,7 @@ void HeadGunnerState::Update()
 {
 }
 
-void HeadGunnerState::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void HeadGunnerState::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 }
 

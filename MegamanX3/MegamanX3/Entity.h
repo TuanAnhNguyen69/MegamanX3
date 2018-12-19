@@ -54,7 +54,7 @@ enum EntityId{
 class Entity
 {
 public:
-	enum SideCollisions
+	enum CollisionSide
 	{
 		Left, //0
 		Right, //1
@@ -81,7 +81,7 @@ public:
 	void InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float startFrame, float endFrame, float maxFramesRow, float frameWidth, float frameHeight, float animationSpeed = 1.0f, bool isLooping = true);
 
 	virtual void Update();
-	virtual void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
+	virtual void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 
 	void Render();
 

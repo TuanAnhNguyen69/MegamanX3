@@ -3,7 +3,6 @@
 #include "Timer.h"
 #include "AnimatedSprite.h"
 #include "Engine.h"
-#include "Map.h"
 #include <iostream>
 
 Entity::Entity(EntityId entityId)
@@ -178,6 +177,6 @@ void Entity::AddPosition(float x, float y)
 	position.y += y;
 }
 
-void Entity::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void Entity::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 }

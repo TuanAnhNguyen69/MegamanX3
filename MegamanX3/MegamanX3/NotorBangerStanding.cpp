@@ -29,6 +29,6 @@ void NotorBangerStanding::Update()
 		handler->ChangeState(NotorBangerStateHandler::StateName::Shoot);
 }
 
-void NotorBangerStanding::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void NotorBangerStanding::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 }

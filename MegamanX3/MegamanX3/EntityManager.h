@@ -20,7 +20,8 @@ public:
 	~EntityManager();
 
 	void Update();
-	void Render();
+	void Render();	
+	void CheckCollide();
 
 	int AddEntity(Entity *entity);
 	void RemoveEntity(Entity *entity);

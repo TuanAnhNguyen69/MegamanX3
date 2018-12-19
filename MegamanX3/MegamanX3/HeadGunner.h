@@ -25,7 +25,7 @@ public:
 	HeadGunnerStateHandler::StateName GetCurrentStateName();
 	void ChangeState(StateName stateName);
 	HeadGunnerStateHandler::MoveDirection GetMoveDirection();
-	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
+	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	void OnNoCollisionWithBottom();
 
 private:

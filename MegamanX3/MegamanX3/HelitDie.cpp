@@ -26,7 +26,7 @@ void HelitDie::Update()
 
 }
 
-void HelitDie::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void HelitDie::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 
 }

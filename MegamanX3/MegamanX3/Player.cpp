@@ -21,6 +21,8 @@ Player::Player() : Entity(EntityId::Megaman_ID)
 	slidingState = nullptr;
 	damagedState = nullptr;
 	climbingState = nullptr;
+	this->bulletCharging = 0;
+	this->fireCoolDown = 10;
 }
 
 
@@ -68,6 +70,10 @@ void Player::Update()
 	if (currentState) {
 		currentState->UpdateInput();
 		currentState->Update();
+	}
+
+	if (fireCoolDown-- == 0) {
+		fireCoolDown = 10;
 	}
 
 	Input *input = Engine::GetEngine()->GetInput();
@@ -160,7 +166,7 @@ PlayerStateHandler::MoveDirection Player::GetMoveDirection() {
 	return MoveDirection::None;
 }
 
-void Player::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void Player::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	if (currentState) {
 		currentState->OnCollision(impactor, side, data);
@@ -172,4 +178,15 @@ void Player::OnNoCollisionWithBottom()
 	if (currentStateName != Jumping && currentStateName != Falling && currentStateName != Climbing) {
 		ChangeState(Falling);
 	}
+}
+
+void Player::ChangeBulletState()
+{
+	if (bulletCharging < 10) {
+		return;
+	}
+	else {
+		return;
+	}
+	
 }
