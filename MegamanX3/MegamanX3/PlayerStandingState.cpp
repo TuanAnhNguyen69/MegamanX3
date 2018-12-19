@@ -3,7 +3,7 @@
 #include "AnimatedSprite.h"
 #include "Engine.h"
 
-PlayerStandingState::PlayerStandingState(PlayerStateHandler *handler, Entity *entity) : PlayerState(handler, entity)
+PlayerStandingState::PlayerStandingState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
 	standSprite = new AnimatedSprite(15, 0.3, true);
 	standSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
@@ -43,15 +43,12 @@ void PlayerStandingState::UpdateInput()
 	}
 
 	if (input->IsKeyDown(DIK_J)) {
-		//if (!shooting) {
-			sprite = shootSprite;
-			shooting = true;
-			entity->SetSprite(sprite);
-		//}
+		sprite = shootSprite;
+		shooting = true;
+		entity->SetSprite(sprite);
 	}
 	else {
 		sprite = standSprite;
-		//shooting = false;
 		entity->SetSprite(sprite);
 	}
 

@@ -5,10 +5,12 @@
 #include "PlayerStateHandler.h"
 #include "AnimatedSprite.h"
 
+class Player;
+
 class PlayerState
 {
 public:
-	PlayerState(PlayerStateHandler *handler, Entity *entity);
+	PlayerState(PlayerStateHandler *handler, Player *entity);
 	~PlayerState();
 
 	virtual void Load();
@@ -19,7 +21,7 @@ public:
 protected:
 	AnimatedSprite *sprite;
 	PlayerStateHandler *handler;
-	Entity *entity;
+	Player *entity;
 };
 
 #endif

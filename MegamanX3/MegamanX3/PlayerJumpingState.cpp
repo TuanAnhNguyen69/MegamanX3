@@ -2,7 +2,7 @@
 #include "PlayerJumpingState.h"
 #include "Engine.h"
 
-PlayerJumpingState::PlayerJumpingState(PlayerStateHandler *handler, Entity *entity) : PlayerState(handler, entity)
+PlayerJumpingState::PlayerJumpingState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
 	sprite = new AnimatedSprite(15, 0.5, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x", 

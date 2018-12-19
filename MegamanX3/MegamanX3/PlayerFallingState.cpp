@@ -2,7 +2,7 @@
 #include "PlayerFallingState.h"
 #include "Engine.h"
 
-PlayerFallingState::PlayerFallingState(PlayerStateHandler *handler, Entity *entity) : PlayerState(handler, entity)
+PlayerFallingState::PlayerFallingState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
 	sprite = new AnimatedSprite(222, 0.5, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",

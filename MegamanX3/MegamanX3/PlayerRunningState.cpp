@@ -2,7 +2,7 @@
 #include "PlayerRunningState.h"
 #include "Engine.h"
 
-PlayerRunningState::PlayerRunningState(PlayerStateHandler *handler, Entity *entity) : PlayerState(handler, entity)
+PlayerRunningState::PlayerRunningState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
 	sprite = new AnimatedSprite(15);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",

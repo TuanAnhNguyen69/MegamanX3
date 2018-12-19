@@ -2,7 +2,7 @@
 #include "PlayerDamagedState.h"
 #include "Engine.h"
 
-PlayerDamagedState::PlayerDamagedState(PlayerStateHandler *handler, Entity *entity) : PlayerState(handler, entity)
+PlayerDamagedState::PlayerDamagedState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
 	sprite = new AnimatedSprite(15, 1.5, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
