@@ -12,6 +12,10 @@ public:
 	void Load();
 	void Update();
 	void UpdateInput();
+private:
+	AnimatedSprite *standSprite;
+	AnimatedSprite *shootSprite;
+	bool shooting;
 };
 
 #endif

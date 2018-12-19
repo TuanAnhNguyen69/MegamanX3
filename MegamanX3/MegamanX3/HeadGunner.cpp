@@ -86,7 +86,7 @@ HeadGunnerStateHandler::MoveDirection HeadGunner::GetMoveDirection()
 	return MoveDirection::None;
 }
 
-void HeadGunner::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void HeadGunner::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	if (currentState)
 	{

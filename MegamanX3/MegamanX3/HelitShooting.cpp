@@ -29,6 +29,6 @@ void HelitShooting::Update()
 {
 }
 
-void HelitShooting::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void HelitShooting::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 }

@@ -58,7 +58,7 @@ void PlayerSlidingState::UpdateInput()
 	}	
 }
 
-void PlayerSlidingState::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void PlayerSlidingState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	switch (side) {
 	case Entity::Left:

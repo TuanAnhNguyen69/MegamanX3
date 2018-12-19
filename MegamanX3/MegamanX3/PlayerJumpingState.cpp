@@ -98,7 +98,7 @@ void PlayerJumpingState::UpdateInput()
 	}
 }
 
-void PlayerJumpingState::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void PlayerJumpingState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	switch (side)
 	{

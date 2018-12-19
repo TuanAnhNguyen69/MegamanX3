@@ -23,6 +23,6 @@ void NotorBangerDie::Update()
 {
 }
 
-void NotorBangerDie::OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void NotorBangerDie::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 }

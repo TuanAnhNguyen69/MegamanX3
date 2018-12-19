@@ -101,7 +101,7 @@ HelitStateHandler::MoveDirection Helit::GetMoveDirection()
 	return MoveDirection::None;
 }
 
-void Helit::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void Helit::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	if (currentState)
 	{

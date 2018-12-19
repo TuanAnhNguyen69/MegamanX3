@@ -17,6 +17,6 @@ void Enemy::Update()
 	int a = 0;
 }
 
-void Enemy::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void Enemy::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 }

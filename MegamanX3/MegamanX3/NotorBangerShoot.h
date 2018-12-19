@@ -9,7 +9,7 @@ public:
 
 	void Load();
 	void Update();
-	void OnCollision(Entity *impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
+	void OnCollision(Entity *impactor,  Entity::CollisionSide side, Entity::CollisionReturn data);
 private:
 	int armor;
 };

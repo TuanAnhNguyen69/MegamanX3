@@ -28,6 +28,6 @@ void HelitFlying::Update()
 {
 }
 
-void HelitFlying::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void HelitFlying::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 }

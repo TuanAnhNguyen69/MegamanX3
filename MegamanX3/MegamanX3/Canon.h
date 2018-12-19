@@ -14,7 +14,7 @@ public:
 
 	void Initialize(bool _isHigh);
 
-	void OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data);
+	void OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::CollisionReturn data);
 
 private:
 	AnimatedSprite * sprite;

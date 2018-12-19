@@ -140,7 +140,8 @@ void Engine::Update()
 	if (gameComponent != nullptr) {
 		gameComponent->Update();
 	}
-	//entityManager->Update();
+	entityManager->Update();
+	entityManager->CheckCollide();
 	input->Update();
 }
 
@@ -152,7 +153,7 @@ void Engine::Render()
 	if (gameComponent != nullptr) {
 		gameComponent->Render();
 	}
-	//entityManager->Render();
+	entityManager->Render();
 
 	spriteHandler->End();
 	graphics->EndScene();

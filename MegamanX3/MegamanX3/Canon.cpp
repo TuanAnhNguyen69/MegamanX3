@@ -60,6 +60,6 @@ void Canon::Update()
 
 
 
-void Canon::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void Canon::OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 }

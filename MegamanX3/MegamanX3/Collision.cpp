@@ -11,7 +11,7 @@ Collision::~Collision()
 {
 }
 
-Entity::SideCollisions Collision::GetSideCollision(Entity * e1, Entity::CollisionReturn data)
+Entity::CollisionSide Collision::GetSideCollision(Entity * e1, Entity::CollisionReturn data)
 {
 	float xCenter = data.RegionCollision.left + (data.RegionCollision.right - data.RegionCollision.left) / 2.0f;
 	float yCenter = data.RegionCollision.top + (data.RegionCollision.bottom - data.RegionCollision.top) / 2.0f;
@@ -115,7 +115,7 @@ Entity::CollisionReturn Collision::RectAndRect(RECT rect1, RECT rect2)
 	return result;
 }
 
-Entity::SideCollisions Collision::GetSideCollision(Entity * e1, Entity * e2)
+Entity::CollisionSide Collision::GetSideCollision(Entity * e1, Entity * e2)
 {
 	RECT rect1 = e1->GetBound();
 	RECT rect2 = e2->GetBound();
@@ -295,22 +295,22 @@ float Collision::SweptAABB(Entity *e1, Entity *e2, Entity::CollisionReturn & dat
 	//{
 	//	if (dxEntry > 0.0f)
 	//	{
-	//		result = Entity::SideCollisions::Right;
+	//		result =  Entity::CollisionSide::Right;
 	//	}
 	//	else
 	//	{
-	//		result = Entity::SideCollisions::Left;
+	//		result =  Entity::CollisionSide::Left;
 	//	}
 	//}
 	//else
 	//{
 	//	if (dyEntry > 0.0f)
 	//	{
-	//		result = Entity::SideCollisions::Top;
+	//		result =  Entity::CollisionSide::Top;
 	//	}
 	//	else
 	//	{
-	//		result = Entity::SideCollisions::Bottom;
+	//		result =  Entity::CollisionSide::Bottom;
 	//	}
 	//}
 

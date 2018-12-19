@@ -5,9 +5,13 @@
 
 PlayerStandingState::PlayerStandingState(PlayerStateHandler *handler, Entity *entity) : PlayerState(handler, entity)
 {
-	sprite = new AnimatedSprite(15, 0.3, true);
-	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+	standSprite = new AnimatedSprite(15, 0.3, true);
+	standSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
 		7, 9, 10, 50, 50);
+	shootSprite = new AnimatedSprite(15, 0.7, true);
+	shootSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+		10, 12, 10, 50, 50);
+	sprite = standSprite;
 }
 
 PlayerStandingState::~PlayerStandingState()
@@ -39,10 +43,16 @@ void PlayerStandingState::UpdateInput()
 	}
 
 	if (input->IsKeyDown(DIK_J)) {
-		sprite->SetFrameRange(10, 12);
+		//if (!shooting) {
+			sprite = shootSprite;
+			shooting = true;
+			entity->SetSprite(sprite);
+		//}
 	}
 	else {
-		sprite->SetFrameRange(7, 9);
+		sprite = standSprite;
+		//shooting = false;
+		entity->SetSprite(sprite);
 	}
 
 	if (input->IsKeyDown(DIK_D) || input->IsKeyDown(DIK_A)) {

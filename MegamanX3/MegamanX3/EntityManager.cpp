@@ -2,13 +2,13 @@
 #include "EntityManager.h"
 #include <iostream>
 #include "EntityImport.h"
+#include "Collision.h"
 
 EntityManager *EntityManager::instance = nullptr;
 
 EntityManager::EntityManager()
 {
 }
-
 
 EntityManager::~EntityManager()
 {
@@ -21,27 +21,58 @@ EntityManager::~EntityManager()
 
 void EntityManager::Update()
 {
-	int size = entities.size();
+	std::vector<Entity*> collidableEntity;
+	quadTree->GetEntitiesCollideAble(collidableEntity, player);
+	int size = collidableEntity.size();
 	for (int index = 0; index < size; index++) {
 		if (camera) {
-			entities[index]->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+			collidableEntity[index]->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 				SCREEN_HEIGHT / 2 - camera->GetCenter().y);
 		}
-		entities[index]->Update();
+		collidableEntity[index]->Update();
 	}
 }
 
 void EntityManager::Render()
 {
-	int size = entities.size();
+	std::vector<Entity*> collidableEntity;
+	quadTree->GetEntitiesCollideAble(collidableEntity, player);
+	int size = collidableEntity.size();
 	for (int index = 0; index < size; index++) {
-		entities[index]->Render();
+		collidableEntity[index]->Render();
 	}
 }
 
-void EntityManager::AddEntity(Entity * entity)
+void EntityManager::CheckCollide()
+{
+	std::vector<Entity*> collidableEntity;
+	EntityManager::GetInstance()->GetQuadTree()->GetEntitiesCollideAble(collidableEntity, player);
+	for (size_t index = 0; index < collidableEntity.size(); index++) {
+		for (size_t otherIndex = 0; otherIndex < collidableEntity.size(); otherIndex++) {
+			if (index != otherIndex) {
+				RECT broadphase = Collision::GetSweptBroadphaseRect(collidableEntity.at(index));
+				if (Collision::IsCollide(broadphase, collidableEntity.at(otherIndex)->GetBound()))
+				{
+					Entity::CollisionReturn collideData;
+					float collisionTime = Collision::SweptAABB(collidableEntity.at(index), collidableEntity.at(otherIndex), collideData);
+					if (collisionTime < 1.0f) //collisiontime > 0 &&
+					{
+						Entity::CollisionSide entitySide = Collision::GetSideCollision(collidableEntity.at(index), collideData);
+						Entity::CollisionSide impactorSide = Collision::GetSideCollision(collidableEntity.at(otherIndex), collideData);
+
+						collidableEntity.at(index)->OnCollision(collidableEntity.at(otherIndex), entitySide, collideData);
+						collidableEntity.at(otherIndex)->OnCollision(collidableEntity.at(index), impactorSide, collideData);
+					}
+				}
+			}
+		}
+	}
+}
+
+int EntityManager::AddEntity(Entity * entity)
 {
 	entities.push_back(entity);
+	return entities.size() - 1;
 }
 
 void EntityManager::RemoveEntity(Entity * entity)
@@ -102,9 +133,8 @@ void EntityManager::Initialize(Player *player, Camera * camera, LPCTSTR fileName
 {
 	this->player = player;
 	this->camera = camera;
-	quadTree = new QuadTree(1, { 0, 0,mapWidth, mapHeight});
+	quadTree = new QuadTree(1, { 0, 0,mapWidth, mapHeight });
 	LoadQuadtree(fileName);
-
 }
 
 std::vector<Entity*> EntityManager::GetAllEntities()
@@ -256,7 +286,6 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 		int a = 0;
 	}
 }
-
 
 QuadTree * EntityManager::GetQuadTree()
 {

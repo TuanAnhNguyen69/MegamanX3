@@ -110,7 +110,7 @@ NotorBangerStateHandler::MoveDirection NotorBanger::GetMoveDirection()
 	return MoveDirection::None;
 }
 
-void NotorBanger::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void NotorBanger::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	if (currentState)
 	{

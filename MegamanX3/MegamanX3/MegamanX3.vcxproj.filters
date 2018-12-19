@@ -48,9 +48,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>World</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>World</Filter>
-    </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -201,6 +198,12 @@
     <ClCompile Include="NotorBangerChangeBarrel.cpp">
       <Filter>Entities\Enemy\NotorBanger</Filter>
     </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBullet.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Entities\Enemy</Filter>
     </ClCompile>
@@ -256,9 +259,6 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="QuadTree.h">
-      <Filter>World</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
       <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
@@ -434,6 +434,12 @@
     </ClInclude>
     <ClInclude Include="NotorBangerChangeBarrel.h">
       <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBullet.h">
+      <Filter>Entities\Player</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Entities\Enemy</Filter>

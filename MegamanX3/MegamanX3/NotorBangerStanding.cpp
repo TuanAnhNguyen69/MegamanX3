@@ -30,7 +30,7 @@ void NotorBangerStanding::Update()
 	//handler->ChangeState(NotorBangerStateHandler::StateName::Jump);
 }
 
-void NotorBangerStanding::OnCollision(Entity * impactor, Entity::SideCollisions side, Entity::CollisionReturn data)
+void NotorBangerStanding::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	//if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
 	{
