@@ -213,9 +213,6 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				helit->SetScale(2, 2);
 				helit->SetBound(width, height);
 				AddEntity(helit);
-				std::cout << quadTree->GetTotalEntities() << std::endl;
-				this->RemoveEntity(helit);
-				std::cout << quadTree->GetTotalEntities() << std::endl;
 				break;*/
 
 			}
@@ -281,9 +278,6 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				platform->SetBound(width, height);
 				platform->Initialize();
 				AddEntity(platform);
-				int a = quadTree->GetTotalEntities();
-				this->RemoveEntity(platform);
-				a = quadTree->GetTotalEntities();
 				break;
 			}
 
