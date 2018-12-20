@@ -9,6 +9,10 @@ PlayerBullet::PlayerBullet() : Entity(EntityId::MegamanBullet_ID)
 
 void PlayerBullet::Initialize()
 {
+	//this->normalBullet->Initialize();
+	//this->superBullet->Initialize();
+	//this->extremeBullet->Initialize();
+
 }
 
 void PlayerBullet::Update()

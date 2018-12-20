@@ -50,7 +50,7 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 	chargingSprite = new Entity();
 	AnimatedSprite * sprite = new AnimatedSprite(15, 1, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "charging",
-		0, 14, 7, 100, 100);
+		0, 0, 7, 100, 100);
 	chargingSprite->SetSprite(sprite);
 
 
@@ -195,7 +195,6 @@ void Player::ChangeBulletState()
 	else {
 		return;
 	}
-	
 }
 
 void Player::Render()
