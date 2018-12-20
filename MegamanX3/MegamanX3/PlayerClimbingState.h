@@ -11,7 +11,7 @@ public:
 		None,
 	};
 
-	PlayerClimbingState(PlayerStateHandler *handler, Entity *entity);
+	PlayerClimbingState(PlayerStateHandler *handler, Player *entity);
 	~PlayerClimbingState();
 	void Load();
 	void Update();

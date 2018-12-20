@@ -47,6 +47,13 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 	this->SetScale(2, 2);
 	this->SetBound(60,100);
 
+	chargingSprite = new Entity();
+	AnimatedSprite * sprite = new AnimatedSprite(15, 1, true);
+	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "charging",
+		0, 0, 7, 100, 100);
+	chargingSprite->SetSprite(sprite);
+
+
 	standingState = new PlayerStandingState(this, this);
 	runningState = new PlayerRunningState(this, this);
 	jumpingState = new PlayerJumpingState(this, this);
@@ -63,17 +70,17 @@ void Player::Update()
 	if (camera) {
 		this->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
+		this->chargingSprite->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
 	}
 
 	Entity::Update();
+	chargingSprite->SetPosition(this->GetPosition().x, this->GetPosition().y + 10);
+	chargingSprite->Update();
 
 	if (currentState) {
 		currentState->UpdateInput();
 		currentState->Update();
-	}
-
-	if (fireCoolDown-- == 0) {
-		fireCoolDown = 10;
 	}
 
 	Input *input = Engine::GetEngine()->GetInput();
@@ -188,5 +195,10 @@ void Player::ChangeBulletState()
 	else {
 		return;
 	}
-	
+}
+
+void Player::Render()
+{
+	Entity::Render();
+	chargingSprite->Render();
 }

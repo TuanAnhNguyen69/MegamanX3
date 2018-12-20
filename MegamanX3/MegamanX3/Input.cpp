@@ -81,6 +81,11 @@ bool Input::IsKeyDown(unsigned int key)
 	return keys[key];
 }
 
+bool Input::IsKeyUp(unsigned int key)
+{
+	return !keys[key] && prevKeys[key];
+}
+
 bool Input::IsKeyHit(unsigned int key)
 {
 	return keys[key] && !prevKeys[key];

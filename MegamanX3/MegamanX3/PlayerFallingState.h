@@ -13,7 +13,7 @@ public:
 		None
 	};
 
-	PlayerFallingState(PlayerStateHandler *handler, Entity *entity);
+	PlayerFallingState(PlayerStateHandler *handler, Player *entity);
 	~PlayerFallingState();
 
 	void Load();

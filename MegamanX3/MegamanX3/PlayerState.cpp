@@ -3,10 +3,10 @@
 #include "Player.h"
 
 
-PlayerState::PlayerState(PlayerStateHandler *handler, Entity *entity)
+PlayerState::PlayerState(PlayerStateHandler *handler, Player *entity)
 {
 	this->handler = handler;
-	this->entity = (Player*)entity;
+	this->entity = entity;
 }
 
 PlayerState::~PlayerState()

@@ -6,7 +6,7 @@
 class PlayerJumpingState : public PlayerState
 {
 public:
-	PlayerJumpingState(PlayerStateHandler *handler, Entity *entity);
+	PlayerJumpingState(PlayerStateHandler *handler, Player *entity);
 	~PlayerJumpingState();
 
 	void Load();

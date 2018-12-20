@@ -6,7 +6,7 @@
 class PlayerStandingState : public PlayerState
 {
 public:
-	PlayerStandingState(PlayerStateHandler *handler, Entity *entity);
+	PlayerStandingState(PlayerStateHandler *handler, Player *entity);
 	~PlayerStandingState();
 
 	void Load();

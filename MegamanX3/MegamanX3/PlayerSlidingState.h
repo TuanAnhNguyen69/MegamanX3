@@ -5,7 +5,7 @@ class PlayerSlidingState :
 	public PlayerState
 {
 public:
-	PlayerSlidingState(PlayerStateHandler *handler, Entity *entity);
+	PlayerSlidingState(PlayerStateHandler *handler, Player *entity);
 	~PlayerSlidingState();
 	void Load();
 	void Update();

@@ -2,7 +2,7 @@
 #include "PlayerSlidingState.h"
 #include "Engine.h"
 
-PlayerSlidingState::PlayerSlidingState(PlayerStateHandler * handler, Entity * entity) : PlayerState(handler, entity)
+PlayerSlidingState::PlayerSlidingState(PlayerStateHandler * handler, Player * entity) : PlayerState(handler, entity)
 {
 
 	sprite = new AnimatedSprite(15, 2.0f, false);

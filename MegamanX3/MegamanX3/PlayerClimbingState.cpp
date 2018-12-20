@@ -3,7 +3,7 @@
 #include "Engine.h"
 
 
-PlayerClimbingState::PlayerClimbingState(PlayerStateHandler *handler, Entity *entity) : PlayerState(handler, entity)
+PlayerClimbingState::PlayerClimbingState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
 	sprite = new AnimatedSprite(15, 0.5, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",

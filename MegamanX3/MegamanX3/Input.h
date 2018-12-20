@@ -15,6 +15,7 @@ public:
 	bool Update();
 
 	bool IsKeyDown(unsigned int key);
+	bool IsKeyUp(unsigned int key);
 	bool IsKeyHit(unsigned int key);
 
 private:

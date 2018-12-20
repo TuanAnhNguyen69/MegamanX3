@@ -4,7 +4,7 @@ class PlayerDamagedState :
 	public PlayerState
 {
 public:
-	PlayerDamagedState(PlayerStateHandler *handler, Entity *entity);
+	PlayerDamagedState(PlayerStateHandler *handler, Player *entity);
 	~PlayerDamagedState();
 	void Load();
 	void Update();

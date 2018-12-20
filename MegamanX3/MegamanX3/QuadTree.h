@@ -19,6 +19,7 @@ public:
 	~QuadTree();
 	void Clear();
 	void Insert(Entity *entity);
+	void Remove(Entity *entity);
 
 	/*lay danh sach nhung Entity co kha nang xay ra va cham
 	tra ve danh sach cac phan tu nam trong vung va cham */
@@ -42,7 +43,7 @@ protected:
 	2: nam trong Node con goc trai duoi
 	3: nam trong Node con goc phai duoi
 	-1: bi dinh > 2 node con*/
-	int GetIndex(RECT body);
+	int GetNodeIndex(RECT body);
 
 	void Split(); //thuc hien chia ra cac node
 
