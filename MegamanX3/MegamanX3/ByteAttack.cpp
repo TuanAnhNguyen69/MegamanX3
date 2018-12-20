@@ -25,32 +25,73 @@ ByteAttack::~ByteAttack()
 void ByteAttack::Load()
 {
 	entity->SetSprite(sprite);
-	if (handler->IsFaceLeft())
+	entity->SetVelocity(0, 0);
+	isMove = false;
+	/*if (sprite->IsFinished())
 	{
-		entity->SetReverse(false);
-		entity->SetVelocityX(-Define::BYTE_SPEED);
-	}
-	else
-	{
-		entity->SetReverse(true);
-		entity->SetVelocityX(Define::BYTE_SPEED);
-	}
+		if (handler->IsFaceLeft())
+		{
+			entity->SetReverse(false);
+			entity->SetVelocityX(-Define::BYTE_SPEED);
+		}
+		else
+		{
+			entity->SetReverse(true);
+			entity->SetVelocityX(Define::BYTE_SPEED);
+		}
+	}*/
 }
 
 void ByteAttack::Update()
 {
-	if (handler->IsFaceLeft())
+	if (sprite->IsFinished())
 	{
-		entity->SetReverse(false);
-		entity->AddVelocityX(-Define::BYTE_ACCELERATION);
-	}
-	else
-	{
-		entity->SetReverse(true);
-		entity->AddVelocityX(Define::BYTE_ACCELERATION);
+		if (!isMove)
+		{
+			if (handler->IsFaceLeft())
+			{
+				entity->SetReverse(true);
+				entity->SetVelocityX(-Define::BYTE_SPEED);
+			}
+			else
+			{
+				entity->SetReverse(true);
+				entity->SetVelocityX(Define::BYTE_SPEED);
+			}
+			isMove = true;
+		}
+		if (handler->IsFaceLeft())
+		{
+			//entity->SetReverse(false);
+			entity->AddVelocityX(-Define::BYTE_ACCELERATION);
+		}
+		else
+		{
+			//entity->SetReverse(true);
+			entity->AddVelocityX(Define::BYTE_ACCELERATION);
+		}
 	}
 }
 
 void ByteAttack::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	if (impactor->GetEntityId() == ByteBomb_ID)
+	{
+		switch (side)
+		{
+		case Entity::Left :
+			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+			entity->SetVelocityX(0);
+			handler->SetFace(false);
+			handler->ChangeState(ByteStateHandler::StateName::Standing);
+			break;
+			
+		case Entity::Right :
+			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+			entity->SetVelocityX(0);
+			handler->SetFace(true);
+			handler->ChangeState(ByteStateHandler::StateName::Standing);
+			break;
+		}
+	}
 }

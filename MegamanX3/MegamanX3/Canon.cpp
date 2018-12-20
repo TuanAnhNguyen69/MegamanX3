@@ -17,31 +17,64 @@ Canon::~Canon()
 {
 }
 
-void Canon::Initialize(bool _isHigh)
+void Canon::Initialize(bool isHigh, bool isLeft)
 {
-	isHigh = _isHigh;
-	//x0 = this->GetPosition().x;
-	//y0 = this->GetPosition().y;
-	this->SetVelocityX(-300.0f);
-	this->SetVelocityY(-400.0f);
+	this->isHigh = isHigh;
+	this->isLeft = isLeft;
+	if (!isHigh)
+	{
+		if (isLeft)
+		{
+			this->SetVelocityX(-300.0f);
+			this->SetVelocityY(-400.0f);
+		}
+		else
+		{
+			this->SetVelocityX(300.0f);
+			this->SetVelocityY(-400.0f);
+		}
+	}
+	else
+	{
+		if (isLeft)
+		{
+
+		}
+		else
+		{
+
+		}
+	}
 }
 
 void Canon::Update()
 {
-	this->AddVelocityY(15.0f);
-	if (this->GetVelocity().x < 0)
+	if (!isHigh)
 	{
-		this->AddVelocityX(14);
-		if (this->GetVelocity().x > 0)
+		this->AddVelocityY(10.0f);
+		if (this->GetVelocity().y > 0)
 		{
-			this->AddVelocityX(-10.0);
+			this->AddVelocityY(10.0f);
+		}
+
+		if (isLeft)
+		{
+			this->AddVelocityX(-20.0f);
+			if (this->GetVelocity().x < 0)
+			{
+				this->AddVelocityX(15.0f);
+			}		
+		}	
+		else
+		{	
+			this->AddVelocityX(20.0f);
+			if (this->GetVelocity().x < 0)
+			{
+				this->AddVelocityX(-15.0f);
+			}
 		}
 	}
-	if (this->GetVelocity().y > 0)
-	{
-		this->AddVelocityY(8.0f);
-	}
-	this->AddVelocityX(-20.0);
+
 	//this->AddVelocityY(-10.0f);
 	Entity::Update();
 	//float dt = Timer::GetDeltaTime();
@@ -60,4 +93,42 @@ void Canon::Update()
 
 void Canon::OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	if (impactor->GetEntityId() == EntityId::Platform_ID)
+	{
+		switch (side)
+		{
+
+		case Entity::Left:
+		{
+			this->AddPosition(data.RegionCollision.right - data.RegionCollision.left + 1, 0);
+			this->SetVelocity(0, 0);
+			//EntityManager::GetInstance()->RemoveEntity(this);
+			break;
+		}
+
+		case Entity::Right:
+		{
+			this->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left + 1), 0);
+			this->SetVelocity(0, 0);
+			//EntityManager::GetInstance()->RemoveEntity(this);
+			break;
+		}
+
+		case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
+		{
+			this->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top + 1);
+			this->SetVelocity(0, 0);
+			//EntityManager::GetInstance()->RemoveEntity(this);
+			break;
+		}
+
+		case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
+		{
+			this->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
+			this->SetVelocity(0, 0);
+			//EntityManager::GetInstance()->RemoveEntity(this);
+			break;
+		}
+		}
+	}
 }

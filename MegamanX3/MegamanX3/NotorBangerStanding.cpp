@@ -21,11 +21,11 @@ void NotorBangerStanding::Load()
 {
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
+	handler->SetPreAction(NotorBangerStateHandler::StateName::Jump);
 }
 
 void NotorBangerStanding::Update()
 {
-	handler->SetPreAction(NotorBangerStateHandler::StateName::Jump);
 	handler->ChangeState(NotorBangerStateHandler::StateName::ChangeBarrel);
 	//handler->ChangeState(NotorBangerStateHandler::StateName::Jump);
 }

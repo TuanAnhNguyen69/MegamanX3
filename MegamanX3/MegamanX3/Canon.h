@@ -12,12 +12,13 @@ public:
 
 	void Update();
 
-	void Initialize(bool _isHigh);
+	void Initialize(bool isHigh, bool isLeft);
 
 	void OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::CollisionReturn data);
 
 private:
 	AnimatedSprite * sprite;
+	bool isLeft;
 	bool isHigh;
 	float x0;
 	float y0;
