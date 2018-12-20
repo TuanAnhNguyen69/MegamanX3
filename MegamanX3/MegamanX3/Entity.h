@@ -75,6 +75,7 @@ public:
 
 	friend class EntityManager;
 	Entity(EntityId entityId);
+	Entity();
 	~Entity();
 
 	void InitializeSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float frameWidth, float frameHeight, float top = 0, float left = 0);
@@ -83,7 +84,7 @@ public:
 	virtual void Update();
 	virtual void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 
-	void Render();
+	virtual void Render();
 
 	D3DXVECTOR3 GetPosition();
 	RECT GetBound();

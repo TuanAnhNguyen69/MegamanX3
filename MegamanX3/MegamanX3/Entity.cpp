@@ -16,6 +16,16 @@ Entity::Entity(EntityId entityId)
 	sprite = nullptr;
 }
 
+Entity::Entity()
+{
+	position = D3DXVECTOR3(0, 0, 0);
+	velocity = D3DXVECTOR3(0, 0, 0);
+	scale = D3DXVECTOR2(1, 1);
+	translation = D3DXVECTOR2(0, 0);
+	reverse = false;
+	sprite = nullptr;
+}
+
 Entity::~Entity()
 {
 	if (sprite) {

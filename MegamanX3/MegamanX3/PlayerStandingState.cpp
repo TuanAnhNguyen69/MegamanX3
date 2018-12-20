@@ -8,9 +8,9 @@ PlayerStandingState::PlayerStandingState(PlayerStateHandler *handler, Player *en
 	standSprite = new AnimatedSprite(15, 0.3, true);
 	standSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
 		7, 9, 10, 50, 50);
-	shootSprite = new AnimatedSprite(15, 0.7, true);
+	shootSprite = new AnimatedSprite(15, 0.5, true);
 	shootSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
-		10, 12, 10, 50, 50);
+		11, 12, 10, 50, 50);
 	sprite = standSprite;
 }
 
@@ -42,14 +42,23 @@ void PlayerStandingState::UpdateInput()
 		return;
 	}
 
-	if (input->IsKeyDown(DIK_J)) {
+	if (input->IsKeyUp(DIK_J)) {
+		entity->fireCoolDown = 0;
 		sprite = shootSprite;
-		shooting = true;
 		entity->SetSprite(sprite);
 	}
 	else {
-		sprite = standSprite;
-		entity->SetSprite(sprite);
+		if (entity->fireCoolDown < 20) {
+			entity->fireCoolDown++;
+		}
+		else {
+			sprite = standSprite;
+			entity->SetSprite(sprite);
+		}	
+	}
+
+	if (input->IsKeyDown(DIK_J)) {
+		//entity->bulletC;
 	}
 
 	if (input->IsKeyDown(DIK_D) || input->IsKeyDown(DIK_A)) {

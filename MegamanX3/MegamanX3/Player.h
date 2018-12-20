@@ -26,6 +26,10 @@ public:
 	MoveDirection GetMoveDirection();
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	void OnNoCollisionWithBottom();
+	int fireCoolDown;
+	int bulletCharging;
+	void ChangeBulletState();
+	void Render();
 
 private:
 	PlayerState *currentState;
@@ -34,9 +38,7 @@ private:
 	//Entity *entity;
 	Camera *camera;
 	bool allowJump;
-	int bulletCharging;
-	int fireCoolDown;
-	void ChangeBulletState();
+	Entity *chargingSprite;
 };
 
 #endif
