@@ -93,7 +93,7 @@ void Canon::Update()
 
 void Canon::OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() == EntityId::Platform_ID)
+	if (impactor->GetEntityId() == EntityId::Platform_ID || impactor->GetEntityId() == EntityId::Megaman_ID)
 	{
 		switch (side)
 		{
@@ -102,7 +102,7 @@ void Canon::OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::
 		{
 			this->AddPosition(data.RegionCollision.right - data.RegionCollision.left + 1, 0);
 			this->SetVelocity(0, 0);
-			//EntityManager::GetInstance()->RemoveEntity(this);
+			EntityManager::GetInstance()->RemoveEntity(this);
 			break;
 		}
 
@@ -110,7 +110,7 @@ void Canon::OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::
 		{
 			this->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left + 1), 0);
 			this->SetVelocity(0, 0);
-			//EntityManager::GetInstance()->RemoveEntity(this);
+			EntityManager::GetInstance()->RemoveEntity(this);
 			break;
 		}
 
@@ -118,7 +118,7 @@ void Canon::OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::
 		{
 			this->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top + 1);
 			this->SetVelocity(0, 0);
-			//EntityManager::GetInstance()->RemoveEntity(this);
+			EntityManager::GetInstance()->RemoveEntity(this);
 			break;
 		}
 
@@ -126,7 +126,7 @@ void Canon::OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::
 		{
 			this->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
 			this->SetVelocity(0, 0);
-			//EntityManager::GetInstance()->RemoveEntity(this);
+			EntityManager::GetInstance()->RemoveEntity(this);
 			break;
 		}
 		}

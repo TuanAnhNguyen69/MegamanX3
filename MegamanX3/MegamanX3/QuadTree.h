@@ -18,12 +18,13 @@ public:
 	QuadTree(int level, RECT bound);
 	~QuadTree();
 	void Clear();
-	void Insert(Entity *entity);
-	void Remove(Entity *entity);
+	void InsertEntity(Entity *entity);
+	bool RemoveEntity(Entity *entity);
+	void Update();
 
 	/*lay danh sach nhung Entity co kha nang xay ra va cham
 	tra ve danh sach cac phan tu nam trong vung va cham */
-	void GetEntitiesCollideAble(std::vector<Entity*> &entitiesOut, Entity *entity);
+	void GetEntitiesCollideAble(std::vector<Entity*> &entitiesOut, RECT bound);
 
 	void GetAllEntities(std::vector<Entity*> &entitiesOut);
 
@@ -48,7 +49,10 @@ protected:
 	void Split(); //thuc hien chia ra cac node
 
 	bool IsContain(Entity *entity);
+	
 	int level; //tuong ung voi so node
+
+	void CheckNodeChange(std::vector<Entity *> &changeList);
 };
 
 #endif

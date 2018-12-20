@@ -21,27 +21,31 @@ EntityManager::~EntityManager()
 
 void EntityManager::Update()
 {
+	quadTree->Update();
 	std::vector<Entity*> collidableEntity;
-	quadTree->GetEntitiesCollideAble(collidableEntity, player);
+	quadTree->GetEntitiesCollideAble(collidableEntity, camera->GetBound());
+
 	int size = collidableEntity.size();
 	for (int index = 0; index < size; index++) {
-		if (camera) {
-			collidableEntity[index]->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
-				SCREEN_HEIGHT / 2 - camera->GetCenter().y);
-		}
+		if (Collision::IsCollide(collidableEntity[index]->GetBound(), camera->GetBound())) {
+			if (camera) {
+				collidableEntity[index]->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+					SCREEN_HEIGHT / 2 - camera->GetCenter().y);
+			}
 
-		if (collidableEntity[index]->entityId == Canon_ID) {
-			int a = 0;
-		}
+			if (collidableEntity[index]->entityId == Canon_ID) {
+				int a = 0;
+			}
 
-		collidableEntity[index]->Update();
+			collidableEntity[index]->Update();
+		}
 	}
 }
 
 void EntityManager::Render()
 {
 	std::vector<Entity*> collidableEntity;
-	quadTree->GetEntitiesCollideAble(collidableEntity, player);
+	quadTree->GetEntitiesCollideAble(collidableEntity, camera->GetBound());
 	int size = collidableEntity.size();
 	for (int index = 0; index < size; index++) {
 		if (collidableEntity[index]->entityId == Canon_ID) {
@@ -54,10 +58,10 @@ void EntityManager::Render()
 void EntityManager::CheckCollide()
 {
 	std::vector<Entity*> playerCollidableEntity;
-	quadTree->GetEntitiesCollideAble(playerCollidableEntity, player);
+	quadTree->GetEntitiesCollideAble(playerCollidableEntity, camera->GetBound());
 	for (size_t index = 0; index < playerCollidableEntity.size(); index++) {
 		std::vector<Entity*> collidableEntity;
-		quadTree->GetEntitiesCollideAble(collidableEntity, playerCollidableEntity.at(index));
+		quadTree->GetEntitiesCollideAble(collidableEntity, playerCollidableEntity.at(index)->GetBound());
 		for (size_t otherIndex = 0; otherIndex < collidableEntity.size(); otherIndex++) {
 			if (playerCollidableEntity.at(index) == collidableEntity.at(otherIndex)) {
 				continue;
@@ -84,7 +88,7 @@ void EntityManager::CheckCollide()
 int EntityManager::AddEntity(Entity * entity)
 {
 	entities.push_back(entity);
-	quadTree->Insert(entity);
+	quadTree->InsertEntity(entity);
 	return entities.size() - 1;
 }
 
@@ -94,16 +98,16 @@ void EntityManager::RemoveEntity(Entity * entity)
 		return;
 	}
 
+	if (!quadTree->RemoveEntity(entity)) {
+		return;
+	}
+
 	int index = -1;
 	if (ContainsEntity(entity, index)) {
 		entities.erase(entities.begin() + index);
 	}
-	
-	quadTree->Remove(entity);
 
-	if (entity) {
-		delete entity;
-	}
+	delete entity;
 }
 
 void EntityManager::RemoveAllEntities()
