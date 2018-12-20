@@ -45,17 +45,18 @@ void NotorBangerShoot::Update()
 	{
 		if (sprite->GetCurrentFrame() == 1 )
 		{
-			if (!hadShoot) {
-				/*HeadGunnerRocket *rocket = new HeadGunnerRocket(true, true);
-				rocket->SetPosition(entity->GetPosition().x, entity->GetPosition().y - 10);
-				rocket->Initialize();
-				rocket->SetScale(2, 2);
-				rocket->SetBound(25, 9);
-				EntityManager::GetInstance()->AddEntity(rocket);*/
-
+			if (!hadShoot) 
+			{
 				Canon *canon = new Canon();
 				canon->SetPosition(entity->GetPosition().x+10, entity->GetPosition().y+5);
-				canon->Initialize(false);
+				if (handler->GetLeftTarget())
+				{
+					canon->Initialize(false, true);
+				}	
+				else
+				{
+					canon->Initialize(false, false);
+				}
 				canon->SetScale(2, 2);
 				canon->SetBound(7, 7);
 				EntityManager::GetInstance()->AddEntity(canon);

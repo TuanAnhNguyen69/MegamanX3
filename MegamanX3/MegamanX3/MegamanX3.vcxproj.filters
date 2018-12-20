@@ -126,9 +126,6 @@
     <ClCompile Include="Helit.cpp">
       <Filter>Entities\Enemy\Helit</Filter>
     </ClCompile>
-    <ClCompile Include="Shurikein.cpp">
-      <Filter>Entities\Enemy\Shurikein</Filter>
-    </ClCompile>
     <ClCompile Include="NotorBanger.cpp">
       <Filter>Entities\Enemy\NotorBanger</Filter>
     </ClCompile>
@@ -230,6 +227,33 @@
     </ClCompile>
     <ClCompile Include="ByteBomb.cpp">
       <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
+    <ClCompile Include="Shuriken.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenState.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenAttack1.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenAttack2.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenDie.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenFlip.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenJump.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenMove.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenTurn.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -369,9 +393,6 @@
     <ClInclude Include="Helit.h">
       <Filter>Entities\Enemy\Helit</Filter>
     </ClInclude>
-    <ClInclude Include="Shurikein.h">
-      <Filter>Entities\Enemy\Shurikein</Filter>
-    </ClInclude>
     <ClInclude Include="NotorBanger.h">
       <Filter>Entities\Enemy\NotorBanger</Filter>
     </ClInclude>
@@ -492,6 +513,36 @@
     <ClInclude Include="ByteBomb.h">
       <Filter>Entities\Enemy\Byte</Filter>
     </ClInclude>
+    <ClInclude Include="Shuriken.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenStateHandler.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenState.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenAttack1.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenAttack2.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenDie.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenFlip.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenJump.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenMove.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenTurn.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
@@ -536,9 +587,6 @@
     <Filter Include="Entities\Enemy\Helit">
       <UniqueIdentifier>{86000a7e-a606-4e89-93e5-45353a0b572c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Entities\Enemy\Shurikein">
-      <UniqueIdentifier>{355ebffe-196e-4a8f-857f-cfc32506640c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Entities\Enemy\NotorBanger">
       <UniqueIdentifier>{5c2c7b7d-14ed-4816-9550-f11484970fcf}</UniqueIdentifier>
     </Filter>
@@ -550,6 +598,9 @@
     </Filter>
     <Filter Include="Entities\Enemy\Byte">
       <UniqueIdentifier>{e4d925f7-3923-4289-bf2d-288df3e55766}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemy\Shuriken">
+      <UniqueIdentifier>{355ebffe-196e-4a8f-857f-cfc32506640c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

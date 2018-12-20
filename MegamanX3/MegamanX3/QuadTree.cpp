@@ -31,8 +31,16 @@ void QuadTree::Clear()
 	}
 }
 
-void QuadTree::Insert(Entity *entity)
+void QuadTree::InsertEntity(Entity *entity)
 {
+	if (entity == nullptr) {
+		return;
+	}
+
+	if (!IsContain(entity)) {
+		return;
+	}
+
 	int index = GetNodeIndex(entity->GetBound());
 
 	//neu node ta ton tai thi insert vao node con
@@ -40,7 +48,7 @@ void QuadTree::Insert(Entity *entity)
 	{
 		if (index != -1)
 		{
-			nodes[index]->Insert(entity);
+			nodes[index]->InsertEntity(entity);
 			return;
 		}
 	}
@@ -53,19 +61,29 @@ void QuadTree::Insert(Entity *entity)
 	else
 	{
 		//node chua dc tao nen se tao va split roi moi insert
-		if (nodes == NULL)
+		if (nodes == NULL && level < 5)
 		{
 			Split();
 		}
 
-		nodes[index]->Insert(entity);
+		if (nodes) {
+			nodes[index]->InsertEntity(entity);
+		}
+		else {
+			this->entities.push_back(entity);
+		}
+
 	}
 }
 
-void QuadTree::Remove(Entity * entity)
+bool QuadTree::RemoveEntity(Entity * entity)
 {
 	if (entity == nullptr) {
-		return;
+		return false;
+	}
+
+	if (!IsContain(entity)) {
+		return false;
 	}
 
 	int nodeIndex = GetNodeIndex(entity->GetBound());
@@ -75,13 +93,34 @@ void QuadTree::Remove(Entity * entity)
 		for (int index = 0; index < size; index++) {
 			if (entities[index] == entity) {
 				entities.erase(entities.begin() + index);
-				break;
+				return true;
 			}
 		}
-		return;
+		return false;
+	} 
+
+	if (nodes == nullptr) {
+		int size = entities.size();
+		for (int index = 0; index < size; index++) {
+			if (entities[index] == entity) {
+				entities.erase(entities.begin() + index);
+				return true;
+			}
+		}
+		return false;
 	}
 
-	nodes[nodeIndex]->Remove(entity);
+	return nodes[nodeIndex]->RemoveEntity(entity);
+}
+
+void QuadTree::Update()
+{
+	std::vector<Entity *> changeList;
+	CheckNodeChange(changeList);
+	for (auto child : changeList) {
+		InsertEntity(child);
+	}
+	return;
 }
 
 bool QuadTree::IsContain(Entity *entity)
@@ -94,6 +133,23 @@ bool QuadTree::IsContain(Entity *entity)
 	}
 
 	return false;
+}
+
+void QuadTree::CheckNodeChange(std::vector<Entity*> &changeList)
+{
+	for (int index = 0; index < entities.size(); index++) {
+		if (GetNodeIndex(entities[index]->GetBound()) != -1) {
+			changeList.push_back(entities[index]);
+			entities.erase(entities.begin() + index);
+		}
+	}
+
+	if (nodes) {
+		nodes[0]->CheckNodeChange(changeList);
+		nodes[1]->CheckNodeChange(changeList);
+		nodes[2]->CheckNodeChange(changeList);
+		nodes[3]->CheckNodeChange(changeList);
+	}
 }
 
 void QuadTree::Split()
@@ -220,9 +276,9 @@ void QuadTree::GetAllEntities(std::vector<Entity*> &entitiesOut)
 	}
 }
 
-void QuadTree::GetEntitiesCollideAble(std::vector<Entity*> &entitiesOut, Entity *entity)
+void QuadTree::GetEntitiesCollideAble(std::vector<Entity*> &entitiesOut, RECT bound)
 {
-	int index = this->GetNodeIndex(entity->GetBound());
+	int index = this->GetNodeIndex(bound);
 	if (index == -1) {
 		int a = 0;
 	}
@@ -246,7 +302,7 @@ void QuadTree::GetEntitiesCollideAble(std::vector<Entity*> &entitiesOut, Entity 
 		if (nodes != NULL)
 		{
 			//kiem tra va lay cac node trong node con
-			nodes[index]->GetEntitiesCollideAble(entitiesOut, entity);
+			nodes[index]->GetEntitiesCollideAble(entitiesOut, bound);
 		}
 	}
 	else

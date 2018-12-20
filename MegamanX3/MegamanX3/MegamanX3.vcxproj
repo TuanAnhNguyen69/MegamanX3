@@ -23,7 +23,7 @@
     <ProjectGuid>{E42C9130-1CC9-448D-91FD-3531680F95EE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>MegamanX3</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -234,9 +234,18 @@
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Shurikein.h" />
+    <ClInclude Include="Shuriken.h" />
+    <ClInclude Include="ShurikenAttack1.h" />
+    <ClInclude Include="ShurikenAttack2.h" />
+    <ClInclude Include="ShurikenDie.h" />
+    <ClInclude Include="ShurikenFlip.h" />
+    <ClInclude Include="ShurikenJump.h" />
+    <ClInclude Include="ShurikenMove.h" />
+    <ClInclude Include="ShurikenState.h" />
+    <ClInclude Include="ShurikenTurn.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="NotorBangerState.h" />
+    <ClInclude Include="ShurikenStateHandler.h" />
     <ClInclude Include="SweptAABB.h" />
     <ClInclude Include="SystemDefs.h" />
     <ClInclude Include="Texture.h" />
@@ -321,7 +330,15 @@
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="Shurikein.cpp" />
+    <ClCompile Include="Shuriken.cpp" />
+    <ClCompile Include="ShurikenAttack1.cpp" />
+    <ClCompile Include="ShurikenAttack2.cpp" />
+    <ClCompile Include="ShurikenDie.cpp" />
+    <ClCompile Include="ShurikenFlip.cpp" />
+    <ClCompile Include="ShurikenJump.cpp" />
+    <ClCompile Include="ShurikenMove.cpp" />
+    <ClCompile Include="ShurikenState.cpp" />
+    <ClCompile Include="ShurikenTurn.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="NotorBangerState.cpp" />
     <ClCompile Include="Texture.cpp" />
