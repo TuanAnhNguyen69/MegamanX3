@@ -196,13 +196,13 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 						break;*/
 			case EntityId::HeadGunner_ID:
 			{
-				HeadGunner * headGunner = new HeadGunner(this->player);
+				/*HeadGunner * headGunner = new HeadGunner(this->player);
 				headGunner->Initialize(false);
 				headGunner->SetPosition(posX + width / 2, posY + height / 2);
 				headGunner->SetScale(2, 2);
 				headGunner->SetBound(width, height);
 				AddEntity(headGunner);
-				break;
+				break;*/
 
 				/*CarryArm * carryArm = new CarryArm(player);
 				carryArm->Initialize();
@@ -227,6 +227,13 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				helit->SetBound(width, height);
 				AddEntity(helit);
 				break;*/
+
+				Conveyor *conveyor = new Conveyor(EntityId::HeadBlueConveyor_ID);
+				conveyor->Initialize(true);
+				conveyor->SetPosition(posX + width / 2, posY + height / 2);
+				conveyor->SetScale(2, 2);
+				AddEntity(conveyor);
+				break;
 
 			}
 

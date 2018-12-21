@@ -1,8 +1,28 @@
 #pragma once
-class Conveyor
+#include "Entity.h"
+#include "Engine.h"
+
+namespace Define
+{
+	const float CONVEYOR_SPEED = 15.0f;
+}
+
+class Conveyor : public Entity
 {
 public:
-	Conveyor();
+	Conveyor(EntityId id);
 	~Conveyor();
+
+	void Update();
+
+	void Initialize(bool isRunToLeft);
+
+	void OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+
+	float GetSpeed();
+
+private:
+	float speed;
+	AnimatedSprite * sprite;
 };
 
