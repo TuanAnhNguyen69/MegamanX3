@@ -15,5 +15,7 @@ public:
 protected:
 	float acceleratorX;
 	float slidedDistance;
+	AnimatedSprite *slideSprite;
+	AnimatedSprite *fireSprite;
 };
 

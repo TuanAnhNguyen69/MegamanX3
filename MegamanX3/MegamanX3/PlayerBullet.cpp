@@ -34,6 +34,8 @@ void PlayerBullet::Update()
 		EntityManager::GetInstance()->RemoveEntity(this);
 		return;
 	}
+	//std::cout << "life" << lifeTime << std::endl;
+
 
 	switch (damage) {
 	case 2:
@@ -49,10 +51,10 @@ void PlayerBullet::Update()
 	}
 
 	if (this->GetReverse()) {
-		this->AddVelocityX(-30);
+		this->AddVelocityX(-10);
 	}
 	else {
-		this->AddVelocityX(30);
+		this->AddVelocityX(10);
 	}
 
 	Entity::Update();

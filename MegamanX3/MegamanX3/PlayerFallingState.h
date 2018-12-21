@@ -26,6 +26,14 @@ protected:
 	float acceleratorX;
 	float acceleratorY;
 	bool isLeftOrRightKeyPressed;
+	AnimatedSprite *fallSprite;
+	AnimatedSprite *fireSprite;
+	AnimatedSprite *landingSprite;
+	AnimatedSprite *landingFireSprite;
+	bool isFalling;
+	void OnPlatformCollide(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+	void OnRoofCollide(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+
 };
 
 #endif

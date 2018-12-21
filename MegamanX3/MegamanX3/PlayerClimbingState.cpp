@@ -26,7 +26,6 @@ void PlayerClimbingState::Load()
 	entity->SetSprite(sprite);
 	acceleratorX = 8.0f;
 	acceleratorY = 7.0f;
-	sprite->ResetFrame();
 }
 
 void PlayerClimbingState::Update()
@@ -44,11 +43,22 @@ void PlayerClimbingState::UpdateInput()
 		return;
 	}
 
-	if (input->IsKeyDown(DIK_J)) {
+	if (input->IsKeyUp(DIK_J)) {
+		entity->fireCoolDown = 0;
 		sprite->SetFrameRange(54, 55);
+		entity->Shoot();
 	}
 	else {
-		sprite->SetFrameRange(50, 50);
+		if (entity->fireCoolDown < 20) {
+			entity->fireCoolDown++;
+		}
+		else {
+			sprite->SetFrameRange(50, 50);
+		}
+	}
+
+	if (input->IsKeyDown(DIK_J)) {
+		entity->bulletCharging++;
 	}
 
 	if ((input->IsKeyDown(DIK_A) && climbingType == ClimbingLeft))

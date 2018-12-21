@@ -234,6 +234,7 @@
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Roof.h" />
     <ClInclude Include="Shuriken.h" />
     <ClInclude Include="ShurikenAttack1.h" />
     <ClInclude Include="ShurikenAttack2.h" />
@@ -330,6 +331,7 @@
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="Roof.cpp" />
     <ClCompile Include="Shuriken.cpp" />
     <ClCompile Include="ShurikenAttack1.cpp" />
     <ClCompile Include="ShurikenAttack2.cpp" />

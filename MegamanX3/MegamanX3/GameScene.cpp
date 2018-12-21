@@ -83,6 +83,7 @@ void GameScene::CheckCollision()
 	int widthBottom = 0;
 	std::vector<Entity*> collidableEntity;
 	EntityManager::GetInstance()->GetQuadTree()->GetEntitiesCollideAble(collidableEntity, camera->GetBound());
+	std::cout << EntityManager::GetInstance()->GetQuadTree()->GetTotalEntities() << std::endl;
 	for (size_t index = 0; index < collidableEntity.size(); index++) {
 		RECT broadphase = Collision::GetSweptBroadphaseRect(player);
 		if (Collision::IsCollide(broadphase, collidableEntity.at(index)->GetBound()))

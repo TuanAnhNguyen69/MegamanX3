@@ -5,9 +5,13 @@
 PlayerSlidingState::PlayerSlidingState(PlayerStateHandler * handler, Player * entity) : PlayerState(handler, entity)
 {
 
-	sprite = new AnimatedSprite(15, 2.0f, false);
-	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+	slideSprite = new AnimatedSprite(15, 2.0f, false);
+	slideSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
 		73, 74, 10, 50, 50);
+
+	fireSprite = new AnimatedSprite(15, 2.0f, false);
+	fireSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+		75, 76, 10, 50, 50);
 }
 
 
@@ -23,6 +27,7 @@ PlayerSlidingState::~PlayerSlidingState()
 
 void PlayerSlidingState::Load()
 {
+	sprite = slideSprite;
 	entity->SetSprite(sprite);
 	if (entity->GetReverse()) {
 		acceleratorX = -30.0f;
@@ -30,7 +35,7 @@ void PlayerSlidingState::Load()
 	else {
 		acceleratorX = 30.0f;
 	}
-	sprite->ResetFrame();
+	slidedDistance = 0;
 }
 
 void PlayerSlidingState::Update()
@@ -50,12 +55,25 @@ void PlayerSlidingState::UpdateInput()
 		return;
 	}
 
-	if (input->IsKeyDown(DIK_J)) {
-		sprite->SetFrameRange(75, 76);
+	if (input->IsKeyUp(DIK_J)) {
+		entity->fireCoolDown = 0;
+		sprite = fireSprite;
+		entity->SetSprite(sprite);
+		entity->Shoot();
 	}
 	else {
-		sprite->SetFrameRange(73, 74);
-	}	
+		if (entity->fireCoolDown < 20) {
+			entity->fireCoolDown++;
+		}
+		else {
+			sprite = slideSprite;
+			entity->SetSprite(sprite);
+		}
+	}
+
+	if (input->IsKeyDown(DIK_J)) {
+		entity->bulletCharging++;
+	}
 }
 
 void PlayerSlidingState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)

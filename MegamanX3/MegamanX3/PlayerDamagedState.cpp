@@ -23,7 +23,6 @@ PlayerDamagedState::~PlayerDamagedState()
 void PlayerDamagedState::Load()
 {
 	entity->SetSprite(sprite);
-	sprite->ResetFrame();
 }
 
 void PlayerDamagedState::Update()

@@ -38,11 +38,22 @@ void PlayerRunningState::UpdateInput()
 		return;
 	}
 
-	if (input->IsKeyDown(DIK_J)) {
+	if (input->IsKeyUp(DIK_J)) {
+		entity->fireCoolDown = 0;
 		sprite->SetFrameRange(24, 33);
+		entity->Shoot();
 	}
 	else {
-		sprite->SetFrameRange(14, 23);
+		if (entity->fireCoolDown < 20) {
+			entity->fireCoolDown++;
+		}
+		else {
+			sprite->SetFrameRange(14, 23);
+		}
+	}
+
+	if (input->IsKeyDown(DIK_J)) {
+		entity->bulletCharging++;
 	}
 
 	if (input->IsKeyDown(DIK_D)) {

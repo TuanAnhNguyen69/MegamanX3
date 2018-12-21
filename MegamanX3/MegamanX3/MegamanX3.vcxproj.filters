@@ -255,6 +255,9 @@
     <ClCompile Include="ShurikenTurn.cpp">
       <Filter>Entities\Enemy\Shuriken</Filter>
     </ClCompile>
+    <ClCompile Include="Roof.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -542,6 +545,9 @@
     </ClInclude>
     <ClInclude Include="ShurikenTurn.h">
       <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="Roof.h">
+      <Filter>Entities\Ground</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

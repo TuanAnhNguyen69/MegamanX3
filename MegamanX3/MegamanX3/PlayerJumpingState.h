@@ -18,6 +18,8 @@ protected:
 	float acceleratorX;
 	float acceleratorY;
 	bool noPressed;
+	AnimatedSprite *jumpSprite;
+	AnimatedSprite *fireSprite;
 };
 
 #endif

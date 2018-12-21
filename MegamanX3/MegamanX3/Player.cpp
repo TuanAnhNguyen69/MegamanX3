@@ -49,13 +49,13 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 	this->SetBound(60,100);
 
 	chargerSuper = new Entity();
-	AnimatedSprite *chargeSuperSprite = new AnimatedSprite(15, 1, true);
+	AnimatedSprite *chargeSuperSprite = new AnimatedSprite(15, 1.5, true);
 	chargeSuperSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "charging",
 		1, 14, 7, 100, 100);
 	chargerSuper->SetSprite(chargeSuperSprite);
 
 	chargerExtreme = new Entity();
-	AnimatedSprite *chargeExtremeSprite = new AnimatedSprite(15, 1, true);
+	AnimatedSprite *chargeExtremeSprite = new AnimatedSprite(15, 1.5, true);
 	chargeExtremeSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "charging",
 		14, 24, 7, 100, 100);
 	chargerExtreme->SetSprite(chargeExtremeSprite);
@@ -69,7 +69,8 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 	damagedState = new PlayerDamagedState(this, this);
 	climbingState = new PlayerClimbingState(this, this);
 	ChangeState(Falling);
-	allowJump = true;
+	isJumping = true;
+	allowSlide = true;
 }
 
 void Player::Update()
@@ -83,7 +84,6 @@ void Player::Update()
 			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
 	}
 
-	Entity::Update();
 	chargerSuper->SetPosition(this->GetPosition().x, this->GetPosition().y + 10);
 	chargerExtreme->SetPosition(this->GetPosition().x, this->GetPosition().y + 10);
 
@@ -92,8 +92,6 @@ void Player::Update()
 		currentState->UpdateInput();
 		currentState->Update();
 	}
-
-	std::cout << bulletCharging << std::endl;
 
 	if (bulletCharging < 50) {
 		bulletDamage = 2;
@@ -117,21 +115,33 @@ void Player::Update()
 	}
 
 	if (input->IsKeyDown(DIK_Z)) {
-		ChangeState(Sliding);
+		if (allowSlide) {
+			ChangeState(Sliding);
+			allowSlide = false;
+		}
+	}
+
+	if (input->IsKeyUp(DIK_Z)) {
+		ChangeState(Standing);
+		allowSlide = true;
 	}
 
 	if (input->IsKeyDown(DIK_SPACE)) {
-		if (allowJump) {
+		if (!isJumping) {
 			if (currentStateName == Running || currentStateName == Standing) {
 				ChangeState(Jumping);
 			}
-			allowJump = false;
+			isJumping = true;
 		}
 	}
 	
-	if (input->IsKeyHit(DIK_SPACE)) {
-		allowJump = true;
+	if (input->IsKeyUp(DIK_SPACE)) {
+		if (currentStateName == Jumping) {
+			ChangeState(Falling);
+		}
 	}
+
+	Entity::Update();
 }
 
 //void Player::SetPosition(int x, int y)
@@ -199,6 +209,10 @@ PlayerStateHandler::MoveDirection Player::GetMoveDirection() {
 
 void Player::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	if (impactor->GetEntityId() == EntityId::MegamanBullet_ID) {
+		return;
+	}
+
 	if (currentState) {
 		currentState->OnCollision(impactor, side, data);
 	}
@@ -217,7 +231,16 @@ void Player::Shoot()
 	bullet->Initialize(bulletDamage);
 	bullet->SetPosition(this->GetPosition().x, this->GetPosition().y + 10);
 	bullet->SetReverse(this->GetReverse());
-	bullet->SetVelocity(this->GetVelocity().x, this->GetVelocity().y);
+
+	float accelX = 0;
+	if (this->GetReverse()) {
+		accelX = -700.0;
+	}
+	else {
+		accelX = 700.0;
+	}
+
+	bullet->SetVelocity(this->GetVelocity().x + accelX, 0);
 	bullet->SetScale(2, 2);
 	EntityManager::GetInstance()->AddEntity(bullet);
 	this->bulletCharging = 0;

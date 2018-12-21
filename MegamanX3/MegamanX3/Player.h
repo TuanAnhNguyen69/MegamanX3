@@ -28,6 +28,7 @@ public:
 	void OnNoCollisionWithBottom();
 	int fireCoolDown;
 	int bulletCharging;
+	bool isJumping;
 	void Shoot();
 	void ChangeBulletState();
 	void Render();
@@ -38,10 +39,10 @@ private:
 	PlayerStateHandler::StateName currentStateName;
 	//Entity *entity;
 	Camera *camera;
-	bool allowJump;
 	Entity *chargerSuper;
 	Entity *chargerExtreme;
 	int bulletDamage;
+	bool allowSlide;
 };
 
 #endif

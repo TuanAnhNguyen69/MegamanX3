@@ -4,9 +4,21 @@
 
 PlayerFallingState::PlayerFallingState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
-	sprite = new AnimatedSprite(222, 0.5, false);
-	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
-		37, 40, 10, 50, 50);
+	fallSprite = new AnimatedSprite(15, 0.5, false);
+	fallSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+		37, 38, 10, 50, 50);
+
+	landingSprite = new AnimatedSprite(15, 0.5, false);
+	landingSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+		39, 40, 10, 50, 50);
+
+	fireSprite = new AnimatedSprite(15, 0.5, false);
+	fireSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+		44, 45, 10, 50, 50);
+
+	landingFireSprite = new AnimatedSprite(15, 0.5, false);
+	landingFireSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+		46, 47, 10, 50, 50);
 }
 
 
@@ -22,6 +34,8 @@ PlayerFallingState::~PlayerFallingState()
 
 void PlayerFallingState::Load()
 {
+	sprite = fallSprite;
+	isFalling = true;
 	entity->SetSprite(sprite);
 	acceleratorY = 15.0f;
 	acceleratorX = 8.0f;
@@ -31,14 +45,23 @@ void PlayerFallingState::Load()
 
 void PlayerFallingState::Update()
 {
+
+	if (!isFalling) {
+		if (sprite->IsFinished()) {
+			if (isLeftOrRightKeyPressed)
+			{
+				handler->ChangeState(PlayerStateHandler::Running);
+			}
+			else
+			{
+				handler->ChangeState(PlayerStateHandler::Standing);
+			}
+		}
+	}
+
 	entity->AddVelocityY(acceleratorY);
 	if (entity->GetVelocity().y > Define::PLAYER_MAX_JUMP_VELOCITY) {
 		entity->SetVelocityY(Define::PLAYER_MAX_JUMP_VELOCITY);
-	}
-
-	// For testing
-	if (entity->GetPosition().y > (SCREEN_HEIGHT / 2)) {
-	//	handler->ChangeState(PlayerStateHandler::StateName::Standing);
 	}
 }
 
@@ -49,11 +72,30 @@ void PlayerFallingState::UpdateInput()
 		return;
 	}
 
-	if (input->IsKeyDown(DIK_J)) {
-		sprite->SetFrameRange(44, 47);
+	if (input->IsKeyUp(DIK_J)) {
+		entity->fireCoolDown = 0;
+		if (isFalling) {
+			sprite = fireSprite;
+		}
+		else {
+			sprite = landingFireSprite;
+		}
+		entity->SetSprite(sprite);
+		entity->Shoot();
 	}
 	else {
-		sprite->SetFrameRange(37, 40);
+		if (entity->fireCoolDown < 20) {
+			entity->fireCoolDown++;
+		}
+		else {
+			if (isFalling) {
+				sprite = fallSprite;
+			}
+			else {
+				sprite = landingSprite;
+			}
+			entity->SetSprite(sprite);
+		}
 	}
 
 	if (input->IsKeyDown(DIK_D)) {
@@ -93,6 +135,18 @@ void PlayerFallingState::UpdateInput()
 
 void PlayerFallingState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	switch (impactor->GetEntityId()) {
+		case Platform_ID:
+			OnPlatformCollide(impactor, side, data);
+			break;
+		case Roof_ID:
+			OnRoofCollide(impactor, side, data);
+			break;
+	}
+}
+
+void PlayerFallingState::OnPlatformCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
 	switch (side)
 	{
 	case Entity::Left:
@@ -102,6 +156,7 @@ void PlayerFallingState::OnCollision(Entity * impactor, Entity::CollisionSide si
 			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
 			entity->SetVelocityX(0);
 		}
+		entity->isJumping = false;
 		break;
 
 	case Entity::Right:
@@ -111,9 +166,11 @@ void PlayerFallingState::OnCollision(Entity * impactor, Entity::CollisionSide si
 			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
 			entity->SetVelocityX(0);
 		}
+		entity->isJumping = false;
 		break;
 
 	case Entity::Top:
+		entity->isJumping = false;
 		break;
 
 	case Entity::Bottom:
@@ -122,19 +179,19 @@ void PlayerFallingState::OnCollision(Entity * impactor, Entity::CollisionSide si
 		if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
 		{
 			entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
-
-			if (isLeftOrRightKeyPressed)
-			{
-				handler->ChangeState(PlayerStateHandler::Running);
-			}
-			else
-			{
-				handler->ChangeState(PlayerStateHandler::Standing);
-			}
+			acceleratorY = 0.0f;
+			isFalling = false;
 		}
+		blockType = None;
+		entity->isJumping = false;
 		return;
 
 	default:
+		blockType = None;
 		break;
 	}
+}
+
+void PlayerFallingState::OnRoofCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
 }
