@@ -4,6 +4,9 @@
 
 HeadGunnerShoot::HeadGunnerShoot(HeadGunnerStateHandler *handler, Entity *entity) : HeadGunnerState(handler, entity)
 {
+	hadShoot = false;
+	isRocket = false;
+	armor = 0;
 	sprite = new AnimatedSprite(5, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "head_gunner",
 		0, 7, 4, 50, 50);

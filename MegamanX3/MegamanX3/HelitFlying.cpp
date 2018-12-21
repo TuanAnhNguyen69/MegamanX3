@@ -21,11 +21,38 @@ HelitFlying::~HelitFlying()
 void HelitFlying::Load()
 {
 	entity->SetSprite(sprite);
-	entity->SetVelocity(0, 0);
+	entity->SetVelocity(0, 10.0f);
 }
 
 void HelitFlying::Update()
 {
+	if (handler->GetHadShootState()) {
+		entity->AddVelocityY(-10.0f);
+	}
+	else {
+		if (!handler->GetLeftTarget())
+		{
+			entity->SetReverse(true);
+			if (!handler->GetAboveTarget()) {
+				entity->AddVelocityY(10.0f);
+			}
+			else {
+				handler->ChangeState(HelitStateHandler::StateName::Shooting);
+
+			}
+		}
+		else {
+			if (!handler->GetAboveTarget()) {
+				entity->AddVelocityY(10.0f);
+			}
+			else {
+				handler->ChangeState(HelitStateHandler::StateName::Shooting);
+
+			}
+		}
+	}
+	
+	
 }
 
 void HelitFlying::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)

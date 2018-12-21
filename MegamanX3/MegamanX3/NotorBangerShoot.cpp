@@ -5,6 +5,7 @@
 
 NotorBangerShoot::NotorBangerShoot(NotorBangerStateHandler *handler, Entity *entity) : NotorBangerState(handler, entity)
 {
+	armor = 5;
 	sprite = new AnimatedSprite(5, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "notor_banger",
 		15, 24, 5, 50, 50);

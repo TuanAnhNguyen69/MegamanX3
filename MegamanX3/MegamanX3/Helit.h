@@ -37,11 +37,18 @@ public:
 
 	//bool GetAction();
 	//void SetAction(bool action);
+	bool GetLeftTarget();
+	bool GetAboveTarget();
+	bool GetHadShootState();
+	void SetHadShootState(bool hadShootState);
+
 	Player* player;
-	bool IsAction();
-	bool IsShoot();
+	
 
 private:
+	bool targetIsLeft;
+	bool targetIsAbove;
+	bool hadShootState;
 	HelitState * currentState;
 	HelitState *flyingState, *shootingState, *dieState, *damagedState;
 	HelitStateHandler::StateName currentStateName;
