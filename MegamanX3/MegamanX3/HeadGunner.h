@@ -19,7 +19,7 @@ public:
 	HeadGunner(Player * player);
 	~HeadGunner();
 
-	void Initialize();
+	void Initialize( bool isLeft);
 	void Update();
 
 	HeadGunnerStateHandler::StateName GetCurrentStateName();
@@ -28,7 +28,10 @@ public:
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	void OnNoCollisionWithBottom();
 
+	bool GetIsLeft();
+
 private:
+	bool isLeft;
 	HeadGunnerState * currentState;
 	HeadGunnerState *standingState, *shootState, *jumpState, *dieState, *damagedState, *fallingState;
 	HeadGunnerStateHandler::StateName currentStateName;

@@ -21,15 +21,29 @@ HeadGunnerRocket::~HeadGunnerRocket()
 	}
 }
 
-void HeadGunnerRocket::Initialize()
+void HeadGunnerRocket::Initialize(bool isLeft)
 {
-	this->SetVelocity(-300.0,0.0);
 	this->SetSprite(sprite);
+	this->isLeft = isLeft;
+	if (isLeft) {
+		this->SetVelocity(-300.0, 0.0);
+		this->SetReverse(false);
+	}
+	else {
+		this->SetVelocity(+300.0, 0.0);
+		this->SetReverse(true);
+	}
 }
 
 void HeadGunnerRocket::Update()
 {
-	this->AddVelocityX(-10.0);
+	if (isLeft) {
+		this->AddVelocityX(-10.0);
+	}
+	else {
+		this->AddVelocityX(+10.0);
+	}
+
 	Entity::Update();
 }
 

@@ -6,13 +6,14 @@ class HeadGunnerRocket : public Entity
 {
 private:
 	AnimatedSprite * sprite;
+	bool isLeft;
 public:
 	HeadGunnerRocket(bool isLeft, bool isTop);
 	~HeadGunnerRocket();
 
 	void Update();
 
-	void Initialize();
+	void Initialize(bool isLeft);
 
 	void OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::CollisionReturn data);
 };

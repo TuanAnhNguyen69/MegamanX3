@@ -27,6 +27,9 @@ void HeadGunnerStanding::Load()
 
 void HeadGunnerStanding::Update()
 {
+	if (!handler->GetIsLeft()) {
+		entity->SetReverse(true);
+	}
 	clock_t cout = clock();
 	int dt = (cout - startState) / 40;
 	if ((dt > 4)

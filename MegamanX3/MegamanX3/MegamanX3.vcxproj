@@ -23,7 +23,7 @@
     <ProjectGuid>{E42C9130-1CC9-448D-91FD-3531680F95EE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>MegamanX3</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -175,6 +175,12 @@
     <ClInclude Include="Canon.h" />
     <ClInclude Include="Cargo.h" />
     <ClInclude Include="CarryArm.h" />
+    <ClInclude Include="CarryArmDamaged.h" />
+    <ClInclude Include="CarryArmDie.h" />
+    <ClInclude Include="CarryArmDropping.h" />
+    <ClInclude Include="CarryArmFlying.h" />
+    <ClInclude Include="CarryArmState.h" />
+    <ClInclude Include="CarryArmStateHandler.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Conveyor.h" />
     <ClInclude Include="DebugDraw.h" />
@@ -205,6 +211,7 @@
     <ClInclude Include="HelitDamaged.h" />
     <ClInclude Include="HelitDie.h" />
     <ClInclude Include="HelitFlying.h" />
+    <ClInclude Include="HelitRocket.h" />
     <ClInclude Include="HelitShooting.h" />
     <ClInclude Include="HelitState.h" />
     <ClInclude Include="HelitStateHandler.h" />
@@ -271,6 +278,11 @@
     <ClCompile Include="Canon.cpp" />
     <ClCompile Include="Cargo.cpp" />
     <ClCompile Include="CarryArm.cpp" />
+    <ClCompile Include="CarryArmDamaged.cpp" />
+    <ClCompile Include="CarryArmDie.cpp" />
+    <ClCompile Include="CarryArmDropping.cpp" />
+    <ClCompile Include="CarryArmFlying.cpp" />
+    <ClCompile Include="CarryArmState.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Conveyor.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
@@ -298,6 +310,7 @@
     <ClCompile Include="HelitDamaged.cpp" />
     <ClCompile Include="HelitDie.cpp" />
     <ClCompile Include="HelitFlying.cpp" />
+    <ClCompile Include="HelitRocket.cpp" />
     <ClCompile Include="HelitShooting.cpp" />
     <ClCompile Include="HelitState.cpp" />
     <ClCompile Include="Input.cpp" />

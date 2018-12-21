@@ -196,20 +196,29 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 						break;*/
 			case EntityId::HeadGunner_ID:
 			{
-				/*HeadGunner * headGunner = new HeadGunner(this->player);
-				headGunner->Initialize();
+				HeadGunner * headGunner = new HeadGunner(this->player);
+				headGunner->Initialize(false);
 				headGunner->SetPosition(posX + width / 2, posY + height / 2);
 				headGunner->SetScale(2, 2);
 				headGunner->SetBound(width, height);
 				AddEntity(headGunner);
-				break;*/
-				CarryArm * carryArm = new CarryArm(player);
+				break;
+
+				/*CarryArm * carryArm = new CarryArm(player);
 				carryArm->Initialize();
 				carryArm->SetPosition(posX + width / 2, (posY + height / 2) - 250);
 				carryArm->SetScale(2, 2);
 				carryArm->SetBound(width, height);
 				AddEntity(carryArm);
-				break;
+				break;*/
+
+				/*Life * life = new Life();
+				life->Initialize();
+				life->SetPosition(posX + width / 2, posY + height / 2);
+				life->SetScale(2, 2);
+				life->SetBound(width, height);
+				AddEntity(life);
+				break;*/
 
 				/*Helit * helit = new Helit(player);
 				helit->Initialize();

@@ -28,10 +28,11 @@ HeadGunner::~HeadGunner()
 	}
 }
 
-void HeadGunner::Initialize()
+void HeadGunner::Initialize( bool isLeft)
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"head_gunner", 50, 50);
+	this->isLeft = isLeft;
 	ChangeState(Standing);
 }
 
@@ -96,6 +97,11 @@ void HeadGunner::OnCollision(Entity * impactor, Entity::CollisionSide side, Enti
 
 void HeadGunner::OnNoCollisionWithBottom()
 {
+}
+
+bool HeadGunner::GetIsLeft()
+{
+	return isLeft;
 }
 
 //bool HeadGunner::GetAction()

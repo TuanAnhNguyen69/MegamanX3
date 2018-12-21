@@ -255,6 +255,24 @@
     <ClCompile Include="ShurikenTurn.cpp">
       <Filter>Entities\Enemy\Shuriken</Filter>
     </ClCompile>
+    <ClCompile Include="HelitRocket.cpp">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArmDamaged.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArmDropping.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArmFlying.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArmState.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArmDie.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -542,6 +560,27 @@
     </ClInclude>
     <ClInclude Include="ShurikenTurn.h">
       <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="HelitRocket.h">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmDamaged.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmDropping.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmFlying.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmState.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmStateHandler.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmDie.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
