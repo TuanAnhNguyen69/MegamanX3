@@ -11,13 +11,13 @@ public:
 		Extreme
 	};
 	PlayerBullet();
-	void Initialize();
+	void Initialize(int damage);
 	void Update();
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	~PlayerBullet();
 private:
-	AnimatedSprite *normalBullet;
-	AnimatedSprite *superBullet;
-	AnimatedSprite *extremeBullet;
+	AnimatedSprite *sprite;
+	int damage;
+	int lifeTime;
 };
 

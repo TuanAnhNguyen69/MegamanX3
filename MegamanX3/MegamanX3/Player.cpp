@@ -7,6 +7,7 @@
 #include "PlayerSlidingState.h"
 #include "PlayerDamagedState.h"
 #include "PlayerClimbingState.h"
+#include "PlayerBullet.h"
 
 #include <iostream>
 
@@ -47,11 +48,17 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 	this->SetScale(2, 2);
 	this->SetBound(60,100);
 
-	chargingSprite = new Entity();
-	AnimatedSprite * sprite = new AnimatedSprite(15, 1, true);
-	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "charging",
-		0, 0, 7, 100, 100);
-	chargingSprite->SetSprite(sprite);
+	chargerSuper = new Entity();
+	AnimatedSprite *chargeSuperSprite = new AnimatedSprite(15, 1, true);
+	chargeSuperSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "charging",
+		1, 14, 7, 100, 100);
+	chargerSuper->SetSprite(chargeSuperSprite);
+
+	chargerExtreme = new Entity();
+	AnimatedSprite *chargeExtremeSprite = new AnimatedSprite(15, 1, true);
+	chargeExtremeSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "charging",
+		14, 24, 7, 100, 100);
+	chargerExtreme->SetSprite(chargeExtremeSprite);
 
 
 	standingState = new PlayerStandingState(this, this);
@@ -70,17 +77,34 @@ void Player::Update()
 	if (camera) {
 		this->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
-		this->chargingSprite->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+		this->chargerSuper->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
+		this->chargerExtreme->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
 	}
 
 	Entity::Update();
-	chargingSprite->SetPosition(this->GetPosition().x, this->GetPosition().y + 10);
-	chargingSprite->Update();
+	chargerSuper->SetPosition(this->GetPosition().x, this->GetPosition().y + 10);
+	chargerExtreme->SetPosition(this->GetPosition().x, this->GetPosition().y + 10);
+
 
 	if (currentState) {
 		currentState->UpdateInput();
 		currentState->Update();
+	}
+
+	std::cout << bulletCharging << std::endl;
+
+	if (bulletCharging < 50) {
+		bulletDamage = 2;
+	}
+	else if (bulletCharging >= 50 && bulletCharging < 150) {
+		chargerSuper->Update();
+		bulletDamage = 3;
+	}
+	else {
+		chargerExtreme->Update();
+		bulletDamage = 10;
 	}
 
 	Input *input = Engine::GetEngine()->GetInput();
@@ -187,6 +211,18 @@ void Player::OnNoCollisionWithBottom()
 	}
 }
 
+void Player::Shoot()
+{
+	PlayerBullet *bullet = new PlayerBullet();
+	bullet->Initialize(bulletDamage);
+	bullet->SetPosition(this->GetPosition().x, this->GetPosition().y + 10);
+	bullet->SetReverse(this->GetReverse());
+	bullet->SetVelocity(this->GetVelocity().x, this->GetVelocity().y);
+	bullet->SetScale(2, 2);
+	EntityManager::GetInstance()->AddEntity(bullet);
+	this->bulletCharging = 0;
+}
+
 void Player::ChangeBulletState()
 {
 	if (bulletCharging < 10) {
@@ -200,5 +236,10 @@ void Player::ChangeBulletState()
 void Player::Render()
 {
 	Entity::Render();
-	chargingSprite->Render();
+	if (bulletCharging >= 50 && bulletCharging < 150) {
+		chargerSuper->Render();
+	}
+	else if (bulletCharging >= 150) {
+		chargerExtreme->Render();
+	}
 }

@@ -2,6 +2,7 @@
 #include "PlayerStandingState.h"
 #include "AnimatedSprite.h"
 #include "Engine.h"
+#include "PlayerBullet.h"
 
 PlayerStandingState::PlayerStandingState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
@@ -46,6 +47,7 @@ void PlayerStandingState::UpdateInput()
 		entity->fireCoolDown = 0;
 		sprite = shootSprite;
 		entity->SetSprite(sprite);
+		entity->Shoot();
 	}
 	else {
 		if (entity->fireCoolDown < 20) {
@@ -58,7 +60,7 @@ void PlayerStandingState::UpdateInput()
 	}
 
 	if (input->IsKeyDown(DIK_J)) {
-		//entity->bulletC;
+		entity->bulletCharging++;
 	}
 
 	if (input->IsKeyDown(DIK_D) || input->IsKeyDown(DIK_A)) {

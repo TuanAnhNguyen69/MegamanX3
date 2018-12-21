@@ -28,6 +28,7 @@ public:
 	void OnNoCollisionWithBottom();
 	int fireCoolDown;
 	int bulletCharging;
+	void Shoot();
 	void ChangeBulletState();
 	void Render();
 
@@ -38,7 +39,9 @@ private:
 	//Entity *entity;
 	Camera *camera;
 	bool allowJump;
-	Entity *chargingSprite;
+	Entity *chargerSuper;
+	Entity *chargerExtreme;
+	int bulletDamage;
 };
 
 #endif
