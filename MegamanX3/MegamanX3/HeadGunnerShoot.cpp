@@ -6,7 +6,7 @@ HeadGunnerShoot::HeadGunnerShoot(HeadGunnerStateHandler *handler, Entity *entity
 {
 	hadShoot = false;
 	isRocket = false;
-	armor = 0;
+	ammo = 0;
 	sprite = new AnimatedSprite(5, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "head_gunner",
 		0, 7, 4, 50, 50);
@@ -28,7 +28,7 @@ void HeadGunnerShoot::Load()
 	entity->SetVelocity(0, 0);
 	hadShoot = false;
 	isRocket = true;
-	armor = 5;
+	ammo = 5;
 }
 
 void HeadGunnerShoot::Update()
@@ -51,7 +51,7 @@ void HeadGunnerShoot::Update()
 	}
 	if (sprite->IsFinished()) {
 		/*sprite->SetFrameRange(0, 0);
-		if (armor > 0)
+		if (ammo > 0)
 		{
 			Canon *canon = new Canon();
 			canon->SetPosition(entity->GetPosition().x + 10, entity->GetPosition().y + 5);
@@ -60,7 +60,7 @@ void HeadGunnerShoot::Update()
 			canon->SetBound(9, 9);
 			EntityManager::GetInstance()->AddEntity(canon);
 			hadShoot = true;
-			armor--;
+			ammo--;
 		}
 		else*/
 		{

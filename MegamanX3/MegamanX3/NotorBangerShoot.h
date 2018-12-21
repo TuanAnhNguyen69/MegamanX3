@@ -11,5 +11,5 @@ public:
 	void Update();
 	void OnCollision(Entity *impactor,  Entity::CollisionSide side, Entity::CollisionReturn data);
 private:
-	int armor;
+	int ammo;
 };

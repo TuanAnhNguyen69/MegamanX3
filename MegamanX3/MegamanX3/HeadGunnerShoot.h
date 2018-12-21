@@ -15,6 +15,6 @@ public:
 private:
 	bool hadShoot;
 	bool isRocket;
-	int armor;
+	int ammo;
 };
 

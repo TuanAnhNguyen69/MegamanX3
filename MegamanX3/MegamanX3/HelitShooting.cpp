@@ -27,12 +27,12 @@ void HelitShooting::Load()
 	entity->SetVelocity(0, 0);
 	handler->SetHadShootState(true);
 	hadShoot = false;
-	armor = 2;
+	ammo = 2;
 }
 
 void HelitShooting::Update()
 {
-	if (armor > 0) {
+	if (ammo > 0) {
 		if (sprite->GetCurrentFrame() == 1) {
 			if (!hadShoot) {
 				HelitRocket *rocket = new HelitRocket();
@@ -42,7 +42,7 @@ void HelitShooting::Update()
 				rocket->SetBound(16, 12);
 				EntityManager::GetInstance()->AddEntity(rocket);
 				hadShoot = true;
-				armor--;
+				ammo--;
 			}
 		}
 		else {
