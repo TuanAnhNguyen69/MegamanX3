@@ -228,6 +228,13 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				AddEntity(helit);
 				break;
 
+				Conveyor *conveyor = new Conveyor(EntityId::HeadBlueConveyor_ID);
+				conveyor->Initialize(true);
+				conveyor->SetPosition(posX + width / 2, posY + height / 2);
+				conveyor->SetScale(2, 2);
+				AddEntity(conveyor);
+				break;
+
 			}
 
 			case EntityId::NotorBanger_ID:
