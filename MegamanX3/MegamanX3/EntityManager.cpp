@@ -203,21 +203,21 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				headGunner->SetBound(width, height);
 				AddEntity(headGunner);
 				break;*/
-				/*NotorBanger * notoBanger = new NotorBanger(player);
-				notoBanger->Initialize();
-				notoBanger->SetPosition(posX + width / 2, posY + height / 2);
-				notoBanger->SetScale(2, 2);
-				notoBanger->SetBound(width, height);
-				AddEntity(notoBanger);
-				break;*/
+				CarryArm * carryArm = new CarryArm(player);
+				carryArm->Initialize();
+				carryArm->SetPosition(posX + width / 2, (posY + height / 2) - 250);
+				carryArm->SetScale(2, 2);
+				carryArm->SetBound(width, height);
+				AddEntity(carryArm);
+				break;
 
-				Helit * helit = new Helit(player);
+				/*Helit * helit = new Helit(player);
 				helit->Initialize();
 				helit->SetPosition(posX + width / 2, (posY + height / 2) - 250);
 				helit->SetScale(2, 2);
 				helit->SetBound(width, height);
 				AddEntity(helit);
-				break;
+				break;*/
 
 			}
 

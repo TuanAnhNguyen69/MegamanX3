@@ -21,7 +21,7 @@ HelitFlying::~HelitFlying()
 void HelitFlying::Load()
 {
 	entity->SetSprite(sprite);
-	entity->SetVelocity(0, 10.0f);
+	entity->SetVelocity(0, 0);
 }
 
 void HelitFlying::Update()

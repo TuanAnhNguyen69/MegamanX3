@@ -23,12 +23,10 @@ HelitShooting::~HelitShooting()
 void HelitShooting::Load()
 {
 	hadShoot = false;
-	isRocket = false;
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	handler->SetHadShootState(true);
 	hadShoot = false;
-	isRocket = true;
 	armor = 2;
 }
 
