@@ -32,8 +32,7 @@ void HeadGunnerStanding::Update()
 	}
 	clock_t cout = clock();
 	int dt = (cout - startState) / 40;
-	if ((dt > 4)
-		&& (dt % 4 == 0))
+	if ((dt > 4) && (dt % 4 == 0))
 	{
 		handler->ChangeState(HeadGunnerStateHandler::StateName::Shoot);
 	}
