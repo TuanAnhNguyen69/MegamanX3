@@ -31,7 +31,6 @@ public:
 	bool GetLeftTarget();
 	bool GetAboveTarget();
 
-	Player *player;
 private:
 	ShurikenState * currentState;
 	ShurikenState *turnState, *attack1State, *attack2State, *jumpState, *dieState, *flipState, *moveState;

@@ -41,16 +41,16 @@ void ByteStanding::Update()
 		entity->SetReverse(true);
 	}
 	clock_t cout = clock();
-	int dt = (cout - startState) / 40;
-	if ((dt > 2) && (dt % 2 == 0))
+	int dt = (cout - startState) / 600;
+	if (dt > 3)
 	{
 		if (handler->GetPreAction() == ByteStateHandler::StateName::Throw)
 		{
-			//handler->ChangeState(ByteStateHandler::StateName::Attack);
+			handler->ChangeState(ByteStateHandler::StateName::Attack);
 		}
 		else if (handler->GetPreAction() == ByteStateHandler::StateName::Attack)
 		{
-			//handler->ChangeState(ByteStateHandler::StateName::Throw);
+			handler->ChangeState(ByteStateHandler::StateName::Throw);
 		}
 	}
 }

@@ -8,6 +8,8 @@ Byte::Byte(Player *player) : Enemy(EntityId::Byte_ID, player)
 	throwState = new ByteThrow(this, this);
 	attackState = new ByteAttack(this, this);
 	dieState = new ByteDie(this, this);
+
+	this->SetPreAction(ByteStateHandler::StateName::Attack);
 }
 
 Byte::~Byte()
@@ -21,8 +23,9 @@ Byte::~Byte()
 void Byte::Initialize()
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "byte", 100, 100);
-	this->ChangeState(Standing);
+	this->ChangeState(ByteStateHandler::StateName::Standing);
 }
+
 
 void Byte::Update()
 {
@@ -91,12 +94,12 @@ void Byte::OnNoCollisionWithBottom()
 
 ByteStateHandler::StateName Byte::GetPreAction()
 {
-	return currentStateName;
+	return preAction;
 }
 
 void Byte::SetPreAction(StateName action)
 {
-	currentStateName = action;
+	preAction = action;
 }
 
 bool Byte::IsFaceLeft()

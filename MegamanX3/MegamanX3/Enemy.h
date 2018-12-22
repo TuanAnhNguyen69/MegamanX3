@@ -8,7 +8,8 @@ public:
 	~Enemy();
 	void Update();
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
-private:
+
+protected:
 	Player * player;
 };
 

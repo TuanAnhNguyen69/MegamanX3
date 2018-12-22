@@ -6,7 +6,7 @@ ByteAttack::ByteAttack(ByteStateHandler *handler, Entity *entity) : ByteState(ha
 {
 	sprite = new AnimatedSprite(10, 1, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "byte",
-		8, 11, 4, 100, 100);
+		4, 6, 4, 100, 100);
 }
 
 
@@ -27,6 +27,7 @@ void ByteAttack::Load()
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	isMove = false;
+	handler->SetPreAction(ByteStateHandler::StateName::Attack);
 	/*if (sprite->IsFinished())
 	{
 		if (handler->IsFaceLeft())

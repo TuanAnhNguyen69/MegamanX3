@@ -4,7 +4,7 @@
 
 ByteThrow::ByteThrow(ByteStateHandler *handler, Entity *entity) : ByteState(handler, entity)
 {
-	sprite = new AnimatedSprite(10, 1, true);
+	sprite = new AnimatedSprite(8, 1, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "byte",
 		8, 11, 4, 100, 100);
 }
@@ -27,6 +27,7 @@ void ByteThrow::Load()
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	hadThrow = false;
+	handler->SetPreAction(ByteStateHandler::StateName::Throw);
 }
 
 void ByteThrow::Update()

@@ -38,7 +38,6 @@ public:
 	bool GetLeftTarget();
 	bool GetAboveTarget();
 
-	Player *player;
 private:
 	NotorBangerState * currentState;
 	NotorBangerState *standingState, *shootState, *jumpState, *dieState, *damagedState, *fallingState, *changeBarrel;
