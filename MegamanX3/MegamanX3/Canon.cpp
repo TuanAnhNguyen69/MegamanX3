@@ -104,32 +104,32 @@ void Canon::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::C
 
 			case Entity::Left:
 			{
-				this->AddPosition(data.RegionCollision.right - data.RegionCollision.left + 1, 0);
-				this->SetVelocity(0, 0);
+				/*this->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+				this->SetVelocity(0, 0);*/
 				EntityManager::GetInstance()->RemoveEntity(this);
 				break;
 			}
 
 			case Entity::Right:
 			{
-				this->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left + 1), 0);
-				this->SetVelocity(0, 0);
+				/*this->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+				this->SetVelocity(0, 0);*/
 				EntityManager::GetInstance()->RemoveEntity(this);
 				break;
 			}
 
 			case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
 			{
-				this->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top + 1);
-				this->SetVelocity(0, 0);
+				/*this->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top);
+				this->SetVelocity(0, 0);*/
 				EntityManager::GetInstance()->RemoveEntity(this);
 				break;
 			}
 
 			case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
 			{
-				this->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
-				this->SetVelocity(0, 0);
+				/*this->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+				this->SetVelocity(0, 0);*/
 				EntityManager::GetInstance()->RemoveEntity(this);
 				break;
 			}

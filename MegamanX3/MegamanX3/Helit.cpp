@@ -27,6 +27,7 @@ Helit::~Helit()
 
 void Helit::Initialize()
 {
+	hp = 100;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"helit", 50, 50);
 	this->ChangeState(HelitStateHandler::StateName::Flying);
@@ -35,6 +36,7 @@ void Helit::Initialize()
 void Helit::Update()
 {
 	//if (IsAction())
+	
 	if (this->GetPosition().x > player->GetPosition().x)
 	{
 		targetIsLeft = true;
@@ -148,6 +150,16 @@ bool Helit::GetHadShootState()
 void Helit::SetHadShootState(bool hadShootState)
 {
 	this->hadShootState = hadShootState;
+}
+
+int Helit::GetHP()
+{
+	return hp;
+}
+
+void Helit::SetHP(int hp)
+{
+	this->hp = hp;
 }
 
 

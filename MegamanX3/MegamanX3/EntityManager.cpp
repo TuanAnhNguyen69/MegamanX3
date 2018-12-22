@@ -197,7 +197,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			case EntityId::HeadGunner_ID:
 			{
 				/*HeadGunner * headGunner = new HeadGunner(this->player);
-				headGunner->Initialize(false);
+				headGunner->Initialize(true);
 				headGunner->SetPosition(posX + width / 2, posY + height / 2);
 				headGunner->SetScale(2, 2);
 				headGunner->SetBound(width, height);
@@ -220,33 +220,25 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				AddEntity(life);
 				break;*/
 
-				Helit * helit = new Helit(player);
-				helit->Initialize();
-				helit->SetPosition(posX + width / 2, (posY + height / 2) - 250);
-				helit->SetScale(2, 2);
-				helit->SetBound(width, height);
-				AddEntity(helit);
+				Byte * byte = new Byte(player);
+				byte->Initialize();
+				byte->SetPosition(posX + width / 2, (posY + height / 2));
+				byte->SetScale(2, 2);
+				byte->SetBound(width, height);
+				AddEntity(byte);
 				break;
 
-				Conveyor *conveyor = new Conveyor(EntityId::HeadBlueConveyor_ID);
+				/*Conveyor *conveyor = new Conveyor(EntityId::HeadBlueConveyor_ID);
 				conveyor->Initialize(true);
 				conveyor->SetPosition(posX + width / 2, posY + height / 2);
 				conveyor->SetScale(2, 2);
 				AddEntity(conveyor);
-				break;
+				break;*/
 
 			}
 
 			case EntityId::NotorBanger_ID:
-			{
-
-				/*Helit * helit = new Helit(player);
-				helit->Initialize();
-				helit->SetPosition(posX + width / 2, (posY + height / 2) - 250);
-				helit->SetScale(2, 2);
-				helit->SetBound(width, height);
-				AddEntity(helit);
-				break;*/
+			{				
 
 				NotorBanger * notoBanger = new NotorBanger(player);
 				notoBanger->Initialize();

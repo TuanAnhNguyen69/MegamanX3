@@ -21,6 +21,7 @@ Byte::~Byte()
 void Byte::Initialize()
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "byte", 100, 100);
+	this->ChangeState(Standing);
 }
 
 void Byte::Update()

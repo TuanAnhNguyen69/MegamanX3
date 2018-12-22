@@ -94,7 +94,8 @@ void NotorBangerJump::OnCollision(Entity *impactor, Entity::CollisionSide side, 
 {
 	switch (side)
 	{
-	/*case Entity::Left:
+
+	case Entity::Left:
 	{
 		entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
 		entity->SetVelocityX(0);
@@ -113,7 +114,7 @@ void NotorBangerJump::OnCollision(Entity *impactor, Entity::CollisionSide side, 
 		entity->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top);
 		entity->SetVelocityY(0);
 		break;
-	}*/
+	}
 
 	case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
 	{
