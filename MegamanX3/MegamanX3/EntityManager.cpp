@@ -220,7 +220,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				AddEntity(life);
 				break;*/
 
-				Helit * helit = new Helit(player);
+				/*Helit * helit = new Helit(player);
 				helit->Initialize();
 				helit->SetPosition(posX + width / 2, (posY + height / 2) - 250);
 				helit->SetScale(2, 2);
@@ -233,8 +233,15 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				conveyor->SetPosition(posX + width / 2, posY + height / 2);
 				conveyor->SetScale(2, 2);
 				AddEntity(conveyor);
-				break;
+				break;*/
 
+				Byte *byte = new Byte(player);
+				byte->Initialize();
+				byte->SetPosition(posX + width / 2, (posY + height / 2) - 30);
+				byte->SetScale(2, 2);
+				byte->SetBound(54 * 2, 74 * 2);
+				AddEntity(byte);
+				break;
 			}
 
 			case EntityId::NotorBanger_ID:
@@ -248,13 +255,13 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				AddEntity(helit);
 				break;*/
 
-				NotorBanger * notoBanger = new NotorBanger(player);
+				/*NotorBanger * notoBanger = new NotorBanger(player);
 				notoBanger->Initialize();
 				notoBanger->SetPosition(posX + width / 2, posY + height / 2);
 				notoBanger->SetScale(2, 2);
 				notoBanger->SetBound(width, height);
 				AddEntity(notoBanger);
-				break;
+				break;*/
 			}
 			/*case EntityId::Bee:
 				break;

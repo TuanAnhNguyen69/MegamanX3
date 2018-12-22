@@ -41,8 +41,6 @@ public:
 	bool GetAboveTarget();
 	bool GetHadShootState();
 	void SetHadShootState(bool hadShootState);
-
-	Player* player;
 	
 
 private:

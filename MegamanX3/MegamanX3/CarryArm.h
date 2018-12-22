@@ -10,6 +10,7 @@
 #include "Enemy.h"
 #include <list>
 #include <cmath>
+#include "Box.h"
 
 class Entity;
 
@@ -41,9 +42,7 @@ public:
 	bool GetAboveTarget();
 	bool GetHadDropState();
 	void SetHadDropState(bool hadDropState);
-
-	Player* player;
-
+	
 
 private:
 	bool targetIsLeft;

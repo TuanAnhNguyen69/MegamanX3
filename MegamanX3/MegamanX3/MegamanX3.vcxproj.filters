@@ -273,6 +273,24 @@
     <ClCompile Include="CarryArmDie.cpp">
       <Filter>Entities\Enemy\CarryArm</Filter>
     </ClCompile>
+    <ClCompile Include="BlastHornetDrop.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetPrepare.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetPrick.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetReturn.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetFly.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetDie.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -581,6 +599,24 @@
     </ClInclude>
     <ClInclude Include="CarryArmDie.h">
       <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetDrop.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetPrepare.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetPrick.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetReturn.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetFly.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetDie.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

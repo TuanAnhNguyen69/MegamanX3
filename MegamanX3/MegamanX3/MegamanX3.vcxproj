@@ -160,6 +160,12 @@
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Bee.h" />
     <ClInclude Include="BlastHornet.h" />
+    <ClInclude Include="BlastHornetDie.h" />
+    <ClInclude Include="BlastHornetDrop.h" />
+    <ClInclude Include="BlastHornetFly.h" />
+    <ClInclude Include="BlastHornetPrepare.h" />
+    <ClInclude Include="BlastHornetPrick.h" />
+    <ClInclude Include="BlastHornetReturn.h" />
     <ClInclude Include="BlastHornetStateHandler.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="BoxWall.h" />
@@ -265,6 +271,12 @@
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Bee.cpp" />
     <ClCompile Include="BlastHornet.cpp" />
+    <ClCompile Include="BlastHornetDie.cpp" />
+    <ClCompile Include="BlastHornetDrop.cpp" />
+    <ClCompile Include="BlastHornetFly.cpp" />
+    <ClCompile Include="BlastHornetPrepare.cpp" />
+    <ClCompile Include="BlastHornetPrick.cpp" />
+    <ClCompile Include="BlastHornetReturn.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="BoxWall.cpp" />
     <ClCompile Include="Byte.cpp" />

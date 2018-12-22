@@ -6,3 +6,4 @@
 #include "CarryArm.h"
 #include "Life.h"
 #include "Conveyor.h"
+#include "Byte.h"

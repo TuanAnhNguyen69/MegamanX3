@@ -35,6 +35,6 @@ public:
 private:
 	ByteState *currentState;
 	ByteState *standingState, *attackState, *throwState, *dieState;
-	ByteStateHandler::StateName currentStateName;
+	ByteStateHandler::StateName currentStateName, preAction;
 };
 

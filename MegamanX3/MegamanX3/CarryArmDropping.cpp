@@ -25,6 +25,13 @@ void CarryArmDropping::Load()
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	handler->SetHadDropState(true);
+
+	handler->box = new Box();
+	handler->box->Initialize(false);
+	handler->box->SetPosition(entity->GetPosition().x, entity->GetPosition().y + 57);
+	handler->box->SetScale(2, 2);
+	handler->box->SetBound(50 * 2, 50 * 2);
+	EntityManager::GetInstance()->AddEntity(handler->box);
 }
 
 void CarryArmDropping::Update()
@@ -32,8 +39,9 @@ void CarryArmDropping::Update()
 	
 	if (!sprite->IsFinished()) {
 		if (sprite->GetCurrentFrame() == 2) {
-			// thả box
-		}
+			handler->box->SetVelocity(entity->GetVelocity().x, entity->GetVelocity().y);
+
+ 		}
 
 		//CarryArmRocket *rocket = new CarryArmRocket();
 		/*rocket->SetPosition(entity->GetPosition().x, entity->GetPosition().y + 22);
