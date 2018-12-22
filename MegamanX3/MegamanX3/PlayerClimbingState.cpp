@@ -92,6 +92,9 @@ void PlayerClimbingState::UpdateInput()
 
 void PlayerClimbingState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	if (impactor->GetEntityId() != Platform_ID) {
+		return;
+	}
 	Input *input = Engine::GetEngine()->GetInput();
 	switch (side)
 	{

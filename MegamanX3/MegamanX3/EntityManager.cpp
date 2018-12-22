@@ -242,10 +242,17 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			case EntityId::Thorn:
 				break;
 			case EntityId::Box:
+				break;*/
+			case EntityId::Roof_ID:
+			{
+				Roof * roof = new Roof();
+				roof->SetPosition(posX + width / 2, posY + height / 2);
+				roof->SetBound(width, height);
+				roof->Initialize();
+				AddEntity(roof);
 				break;
-			case EntityId::Roof:
-				break;
-			case EntityId::BreakPlatform:
+			}
+			/*case EntityId::BreakPlatform:
 				break;
 			case EntityId::Canon:
 				break;

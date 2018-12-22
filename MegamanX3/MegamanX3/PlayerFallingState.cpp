@@ -1,6 +1,7 @@
   #include "pch.h"
 #include "PlayerFallingState.h"
 #include "Engine.h"
+#include "Roof.h"
 
 PlayerFallingState::PlayerFallingState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
@@ -194,4 +195,55 @@ void PlayerFallingState::OnPlatformCollide(Entity * impactor, Entity::CollisionS
 
 void PlayerFallingState::OnRoofCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	std::cout << ((Roof*)impactor)->GetCollidePosition(entity) << std::endl;
+
+	switch (side)
+	{
+	case Entity::Left:
+		break;
+	case Entity::Right:
+		break;
+	case Entity::Top:
+		break;
+
+	case Entity::Bottom:
+	case Entity::BottomRight:
+	case Entity::BottomLeft:
+		if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
+		{
+			//if (entity->GetPosition().x < impactor->GetPosition().x + impactor->GetWidth() / 6
+			//	&& entity->GetPosition().x > impactor->GetPosition().x - impactor->GetWidth() / 6)
+			//{
+			//	entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+			//	acceleratorY = 0.0f;
+			//	isFalling = false;
+			//}
+			//else if (entity->GetPosition().x < impactor->GetPosition().x - impactor->GetWidth() / 6) {
+			//	if (entity->GetPosition().y + entity->GetHeight() / 2 >= impactor->GetPosition().y) {
+			//		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+			//		acceleratorY = 0.0f;
+			//		isFalling = false;
+			//	}
+			//}
+			//else if (entity->GetPosition().x > impactor->GetPosition().x + impactor->GetWidth() / 6) {
+			//	if (entity->GetPosition().y + entity->GetHeight() / 2 >= impactor->GetPosition().y) {
+			//		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+			//		acceleratorY = 0.0f;
+			//		isFalling = false;
+			//	}
+			//}
+			if (entity->GetPosition().y + entity->GetHeight() / 2 >= ((Roof*)impactor)->GetCollidePosition(entity)) {
+				acceleratorY = 0.0f;
+				isFalling = false;
+			}
+		}
+		blockType = None;
+		entity->isJumping = false;
+		return;
+
+	default:
+		blockType = None;
+		break;
+	}
 }
+

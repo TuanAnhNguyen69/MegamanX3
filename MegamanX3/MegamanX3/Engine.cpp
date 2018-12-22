@@ -63,7 +63,7 @@ bool Engine::Initialize(HINSTANCE instance, HWND hwnd)
 	resourceManager = ResourceManager::GetInstance();
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "stage.png");
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "PlayerPaper.png");
-	resourceManager->LoadTextureResource(graphics->GetDevice(), "platform.png");
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "platform.png", D3DCOLOR_XRGB(255, 255, 255));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "head_gunner_rocket.png",D3DCOLOR_XRGB(255, 255, 255));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "x.png", D3DCOLOR_XRGB(50, 96, 166));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "head_gunner.png", D3DCOLOR_XRGB(50, 96, 166));

@@ -118,6 +118,9 @@ void PlayerJumpingState::UpdateInput()
 
 void PlayerJumpingState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	if (impactor->GetEntityId() != Platform_ID) {
+		return;
+	}
 	switch (side)
 	{
 	case Entity::Left:

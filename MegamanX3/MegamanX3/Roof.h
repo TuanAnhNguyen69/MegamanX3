@@ -7,6 +7,7 @@ public:
 	Roof();
 	void Update();
 	void Initialize();
+	int GetCollidePosition(Entity *entity);
 	~Roof();
 };
 

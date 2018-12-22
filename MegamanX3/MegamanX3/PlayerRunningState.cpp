@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "PlayerRunningState.h"
 #include "Engine.h"
+#include "Roof.h"
 
 PlayerRunningState::PlayerRunningState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
@@ -81,6 +82,8 @@ void PlayerRunningState::UpdateInput()
 
 void PlayerRunningState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	std::cout << ((Roof*)impactor)->GetCollidePosition(entity) << std::endl;
+
 	switch (side) {
 	case Entity::Left:
 	{

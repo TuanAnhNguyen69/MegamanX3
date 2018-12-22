@@ -30,16 +30,16 @@ bool GameScene::Initialize()
 {
 
 	map = new Background();
-	map->Initialize("aaaaa", 2);
+	map->Initialize("roof", 2);
 
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 	camera->SetCenter(SCREEN_WIDTH / 2, 0);
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(1115, 1630);
+	player->SetPosition(6400, 1700);
 
-	EntityManager::GetInstance()->Initialize(player, camera, "aaaaa", map->GetWidth(), map->GetHeight());
+	EntityManager::GetInstance()->Initialize(player, camera, "roof", map->GetWidth(), map->GetHeight());
 
 	
 	debugDraw = new DebugDraw();
@@ -83,7 +83,7 @@ void GameScene::CheckCollision()
 	int widthBottom = 0;
 	std::vector<Entity*> collidableEntity;
 	EntityManager::GetInstance()->GetQuadTree()->GetEntitiesCollideAble(collidableEntity, camera->GetBound());
-	std::cout << EntityManager::GetInstance()->GetQuadTree()->GetTotalEntities() << std::endl;
+	//std::cout << EntityManager::GetInstance()->GetQuadTree()->GetTotalEntities() << std::endl;
 	for (size_t index = 0; index < collidableEntity.size(); index++) {
 		RECT broadphase = Collision::GetSweptBroadphaseRect(player);
 		if (Collision::IsCollide(broadphase, collidableEntity.at(index)->GetBound()))
