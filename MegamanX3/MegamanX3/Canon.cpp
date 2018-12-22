@@ -7,7 +7,7 @@ Canon::Canon() : Entity(EntityId::Canon_ID)
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"canon", 9, 9);
-	sprite = new AnimatedSprite(10, true);
+	sprite = new AnimatedSprite(10, 1, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "canon",
 		0, 0, 1, 9, 9);
 }

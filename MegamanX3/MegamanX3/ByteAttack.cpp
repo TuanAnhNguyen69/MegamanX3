@@ -28,7 +28,7 @@ void ByteAttack::Load()
 	entity->SetVelocity(0, 0);
 	isMove = false;
 	handler->SetPreAction(ByteStateHandler::StateName::Attack);
-	/*if (sprite->IsFinished())
+	if (sprite->IsFinished())
 	{
 		if (handler->IsFaceLeft())
 		{
@@ -40,7 +40,7 @@ void ByteAttack::Load()
 			entity->SetReverse(true);
 			entity->SetVelocityX(Define::BYTE_SPEED);
 		}
-	}*/
+	}
 }
 
 void ByteAttack::Update()
@@ -51,7 +51,7 @@ void ByteAttack::Update()
 		{
 			if (handler->IsFaceLeft())
 			{
-				entity->SetReverse(true);
+				entity->SetReverse(false);
 				entity->SetVelocityX(-Define::BYTE_SPEED);
 			}
 			else
@@ -81,14 +81,14 @@ void ByteAttack::OnCollision(Entity * impactor, Entity::CollisionSide side, Enti
 		switch (side)
 		{
 		case Entity::Left :
-			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left +1, 0);
 			entity->SetVelocityX(0);
 			handler->SetFace(false);
 			handler->ChangeState(ByteStateHandler::StateName::Standing);
 			break;
 			
 		case Entity::Right :
-			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left +20), 0);
 			entity->SetVelocityX(0);
 			handler->SetFace(true);
 			handler->ChangeState(ByteStateHandler::StateName::Standing);

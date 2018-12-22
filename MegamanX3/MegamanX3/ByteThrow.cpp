@@ -41,15 +41,17 @@ void ByteThrow::Update()
 		entity->SetReverse(true);
 	}
 
-	if (sprite->GetCurrentFrame() == 3 && !hadThrow)
+	if (sprite->GetCurrentFrame() == 2 && !hadThrow)
 	{
 		ByteBomb *bomb = new ByteBomb();
 		if (handler->IsFaceLeft())
-		{
+		{		
+			bomb->SetPosition(entity->GetPosition().x + -60, entity->GetPosition().y + 10);
 			bomb->Initailize(ByteBomb::MoveDirection::Left);
 		}
 		else
 		{
+			bomb->SetPosition(entity->GetPosition().x + 20, entity->GetPosition().y + 10);
 			bomb->Initailize(ByteBomb::MoveDirection::Right);
 		}
 		bomb->SetScale(2, 2);

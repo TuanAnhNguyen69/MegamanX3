@@ -109,8 +109,5 @@ bool Byte::IsFaceLeft()
 
 void Byte::SetFace(bool isLeft)
 {
-	if (isLeft)
-		isFaceLeft = true;
-	else
-		isFaceLeft = false;
+	isFaceLeft = isLeft;
 }
