@@ -33,6 +33,9 @@ protected:
 	bool isFalling;
 	void OnPlatformCollide(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	void OnRoofCollide(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+	void OnUpPlatformCollide(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+	void OnDownPlatformCollide(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+	int fallDistance;
 };
 
 #endif

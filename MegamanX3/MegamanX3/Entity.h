@@ -35,8 +35,8 @@ enum EntityId{
 	BoxWall_ID,
 	Roof_ID,
 	BreakPlatform_ID,
-	UpGround_ID,
-	DownGround_ID,
+	UpPlatform_ID,
+	DownPlatform_ID,
 	Platform_ID,
 
 	//weapon

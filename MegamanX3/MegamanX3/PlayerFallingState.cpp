@@ -1,7 +1,7 @@
   #include "pch.h"
 #include "PlayerFallingState.h"
 #include "Engine.h"
-#include "Roof.h"
+#include "EntityImport.h"
 
 PlayerFallingState::PlayerFallingState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
@@ -20,6 +20,7 @@ PlayerFallingState::PlayerFallingState(PlayerStateHandler *handler, Player *enti
 	landingFireSprite = new AnimatedSprite(15, 0.5, false);
 	landingFireSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
 		46, 47, 10, 50, 50);
+	fallDistance = 0;
 }
 
 
@@ -37,16 +38,15 @@ void PlayerFallingState::Load()
 {
 	sprite = fallSprite;
 	isFalling = true;
-	entity->SetSprite(sprite);
 	acceleratorY = 15.0f;
 	acceleratorX = 8.0f;
 	isLeftOrRightKeyPressed = false;
+	entity->SetSprite(sprite);
 	sprite->ResetFrame();
 }
 
 void PlayerFallingState::Update()
 {
-
 	if (!isFalling) {
 		if (sprite->IsFinished()) {
 			if (isLeftOrRightKeyPressed)
@@ -143,6 +143,12 @@ void PlayerFallingState::OnCollision(Entity * impactor, Entity::CollisionSide si
 		case Roof_ID:
 			OnRoofCollide(impactor, side, data);
 			break;
+		case UpPlatform_ID:
+			OnUpPlatformCollide(impactor, side, data);
+			break;
+		case DownPlatform_ID:
+			OnDownPlatformCollide(impactor, side, data);
+			break;
 	}
 }
 
@@ -211,28 +217,69 @@ void PlayerFallingState::OnRoofCollide(Entity * impactor, Entity::CollisionSide 
 	case Entity::BottomLeft:
 		if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
 		{
-			//if (entity->GetPosition().x < impactor->GetPosition().x + impactor->GetWidth() / 6
-			//	&& entity->GetPosition().x > impactor->GetPosition().x - impactor->GetWidth() / 6)
-			//{
-			//	entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
-			//	acceleratorY = 0.0f;
-			//	isFalling = false;
-			//}
-			//else if (entity->GetPosition().x < impactor->GetPosition().x - impactor->GetWidth() / 6) {
-			//	if (entity->GetPosition().y + entity->GetHeight() / 2 >= impactor->GetPosition().y) {
-			//		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
-			//		acceleratorY = 0.0f;
-			//		isFalling = false;
-			//	}
-			//}
-			//else if (entity->GetPosition().x > impactor->GetPosition().x + impactor->GetWidth() / 6) {
-			//	if (entity->GetPosition().y + entity->GetHeight() / 2 >= impactor->GetPosition().y) {
-			//		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
-			//		acceleratorY = 0.0f;
-			//		isFalling = false;
-			//	}
-			//}
-			if (entity->GetPosition().y + entity->GetHeight() / 2 >= ((Roof*)impactor)->GetCollidePosition(entity)) {
+			if (entity->GetPosition().y + entity->GetHeight() / 2 >= ((Roof*)impactor)->GetCollidePosition(entity) + 20) {
+				acceleratorY = 0.0f;
+				isFalling = false;
+			}
+		}
+		blockType = None;
+		entity->isJumping = false;
+		return;
+
+	default:
+		blockType = None;
+		break;
+	}
+}
+
+void PlayerFallingState::OnUpPlatformCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side)
+	{
+	case Entity::Left:
+		break;
+	case Entity::Right:
+		break;
+	case Entity::Top:
+		break;
+
+	case Entity::Bottom:
+	case Entity::BottomRight:
+	case Entity::BottomLeft:
+		if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
+		{
+			if (entity->GetPosition().y + entity->GetHeight() / 2 >= ((UpPlatform*)impactor)->GetCollidePosition(entity)) {
+				acceleratorY = 0.0f;
+				isFalling = false;
+			}
+		}
+		blockType = None;
+		entity->isJumping = false;
+		return;
+
+	default:
+		blockType = None;
+		break;
+	}
+}
+
+void PlayerFallingState::OnDownPlatformCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side)
+	{
+	case Entity::Left:
+		break;
+	case Entity::Right:
+		break;
+	case Entity::Top:
+		break;
+
+	case Entity::Bottom:
+	case Entity::BottomRight:
+	case Entity::BottomLeft:
+		if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
+		{
+			if (entity->GetPosition().y + entity->GetHeight() / 2 >= ((DownPlatform*)impactor)->GetCollidePosition(entity)) {
 				acceleratorY = 0.0f;
 				isFalling = false;
 			}

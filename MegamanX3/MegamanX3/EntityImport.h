@@ -4,3 +4,5 @@
 #include "HeadGunner.h"
 #include "Helit.h"
 #include "Roof.h"
+#include "UpPlatform.h"
+#include "DownPlatform.h"

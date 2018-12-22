@@ -30,16 +30,16 @@ bool GameScene::Initialize()
 {
 
 	map = new Background();
-	map->Initialize("roof", 2);
+	map->Initialize("ground", 2);
 
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 	camera->SetCenter(SCREEN_WIDTH / 2, 0);
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(6400, 1700);
+	player->SetPosition(12700, 3700);
 
-	EntityManager::GetInstance()->Initialize(player, camera, "roof", map->GetWidth(), map->GetHeight());
+	EntityManager::GetInstance()->Initialize(player, camera, "ground", map->GetWidth(), map->GetHeight());
 
 	
 	debugDraw = new DebugDraw();
@@ -88,7 +88,7 @@ void GameScene::CheckCollision()
 		RECT broadphase = Collision::GetSweptBroadphaseRect(player);
 		if (Collision::IsCollide(broadphase, collidableEntity.at(index)->GetBound()))
 		{
-			if (collidableEntity.at(index)->GetEntityId() == EntityId::Canon_ID) {
+			if (collidableEntity.at(index)->GetEntityId() == EntityId::DownPlatform_ID) {
 				int a = 0;
 			}
 			Entity::CollisionReturn collideData;

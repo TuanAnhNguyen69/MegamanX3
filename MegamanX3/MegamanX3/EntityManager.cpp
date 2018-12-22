@@ -277,11 +277,25 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			case EntityId::SmallElevator:
 				break;
 			case EntityId::BoxWall:
-				break;
-			case EntityId::UpGround:
-				break;
-			case EntityId::DownGround:
 				break;*/
+			case EntityId::UpPlatform_ID:
+			{
+				UpPlatform * upPlatform = new UpPlatform();
+				upPlatform->SetPosition(posX + width / 2, posY + height / 2);
+				upPlatform->SetBound(width, height);
+				upPlatform->Initialize();
+				AddEntity(upPlatform);
+				break;
+			}
+			case EntityId::DownPlatform_ID:
+			{
+				DownPlatform * downPlatform = new DownPlatform();
+				downPlatform->SetPosition(posX + width / 2, posY + height / 2);
+				downPlatform->SetBound(width, height);
+				downPlatform->Initialize();
+				AddEntity(downPlatform);
+				break;
+			}
 			case EntityId::Platform_ID:
 			{
 				Platform * platform = new Platform();

@@ -2,6 +2,8 @@
 #include "PlayerRunningState.h"
 #include "Engine.h"
 #include "Roof.h"
+#include "DownPlatform.h"
+#include "UpPlatform.h"
 
 PlayerRunningState::PlayerRunningState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
@@ -82,45 +84,185 @@ void PlayerRunningState::UpdateInput()
 
 void PlayerRunningState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	std::cout << ((Roof*)impactor)->GetCollidePosition(entity) << std::endl;
-
-	switch (side) {
-	case Entity::Left:
+	((Roof*)impactor)->GetCollidePosition(entity);
+	switch (impactor->GetEntityId())
 	{
-		//va cham phia ben trai player
-		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
-		{
-			//day Player ra phia ben phai de cho player khong bi xuyen qua object
-			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+	case Platform_ID:
+		OnPlatformCollide(impactor, side, data);
+		break;
+	case Roof_ID:
+		OnRoofCollide(impactor, side, data);
+		break;
+	case UpPlatform_ID:
+		OnUpPlatformCollide(impactor, side, data);
+		break;
+	case DownPlatform_ID:
+		OnDownPlatformCollide(impactor, side, data);
+		break;
+	default:
+		break;
+	}
+	
+}
 
-			//handler->ChangeState(PlayerStateHandler::Standing);
+void PlayerRunningState::OnPlatformCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side) {
+		case Entity::Left:
+		{
+			//va cham phia ben trai player
+			if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
+			{
+				//day Player ra phia ben phai de cho player khong bi xuyen qua object
+				entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+
+				//handler->ChangeState(PlayerStateHandler::Standing);
+			}
+
+			return;
 		}
 
-		return;
-	}
-
-	case Entity::Right:
-	{
-		//va cham phia ben phai player
-		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
+		case Entity::Right:
 		{
-			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
-			//handler->ChangeState(PlayerStateHandler::Standing);
-		} 
-		return;
+			//va cham phia ben phai player
+			if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
+			{
+				entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+				//handler->ChangeState(PlayerStateHandler::Standing);
+			}
+			return;
+		}
+
+		case Entity::Top:
+			break;
+
+		case Entity::Bottom: case Entity::BottomLeft: case Entity::BottomRight:
+		{
+			entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+
+			entity->SetVelocityY(0);
+
+			return;
+		}
 	}
+}
 
-	case Entity::Top:
-		break;
+void PlayerRunningState::OnRoofCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side) {
+		case Entity::Left:
+		{
+			//va cham phia ben trai player
+			if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
+			{
+				//day Player ra phia ben phai de cho player khong bi xuyen qua object
+				entity->AddPosition(- 5, -5);
+				//handler->ChangeState(PlayerStateHandler::Standing);
+			}
 
-	case Entity::Bottom: case Entity::BottomLeft: case Entity::BottomRight:
-	{
-		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+			return;
+		}
 
-		entity->SetVelocityY(0);
+		case Entity::Right:
+		{
+			//va cham phia ben phai player
+			if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
+			{
+				entity->AddPosition(5, -5);
+				//handler->ChangeState(PlayerStateHandler::Standing);
+			}
+			return;
+		}
 
-		return;
+		case Entity::Top:
+			break;
+
+		case Entity::Bottom: case Entity::BottomLeft: case Entity::BottomRight:
+		{
+			entity->SetPosition(entity->GetPosition().x, ((Roof *)impactor)->GetCollidePosition(entity) - entity->GetWidth()/2);
+			entity->SetVelocityY(0);
+			return;
+		}
 	}
+}
+
+void PlayerRunningState::OnUpPlatformCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side) {
+		case Entity::Left:
+		{
+			//va cham phia ben trai player
+			if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
+			{
+				//day Player ra phia ben phai de cho player khong bi xuyen qua object
+				entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+
+				//handler->ChangeState(PlayerStateHandler::Standing);
+			}
+
+			return;
+		}
+
+		case Entity::Right:
+		{
+			//va cham phia ben phai player
+			if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
+			{
+				entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+				//handler->ChangeState(PlayerStateHandler::Standing);
+			}
+			return;
+		}
+
+		case Entity::Top:
+			break;
+
+		case Entity::Bottom: case Entity::BottomLeft: case Entity::BottomRight:
+		{
+			entity->SetPosition(entity->GetPosition().x, ((UpPlatform *)impactor)->GetCollidePosition(entity) - entity->GetWidth() / 2 - 20);
+			entity->SetVelocityY(0);
+			return;
+		}
+	}
+}
+
+void PlayerRunningState::OnDownPlatformCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side) {
+		case Entity::Left:
+		{
+			//va cham phia ben trai player
+			if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
+			{
+				//day Player ra phia ben phai de cho player khong bi xuyen qua object
+				entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+
+				//handler->ChangeState(PlayerStateHandler::Standing);
+			}
+
+			return;
+		}
+
+		case Entity::Right:
+		{
+			//va cham phia ben phai player
+			if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
+			{
+				entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+				//handler->ChangeState(PlayerStateHandler::Standing);
+			}
+			return;
+		}
+
+		case Entity::Top:
+			break;
+
+		case Entity::Bottom: case Entity::BottomLeft: case Entity::BottomRight:
+		{
+			entity->SetPosition(entity->GetPosition().x, ((DownPlatform *)impactor)->GetCollidePosition(entity) - entity->GetWidth() / 2 - 20);
+			entity->SetVelocityY(0);
+			return;
+		}
 	}
 }
 
