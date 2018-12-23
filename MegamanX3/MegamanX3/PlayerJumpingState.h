@@ -20,6 +20,8 @@ protected:
 	bool noPressed;
 	AnimatedSprite *jumpSprite;
 	AnimatedSprite *fireSprite;
+	AnimatedSprite *climbingJumpSprite;
+	AnimatedSprite *climbingFireSprite;
 };
 
 #endif

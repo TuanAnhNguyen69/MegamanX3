@@ -240,6 +240,11 @@ void Player::Shoot()
 		accelX = 700.0;
 	}
 
+	if (currentStateName == Climbing) {
+		accelX *= -1;
+		bullet->SetReverse(!this->GetReverse());
+	}
+
 	bullet->SetVelocity(this->GetVelocity().x + accelX, 0);
 	bullet->SetScale(2, 2);
 	EntityManager::GetInstance()->AddEntity(bullet);

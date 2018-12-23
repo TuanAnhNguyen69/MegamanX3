@@ -6,12 +6,7 @@
 class PlayerFallingState : public PlayerState
 {
 public:
-	enum BlockType
-	{
-		BlockLeft,
-		BlockRight,
-		None
-	};
+	
 
 	PlayerFallingState(PlayerStateHandler *handler, Player *entity);
 	~PlayerFallingState();
@@ -22,7 +17,6 @@ public:
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 
 protected:
-	BlockType blockType;
 	float acceleratorX;
 	float acceleratorY;
 	bool isLeftOrRightKeyPressed;

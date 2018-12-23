@@ -108,7 +108,7 @@ void PlayerFallingState::UpdateInput()
 				entity->SetVelocityX(Define::PLAYER_MAX_RUNNING_SPEED);
 			}
 		}
-		if (blockType == BlockRight)
+		if (entity->blockType == Player::BlockRight)
 		{
 			handler->ChangeState(PlayerStateHandler::StateName::Climbing);
 			return;
@@ -123,7 +123,7 @@ void PlayerFallingState::UpdateInput()
 				entity->SetVelocityX(-Define::PLAYER_MAX_RUNNING_SPEED);
 			}
 		}
-		if (blockType == BlockLeft)
+		if (entity->blockType == Player::BlockLeft)
 		{
 			handler->ChangeState(PlayerStateHandler::StateName::Climbing);
 			return;
@@ -159,7 +159,7 @@ void PlayerFallingState::OnPlatformCollide(Entity * impactor, Entity::CollisionS
 	case Entity::Left:
 		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
 		{
-			blockType = BlockLeft;
+			entity->blockType = Player::BlockLeft;
 			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
 			entity->SetVelocityX(0);
 		}
@@ -169,7 +169,7 @@ void PlayerFallingState::OnPlatformCollide(Entity * impactor, Entity::CollisionS
 	case Entity::Right:
 		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
 		{
-			blockType = BlockRight;
+			entity->blockType = Player::BlockRight;
 			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
 			entity->SetVelocityX(0);
 		}
@@ -189,12 +189,12 @@ void PlayerFallingState::OnPlatformCollide(Entity * impactor, Entity::CollisionS
 			acceleratorY = 0.0f;
 			isFalling = false;
 		}
-		blockType = None;
+		entity->blockType = Player::None;
 		entity->isJumping = false;
 		return;
 
 	default:
-		blockType = None;
+		entity->blockType = Player::None;
 		break;
 	}
 }
@@ -222,12 +222,12 @@ void PlayerFallingState::OnRoofCollide(Entity * impactor, Entity::CollisionSide 
 				isFalling = false;
 			}
 		}
-		blockType = None;
+		entity->blockType = Player::None;
 		entity->isJumping = false;
 		return;
 
 	default:
-		blockType = None;
+		entity->blockType = Player::None;
 		break;
 	}
 }
@@ -253,12 +253,12 @@ void PlayerFallingState::OnUpPlatformCollide(Entity * impactor, Entity::Collisio
 				isFalling = false;
 			}
 		}
-		blockType = None;
+		entity->blockType = Player::None;
 		entity->isJumping = false;
 		return;
 
 	default:
-		blockType = None;
+		entity->blockType = Player::None;
 		break;
 	}
 }
@@ -284,12 +284,12 @@ void PlayerFallingState::OnDownPlatformCollide(Entity * impactor, Entity::Collis
 				isFalling = false;
 			}
 		}
-		blockType = None;
+		entity->blockType = Player::None;
 		entity->isJumping = false;
 		return;
 
 	default:
-		blockType = None;
+		entity->blockType = Player::None;
 		break;
 	}
 }

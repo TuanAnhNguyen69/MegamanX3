@@ -12,6 +12,14 @@ PlayerJumpingState::PlayerJumpingState(PlayerStateHandler *handler, Player *enti
 	fireSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
 		41, 43, 10, 50, 50);
 
+	climbingJumpSprite = new AnimatedSprite(15, 0.1, false);
+	climbingJumpSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+		51, 52, 10, 50, 50);
+
+	climbingFireSprite = new AnimatedSprite(15, 0.1, false);
+	climbingFireSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+		56, 57, 10, 50, 50);
+
 	sprite = jumpSprite;
 }
 
@@ -73,7 +81,13 @@ void PlayerJumpingState::UpdateInput()
 
 	if (input->IsKeyUp(DIK_J)) {
 		entity->fireCoolDown = 0;
-		sprite = fireSprite;
+
+		if (entity->blockType == Player::None) {
+			sprite = fireSprite;
+		}
+		else {
+			sprite = climbingFireSprite;
+		}
 		entity->SetSprite(sprite);
 		entity->Shoot();
 	}
@@ -82,7 +96,12 @@ void PlayerJumpingState::UpdateInput()
 			entity->fireCoolDown++;
 		}
 		else {
-			sprite = jumpSprite;
+			if (entity->blockType == Player::None) {
+				sprite = jumpSprite;
+			}
+			else {
+				sprite = climbingJumpSprite;
+			}
 			entity->SetSprite(sprite);
 		}
 	}

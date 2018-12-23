@@ -5,9 +5,13 @@
 
 PlayerClimbingState::PlayerClimbingState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
-	sprite = new AnimatedSprite(15, 0.5, false);
-	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+	climbSprite = new AnimatedSprite(15, 0.5, false);
+	climbSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
 		49, 50, 10, 50, 50);
+
+	fireSprite = new AnimatedSprite(15, 0.5, false);
+	fireSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+		54, 55, 10, 50, 50);
 }
 
 
@@ -23,6 +27,7 @@ PlayerClimbingState::~PlayerClimbingState()
 
 void PlayerClimbingState::Load()
 {
+	sprite = climbSprite;
 	entity->SetSprite(sprite);
 	acceleratorX = 8.0f;
 	acceleratorY = 7.0f;
@@ -45,7 +50,8 @@ void PlayerClimbingState::UpdateInput()
 
 	if (input->IsKeyUp(DIK_J)) {
 		entity->fireCoolDown = 0;
-		sprite->SetFrameRange(54, 55);
+		sprite = fireSprite;
+		entity->SetSprite(fireSprite);
 		entity->Shoot();
 	}
 	else {
@@ -53,7 +59,8 @@ void PlayerClimbingState::UpdateInput()
 			entity->fireCoolDown++;
 		}
 		else {
-			sprite->SetFrameRange(50, 50);
+			sprite = climbSprite;
+			entity->SetSprite(climbSprite);
 		}
 	}
 

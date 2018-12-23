@@ -84,7 +84,6 @@ void PlayerRunningState::UpdateInput()
 
 void PlayerRunningState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	((Roof*)impactor)->GetCollidePosition(entity);
 	switch (impactor->GetEntityId())
 	{
 	case Platform_ID:

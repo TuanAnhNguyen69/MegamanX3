@@ -29,5 +29,7 @@ protected:
 	//bool isClimbingLeft;
 	bool isKeyLeft;
 	bool isKeyRight;
+	AnimatedSprite *climbSprite;
+	AnimatedSprite *fireSprite;
 };
 

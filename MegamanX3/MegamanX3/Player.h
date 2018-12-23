@@ -32,8 +32,16 @@ public:
 	void Shoot();
 	void ChangeBulletState();
 	void Render();
-
+	enum BlockType
+	{
+		BlockLeft,
+		BlockRight,
+		None
+	};
+	BlockType blockType;
 private:
+
+
 	PlayerState *currentState;
 	PlayerState *standingState, *runningState, *jumpingState, *fallingState, *damagedState, *slidingState, *climbingState;
 	PlayerStateHandler::StateName currentStateName;

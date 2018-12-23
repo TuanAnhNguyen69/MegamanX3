@@ -30,16 +30,16 @@ bool GameScene::Initialize()
 {
 
 	map = new Background();
-	map->Initialize("ground", 2);
+	map->Initialize("roof", 2);
 
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 	camera->SetCenter(SCREEN_WIDTH / 2, 0);
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(12700, 3700);
+	player->SetPosition(6000, 1700);
 
-	EntityManager::GetInstance()->Initialize(player, camera, "ground", map->GetWidth(), map->GetHeight());
+	EntityManager::GetInstance()->Initialize(player, camera, "roof", map->GetWidth(), map->GetHeight());
 
 	
 	debugDraw = new DebugDraw();
