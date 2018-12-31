@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "Camera.h"
+#include <fstream>
+#include <iostream>
+#include <sstream>
 
 
 Camera::Camera(int width, int height)
@@ -35,6 +38,27 @@ int Camera::GetHeight()
 
 void Camera::Initialize(LPCTSTR filePath)
 {
+	std::string objFilePath("Map/");
+	objFilePath.append(filePath).append("CAM.txt");
+	std::ifstream camera(objFilePath);
+
+	if (camera.is_open())
+	{
+		float posX, posY; int width, height;
+		int count;
+		camera >> count;
+		std::cout << count;
+		for (int i = 0; i < count; i++)
+		{
+			camera >> posX >> posY >> width >> height;
+			RECT * rect = new RECT();
+			rect->left = posX;
+			rect->top = posY;
+			rect->right = posX + width;
+			rect->bottom = posY + height;
+			rangeRects.push_back(rect);
+		}
+	}
 }
 
 D3DXVECTOR3 Camera::GetCenter()

@@ -194,7 +194,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 						break;
 					case EntityId::CarryArm:
 						break;*/
-			case EntityId::HeadGunner_ID:
+			case EntityId::LeftFaceHeadGunner_ID:
 			{
 				/*HeadGunner * headGunner = new HeadGunner(this->player);
 				headGunner->Initialize(true);

@@ -16,7 +16,7 @@ class Entity;
 class HeadGunner : public HeadGunnerStateHandler, public Enemy
 {
 public:
-	HeadGunner(Player * player);
+	HeadGunner(Player * player, EntityId id);
 	~HeadGunner();
 
 	void Initialize( bool isLeft);

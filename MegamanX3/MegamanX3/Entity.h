@@ -25,13 +25,14 @@ enum EntityId{
 	// Ground
 	Cargo_ID,
 	Door_ID,
-	Ladder_ID,
 	BigElevator_ID,
 	SmallElevator_ID,
-	HeadBlueConveyor_ID,
-	BlueConveyor_ID,
-	HeadYellowConveyor_ID,
-	YellowConveyor_ID,
+	LeftBlueConveyor_ID,
+	RightBlueConveyor_ID,
+	LeftYellowConveyor_ID,
+	RightYellowConveyor_ID,
+	LeftSmallConveyor_ID,
+	RightSmallConveyor_ID,
 	Thorn_ID,
 	Box_ID,
 	BoxWall_ID,
@@ -50,7 +51,7 @@ enum EntityId{
 	//Item
 	SmallEnergy_ID,
 	BigEnergy_ID,
-	ChimeraArmor_ID
+	ChimeraArmor_ID,
 };
 
 class Entity

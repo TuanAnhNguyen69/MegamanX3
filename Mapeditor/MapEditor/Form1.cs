@@ -71,6 +71,7 @@ namespace MapEditor
             InitializeComponent();
             listTile = new List<Bitmap>();
             listobjmap = new List<ObjectGame>();
+            listCameraRange = new List<Rectangle>();
             initWorker();
         }
 
@@ -275,22 +276,38 @@ namespace MapEditor
                 //File.WriteAllText(Path.Combine(fileDirectory, fileName + ".txt"), text);
 
 
-                String s = "";
+                String objString = "";
 
-                StreamWriter writer = new StreamWriter(saveFileDialog1.FileName + "OBJ.txt");
+                StreamWriter objWriter = new StreamWriter(saveFileDialog1.FileName + "OBJ.txt");
 
-                s += listobjmap.Count + "\r\n" + "\r\n";
+                objString += listobjmap.Count + "\r\n" + "\r\n";
 
                 foreach (ObjectGame obj in listobjmap)
                 {
-                    s += (int) obj.ID + "\r\n";
-                    s += obj.topLeft.X + "\r\n";
-                    s += obj.topLeft.Y + "\r\n";
-                    s += obj.width + "\r\n";
-                    s += obj.height + "\r\n";
-                    s += "\r\n";
+                    objString += (int) obj.ID + "\r\n";
+                    objString += obj.topLeft.X + "\r\n";
+                    objString += obj.topLeft.Y + "\r\n";
+                    objString += obj.width + "\r\n";
+                    objString += obj.height + "\r\n";
+                    objString += "\r\n";
                 }
-                writer.Write(s);
+                objWriter.Write(objString);
+                objWriter.Close();
+
+                String cameraString = "";
+
+                StreamWriter writer = new StreamWriter(saveFileDialog1.FileName + "CAM.txt");
+
+                cameraString += listCameraRange.Count + "\r\n" + "\r\n";
+                foreach (Rectangle rect in listCameraRange)
+                {
+                    cameraString += rect.Left + "\r\n";
+                    cameraString += rect.Top + "\r\n";
+                    cameraString += rect.Width + "\r\n";
+                    cameraString += rect.Height + "\r\n";
+                    cameraString += "\r\n";
+                }
+                writer.Write(cameraString);
                 writer.Close();
 
                 StreamWriter quadtree = new StreamWriter(saveFileDialog1.FileName + "Quadtree.txt");
@@ -383,7 +400,7 @@ namespace MapEditor
                 case EnumID.CarryArm_ID:
                     return new Bitmap(Path.Combine(Application.StartupPath, @"resource\carry_arm.png"));
                 case EnumID.LeftFaceHeadGunner_ID:
-                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\head_gunner.png"));
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\left_face_head_gunner.png"));
                 case EnumID.Helit_ID:
                     return new Bitmap(Path.Combine(Application.StartupPath, @"resource\helit.png"));
                 case EnumID.NotorBanger_ID:
@@ -414,40 +431,23 @@ namespace MapEditor
                     return new Bitmap(Path.Combine(Application.StartupPath, @"resource\big_energy.png"));
                 case EnumID.ChimeraArmor_ID:
                     return new Bitmap(Path.Combine(Application.StartupPath, @"resource\chimera.png"));
-                case EnumID.Megaman_ID:
-                    break;
-                case EnumID.MegamanBullet_ID:
-                    break;
                 case EnumID.Byte_ID:
-                    break;
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\byte.png"));
                 case EnumID.RightFaceHeadGunner_ID:
-                    break;
-                case EnumID.Bee_ID:
-                    break;
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\right_face_head_gunner.png"));
                 case EnumID.LeftBlueConveyor_ID:
-                    break;
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\left_blue_conveyor.png"));
                 case EnumID.RightBlueConveyor_ID:
-                    break;
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\right_blue_conveyor.png"));
                 case EnumID.LeftYellowConveyor_ID:
-                    break;
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\left_yellow_conveyor.png"));
                 case EnumID.RightYellowConveyor_ID:
-                    break;
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\right_yellow_conveyor.png"));
                 case EnumID.LeftSmallConveyor_ID:
-                    break;
                 case EnumID.RightSmallConveyor_ID:
-                    break;
-                case EnumID.BreakPlatform_ID:
-                    break;
-                case EnumID.Canon_ID:
-                    break;
-                case EnumID.GunnerRocket_ID:
-                    break;
-                case EnumID.HeliRocket_ID:
-                    break;
-                case EnumID.ByteBomb_ID:
-                    break;
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\small_conveyor.png"));
                 case EnumID.CameraRange_ID:
-                    break;
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\platform.png"));
                 default:
                     return new Bitmap(Path.Combine(Application.StartupPath, @"resource\platform.png"));
             }
@@ -609,9 +609,6 @@ namespace MapEditor
                 case EnumID.BlastHornet_ID:
                     drawItem(@"resource\blast_hornet.png");
                     break;
-                case EnumID.Byte_ID:
-
-                    break;
                 case EnumID.Shurikein_ID:
                     drawItem(@"resource\shurikein.png");
                     break;
@@ -640,16 +637,6 @@ namespace MapEditor
                     break;
                 case EnumID.Roof_ID:
                     drawItem(@"resource\roof.png");
-                    break;
-                case EnumID.BreakPlatform_ID:
-                    break;
-                case EnumID.Canon_ID:
-                    break;
-                case EnumID.GunnerRocket_ID:
-                    break;
-                case EnumID.HeliRocket_ID:
-                    break;
-                case EnumID.ByteBomb_ID:
                     break;
                 case EnumID.SmallEnergy_ID:
                     drawItem(@"resource\small_energy.png");
@@ -683,21 +670,30 @@ namespace MapEditor
                 case EnumID.Platform_ID:
                     drawItem(@"resource\platform.png");
                     break;
+                case EnumID.Byte_ID:
+                    drawItem(@"resource\byte.png");
+                    break;
                 case EnumID.RightFaceHeadGunner_ID:
+                    drawItem(@"resource\right_face_head_gunner.png");
                     break;
                 case EnumID.LeftBlueConveyor_ID:
+                    drawItem(@"resource\left_blue_conveyor.png");
                     break;
                 case EnumID.RightBlueConveyor_ID:
+                    drawItem(@"resource\right_blue_conveyor.png");
                     break;
                 case EnumID.LeftYellowConveyor_ID:
+                    drawItem(@"resource\left_yellow_conveyor.png");
                     break;
                 case EnumID.RightYellowConveyor_ID:
+                    drawItem(@"resource\right_yellow_conveyor.png");
                     break;
                 case EnumID.LeftSmallConveyor_ID:
-                    break;
                 case EnumID.RightSmallConveyor_ID:
+                    drawItem(@"resource\small_conveyor.png");
                     break;
                 case EnumID.CameraRange_ID:
+                    drawItem(@"resource\platform.png");
                     break;
                 default:
                     drawItem(@"resource\platform.png");
@@ -713,11 +709,11 @@ namespace MapEditor
             currentMouse = new Point(e.X, e.Y);
             if (e.Button.Equals(MouseButtons.Left))
             {
-                if (curentType != EnumID.Platform_ID)
+                if (curentType == EnumID.Platform_ID || curentType == EnumID.CameraRange_ID)
                 {
-                    Draw(curentType);
+                    return;
                 }
-                return;
+                Draw(curentType);
             }
 
             if (e.Button.Equals(MouseButtons.Middle))
@@ -737,19 +733,13 @@ namespace MapEditor
             currentMouse = new Point(e.X, e.Y);
             if (e.Button.Equals(MouseButtons.Left))
             {
-                if (curentType != EnumID.Platform_ID)
-                {
-                    return;
-                }
-                else
+                if (curentType == EnumID.Platform_ID || curentType == EnumID.CameraRange_ID)
                 {
                     Bitmap bm = new Bitmap(Path.Combine(Application.StartupPath, @"resource\platform.png"));
                     DrawImage(pictureBox1.Image, bm, startMouse, new Rectangle(0, 0, currentMouse.X - startMouse.X, currentMouse.Y - startMouse.Y));
                     bm.Dispose();
-                    pictureBox1.Refresh();
-
+                    pictureBox1.Refresh();       
                 }
-
             }
 
         }
@@ -769,6 +759,7 @@ namespace MapEditor
                 Rectangle rect = new Rectangle(startMouse.X, startMouse.Y, currentMouse.X - startMouse.X, currentMouse.Y - startMouse.Y);
                 pictureBox1.Refresh();
                 listCameraRange.Add(rect);
+                return;
             }
 
             if (curentType == EnumID.Platform_ID)
@@ -795,7 +786,7 @@ namespace MapEditor
             currentMouse = new Point(e.X, e.Y);
             if (e.Button.Equals(MouseButtons.Left))
             {
-                if (curentType == EnumID.Platform_ID)
+                if (curentType == EnumID.Platform_ID || curentType == EnumID.CameraRange_ID)
                 {
                     Draw(curentType);
                 }

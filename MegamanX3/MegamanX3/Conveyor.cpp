@@ -7,7 +7,7 @@ Conveyor::Conveyor(EntityId id) : Entity(id)
 	this->speed = Define::CONVEYOR_SPEED;
 	switch (id)
 	{
-	case YellowConveyor_ID:
+	case LeftYellowConveyor_ID:
 		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 			"yellow_conveyor", 32, 32);
 		sprite = new AnimatedSprite(speed, 1, true);
@@ -15,7 +15,7 @@ Conveyor::Conveyor(EntityId id) : Entity(id)
 			0, 3, 4, 32, 32);
 		this->SetBound(32 * 2, 32 * 2);
 		break;
-	case HeadYellowConveyor_ID:
+	case RightYellowConveyor_ID:
 		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 			"head_yellow_conveyor", 18, 32);
 		sprite = new AnimatedSprite(speed, 1, true);
@@ -23,7 +23,7 @@ Conveyor::Conveyor(EntityId id) : Entity(id)
 			0, 3, 4, 18, 32);
 		this->SetBound(18 * 2, 32 * 2);
 		break;
-	case BlueConveyor_ID:
+	case LeftBlueConveyor_ID:
 		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 			"blue_conveyor", 32, 32);
 		sprite = new AnimatedSprite(speed, 1, true);
@@ -31,7 +31,7 @@ Conveyor::Conveyor(EntityId id) : Entity(id)
 			0, 3, 4, 32, 32);
 		this->SetBound(32 * 2, 32 * 2);
 		break;
-	case HeadBlueConveyor_ID:
+	case RightBlueConveyor_ID:
 		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 			"head_blue_conveyor", 18, 32);
 		sprite = new AnimatedSprite(speed, 1, true);
