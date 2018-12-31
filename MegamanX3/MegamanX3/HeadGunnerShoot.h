@@ -2,6 +2,7 @@
 #include "HeadGunnerState.h"
 #include "HeadGunnerRocket.h"
 #include "Canon.h"
+#include "time.h"
 
 class HeadGunnerShoot : public HeadGunnerState
 {
@@ -13,8 +14,9 @@ public:
 	void Update();
 	void OnCollision(Entity *impactor,  Entity::CollisionSide side, Entity::CollisionReturn data);
 private:
+
 	bool hadShoot;
 	bool isRocket;
-	int armor;
+	int ammo;
 };
 

@@ -160,6 +160,12 @@
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Bee.h" />
     <ClInclude Include="BlastHornet.h" />
+    <ClInclude Include="BlastHornetDie.h" />
+    <ClInclude Include="BlastHornetDrop.h" />
+    <ClInclude Include="BlastHornetFly.h" />
+    <ClInclude Include="BlastHornetPrepare.h" />
+    <ClInclude Include="BlastHornetPrick.h" />
+    <ClInclude Include="BlastHornetReturn.h" />
     <ClInclude Include="BlastHornetStateHandler.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="BoxWall.h" />
@@ -175,6 +181,12 @@
     <ClInclude Include="Canon.h" />
     <ClInclude Include="Cargo.h" />
     <ClInclude Include="CarryArm.h" />
+    <ClInclude Include="CarryArmDamaged.h" />
+    <ClInclude Include="CarryArmDie.h" />
+    <ClInclude Include="CarryArmDropping.h" />
+    <ClInclude Include="CarryArmFlying.h" />
+    <ClInclude Include="CarryArmState.h" />
+    <ClInclude Include="CarryArmStateHandler.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Conveyor.h" />
     <ClInclude Include="DebugDraw.h" />
@@ -205,6 +217,7 @@
     <ClInclude Include="HelitDamaged.h" />
     <ClInclude Include="HelitDie.h" />
     <ClInclude Include="HelitFlying.h" />
+    <ClInclude Include="HelitRocket.h" />
     <ClInclude Include="HelitShooting.h" />
     <ClInclude Include="HelitState.h" />
     <ClInclude Include="HelitStateHandler.h" />
@@ -259,6 +272,12 @@
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Bee.cpp" />
     <ClCompile Include="BlastHornet.cpp" />
+    <ClCompile Include="BlastHornetDie.cpp" />
+    <ClCompile Include="BlastHornetDrop.cpp" />
+    <ClCompile Include="BlastHornetFly.cpp" />
+    <ClCompile Include="BlastHornetPrepare.cpp" />
+    <ClCompile Include="BlastHornetPrick.cpp" />
+    <ClCompile Include="BlastHornetReturn.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="BoxWall.cpp" />
     <ClCompile Include="Byte.cpp" />
@@ -272,6 +291,11 @@
     <ClCompile Include="Canon.cpp" />
     <ClCompile Include="Cargo.cpp" />
     <ClCompile Include="CarryArm.cpp" />
+    <ClCompile Include="CarryArmDamaged.cpp" />
+    <ClCompile Include="CarryArmDie.cpp" />
+    <ClCompile Include="CarryArmDropping.cpp" />
+    <ClCompile Include="CarryArmFlying.cpp" />
+    <ClCompile Include="CarryArmState.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Conveyor.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
@@ -299,6 +323,7 @@
     <ClCompile Include="HelitDamaged.cpp" />
     <ClCompile Include="HelitDie.cpp" />
     <ClCompile Include="HelitFlying.cpp" />
+    <ClCompile Include="HelitRocket.cpp" />
     <ClCompile Include="HelitShooting.cpp" />
     <ClCompile Include="HelitState.cpp" />
     <ClCompile Include="Input.cpp" />

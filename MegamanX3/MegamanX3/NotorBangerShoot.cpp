@@ -5,6 +5,7 @@
 
 NotorBangerShoot::NotorBangerShoot(NotorBangerStateHandler *handler, Entity *entity) : NotorBangerState(handler, entity)
 {
+	ammo = 5;
 	sprite = new AnimatedSprite(5, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "notor_banger",
 		15, 24, 5, 50, 50);
@@ -22,7 +23,7 @@ NotorBangerShoot::~NotorBangerShoot()
 
 void NotorBangerShoot::Load()
 {
-	armor = 5;
+	ammo = 5;
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	hadShoot = false;
@@ -41,7 +42,7 @@ void NotorBangerShoot::Update()
 	{
 		sprite->SetFrameRange(15, 17);
 	}
-	if(armor > 0)
+	if(ammo > 0)
 	{
 		if (sprite->GetCurrentFrame() == 1 )
 		{
@@ -61,7 +62,7 @@ void NotorBangerShoot::Update()
 				canon->SetBound(7, 7);
 				EntityManager::GetInstance()->AddEntity(canon);
 				hadShoot = true;
-				armor--;
+				ammo--;
 			}
 		}
 		else

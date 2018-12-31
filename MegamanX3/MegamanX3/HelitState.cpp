@@ -1,11 +1,12 @@
 #include "pch.h"
 #include "HelitState.h"
+#include "Helit.h"
 
 
 HelitState::HelitState(HelitStateHandler *handler, Entity *entity)
 {
 	this->handler = handler;
-	this->entity = entity;
+	this->entity = (Helit*)entity;
 }
 
 HelitState::~HelitState()

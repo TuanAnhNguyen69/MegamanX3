@@ -3,11 +3,11 @@
 
 
 
-Canon::Canon() : Entity (EntityId::Canon_ID)
+Canon::Canon() : Entity(EntityId::Canon_ID)
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"canon", 9, 9);
-	sprite = new AnimatedSprite(10, true);
+	sprite = new AnimatedSprite(10, 1, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "canon",
 		0, 0, 1, 9, 9);
 }
@@ -15,6 +15,10 @@ Canon::Canon() : Entity (EntityId::Canon_ID)
 
 Canon::~Canon()
 {
+	if (sprite) {
+		delete sprite;
+		sprite = nullptr;
+	}
 }
 
 void Canon::Initialize(bool isHigh, bool isLeft)
@@ -63,10 +67,10 @@ void Canon::Update()
 			if (this->GetVelocity().x < 0)
 			{
 				this->AddVelocityX(15.0f);
-			}		
-		}	
+			}
+		}
 		else
-		{	
+		{
 			this->AddVelocityX(20.0f);
 			if (this->GetVelocity().x < 0)
 			{
@@ -91,44 +95,44 @@ void Canon::Update()
 
 
 
-void Canon::OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::CollisionReturn data)
+void Canon::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	if (impactor->GetEntityId() == EntityId::Platform_ID || impactor->GetEntityId() == EntityId::Megaman_ID)
 	{
 		switch (side)
 		{
 
-		case Entity::Left:
-		{
-			this->AddPosition(data.RegionCollision.right - data.RegionCollision.left + 1, 0);
-			this->SetVelocity(0, 0);
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
+			case Entity::Left:
+			{
+				/*this->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+				this->SetVelocity(0, 0);*/
+				EntityManager::GetInstance()->RemoveEntity(this);
+				break;
+			}
 
-		case Entity::Right:
-		{
-			this->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left + 1), 0);
-			this->SetVelocity(0, 0);
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
+			case Entity::Right:
+			{
+				/*this->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+				this->SetVelocity(0, 0);*/
+				EntityManager::GetInstance()->RemoveEntity(this);
+				break;
+			}
 
-		case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
-		{
-			this->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top + 1);
-			this->SetVelocity(0, 0);
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
+			case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
+			{
+				/*this->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top);
+				this->SetVelocity(0, 0);*/
+				EntityManager::GetInstance()->RemoveEntity(this);
+				break;
+			}
 
-		case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
-		{
-			this->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
-			this->SetVelocity(0, 0);
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
+			case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
+			{
+				/*this->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+				this->SetVelocity(0, 0);*/
+				EntityManager::GetInstance()->RemoveEntity(this);
+				break;
+			}
 		}
 	}
 }

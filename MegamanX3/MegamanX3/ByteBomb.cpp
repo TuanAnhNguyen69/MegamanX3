@@ -4,6 +4,8 @@
 
 ByteBomb::ByteBomb() : Entity(EntityId::ByteBomb_ID)
 {
+	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
+		"byte_bomb", 22, 22);
 	sprite = new AnimatedSprite(15, 1, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "byte_bomb",
 		0, 6, 9, 22, 22);
@@ -12,24 +14,32 @@ ByteBomb::ByteBomb() : Entity(EntityId::ByteBomb_ID)
 
 ByteBomb::~ByteBomb()
 {
+	if (sprite)
+	{
+		delete sprite;
+		sprite = nullptr;
+	}
 }
 
 void ByteBomb::Initailize(MoveDirection moveDirection)
 {
 	this->moveDirection = moveDirection;
+	this->SetSprite(sprite);
 }
 
 void ByteBomb::Update()
 {
+	Entity::Update();
+	//sprite->SetFrameRange(0, 6);
 	if (moveDirection == MoveDirection::Left)
 	{
 		this->SetVelocityX(-Define::BYTEBOMB_SPEED);
-		this->AddVelocityX(-Define::BYTEBOMB_ACCELERATION);
+		//this->AddVelocityX(-Define::BYTEBOMB_ACCELERATION);
 	}
 	else if (moveDirection == MoveDirection::Right)
 	{
 		this->SetVelocityX(Define::BYTEBOMB_SPEED);
-		this->AddVelocityX(Define::BYTEBOMB_ACCELERATION);
+		//this->AddVelocityX(Define::BYTEBOMB_ACCELERATION);
 	}
 }
 

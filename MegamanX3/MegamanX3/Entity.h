@@ -16,7 +16,8 @@ enum EntityId{
 
 	// Creep
 	CarryArm_ID,
-	HeadGunner_ID,
+	LeftFaceHeadGunner_ID,
+	RightFaceHeadGunner_ID,
 	Helit_ID,
 	NotorBanger_ID,
 	Bee_ID,
@@ -27,9 +28,10 @@ enum EntityId{
 	Ladder_ID,
 	BigElevator_ID,
 	SmallElevator_ID,
+	HeadBlueConveyor_ID,
 	BlueConveyor_ID,
+	HeadYellowConveyor_ID,
 	YellowConveyor_ID,
-	SmallConveyor_ID,
 	Thorn_ID,
 	Box_ID,
 	BoxWall_ID,

@@ -47,11 +47,14 @@
             this.headGunnerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notoBangerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.carryArmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groundToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cargoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bigElevatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smallElevatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yellowConveyorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.smallConveyorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.conveyorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thornToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.boxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,9 +119,11 @@
             this.fireToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.yellowConveyorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.smallConveyorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.carryArmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rightFaceHeadGunnerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rightYellowConveyorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rightBlueConveyprToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rightSmallConveyorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cameraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -219,9 +224,10 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem});
+            this.addToolStripMenuItem,
+            this.cameraToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
             // 
             // addToolStripMenuItem
             // 
@@ -247,20 +253,20 @@
             // blastHornetToolStripMenuItem
             // 
             this.blastHornetToolStripMenuItem.Name = "blastHornetToolStripMenuItem";
-            this.blastHornetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.blastHornetToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.blastHornetToolStripMenuItem.Text = "BlastHornet";
             this.blastHornetToolStripMenuItem.Click += new System.EventHandler(this.blastHornetToolStripMenuItem_Click);
             // 
             // byteToolStripMenuItem
             // 
             this.byteToolStripMenuItem.Name = "byteToolStripMenuItem";
-            this.byteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.byteToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.byteToolStripMenuItem.Text = "Byte";
             // 
             // shurikeinToolStripMenuItem
             // 
             this.shurikeinToolStripMenuItem.Name = "shurikeinToolStripMenuItem";
-            this.shurikeinToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.shurikeinToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.shurikeinToolStripMenuItem.Text = "Shurikein";
             this.shurikeinToolStripMenuItem.Click += new System.EventHandler(this.shurikeinToolStripMenuItem_Click);
             // 
@@ -270,7 +276,8 @@
             this.headGunnerToolStripMenuItem,
             this.helitToolStripMenuItem,
             this.notoBangerToolStripMenuItem,
-            this.carryArmToolStripMenuItem});
+            this.carryArmToolStripMenuItem,
+            this.rightFaceHeadGunnerToolStripMenuItem});
             this.enemyToolStripMenuItem1.Name = "enemyToolStripMenuItem1";
             this.enemyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.enemyToolStripMenuItem1.Text = "Enemy";
@@ -278,23 +285,30 @@
             // headGunnerToolStripMenuItem
             // 
             this.headGunnerToolStripMenuItem.Name = "headGunnerToolStripMenuItem";
-            this.headGunnerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.headGunnerToolStripMenuItem.Text = "HeadGunner";
+            this.headGunnerToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.headGunnerToolStripMenuItem.Text = "LeftFaceHeadGunner";
             this.headGunnerToolStripMenuItem.Click += new System.EventHandler(this.headGunnerToolStripMenuItem_Click);
             // 
             // helitToolStripMenuItem
             // 
             this.helitToolStripMenuItem.Name = "helitToolStripMenuItem";
-            this.helitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.helitToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.helitToolStripMenuItem.Text = "Helit";
             this.helitToolStripMenuItem.Click += new System.EventHandler(this.helitToolStripMenuItem_Click);
             // 
             // notoBangerToolStripMenuItem
             // 
             this.notoBangerToolStripMenuItem.Name = "notoBangerToolStripMenuItem";
-            this.notoBangerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.notoBangerToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.notoBangerToolStripMenuItem.Text = "NotoBanger";
             this.notoBangerToolStripMenuItem.Click += new System.EventHandler(this.notoBangerToolStripMenuItem_Click);
+            // 
+            // carryArmToolStripMenuItem
+            // 
+            this.carryArmToolStripMenuItem.Name = "carryArmToolStripMenuItem";
+            this.carryArmToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.carryArmToolStripMenuItem.Text = "CarryArm";
+            this.carryArmToolStripMenuItem.Click += new System.EventHandler(this.carryArmToolStripMenuItem_Click);
             // 
             // groundToolStripMenuItem1
             // 
@@ -312,7 +326,10 @@
             this.roofToolStripMenuItem,
             this.upGroundToolStripMenuItem,
             this.downGroundToolStripMenuItem,
-            this.platformToolStripMenuItem});
+            this.platformToolStripMenuItem,
+            this.rightYellowConveyorToolStripMenuItem,
+            this.rightBlueConveyprToolStripMenuItem,
+            this.rightSmallConveyorToolStripMenuItem});
             this.groundToolStripMenuItem1.Name = "groundToolStripMenuItem1";
             this.groundToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.groundToolStripMenuItem1.Text = "Ground";
@@ -320,84 +337,98 @@
             // cargoToolStripMenuItem
             // 
             this.cargoToolStripMenuItem.Name = "cargoToolStripMenuItem";
-            this.cargoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cargoToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.cargoToolStripMenuItem.Text = "Cargo";
             this.cargoToolStripMenuItem.Click += new System.EventHandler(this.cargoToolStripMenuItem_Click);
             // 
             // doorToolStripMenuItem
             // 
             this.doorToolStripMenuItem.Name = "doorToolStripMenuItem";
-            this.doorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.doorToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.doorToolStripMenuItem.Text = "Door";
             this.doorToolStripMenuItem.Click += new System.EventHandler(this.doorToolStripMenuItem_Click);
             // 
             // bigElevatorToolStripMenuItem
             // 
             this.bigElevatorToolStripMenuItem.Name = "bigElevatorToolStripMenuItem";
-            this.bigElevatorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bigElevatorToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.bigElevatorToolStripMenuItem.Text = "BigElevator";
             this.bigElevatorToolStripMenuItem.Click += new System.EventHandler(this.bigElevatorToolStripMenuItem_Click);
             // 
             // smallElevatorToolStripMenuItem
             // 
             this.smallElevatorToolStripMenuItem.Name = "smallElevatorToolStripMenuItem";
-            this.smallElevatorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.smallElevatorToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.smallElevatorToolStripMenuItem.Text = "SmallElevator";
             this.smallElevatorToolStripMenuItem.Click += new System.EventHandler(this.smallElevatorToolStripMenuItem_Click);
+            // 
+            // yellowConveyorToolStripMenuItem
+            // 
+            this.yellowConveyorToolStripMenuItem.Name = "yellowConveyorToolStripMenuItem";
+            this.yellowConveyorToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.yellowConveyorToolStripMenuItem.Text = "Left Yellow Conveyor";
+            this.yellowConveyorToolStripMenuItem.Click += new System.EventHandler(this.yellowConveyorToolStripMenuItem_Click);
+            // 
+            // smallConveyorToolStripMenuItem
+            // 
+            this.smallConveyorToolStripMenuItem.Name = "smallConveyorToolStripMenuItem";
+            this.smallConveyorToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.smallConveyorToolStripMenuItem.Text = "Left Small Conveyor";
+            this.smallConveyorToolStripMenuItem.Click += new System.EventHandler(this.smallConveyorToolStripMenuItem_Click);
             // 
             // conveyorToolStripMenuItem
             // 
             this.conveyorToolStripMenuItem.Name = "conveyorToolStripMenuItem";
-            this.conveyorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.conveyorToolStripMenuItem.Text = "Blue Conveyor";
+            this.conveyorToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.conveyorToolStripMenuItem.Text = "Left Blue Conveyor";
             this.conveyorToolStripMenuItem.Click += new System.EventHandler(this.conveyorToolStripMenuItem_Click_1);
             // 
             // thornToolStripMenuItem
             // 
             this.thornToolStripMenuItem.Name = "thornToolStripMenuItem";
-            this.thornToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.thornToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.thornToolStripMenuItem.Text = "Thorn";
             this.thornToolStripMenuItem.Click += new System.EventHandler(this.thornToolStripMenuItem_Click);
             // 
             // boxToolStripMenuItem
             // 
             this.boxToolStripMenuItem.Name = "boxToolStripMenuItem";
-            this.boxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.boxToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.boxToolStripMenuItem.Text = "Box";
             this.boxToolStripMenuItem.Click += new System.EventHandler(this.boxToolStripMenuItem_Click);
             // 
             // breakableWallToolStripMenuItem
             // 
             this.breakableWallToolStripMenuItem.Name = "breakableWallToolStripMenuItem";
-            this.breakableWallToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.breakableWallToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.breakableWallToolStripMenuItem.Text = "Box Wall";
             this.breakableWallToolStripMenuItem.Click += new System.EventHandler(this.breakableWallToolStripMenuItem_Click);
             // 
             // roofToolStripMenuItem
             // 
             this.roofToolStripMenuItem.Name = "roofToolStripMenuItem";
-            this.roofToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.roofToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.roofToolStripMenuItem.Text = "Roof";
             this.roofToolStripMenuItem.Click += new System.EventHandler(this.roofToolStripMenuItem_Click);
             // 
             // upGroundToolStripMenuItem
             // 
             this.upGroundToolStripMenuItem.Name = "upGroundToolStripMenuItem";
-            this.upGroundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.upGroundToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.upGroundToolStripMenuItem.Text = "UpGround";
             this.upGroundToolStripMenuItem.Click += new System.EventHandler(this.upGroundToolStripMenuItem_Click);
             // 
             // downGroundToolStripMenuItem
             // 
             this.downGroundToolStripMenuItem.Name = "downGroundToolStripMenuItem";
-            this.downGroundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.downGroundToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.downGroundToolStripMenuItem.Text = "DownGround";
             this.downGroundToolStripMenuItem.Click += new System.EventHandler(this.downGroundToolStripMenuItem_Click);
             // 
             // platformToolStripMenuItem
             // 
             this.platformToolStripMenuItem.Name = "platformToolStripMenuItem";
-            this.platformToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.platformToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.platformToolStripMenuItem.Text = "Platform";
             this.platformToolStripMenuItem.Click += new System.EventHandler(this.platformToolStripMenuItem_Click);
             // 
@@ -414,21 +445,21 @@
             // smallEnergyToolStripMenuItem
             // 
             this.smallEnergyToolStripMenuItem.Name = "smallEnergyToolStripMenuItem";
-            this.smallEnergyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.smallEnergyToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.smallEnergyToolStripMenuItem.Text = "SmallEnergy";
             this.smallEnergyToolStripMenuItem.Click += new System.EventHandler(this.smallEnergyToolStripMenuItem_Click);
             // 
             // bigEnergyToolStripMenuItem
             // 
             this.bigEnergyToolStripMenuItem.Name = "bigEnergyToolStripMenuItem";
-            this.bigEnergyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bigEnergyToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.bigEnergyToolStripMenuItem.Text = "BigEnergy";
             this.bigEnergyToolStripMenuItem.Click += new System.EventHandler(this.bigEnergyToolStripMenuItem_Click);
             // 
             // chimeraArmorToolStripMenuItem
             // 
             this.chimeraArmorToolStripMenuItem.Name = "chimeraArmorToolStripMenuItem";
-            this.chimeraArmorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.chimeraArmorToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.chimeraArmorToolStripMenuItem.Text = "ChimeraArmor";
             this.chimeraArmorToolStripMenuItem.Click += new System.EventHandler(this.chimeraArmorToolStripMenuItem_Click);
             // 
@@ -696,26 +727,40 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // yellowConveyorToolStripMenuItem
+            // rightFaceHeadGunnerToolStripMenuItem
             // 
-            this.yellowConveyorToolStripMenuItem.Name = "yellowConveyorToolStripMenuItem";
-            this.yellowConveyorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.yellowConveyorToolStripMenuItem.Text = "Yellow Conveyor";
-            this.yellowConveyorToolStripMenuItem.Click += new System.EventHandler(this.yellowConveyorToolStripMenuItem_Click);
+            this.rightFaceHeadGunnerToolStripMenuItem.Name = "rightFaceHeadGunnerToolStripMenuItem";
+            this.rightFaceHeadGunnerToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.rightFaceHeadGunnerToolStripMenuItem.Text = "RightFaceHeadGunner";
+            this.rightFaceHeadGunnerToolStripMenuItem.Click += new System.EventHandler(this.rightFaceHeadGunnerToolStripMenuItem_Click);
             // 
-            // smallConveyorToolStripMenuItem
+            // rightYellowConveyorToolStripMenuItem
             // 
-            this.smallConveyorToolStripMenuItem.Name = "smallConveyorToolStripMenuItem";
-            this.smallConveyorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.smallConveyorToolStripMenuItem.Text = "Small Conveyor";
-            this.smallConveyorToolStripMenuItem.Click += new System.EventHandler(this.smallConveyorToolStripMenuItem_Click);
+            this.rightYellowConveyorToolStripMenuItem.Name = "rightYellowConveyorToolStripMenuItem";
+            this.rightYellowConveyorToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.rightYellowConveyorToolStripMenuItem.Text = "Right Yellow Conveyor";
+            this.rightYellowConveyorToolStripMenuItem.Click += new System.EventHandler(this.rightYellowConveyorToolStripMenuItem_Click);
             // 
-            // carryArmToolStripMenuItem
+            // rightBlueConveyprToolStripMenuItem
             // 
-            this.carryArmToolStripMenuItem.Name = "carryArmToolStripMenuItem";
-            this.carryArmToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.carryArmToolStripMenuItem.Text = "CarryArm";
-            this.carryArmToolStripMenuItem.Click += new System.EventHandler(this.carryArmToolStripMenuItem_Click);
+            this.rightBlueConveyprToolStripMenuItem.Name = "rightBlueConveyprToolStripMenuItem";
+            this.rightBlueConveyprToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.rightBlueConveyprToolStripMenuItem.Text = "Right Blue Conveypr";
+            this.rightBlueConveyprToolStripMenuItem.Click += new System.EventHandler(this.rightBlueConveyprToolStripMenuItem_Click);
+            // 
+            // rightSmallConveyorToolStripMenuItem
+            // 
+            this.rightSmallConveyorToolStripMenuItem.Name = "rightSmallConveyorToolStripMenuItem";
+            this.rightSmallConveyorToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.rightSmallConveyorToolStripMenuItem.Text = "Right Small Conveyor";
+            this.rightSmallConveyorToolStripMenuItem.Click += new System.EventHandler(this.rightSmallConveyorToolStripMenuItem_Click);
+            // 
+            // cameraToolStripMenuItem
+            // 
+            this.cameraToolStripMenuItem.Name = "cameraToolStripMenuItem";
+            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cameraToolStripMenuItem.Text = "Camera";
+            this.cameraToolStripMenuItem.Click += new System.EventHandler(this.cameraToolStripMenuItem_Click_1);
             // 
             // Form1
             // 
@@ -831,6 +876,11 @@
         private System.Windows.Forms.ToolStripMenuItem carryArmToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem yellowConveyorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem smallConveyorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rightFaceHeadGunnerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rightYellowConveyorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rightBlueConveyprToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rightSmallConveyorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cameraToolStripMenuItem;
     }
 }
 

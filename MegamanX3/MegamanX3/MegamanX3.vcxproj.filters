@@ -258,6 +258,42 @@
     <ClCompile Include="Roof.cpp">
       <Filter>Entities\Ground</Filter>
     </ClCompile>
+    <ClCompile Include="HelitRocket.cpp">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArmDamaged.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArmDropping.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArmFlying.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArmState.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArmDie.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetDrop.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetPrepare.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetPrick.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetReturn.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetFly.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetDie.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -548,6 +584,45 @@
     </ClInclude>
     <ClInclude Include="Roof.h">
       <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="HelitRocket.h">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmDamaged.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmDropping.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmFlying.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmState.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmStateHandler.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmDie.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetDrop.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetPrepare.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetPrick.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetReturn.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetFly.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetDie.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

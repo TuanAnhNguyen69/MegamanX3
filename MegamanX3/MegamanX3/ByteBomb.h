@@ -5,7 +5,7 @@
 
 namespace Define
 {
-	const float BYTEBOMB_SPEED = 300.0f;		//vận tốc
+	const float BYTEBOMB_SPEED = 250.0f;		//vận tốc
 	const float BYTEBOMB_ACCELERATION = 10.0f;	//gia tốc
 }
 

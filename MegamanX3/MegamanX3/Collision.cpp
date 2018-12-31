@@ -198,6 +198,16 @@ bool Collision::IsCollide(RECT rect1, RECT rect2)
 	return true;
 }
 
+bool Collision::IsInside(RECT rect1, RECT rect2)	
+{
+	if (rect1.left < rect2.left || rect1.right > rect2.right || rect1.top < rect2.top || rect1.bottom > rect2.bottom)
+	{
+		return false;
+	}
+
+	return true;
+}
+
 RECT Collision::GetSweptBroadphaseRect(Entity * entity)
 {
 	RECT boardPhase;

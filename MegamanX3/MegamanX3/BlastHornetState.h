@@ -1,6 +1,7 @@
 #ifndef _ENEMY_STATE_H
 #define _ENEMY_STATE_H
 
+#include "Engine.h"
 #include "Entity.h"
 #include "BlastHornetStateHandler.h"
 #include "AnimatedSprite.h"
@@ -19,6 +20,7 @@ protected:
 	AnimatedSprite *sprite;
 	BlastHornetStateHandler *handler;
 	Entity *entity;
+	bool isGoToPointA;
 };
 
 #endif

@@ -27,6 +27,7 @@ Helit::~Helit()
 
 void Helit::Initialize()
 {
+	hp = 100;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"helit", 50, 50);
 	this->ChangeState(HelitStateHandler::StateName::Flying);
@@ -35,12 +36,30 @@ void Helit::Initialize()
 void Helit::Update()
 {
 	//if (IsAction())
+	
+	if (this->GetPosition().x > player->GetPosition().x)
 	{
-		Entity::Update();
-		if (currentState) {
-			currentState->Update();
-		}
+		targetIsLeft = true;
 	}
+	else
+	{
+		targetIsLeft = false;
+	}
+
+	if (player->GetPosition().y  < (this->GetPosition().y ))
+	{
+		targetIsAbove = true;
+	}
+	else
+	{
+		targetIsAbove = false;
+	}
+
+	Entity::Update();
+	if (currentState) {
+		currentState->Update();
+	}
+
 }
 
 //void Helit::SetPosition(int x, int y)
@@ -113,25 +132,36 @@ void Helit::OnNoCollisionWithBottom()
 {
 }
 
-bool Helit::IsAction()
+bool Helit::GetLeftTarget()
 {
-	if (abs(player->GetPosition().x - this->GetPosition().x) <= 200 && 
-		abs(player->GetPosition().y - this->GetPosition().y) <= 200)
-	{
-		return true;
-	}
-	return false;
+	return targetIsLeft;
 }
 
-bool Helit::IsShoot()
+bool Helit::GetAboveTarget()
 {
-	if (abs(player->GetPosition().x - this->GetPosition().x) <= 75 &&
-		(this->GetPosition().y >= player->GetPosition().y));
-	{
-		return true;
-	}
-	return false;
+	return targetIsAbove;
 }
+
+bool Helit::GetHadShootState()
+{
+	return hadShootState;
+}
+
+void Helit::SetHadShootState(bool hadShootState)
+{
+	this->hadShootState = hadShootState;
+}
+
+int Helit::GetHP()
+{
+	return hp;
+}
+
+void Helit::SetHP(int hp)
+{
+	this->hp = hp;
+}
+
 
 //bool Helit::GetAction()
 //{

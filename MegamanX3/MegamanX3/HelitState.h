@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Entity.h"
 #include "AnimatedSprite.h"
 #include "HelitStateHandler.h"
@@ -19,5 +19,6 @@ protected:
 	AnimatedSprite * sprite;
 	HelitStateHandler *handler;
 	Entity *entity;
+	/*bool hadShootState;*/
 };
 

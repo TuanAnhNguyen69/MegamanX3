@@ -33,6 +33,10 @@ int Camera::GetHeight()
 	return height;
 }
 
+void Camera::Initialize(LPCTSTR filePath)
+{
+}
+
 D3DXVECTOR3 Camera::GetCenter()
 {
 	return center;
