@@ -338,4 +338,3 @@ float Collision::SweptAABB(Entity *e1, Entity *e2, Entity::CollisionReturn & dat
 
 	return entryTime;
 }
-

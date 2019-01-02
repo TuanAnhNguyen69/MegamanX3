@@ -20,7 +20,6 @@ public:
 
 private:
 	void CheckCollision();
-	void CheckCamera();
 	void DrawQuadtree(QuadTree *quadtree);
 
 	DebugDraw *debugDraw;

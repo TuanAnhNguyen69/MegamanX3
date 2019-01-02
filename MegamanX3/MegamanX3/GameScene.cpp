@@ -33,15 +33,15 @@ bool GameScene::Initialize()
 	map->Initialize("roof", 2);
 
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
-	camera->SetCenter(SCREEN_WIDTH / 2, 0);
 	camera->Initialize("testCam");
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(100, 1700);
+	player->SetPosition(300, 1700);
+
+	
 
 	EntityManager::GetInstance()->Initialize(player, camera, "testCam", map->GetWidth(), map->GetHeight());
-
 	
 	debugDraw = new DebugDraw();
 	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));
@@ -73,8 +73,9 @@ void GameScene::DrawQuadtree(QuadTree *quadtree)
 void GameScene::Update()
 {
 	CheckCollision();
+	camera->CheckCameraPath();
 	EntityManager::GetInstance()->CheckCollide();
-	CheckCamera();
+	camera->Update(player->GetPosition());
 	player->Update();
 	EntityManager::GetInstance()->Update();
 }
@@ -84,7 +85,6 @@ void GameScene::CheckCollision()
 	int widthBottom = 0;
 	std::vector<Entity*> collidableEntity;
 	EntityManager::GetInstance()->GetQuadTree()->GetEntitiesCollideAble(collidableEntity, camera->GetBound());
-	//std::cout << EntityManager::GetInstance()->GetQuadTree()->GetTotalEntities() << std::endl;
 	for (size_t index = 0; index < collidableEntity.size(); index++) {
 		RECT broadphase = Collision::GetSweptBroadphaseRect(player);
 		if (Collision::IsCollide(broadphase, collidableEntity.at(index)->GetBound()))
@@ -115,31 +115,6 @@ void GameScene::CheckCollision()
 
 	if (widthBottom < Define::PLAYER_BOTTOM_RANGE_FALLING) {
 		player->OnNoCollisionWithBottom();
-	}
-}
-
-void GameScene::CheckCamera() {
-	camera->SetCenter(player->GetPosition());
-	if (camera->GetBound().left < 0)
-	{
-		camera->SetCenter(camera->GetWidth() / 2, camera->GetCenter().y);
-	}
-
-	if (camera->GetBound().right > map->GetWidth())
-	{
-		camera->SetCenter(map->GetWidth() - camera->GetWidth() / 2,
-			camera->GetCenter().y);
-	}
-
-	if (camera->GetBound().top < 0)
-	{
-		camera->SetCenter(camera->GetCenter().x, camera->GetHeight() / 2);
-	}
-
-	if (camera->GetBound().bottom > map->GetHeight())
-	{
-		camera->SetCenter(camera->GetCenter().x,
-			map->GetHeight() - camera->GetHeight() / 2);
 	}
 }
 
