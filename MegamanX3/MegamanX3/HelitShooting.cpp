@@ -27,7 +27,7 @@ void HelitShooting::Load()
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	hadShoot = false;
-	ammo = 2;
+	ammo = 10;
 }
 
 void HelitShooting::Update()
