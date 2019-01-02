@@ -20,3 +20,13 @@ void Enemy::Update()
 void Enemy::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 }
+
+void Enemy::SubHP(int damage)
+{
+	HP -= damage;
+}
+
+int Enemy::GetHP()
+{
+	return HP;
+}

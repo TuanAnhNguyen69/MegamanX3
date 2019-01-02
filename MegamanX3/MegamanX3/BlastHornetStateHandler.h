@@ -4,13 +4,10 @@
 
 namespace Define
 {
-	const float BLASTHORNET_PRICK_SPEED_X = 0.0f;
-	const float BLASTHORNET_PRICK_SPEED_Y = 0.0f;
-	const float BLASTHORNET_RETURN_SPEED_X = 10.0f;
-	const float BLASTHORNET_RETURN_SPEED_Y = 10.0f;
-	const float BLASTHORNET_FLY_SPEED_X = 0.0f;
-	const float BLASTHORNET_FLY_SPEED_Y = 0.0f;
-
+	const float BLASTHORNET_PRICK_SPEED = 50.0f;
+	const float BLASTHORNET_RETURN_SPEED = 20.0f;
+	const float BLASTHORNET_FLY_SPEED = 20.0f;
+	const int BLASTHORNET_HP = 40;
 }
 
 class BlastHornetStateHandler
@@ -43,6 +40,10 @@ public:
 
 	virtual D3DXVECTOR3 GetPointA() = 0;
 	virtual D3DXVECTOR3 GetPointB() = 0;
+
+	virtual Player* GetPlayer() = 0;
+
+	virtual int GetHP() = 0;
 
 };
 

@@ -4,7 +4,7 @@
 
 ByteThrow::ByteThrow(ByteStateHandler *handler, Entity *entity) : ByteState(handler, entity)
 {
-	sprite = new AnimatedSprite(8, 1, false);
+	sprite = new AnimatedSprite(8, 1, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "byte",
 		8, 11, 4, 100, 100);
 }
@@ -41,7 +41,8 @@ void ByteThrow::Update()
 		entity->SetReverse(true);
 	}
 
-	if (sprite->GetCurrentFrame() == 2 && !hadThrow)
+	//if (sprite->GetCurrentFrame() == 2 && !hadThrow)
+	if(!hadThrow)
 	{
 		ByteBomb *bomb = new ByteBomb();
 		if (handler->IsFaceLeft())
@@ -55,7 +56,7 @@ void ByteThrow::Update()
 			bomb->Initailize(ByteBomb::MoveDirection::Right);
 		}
 		bomb->SetScale(2, 2);
-		bomb->SetBound(15, 15);
+		bomb->SetBound(15*2, 15*2);
 		EntityManager::GetInstance()->AddEntity(bomb);
 		hadThrow = true;
 	}

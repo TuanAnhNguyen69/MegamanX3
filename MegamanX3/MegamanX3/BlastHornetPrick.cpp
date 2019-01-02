@@ -4,9 +4,9 @@
 
 BlastHornetPrick::BlastHornetPrick(BlastHornetStateHandler *handler, Entity *entity) : BlastHornetState(handler, entity)
 {
-	sprite = new AnimatedSprite(25, 1, false);
+	sprite = new AnimatedSprite(15, 0.5, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "blast_hornet",
-		3, 23, 6, 100, 100);
+		6, 23, 6, 100, 100);
 }
 
 
@@ -22,36 +22,45 @@ BlastHornetPrick::~BlastHornetPrick()
 
 void BlastHornetPrick::Load()
 {
+	isStopState = false;
 	entity->SetVelocity(0, 0);
 	entity->SetSprite(sprite);
+	handler->SetPreAction(BlastHornetStateHandler::StateName::Prick);
 	targetPos = handler->GetPlayerPos();
+	timeStartState = clock();
 }
 
 void BlastHornetPrick::Update()
 {
+	BlastHornetState::Update();
+
 	//Nếu đang ở A
 	if (entity->GetPosition().x == handler->GetPointA().x && entity->GetPosition().y == handler->GetPointA().y)
 	{
-		//Vector vận tốc sẽ hướng từ A tới target
-		//Vector có phương, chiều (x/y,y/x) ~ (x,y)
-		//x = xA - xCurrent, y = yA - yCurrent, y luôn dương
-		//Vector có độ lớn như Define
-		entity->SetVelocity(
-			(targetPos.x - handler->GetPointA().x) / (targetPos.y - handler->GetPointA().y) * Define::BLASTHORNET_PRICK_SPEED_X,
-			(targetPos.y - handler->GetPointA().y) / abs(targetPos.x - handler->GetPointA().x) * Define::BLASTHORNET_PRICK_SPEED_Y
-		);
+		curPos = handler->GetPointA();
+		//GoOn(handler->GetPointA(), targetPos, 50);
 	}
 	//Nếu đang ở B
-	else
+	else if (entity->GetPosition().x == handler->GetPointB().x && entity->GetPosition().y == handler->GetPointB().y)
 	{
-		//Vector vận tốc sẽ hướng từ B tới target
-		//Vector có phương, chiều (x/y,y/x) ~ (x,y)
-		//x = xB - xCurrent, y = yB - yCurrent, y luôn dương
-		//Vector có độ lớn như Define
-		entity->SetVelocity(
-			(targetPos.x - handler->GetPointA().x) / (targetPos.y - handler->GetPointA().y) * Define::BLASTHORNET_PRICK_SPEED_X,
-			(targetPos.y - handler->GetPointA().y) / abs(targetPos.x - handler->GetPointA().x) * Define::BLASTHORNET_PRICK_SPEED_Y
-		);
+		curPos = handler->GetPointB();
+		//GoOn(handler->GetPointB(), targetPos, 50);
+	}
+
+	if (sprite->IsFinished())
+	{
+		GoOn(curPos, targetPos, 50);
+	}
+	
+	if (isStopState)
+	{
+		timeCount = clock();
+		int dt = (timeCount - timeStartState) / 1200;
+		if(dt > 3)
+		{
+			sprite->ResetFrame();
+			handler->ChangeState(BlastHornetStateHandler::StateName::Return);
+		}		
 	}
 }
 
@@ -62,37 +71,37 @@ void BlastHornetPrick::OnCollision(Entity * impactor, Entity::CollisionSide side
 		switch (side)
 		{
 
-		case Entity::Left:
-		{
-			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
-			entity->SetVelocity(0, 0);
-			handler->ChangeState(BlastHornetStateHandler::StateName::Return);
-			break;
-		}
+			case Entity::Left:
+			{
+				entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+				entity->SetVelocity(0, 0);
+				isStopState = true;
+				break;
+			}
 
-		case Entity::Right:
-		{
-			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
-			entity->SetVelocity(0, 0);
-			handler->ChangeState(BlastHornetStateHandler::StateName::Return);
-			break;
-		}
+			case Entity::Right:
+			{
+				entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+				entity->SetVelocity(0, 0);
+				isStopState = true;
+				break;
+			}
 
-		case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
-		{
-			entity->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top);
-			entity->SetVelocity(0, 0);
-			handler->ChangeState(BlastHornetStateHandler::StateName::Return);
-			break;
-		}
+			case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
+			{
+				entity->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top);
+				entity->SetVelocity(0, 0);
+				isStopState = true;
+				break;
+			}
 
-		case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
-		{
-			entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
-			entity->SetVelocity(0, 0);
-			handler->ChangeState(BlastHornetStateHandler::StateName::Return);
-			break;
-		}
+			case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
+			{
+				entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+				entity->SetVelocity(0, 0);
+				isStopState = true;
+				break;
+			}
 		}
 	}
 }

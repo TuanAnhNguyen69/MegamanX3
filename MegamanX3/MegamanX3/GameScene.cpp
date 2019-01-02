@@ -89,7 +89,7 @@ void GameScene::CheckCollision()
 		RECT broadphase = Collision::GetSweptBroadphaseRect(player);
 		if (Collision::IsCollide(broadphase, collidableEntity.at(index)->GetBound()))
 		{
-			if (collidableEntity.at(index)->GetEntityId() == EntityId::Canon_ID) {
+			if (collidableEntity.at(index)->GetEntityId() == EntityId::BlastHornet_ID) {
 				int a = 0;
 			}
 			Entity::CollisionReturn collideData;
