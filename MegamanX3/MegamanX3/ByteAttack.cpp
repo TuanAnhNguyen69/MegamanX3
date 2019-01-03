@@ -80,15 +80,16 @@ void ByteAttack::OnCollision(Entity * impactor, Entity::CollisionSide side, Enti
 	{
 		switch (side)
 		{
-		case Entity::Left :
-			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left +1, 0);
+
+		case Entity::Left:
+			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left + 60, 0);
 			entity->SetVelocityX(0);
 			handler->SetFace(false);
 			handler->ChangeState(ByteStateHandler::StateName::Standing);
 			break;
-			
-		case Entity::Right :
-			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left +20), 0);
+
+		case Entity::Right:
+			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left) - 60, 0);
 			entity->SetVelocityX(0);
 			handler->SetFace(true);
 			handler->ChangeState(ByteStateHandler::StateName::Standing);

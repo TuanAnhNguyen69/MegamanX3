@@ -23,6 +23,7 @@ ByteBomb::~ByteBomb()
 
 void ByteBomb::Initailize(MoveDirection moveDirection)
 {
+
 	this->moveDirection = moveDirection;
 	this->SetSprite(sprite);
 }

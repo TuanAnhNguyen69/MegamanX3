@@ -145,15 +145,18 @@ Entity::CollisionSide Collision::GetSideCollision(Entity * e1, Entity * e2)
 				return Entity::Right;
 			}
 		}
-		else if (wy > -hx)
-		{
-			/*va cham ben trai e1*/
-			return Entity::Left;
-		}
 		else
 		{
-			/*va cham phia duoi e1*/
-			return Entity::Bottom;
+			if (wy > -hx)
+			{
+				/*va cham ben trai e1*/
+				return Entity::Left;
+			}
+			else
+			{
+				/*va cham phia duoi e1*/
+				return Entity::Bottom;
+			}
 		}
 	}
 	return Entity::NotKnow;

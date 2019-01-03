@@ -27,23 +27,24 @@ void BlastHornetPrepare::Load()
 }
 
 void BlastHornetPrepare::Update()
-{
-	BlastHornetState::Update();
+{	
 	//if (HP > 20) nếu máu còn nhiều hơn 1/2
+	if(true)
 	{
 		if (handler->GetPreAction() == BlastHornetStateHandler::StateName::Drop)
 		{
 			handler->ChangeState(BlastHornetStateHandler::StateName::Prick);
 		}
-		else
+		else if(handler->GetPreAction() == BlastHornetStateHandler::StateName::Prick)
 		{
 			handler->ChangeState(BlastHornetStateHandler::StateName::Drop);
 		}
 	}
-	//else
+	/*else
 	{
 		handler->ChangeState(BlastHornetStateHandler::StateName::Fly);
-	}
+	}*/
+	//BlastHornetState::Update();
 }
 
 void BlastHornetPrepare::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)

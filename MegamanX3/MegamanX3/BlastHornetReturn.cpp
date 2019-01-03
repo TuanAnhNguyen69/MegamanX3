@@ -4,7 +4,7 @@
 
 BlastHornetReturn::BlastHornetReturn(BlastHornetStateHandler *handler, Entity *entity) : BlastHornetState(handler, entity)
 {
-	sprite = new AnimatedSprite(30, 1, true);
+	sprite = new AnimatedSprite(30, 0.3, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "blast_hornet",
 		0, 2, 6, 100, 100);
 }
@@ -12,7 +12,7 @@ BlastHornetReturn::BlastHornetReturn(BlastHornetStateHandler *handler, Entity *e
 
 BlastHornetReturn::~BlastHornetReturn()
 {
-	if (handler->GetCurrentStateName() != BlastHornetStateHandler::StateName::Prepare) {
+	if (handler->GetCurrentStateName() != BlastHornetStateHandler::StateName::Return) {
 		if (sprite) {
 			delete sprite;
 			sprite = nullptr;
@@ -22,30 +22,40 @@ BlastHornetReturn::~BlastHornetReturn()
 
 void BlastHornetReturn::Load()
 {
+	entity->SetVelocity(0, 0);
 	entity->SetSprite(sprite);
 	curPos = D3DXVECTOR3(entity->GetPosition().x, entity->GetPosition().y, 0);
+	//isGoToPointA = false;
 }
 
 void BlastHornetReturn::Update()
 {
+	BlastHornetState::Update();
+
+	//Nếu player ở gần B hơn A
+	if (abs(handler->GetPlayerPos().x - handler->GetPointA().x) > abs(handler->GetPlayerPos().x - handler->GetPointB().x))
+	{
+		isGoToPointA = false;
+	}
+	//Nếu player ở gần A hơn B
+	else
+	{
+		isGoToPointA = true;
+	}
+
 	//Nếu BlastHornet trở về A
 	if (isGoToPointA)
 	{
 		//Nếu đã ở A thì chuyển sang State Prepare
 		if (entity->GetPosition().x == handler->GetPointA().x && entity->GetPosition().y == handler->GetPointA().y)
 		{
+			entity->SetReverse(false);
 			handler->ChangeState(BlastHornetStateHandler::StateName::Prepare);
 		}
 		//Nếu chưa ở A
 		else
 		{
-			//Vector vận tốc sẽ hướng từ curPos về A
-			//Vector có phương, chiều (x/y,y/x) ~ (x,y)
-			//x = xA - xCurrent, y = yA - yCurrent, y luôn âm
-			//Vector có độ lớn như Define
-			entity->SetVelocity(
-				(handler->GetPointA().x - curPos.x) / abs(handler->GetPointA().y - curPos.y) * Define::BLASTHORNET_RETURN_SPEED_X,
-				(handler->GetPointA().y - curPos.y) / (handler->GetPointA().x - curPos.x) * Define::BLASTHORNET_RETURN_SPEED_Y);
+			GoTo(curPos, handler->GetPointA(), 10);
 		}
 	}
 	//Nếu BlastHornet trở về B
@@ -54,19 +64,19 @@ void BlastHornetReturn::Update()
 		//Nếu đã ở B thì chuyển sang State Prepare
 		if (entity->GetPosition().x == handler->GetPointB().x && entity->GetPosition().y == handler->GetPointB().y)
 		{
+			entity->SetReverse(true);
 			handler->ChangeState(BlastHornetStateHandler::StateName::Prepare);
 		}
 		//Nếu chưa ở B
 		else
 		{
-			//Vector vận tốc sẽ hướng từ curPos về B
-			//Vector có phương (x/y,y/x) ~ (x,y)
-			//x = xB - xCurrent, y = yB - yCurrent, y luôn âm
-			//Vector có độ lớn như Define
-			entity->SetVelocity(
-				(handler->GetPointB().x - curPos.x) / abs(handler->GetPointA().y - curPos.y) * Define::BLASTHORNET_RETURN_SPEED_X,
-				(handler->GetPointB().y - curPos.y) / (handler->GetPointB().x - curPos.x) * Define::BLASTHORNET_RETURN_SPEED_Y);
+			GoTo(curPos, handler->GetPointB(), 10);
 		}
+	}
+
+	if (handler->GetHP() <= Define::BLASTHORNET_HP / 2)
+	{
+		handler->ChangeState(BlastHornetStateHandler::StateName::Fly);
 	}
 }
 
