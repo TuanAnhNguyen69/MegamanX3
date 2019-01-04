@@ -126,6 +126,14 @@ void Player::Update()
 		allowSlide = true;
 	}
 
+	if (input->IsKeyDown(DIK_T)) {
+		SetVelocityY(-100);
+	}
+
+	if (input->IsKeyUp(DIK_T)) {
+		SetVelocityY(0);
+	}
+
 	if (input->IsKeyDown(DIK_SPACE)) {
 		if (!isJumping) {
 			if (currentStateName == Running || currentStateName == Standing) {

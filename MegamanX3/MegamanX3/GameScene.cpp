@@ -37,7 +37,8 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(300, 1700);
+	player->SetPosition(8300, 1800);
+	camera->SetCenter(player->GetPosition());
 
 	
 

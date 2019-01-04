@@ -66,8 +66,7 @@ void Camera::Initialize(LPCTSTR filePath)
 
 void Camera::Update(D3DXVECTOR3 center)
 {
-	D3DXVECTOR3 newCenter = D3DXVECTOR3(center.x, center.y - 65, center.z);
-	this->SetCenter(newCenter);
+	this->SetCenter(center);
 
 	if (!range) {
 		return;
@@ -102,6 +101,10 @@ void Camera::CheckCameraPath()
 	int size = rangeRects.size();
 	for (int index = 0; index < size; index++)
 	{
+		if (index == 3) {
+			int a = 0;
+		}
+
 		if (Collision::IsInside(this->GetBound(), *rangeRects.at(index))) {
 			currentRects.push_back(rangeRects.at(index));
 		}
@@ -110,6 +113,11 @@ void Camera::CheckCameraPath()
 	size = currentRects.size();
 	if (size != 0) {
 		range = new RECT();
+		range->left = -1;
+		range->right = -1;
+		range->top = -1;
+		range->bottom = -1;
+
 	}
 	for (int index = 0; index < size; index++)
 	{
@@ -136,22 +144,22 @@ RECT Camera::GetBound()
 
 void Camera::SetRange(RECT *rect)
 {
-	if (rect->left < range->left || range->left == 0)
+	if (rect->left < range->left || range->left == -1)
 	{
 		range->left = rect->left;
 	}
 
-	if (rect->right > range->right || range->right == 0)
+	if (rect->right > range->right || range->right == -1)
 	{
 		range->right = rect->right;
 	}
 
-	if (rect->top < range->top || range->top == 0)
+	if (rect->top < range->top || range->top == -1)
 	{
 		range->top = rect->top;
 	}
 
-	if (rect->bottom > range->bottom || range->bottom == 0)
+	if (rect->bottom > range->bottom || range->bottom == -1)
 	{
 		range->bottom = rect->bottom;
 	}

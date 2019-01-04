@@ -1,8 +1,8 @@
 #ifndef _SYSTEM_DEFS_H
 #define _SYSTEM_DEFS_H
 
-#define SCREEN_HEIGHT 440
-#define SCREEN_WIDTH 510
+#define SCREEN_HEIGHT 488
+#define SCREEN_WIDTH 528
 #define WINDOW_POSX 130
 #define WINDOW_POSY 85
 
