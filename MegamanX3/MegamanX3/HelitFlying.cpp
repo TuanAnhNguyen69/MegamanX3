@@ -92,7 +92,8 @@ void HelitFlying::OnCollision(Entity * impactor, Entity::CollisionSide side, Ent
 
 				/*entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
 				entity->SetVelocity(0, 0);*/
-				entity->AddVelocityY(-20.0f);				
+				entity->AddVelocityY(-20.0f);	
+				handler->ChangeState(HelitStateHandler::StateName::Die);
 				break;
 			}
 		}
@@ -108,7 +109,7 @@ void HelitFlying::OnCollision(Entity * impactor, Entity::CollisionSide side, Ent
 			/*entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left + 1, 0);
 			entity->SetVelocity(0, 0);*/
 			if (handler->GetHP() > 0) {
-				handler->SetHP(handler->GetHP() - 50);
+				handler->SubHP(handler->GetHP() - 50);
 			}
 			else {
 				EntityManager::GetInstance()->RemoveEntity(entity);
@@ -123,7 +124,7 @@ void HelitFlying::OnCollision(Entity * impactor, Entity::CollisionSide side, Ent
 			entity->SetVelocity(0, 0);*/
 			
 			if (handler->GetHP() > 0) {
-				handler->SetHP(handler->GetHP() - 50);
+				handler->SubHP(handler->GetHP() - 50);
 			}
 			else {
 				EntityManager::GetInstance()->RemoveEntity(entity);
@@ -138,7 +139,7 @@ void HelitFlying::OnCollision(Entity * impactor, Entity::CollisionSide side, Ent
 			entity->SetVelocity(0, 0);*/
 			
 			if (handler->GetHP() > 0) {
-				handler->SetHP(handler->GetHP() - 50);
+				handler->SubHP(handler->GetHP() - 50);
 			}
 			else {
 				EntityManager::GetInstance()->RemoveEntity(entity);
@@ -154,7 +155,7 @@ void HelitFlying::OnCollision(Entity * impactor, Entity::CollisionSide side, Ent
 			entity->SetVelocity(0, 0);*/
 			
 			 if (handler->GetHP() > 0) {
-				 handler->SetHP(handler->GetHP() - 50);
+				 handler->SubHP(handler->GetHP() - 50);
 			 }
 			 else {
 				 EntityManager::GetInstance()->RemoveEntity(entity);

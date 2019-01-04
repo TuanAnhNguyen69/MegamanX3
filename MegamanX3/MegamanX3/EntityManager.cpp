@@ -256,18 +256,17 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 			}
 
-			case EntityId::NotorBanger_ID:
+			/*case EntityId::NotorBanger_ID:
 			{				
 
-				/*NotorBanger * notoBanger = new NotorBanger(player);
+				NotorBanger * notoBanger = new NotorBanger(player);
 				notoBanger->Initialize();
 				notoBanger->SetPosition(posX + width / 2, posY + height / 2);
 				notoBanger->SetScale(2, 2);
 				notoBanger->SetBound(width, height);
-				AddEntity(notoBanger);
-				break;*/
+				AddEntity(notoBanger);			
 				break;
-			}
+			}*/
 			/*case EntityId::Bee:
 				break;
 				case EntityId::Helit:

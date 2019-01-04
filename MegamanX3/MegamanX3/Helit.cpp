@@ -23,11 +23,15 @@ Helit::Helit(Player *_player) : Enemy(EntityId::Helit_ID, _player)
 
 Helit::~Helit()
 {
+	if (currentState) {
+		delete currentState;
+		currentState = nullptr;
+	}	
 }
 
 void Helit::Initialize()
 {
-	hp = 100;
+	HP = 0;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"helit", 50, 50);
 	this->ChangeState(HelitStateHandler::StateName::Flying);
@@ -154,13 +158,19 @@ void Helit::SetHadShootState(bool hadShootState)
 
 int Helit::GetHP()
 {
-	return hp;
+	return HP;
 }
 
-void Helit::SetHP(int hp)
+void Helit::SubHP(int damage)
 {
-	this->hp = hp;
+	this->HP -= damage;
 }
+
+void Helit::Died()
+{
+	EntityManager::GetInstance()->RemoveEntity(this);
+}
+
 
 
 //bool Helit::GetAction()
