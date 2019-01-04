@@ -27,6 +27,7 @@ void BlastHornetDrop::Load()
 	entity->SetVelocity(0, 0);
 	hadDrop = false;
 	targetPos = handler->GetPlayerPos();
+	curPos = entity->GetPosition();
 }
 
 void BlastHornetDrop::Update()
@@ -34,17 +35,17 @@ void BlastHornetDrop::Update()
 	if (sprite->GetCurrentFrame() == 10 && !hadDrop)
 	{
 		Bee *bee1, *bee2, *bee3, *bee4, *bee5;
-		bee1 = new Bee(D3DXVECTOR3(targetPos.x + 1000, targetPos.y, 0));
-		bee2 = new Bee(D3DXVECTOR3(targetPos.x + 500, targetPos.y, 0));
+		bee1 = new Bee(D3DXVECTOR3(targetPos.x + 150, targetPos.y, 0));
+		bee2 = new Bee(D3DXVECTOR3(targetPos.x + 70, targetPos.y, 0));
 		bee3 = new Bee(targetPos);
-		bee4 = new Bee(D3DXVECTOR3(targetPos.x - 500, targetPos.y, 0));
-		bee5 = new Bee(D3DXVECTOR3(targetPos.x - 1000, targetPos.y, 0));
+		bee4 = new Bee(D3DXVECTOR3(targetPos.x - 70, targetPos.y, 0));
+		bee5 = new Bee(D3DXVECTOR3(targetPos.x - 150, targetPos.y, 0));
 
-		bee1->SetPosition(entity->GetPosition().x, entity->GetPosition().y);
-		bee2->SetPosition(entity->GetPosition().x, entity->GetPosition().y);
-		bee3->SetPosition(entity->GetPosition().x, entity->GetPosition().y);
-		bee4->SetPosition(entity->GetPosition().x, entity->GetPosition().y);
-		bee5->SetPosition(entity->GetPosition().x, entity->GetPosition().y);
+		bee1->SetPosition(curPos.x, curPos.y);
+		bee2->SetPosition(curPos.x, curPos.y);
+		bee3->SetPosition(curPos.x, curPos.y);
+		bee4->SetPosition(curPos.x, curPos.y);
+		bee5->SetPosition(curPos.x, curPos.y);
 
 		bee1->SetScale(2, 2);
 		bee2->SetScale(2, 2);
@@ -57,6 +58,12 @@ void BlastHornetDrop::Update()
 		bee3->SetBound(15 * 2, 15 * 2);
 		bee4->SetBound(15 * 2, 15 * 2);
 		bee5->SetBound(15 * 2, 15 * 2);
+
+		bee1->Initailize();
+		bee2->Initailize();
+		bee3->Initailize();
+		bee4->Initailize();
+		bee5->Initailize();
 
 		EntityManager::GetInstance()->AddEntity(bee1);
 		EntityManager::GetInstance()->AddEntity(bee2);

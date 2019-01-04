@@ -13,5 +13,6 @@ public:
 private:
 	bool hadDrop;
 	D3DXVECTOR3 targetPos;
+	D3DXVECTOR3 curPos;
 };
 

@@ -10,7 +10,9 @@ Bee::Bee(Player *player)
 	sprite = new AnimatedSprite(15, 1, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "bee",
 		0, 2, 3, 30, 30);
-	this->player = player;
+	//this->player = player;
+	//this->startPos = D3DXVECTOR3(this->GetPosition().x, this->GetPosition().y, 0);
+	//this->startPos = this->GetPosition();
 }
 
 Bee::Bee(D3DXVECTOR3 desPos)
@@ -22,6 +24,7 @@ Bee::Bee(D3DXVECTOR3 desPos)
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "bee",
 		0, 2, 3, 30, 30);
 	this->desPos = desPos;
+	//this->startPos = this->GetPosition();
 }
 
 
@@ -38,8 +41,8 @@ void Bee::Initailize()
 {
 	timeBorn = clock();
 	this->SetSprite(sprite);
-	this->startPos = D3DXVECTOR3(this->GetPosition().x, this->GetPosition().y, 0);
 	isStop = false;
+	this->startPos = D3DXVECTOR3(this->GetPosition().x, this->GetPosition().y, 0);
 }
 
 void Bee::Update()

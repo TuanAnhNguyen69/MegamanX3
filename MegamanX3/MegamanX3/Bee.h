@@ -5,7 +5,7 @@
 
 namespace Define
 {
-	const float BEE_SPEED = 10.0f;
+	const float BEE_SPEED = 15.0;
 	const float BEE_FOLLOW_SPEED = 7.0f;
 }
 
@@ -31,6 +31,5 @@ private:
 	clock_t timeBorn;
 	clock_t timeCount;
 	bool isStop;
-
 };
 

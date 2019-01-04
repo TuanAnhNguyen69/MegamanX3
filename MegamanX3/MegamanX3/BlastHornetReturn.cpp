@@ -26,11 +26,7 @@ void BlastHornetReturn::Load()
 	entity->SetSprite(sprite);
 	curPos = D3DXVECTOR3(entity->GetPosition().x, entity->GetPosition().y, 0);
 	//isGoToPointA = false;
-}
-
-void BlastHornetReturn::Update()
-{
-	BlastHornetState::Update();
+	route = Route::Unknow;
 
 	//Nếu player ở gần B hơn A
 	if (abs(handler->GetPlayerPos().x - handler->GetPointA().x) > abs(handler->GetPlayerPos().x - handler->GetPointB().x))
@@ -42,6 +38,35 @@ void BlastHornetReturn::Update()
 	{
 		isGoToPointA = true;
 	}
+}
+
+void BlastHornetReturn::Update()
+{
+	BlastHornetState::Update();
+
+	/*if ((entity->GetPosition().x == handler->GetPointA().x && entity->GetPosition().y == handler->GetPointA().y) ||
+		(entity->GetPosition().x == handler->GetPointB().x && entity->GetPosition().y == handler->GetPointB().y))
+	{
+		isChangePos = true;
+	}
+	else
+	{
+		isChangePos = false;
+	}*/
+
+	/*if (entity->GetPosition().x == handler->GetPointA().x && entity->GetPosition().y == handler->GetPointA().y)
+	{
+		route = Route::AtA;
+	}
+	else if (entity->GetPosition().x == handler->GetPointB().x && entity->GetPosition().y == handler->GetPointB().y)
+	{
+		route = Route::AtB;
+	}
+	else
+	{
+		route = Route::Moving;
+	}*/
+
 
 	//Nếu BlastHornet trở về A
 	if (isGoToPointA)
@@ -55,7 +80,9 @@ void BlastHornetReturn::Update()
 		//Nếu chưa ở A
 		else
 		{
-			GoTo(curPos, handler->GetPointA(), 10);
+			if(route == Route::AtA || route)
+			//if (isChangePos)
+				GoTo(curPos, handler->GetPointA(), 10);
 		}
 	}
 	//Nếu BlastHornet trở về B
@@ -70,7 +97,8 @@ void BlastHornetReturn::Update()
 		//Nếu chưa ở B
 		else
 		{
-			GoTo(curPos, handler->GetPointB(), 10);
+			//if(isChangePos)
+				GoTo(curPos, handler->GetPointB(), 10);
 		}
 	}
 
