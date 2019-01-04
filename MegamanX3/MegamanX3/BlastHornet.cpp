@@ -17,22 +17,37 @@ BlastHornet::BlastHornet(Player *player) : Enemy(EntityId::BlastHornet_ID, playe
 
 BlastHornet::~BlastHornet()
 {
-
+	delete prepareState;
+	delete returnState;
+	delete prickState;
+	delete dropState;
+	delete flyState;
+	delete dieState;
 }
 
 void BlastHornet::Initialize()
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"blast_hornet", 100, 100);
-	this->ChangeState(Fly);
-	pointA = D3DXVECTOR3(this->GetPosition().x, this->GetPosition().y, 0);
-	pointB = D3DXVECTOR3(pointA.x - 800, pointA.y, 0);
+	//this->ChangeState(Fly);
+	pointA = D3DXVECTOR3(this->GetPosition().x + 50, this->GetPosition().y - 50, 0);
+	pointB = D3DXVECTOR3(pointA.x - 500, pointA.y, 0);
+	this->SetPreAction(BlastHornetStateHandler::StateName::Drop);
+	this->ChangeState(BlastHornetStateHandler::StateName::Return);
+	//this->ChangeState(BlastHornetStateHandler::StateName::Fly);
+	//this->ChangeState(BlastHornetStateHandler::StateName::Die);
+	HP = Define::BLASTHORNET_HP;
 }
 
 void BlastHornet::Update()
 {
 	Entity::Update();
 	playerPos = D3DXVECTOR3(player->GetPosition().x, player->GetPosition().y, 0);
+
+	if (currentState)
+	{
+		currentState->Update();
+	}
 }
 
 BlastHornetStateHandler::StateName BlastHornet::GetCurrentStateName()
@@ -62,6 +77,7 @@ void BlastHornet::ChangeState(StateName stateName)
 	case Fly:
 		currentState = flyState;
 		currentStateName = Fly;
+		break;
 	case Die:
 		currentState = dieState;
 		currentStateName = Die;
@@ -120,4 +136,14 @@ D3DXVECTOR3 BlastHornet::GetPointA()
 D3DXVECTOR3 BlastHornet::GetPointB()
 {
 	return pointB;
+}
+
+Player * BlastHornet::GetPlayer()
+{
+	return this->player;
+}
+
+int BlastHornet::GetHP()
+{
+	return this->HP;
 }

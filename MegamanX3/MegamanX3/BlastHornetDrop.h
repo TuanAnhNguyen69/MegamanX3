@@ -10,5 +10,8 @@ public:
 	virtual void Load();
 	virtual void Update();
 	virtual void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+private:
+	bool hadDrop;
+	D3DXVECTOR3 targetPos;
 };
 

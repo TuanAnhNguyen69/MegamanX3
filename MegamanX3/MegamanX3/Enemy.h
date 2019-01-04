@@ -9,7 +9,11 @@ public:
 	void Update();
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 
+	/*virtual void SubHP(int damage) = 0;
+	virtual int GetHP() = 0;*/
+
 protected:
 	Player * player;
+	int HP;
 };
 

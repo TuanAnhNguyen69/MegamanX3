@@ -40,10 +40,10 @@ public:
 	bool GetLeftTarget();
 	bool GetAboveTarget();
 	bool GetHadShootState();
-	void SetHadShootState(bool hadShootState);
+	void SetHadShootState(bool hadShootState);	
 	int GetHP();
-	void SetHP(int hp);
-
+	void SubHP(int damage);
+	void Died();
 	Player* player;
 	
 
@@ -51,7 +51,7 @@ private:
 	bool targetIsLeft;
 	bool targetIsAbove;
 	bool hadShootState;
-	int hp;
+	
 	HelitState * currentState;
 	HelitState *flyingState, *shootingState, *dieState, *damagedState;
 	HelitStateHandler::StateName currentStateName;

@@ -61,12 +61,15 @@ void EntityManager::CheckCollide()
 	quadTree->GetEntitiesCollideAble(playerCollidableEntity, camera->GetBound());
 	for (size_t index = 0; index < playerCollidableEntity.size(); index++) {
 		std::vector<Entity*> collidableEntity;
+		if (playerCollidableEntity.at(index)->GetEntityId() == EntityId::BlastHornet_ID) {
+			int a = 0;
+		}
 		quadTree->GetEntitiesCollideAble(collidableEntity, playerCollidableEntity.at(index)->GetBound());
 		for (size_t otherIndex = 0; otherIndex < collidableEntity.size(); otherIndex++) {
 			if (playerCollidableEntity.at(index) == collidableEntity.at(otherIndex)) {
 				continue;
 			}
-
+			
 			RECT broadphase = Collision::GetSweptBroadphaseRect(playerCollidableEntity.at(index));
 			if (Collision::IsCollide(broadphase, collidableEntity.at(otherIndex)->GetBound()))
 			{
@@ -220,11 +223,11 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				AddEntity(life);
 				break;*/
 
-				/*Helit * helit = new Helit(player);
+				Helit * helit = new Helit(player);
 				helit->Initialize();
 				helit->SetPosition(posX + width / 2, (posY + height / 2) - 250);
 				helit->SetScale(2, 2);
-				helit->SetBound(width, height);
+				helit->SetBound(40 * 2, 40 * 2);
 				AddEntity(helit);
 				break;
 
@@ -235,25 +238,34 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				AddEntity(conveyor);
 				break;*/
 
-				Byte *byte = new Byte(player);
+				/*Byte *byte = new Byte(player);
 				byte->Initialize();
 				byte->SetPosition(posX + width / 2, (posY + height / 2) - 30);
 				byte->SetScale(2, 2);
 				byte->SetBound(54 * 2, 74 * 2);
 				AddEntity(byte);
-				break;
+				break;*/
+
+				/*BlastHornet *boss = new BlastHornet(player);
+				boss->SetPosition(posX + width / 2 + 100, (posY + height / 2) - 100);
+				boss->SetScale(1.5, 1.5);
+				boss->SetBound(45 * 1.5, 50 * 1.5);
+				boss->Initialize();
+				AddEntity(boss);
+				break;*/
+
 			}
 
 			case EntityId::NotorBanger_ID:
 			{				
 
-				/*NotorBanger * notoBanger = new NotorBanger(player);
+				NotorBanger * notoBanger = new NotorBanger(player);
 				notoBanger->Initialize();
 				notoBanger->SetPosition(posX + width / 2, posY + height / 2);
 				notoBanger->SetScale(2, 2);
 				notoBanger->SetBound(width, height);
-				AddEntity(notoBanger);
-				break;*/
+				AddEntity(notoBanger);			
+				break;
 			}
 			/*case EntityId::Bee:
 				break;

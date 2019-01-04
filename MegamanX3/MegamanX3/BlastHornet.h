@@ -32,6 +32,10 @@ public:
 	D3DXVECTOR3 GetPointA();
 	D3DXVECTOR3 GetPointB();
 
+	Player* GetPlayer();
+
+	int GetHP();
+
 private:
 	BlastHornetState * currentState;
 	BlastHornetState *flyState, *prepareState, *prickState, *dieState, *returnState, *dropState;
@@ -40,4 +44,6 @@ private:
 
 	D3DXVECTOR3 playerPos;
 	D3DXVECTOR3 pointA, pointB;
+
+	Player *player;
 };
