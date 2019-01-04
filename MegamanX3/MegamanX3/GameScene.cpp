@@ -37,12 +37,12 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(8300, 1800);
+	player->SetPosition(3200, 700);
 	camera->SetCenter(player->GetPosition());
 
 	
 
-	EntityManager::GetInstance()->Initialize(player, camera, "testCam", map->GetWidth(), map->GetHeight());
+	EntityManager::GetInstance()->Initialize(player, camera, "testConveyor", map->GetWidth(), map->GetHeight());
 	
 	debugDraw = new DebugDraw();
 	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));

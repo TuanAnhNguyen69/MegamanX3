@@ -81,10 +81,11 @@ bool Engine::Initialize(HINSTANCE instance, HWND hwnd)
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "super_bullet.png", D3DCOLOR_XRGB(50, 96, 166));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "extreme_bullet.png", D3DCOLOR_XRGB(50, 96, 166));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "elevator.png", D3DCOLOR_XRGB(255, 255, 255));
-	resourceManager->LoadTextureResource(graphics->GetDevice(), "yellow_conveyor.png", D3DCOLOR_XRGB(255, 255, 255));
-	resourceManager->LoadTextureResource(graphics->GetDevice(), "head_yellow_conveyor.png", D3DCOLOR_XRGB(255, 255, 255));
-	resourceManager->LoadTextureResource(graphics->GetDevice(), "blue_conveyor.png", D3DCOLOR_XRGB(255, 255, 255));
-	resourceManager->LoadTextureResource(graphics->GetDevice(), "head_blue_conveyor.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "left_yellow_conveyor.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "right_yellow_conveyor.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "left_blue_conveyor.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "right_blue_conveyor.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "small_conveyor.png", D3DCOLOR_XRGB(255, 255, 255));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "box.png", D3DCOLOR_XRGB(255, 255, 255));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "thorn.png", D3DCOLOR_XRGB(255, 255, 255));
 

@@ -138,6 +138,12 @@ void PlayerFallingState::OnCollision(Entity * impactor, Entity::CollisionSide si
 {
 	switch (impactor->GetEntityId()) {
 		case Platform_ID:
+		case EntityId::LeftBlueConveyor_ID:
+		case EntityId::RightBlueConveyor_ID:
+		case EntityId::LeftYellowConveyor_ID:
+		case EntityId::RightYellowConveyor_ID:
+		case EntityId::LeftSmallConveyor_ID:
+		case EntityId::RightSmallConveyor_ID:
 			OnPlatformCollide(impactor, side, data);
 			break;
 		case Roof_ID:

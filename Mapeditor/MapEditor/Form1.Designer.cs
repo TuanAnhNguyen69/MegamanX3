@@ -227,7 +227,7 @@
             this.addToolStripMenuItem,
             this.cameraToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(116, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
             // 
             // addToolStripMenuItem
             // 
@@ -237,7 +237,7 @@
             this.groundToolStripMenuItem1,
             this.itemToolStripMenuItem1});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addToolStripMenuItem.Text = "Add";
             // 
             // bossToolStripMenuItem1
@@ -247,7 +247,7 @@
             this.byteToolStripMenuItem,
             this.shurikeinToolStripMenuItem});
             this.bossToolStripMenuItem1.Name = "bossToolStripMenuItem1";
-            this.bossToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
+            this.bossToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.bossToolStripMenuItem1.Text = "Boss";
             // 
             // blastHornetToolStripMenuItem
@@ -279,7 +279,7 @@
             this.carryArmToolStripMenuItem,
             this.rightFaceHeadGunnerToolStripMenuItem});
             this.enemyToolStripMenuItem1.Name = "enemyToolStripMenuItem1";
-            this.enemyToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
+            this.enemyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.enemyToolStripMenuItem1.Text = "Enemy";
             // 
             // headGunnerToolStripMenuItem
@@ -338,7 +338,7 @@
             this.rightBlueConveyprToolStripMenuItem,
             this.rightSmallConveyorToolStripMenuItem});
             this.groundToolStripMenuItem1.Name = "groundToolStripMenuItem1";
-            this.groundToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
+            this.groundToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.groundToolStripMenuItem1.Text = "Ground";
             // 
             // cargoToolStripMenuItem
@@ -467,7 +467,7 @@
             this.bigEnergyToolStripMenuItem,
             this.chimeraArmorToolStripMenuItem});
             this.itemToolStripMenuItem1.Name = "itemToolStripMenuItem1";
-            this.itemToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
+            this.itemToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.itemToolStripMenuItem1.Text = "Item";
             // 
             // smallEnergyToolStripMenuItem
@@ -494,7 +494,7 @@
             // cameraToolStripMenuItem
             // 
             this.cameraToolStripMenuItem.Name = "cameraToolStripMenuItem";
-            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cameraToolStripMenuItem.Text = "Camera";
             this.cameraToolStripMenuItem.Click += new System.EventHandler(this.cameraToolStripMenuItem_Click_1);
             // 

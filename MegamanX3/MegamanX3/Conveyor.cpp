@@ -4,40 +4,52 @@
 
 Conveyor::Conveyor(EntityId id) : Entity(id)
 {
-	this->speed = Define::CONVEYOR_SPEED;
 	switch (id)
 	{
 	case LeftYellowConveyor_ID:
-		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-			"yellow_conveyor", 32, 32);
-		sprite = new AnimatedSprite(speed, 1, true);
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "yellow_conveyor",
-			0, 3, 4, 32, 32);
-		this->SetBound(32 * 2, 32 * 2);
+		sprite = new AnimatedSprite(Define::CONVEYOR_SPEED, 1, true);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "left_yellow_conveyor",
+			0, 3, 1, 704, 64);
+		speed = -Define::CONVEYOR_SPEED;
 		break;
 	case RightYellowConveyor_ID:
-		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-			"head_yellow_conveyor", 18, 32);
-		sprite = new AnimatedSprite(speed, 1, true);
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "head_yellow_conveyor",
-			0, 3, 4, 18, 32);
-		this->SetBound(18 * 2, 32 * 2);
+		sprite = new AnimatedSprite(Define::CONVEYOR_SPEED, 1, true);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "right_yellow_conveyor",
+			0, 3, 1, 672, 64);
+		speed = Define::CONVEYOR_SPEED;
 		break;
 	case LeftBlueConveyor_ID:
-		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-			"blue_conveyor", 32, 32);
-		sprite = new AnimatedSprite(speed, 1, true);
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "blue_conveyor",
-			0, 3, 4, 32, 32);
-		this->SetBound(32 * 2, 32 * 2);
+		sprite = new AnimatedSprite(Define::CONVEYOR_SPEED, 1, true);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "left_blue_conveyor",
+			0, 3, 1, 352, 64);
+		speed = -Define::CONVEYOR_SPEED;
 		break;
 	case RightBlueConveyor_ID:
-		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-			"head_blue_conveyor", 18, 32);
-		sprite = new AnimatedSprite(speed, 1, true);
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "head_blue_conveyor",
-			0, 3, 4, 18, 32);
-		this->SetBound(18 * 2, 32 * 2);
+		sprite = new AnimatedSprite(Define::CONVEYOR_SPEED, 1, true);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "small_conveyor",
+			0, 3, 1, 380, 64);
+		speed = Define::CONVEYOR_SPEED;
+		break;
+	case RightSmallConveyor_ID:
+		sprite = new AnimatedSprite(Define::CONVEYOR_SPEED, 1, true);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "small_conveyor",
+			0, 3, 1, 256, 64);
+		this->SetReverse(true);
+		speed = -Define::CONVEYOR_SPEED;
+		break;
+	case LeftSmallConveyor_ID:
+		sprite = new AnimatedSprite(Define::CONVEYOR_SPEED, 1, true);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "small_conveyor",
+			0, 3, 1, 256, 64);
+		this->SetReverse(false);
+		speed = Define::CONVEYOR_SPEED;
+		break;
+	default:
+		sprite = new AnimatedSprite(Define::CONVEYOR_SPEED, 1, true);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "small_conveyor",
+			0, 3, 1, 256, 64);
+		this->SetReverse(true);
+		speed = -Define::CONVEYOR_SPEED;
 		break;
 	}
 }
@@ -52,20 +64,10 @@ Conveyor::~Conveyor()
 	}
 }
 
-void Conveyor::Initialize(bool isRunToLeft)
+void Conveyor::Initialize()
 {
 	this->SetSprite(sprite);
 	this->SetVelocity(0, 0);
-	if (isRunToLeft)
-	{
-		this->SetReverse(true);
-		speed = -Define::CONVEYOR_SPEED;
-	}
-	else
-	{
-		this->SetReverse(false);
-		speed = Define::CONVEYOR_SPEED;
-	}
 }
 
 void Conveyor::Update()

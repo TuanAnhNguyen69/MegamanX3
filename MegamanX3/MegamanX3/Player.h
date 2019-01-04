@@ -51,6 +51,8 @@ private:
 	Entity *chargerExtreme;
 	int bulletDamage;
 	bool allowSlide;
+	void OnConveyorCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+
 };
 
 #endif

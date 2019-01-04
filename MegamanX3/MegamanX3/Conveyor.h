@@ -15,7 +15,7 @@ public:
 
 	void Update();
 
-	void Initialize(bool isRunToLeft);
+	void Initialize();
 
 	void OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 

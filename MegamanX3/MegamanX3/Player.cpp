@@ -8,6 +8,7 @@
 #include "PlayerDamagedState.h"
 #include "PlayerClimbingState.h"
 #include "PlayerBullet.h"
+#include "EntityImport.h"
 
 #include <iostream>
 
@@ -217,8 +218,20 @@ PlayerStateHandler::MoveDirection Player::GetMoveDirection() {
 
 void Player::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() == EntityId::MegamanBullet_ID) {
+	
+	switch (impactor->GetEntityId()) {
+	case EntityId::MegamanBullet_ID:
 		return;
+	case EntityId::LeftBlueConveyor_ID:
+	case EntityId::RightBlueConveyor_ID:
+	case EntityId::LeftYellowConveyor_ID:
+	case EntityId::RightYellowConveyor_ID:
+	case EntityId::LeftSmallConveyor_ID:
+	case EntityId::RightSmallConveyor_ID:
+		OnConveyorCollision(impactor, side, data);
+		break;
+	default:
+		break;
 	}
 
 	if (currentState) {
@@ -277,5 +290,25 @@ void Player::Render()
 	}
 	else if (bulletCharging >= 150) {
 		chargerExtreme->Render();
+	}
+}
+
+void Player::OnConveyorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	
+
+	switch (side)
+	{
+	case Entity::Left:
+	case Entity::Right:
+	case Entity::Top:
+		break;
+	case Entity::Bottom:
+	case Entity::BottomRight:
+	case Entity::BottomLeft:
+		this->AddPosition(((Conveyor*)(impactor))->GetSpeed() / 10, 0);
+		break;
+	default:
+		break;
 	}
 }
