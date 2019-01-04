@@ -295,8 +295,6 @@ void Player::Render()
 
 void Player::OnConveyorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	
-
 	switch (side)
 	{
 	case Entity::Left:
