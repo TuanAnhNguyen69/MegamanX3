@@ -27,28 +27,23 @@ void CarryArmFlying::Load()
 void CarryArmFlying::Update()
 {
 	if (handler->GetHadDropState()) {
-		entity->AddVelocityY(-10.0f);
+		entity->AddVelocityY(-Define::CARRYARM_FLY_SPEED);
 	}
 	else {
 		if (!handler->GetLeftTarget())
 		{
 			entity->SetReverse(true);
-			if (!handler->GetAboveTarget()) {
-				entity->AddVelocityY(10.0f);
-			}
-			else {
-				handler->ChangeState(CarryArmStateHandler::StateName::Dropping);
-
-			}
 		}
 		else {
-			if (!handler->GetAboveTarget()) {
-				entity->AddVelocityY(10.0f);
-			}
-			else {
-				handler->ChangeState(CarryArmStateHandler::StateName::Dropping);
-
-			}
+			entity->SetReverse(false);
+		}
+		if(!handler->box->IsCollisionPlatform())
+		{
+			entity->AddVelocityY(Define::CARRYARM_FLY_SPEED);
+			handler->box->AddVelocityY(Define::CARRYARM_FLY_SPEED);
+		}
+		else {
+			handler->ChangeState(CarryArmStateHandler::StateName::Dropping);
 		}
 	}
 

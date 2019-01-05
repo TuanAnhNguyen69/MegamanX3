@@ -161,6 +161,16 @@ void Entity::SetReverse(bool reverse)
 	this->reverse = reverse;
 }
 
+void Entity::SetPositionX(float x)
+{
+	position.x = x;
+}
+
+void Entity::SetPositionY(float y)
+{
+	position.y = y;
+}
+
 void Entity::SetVelocityX(float x)
 {
 	velocity.x = x;
@@ -187,6 +197,41 @@ void Entity::AddPosition(float x, float y)
 	position.y += y;
 }
 
+void Entity::GoTo(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed)
+{
+	D3DXVECTOR3 moveVector;
+
+	moveVector = D3DXVECTOR3(desPoint.x - curPoint.x, desPoint.y - curPoint.y, 0);
+
+	float speedVector = sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y);
+
+	this->AddVelocityX(moveVector.x / speedVector * speed);
+	this->AddVelocityY(moveVector.y / speedVector * speed);
+
+	if ((((desPoint.x >= curPoint.x) && (this->GetPosition().x >= desPoint.x)) ||
+		((desPoint.x <= curPoint.x) && (this->GetPosition().x <= desPoint.x))) &&
+		(((desPoint.y >= curPoint.y) && (this->GetPosition().y >= desPoint.y)) ||
+		((desPoint.y <= curPoint.y) && (this->GetPosition().y <= desPoint.y)))
+		)
+	{
+		this->SetVelocity(0, 0);
+		this->SetPosition(desPoint.x, desPoint.y);
+	}
+}
+
+void Entity::GoOn(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed)
+{
+	D3DXVECTOR3 moveVector;
+
+	moveVector = D3DXVECTOR3(desPoint.x - curPoint.x, desPoint.y - curPoint.y, 0);
+
+	float speedVector = sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y);
+
+	this->AddVelocityX(moveVector.x / speedVector * speed);
+	this->AddVelocityY(moveVector.y / speedVector * speed);
+}
+
 void Entity::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+
 }

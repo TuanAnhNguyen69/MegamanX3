@@ -124,7 +124,7 @@ void NotorBangerJump::OnCollision(Entity *impactor, Entity::CollisionSide side, 
 			entity->SetVelocityY(0);
 			handler->ChangeState(NotorBangerStateHandler::StateName::Standing);
 		}
-		return;
+		break;
 		
 	}
 

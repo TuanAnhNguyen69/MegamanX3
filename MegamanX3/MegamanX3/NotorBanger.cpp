@@ -26,6 +26,7 @@ void NotorBanger::Initialize()
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"notor_banger", 50, 50);
+	this->SetPreAction(NotorBangerStateHandler::StateName::Jump);
 	ChangeState(Standing);
 }
 

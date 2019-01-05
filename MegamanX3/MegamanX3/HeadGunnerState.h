@@ -4,6 +4,7 @@
 #include "HeadGunnerStateHandler.h"
 #include "Engine.h"
 #include <iostream>
+#include <time.h>
 
 class HeadGunnerState
 {
@@ -19,5 +20,7 @@ protected:
 	AnimatedSprite * sprite;
 	HeadGunnerStateHandler *handler;
 	Entity *entity;
+
+	clock_t timeStartState, timeCount;
 };
 

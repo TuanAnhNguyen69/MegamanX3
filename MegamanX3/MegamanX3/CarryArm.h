@@ -54,5 +54,7 @@ private:
 	//Entity *entity;
 	Camera *camera;
 	CarryArmStateHandler::StateName preAction;
+
+	//Box *box;
 };
 

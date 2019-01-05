@@ -21,8 +21,9 @@ protected:
 	ShurikenStateHandler *handler;
 	Entity *entity;
 
-	D3DXVECTOR3 startPoint;
-	D3DXVECTOR3 jumpPoint;
+	/*D3DXVECTOR3 startPoint;
+	D3DXVECTOR3 jumpPoint;*/
 
+	clock_t timeStartState, timeCount;
 };
 

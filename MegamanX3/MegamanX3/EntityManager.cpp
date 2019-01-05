@@ -27,7 +27,8 @@ void EntityManager::Update()
 
 	int size = collidableEntity.size();
 	for (int index = 0; index < size; index++) {
-		if (Collision::IsCollide(collidableEntity[index]->GetBound(), camera->GetBound())) {
+		if (Collision::IsCollide(collidableEntity[index]->GetBound(), camera->GetBound())) 
+		{
 			if (camera) {
 				collidableEntity[index]->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 					SCREEN_HEIGHT / 2 - camera->GetCenter().y);
@@ -207,11 +208,20 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				AddEntity(headGunner);
 				break;*/
 
+
+				/*NotorBanger * notoBanger = new NotorBanger(player);
+				notoBanger->Initialize();
+				notoBanger->SetPosition(posX + width / 2, posY + height / 2);
+				notoBanger->SetScale(2, 2);
+				notoBanger->SetBound(width, height);
+				AddEntity(notoBanger);
+				break;*/
+
 				/*CarryArm * carryArm = new CarryArm(player);
-				carryArm->Initialize();
 				carryArm->SetPosition(posX + width / 2, (posY + height / 2) - 250);
-				carryArm->SetScale(2, 2);
-				carryArm->SetBound(width, height);
+				carryArm->SetScale(1, 1);
+				carryArm->SetBound(32, 57);
+				carryArm->Initialize();
 				AddEntity(carryArm);
 				break;*/
 
@@ -223,13 +233,13 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				AddEntity(life);
 				break;*/
 
-				/*Helit * helit = new Helit(player);
+				Helit * helit = new Helit(player);
 				helit->Initialize();
 				helit->SetPosition(posX + width / 2, (posY + height / 2) - 250);
 				helit->SetScale(2, 2);
 				helit->SetBound(40 * 2, 40 * 2);
 				AddEntity(helit);
-				break;*/
+				break;
 
 				/*Conveyor *conveyor = new Conveyor(EntityId::HeadBlueConveyor_ID);
 				conveyor->Initialize(true);
@@ -246,14 +256,39 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				AddEntity(byte);
 				break;*/
 
-				BlastHornet *boss = new BlastHornet(player);
+				/*BlastHornet *boss = new BlastHornet(player);
 				boss->SetPosition(posX + width / 2 + 100, (posY + height / 2) - 100);
 				boss->SetScale(1.5, 1.5);
 				boss->SetBound(45 * 1.5, 50 * 1.5);
 				boss->Initialize();
 				AddEntity(boss);
+				break;*/
+
+			}
+
+			case EntityId::BlastHornet_ID:
+			{
+				/*BlastHornet *boss = new BlastHornet(player);
+				boss->SetPosition(posX + width / 2 + 100, (posY + height / 2));
+				boss->SetScale(1.5, 1.5);
+				boss->SetBound(45 * 1.5, 50 * 1.5);
+				boss->Initialize();
+				AddEntity(boss);
+				break;*/
+
+				Shuriken *shuriken = new Shuriken(player);
+				shuriken->SetPosition(posX + width / 2 + 20, (posY + height / 2) + 150);
+				shuriken->Initialize();
+				AddEntity(shuriken);
 				break;
 
+				/*Byte *byte = new Byte(player);
+				byte->Initialize();
+				byte->SetPosition(posX + width / 2, (posY + height / 2) - 30);
+				byte->SetScale(2, 2);
+				byte->SetBound(54 * 2, 74 * 2);
+				AddEntity(byte);
+				break;*/
 			}
 
 			/*case EntityId::NotorBanger_ID:

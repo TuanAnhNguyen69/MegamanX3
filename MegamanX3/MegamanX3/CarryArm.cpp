@@ -18,6 +18,8 @@ CarryArm::CarryArm(Player *_player) : Enemy(EntityId::CarryArm_ID, _player)
 	dieState = new CarryArmDie(this, this);
 
 	player = _player;
+
+	
 }
 
 
@@ -30,6 +32,14 @@ void CarryArm::Initialize()
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"CarryArm", 50, 65);
 	this->ChangeState(CarryArmStateHandler::StateName::Flying);
+
+
+	this->box = new Box();
+	this->box->Initialize(false);
+	this->box->SetPosition(this->GetPosition().x, this->GetPosition().y + 50);
+	this->box->SetScale(1, 1);
+	this->box->SetBound(50 * 1, 50 * 1);
+	EntityManager::GetInstance()->AddEntity(this->box);
 }
 
 void CarryArm::Update()
@@ -53,11 +63,12 @@ void CarryArm::Update()
 		targetIsAbove = false;
 	}
 
+	//this->box->SetVelocity(this->GetVelocity().x, this->GetVelocity().y);
 	Entity::Update();
 	if (currentState) {
 		currentState->Update();
 	}
-
+	//this->box->Update();
 }
 
 //void CarryArm::SetPosition(int x, int y)

@@ -31,7 +31,8 @@ bool GameScene::Initialize()
 
 	map = new Background();
 	map->Initialize("aaaaa", 2);
-	//map->Initialize("test1", 2);
+	//map->Initialize("testBoss", 2);
+	
 
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 	camera->SetCenter(SCREEN_WIDTH / 2, 0);
@@ -39,10 +40,10 @@ bool GameScene::Initialize()
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
 	player->SetPosition(1115, 1630);
-	//player->SetPosition(2400, 1100);
+	//player->SetPosition(4700, 2100);
 
 	EntityManager::GetInstance()->Initialize(player, camera, "aaaaa", map->GetWidth(), map->GetHeight());
-	//EntityManager::GetInstance()->Initialize(player, camera, "test1", map->GetWidth(), map->GetHeight());
+	//EntityManager::GetInstance()->Initialize(player, camera, "testBoss", map->GetWidth(), map->GetHeight());
 
 	
 	debugDraw = new DebugDraw();

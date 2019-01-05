@@ -1,5 +1,11 @@
 #pragma once
 #include "Box.h"
+
+namespace Define
+{
+	const float CARRYARM_FLY_SPEED = 5.0f; //van toc bay
+}
+
 class CarryArmStateHandler
 {
 protected:

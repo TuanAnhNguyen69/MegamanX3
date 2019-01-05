@@ -20,6 +20,13 @@ public:
 		Right,
 	};
 
+	enum CollisionDirection
+	{
+		CollLeft,
+		CollRight,
+		None
+	};
+
 	ByteBomb();
 	~ByteBomb();
 
@@ -30,6 +37,8 @@ public:
 private:
 	AnimatedSprite * sprite;
 	MoveDirection moveDirection;
-
+	CollisionDirection collDirection;
+	bool isRemove;
+	bool isAddWall;
 };
 

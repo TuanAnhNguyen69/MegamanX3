@@ -23,7 +23,7 @@ Byte::~Byte()
 void Byte::Initialize()
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "byte", 100, 100);
-	this->SetFace(false);
+	this->SetFace(true);
 	this->ChangeState(ByteStateHandler::StateName::Standing);
 	
 }

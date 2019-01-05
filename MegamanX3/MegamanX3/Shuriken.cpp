@@ -4,26 +4,63 @@
 
 Shuriken::Shuriken(Player *player) : Enemy(EntityId::Shurikein_ID, player)
 {
-	turnState = new ShurikenState(this, this);
-	attack1State = new ShurikenState(this, this);
-	attack2State = new ShurikenState(this, this);
-	flipState = new ShurikenState(this, this);
-	moveState = new ShurikenState(this, this);
-	jumpState = new ShurikenState(this, this);
-	dieState = new ShurikenState(this, this);
+	turnState = new ShurikenTurn(this, this);
+	attack1State = new ShurikenAttack1(this, this);
+	attack2State = new ShurikenAttack2(this, this);
+	flipState = new ShurikenFlip(this, this);
+	moveState = new ShurikenMove(this, this);
+	jumpState = new ShurikenJump(this, this);
+	dieState = new ShurikenDie(this, this);
 }
 
 
 Shuriken::~Shuriken()
 {
-
+	if (turnState)
+	{
+		delete turnState;
+		turnState = nullptr;
+	}
+	if (attack1State)
+	{
+		delete attack1State;
+		attack1State = nullptr;
+	}
+	if (attack2State)
+	{
+		delete attack2State;
+		attack2State = nullptr;
+	}
+	if (flipState)
+	{
+		delete flipState;
+		flipState = nullptr;
+	}
+	if (moveState)
+	{
+		delete moveState;
+		moveState = nullptr;
+	}
+	if (jumpState)
+	{
+		delete jumpState;
+		jumpState = nullptr;
+	}
+	if (dieState)
+	{
+		delete dieState;
+		dieState = nullptr;
+	}
 }
 
 void Shuriken::Initialize()
 {
+	this->SetScale(2, 2);
+	this->SetBound(50 * 2, 50 * 2);
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"shuriken", 50, 50);
-	this->ChangeState(Turn);
+	this->SetPreAction(ShurikenStateHandler::StateName::Jump);
+	this->ChangeState(ShurikenStateHandler::StateName::Turn);
 }
 
 void Shuriken::Update()
@@ -71,10 +108,10 @@ void Shuriken::ChangeState(StateName stateName)
 		currentState = flipState;
 		currentStateName = Flip;
 		break;
-	default:
-		currentState = turnState;
-		currentStateName = Turn;
-		break;
+	//default:
+	//	currentState = turnState;
+	//	currentStateName = Turn;
+	//	break;
 	}
 	currentState->Load();
 }

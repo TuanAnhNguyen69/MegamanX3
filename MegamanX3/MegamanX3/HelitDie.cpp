@@ -30,11 +30,11 @@ void HelitDie::Update()
 {
 	if (handler->GetHP() == 0) {
 		if (sprite->IsFinished()) {
-			entity->SetSprite(nullptr);	
+			/*entity->SetSprite(nullptr);	
 			entity->SetBound(0, 0);
 			handler->Died();
-			delete entity;
-			
+			delete entity;*/
+			EntityManager::GetInstance()->RemoveEntity(entity);
 		}
 	}
 }

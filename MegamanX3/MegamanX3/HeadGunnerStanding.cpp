@@ -4,7 +4,7 @@
 
 HeadGunnerStanding::HeadGunnerStanding(HeadGunnerStateHandler *handler, Entity *entity) : HeadGunnerState(handler, entity)
 {
-	sprite = new AnimatedSprite(5, true);
+	sprite = new AnimatedSprite(5, 1, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "head_gunner",
 		0, 0, 4, 50, 50);
 }
@@ -22,7 +22,7 @@ void HeadGunnerStanding::Load()
 {
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
-	startState = clock();
+	timeStartState = clock();
 }
 
 void HeadGunnerStanding::Update()
@@ -30,9 +30,9 @@ void HeadGunnerStanding::Update()
 	if (!handler->GetIsLeft()) {
 		entity->SetReverse(true);
 	}
-	clock_t cout = clock();
-	int dt = (cout - startState) / 40;
-	if ((dt > 4) && (dt % 4 == 0))
+	timeCount = clock();
+	int dt = (timeCount - timeStartState) / 1000;
+	if (dt > 2)
 	{
 		handler->ChangeState(HeadGunnerStateHandler::StateName::Shoot);
 	}

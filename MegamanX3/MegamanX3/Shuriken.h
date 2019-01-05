@@ -9,6 +9,7 @@
 #include "ShurikenJump.h"
 #include "ShurikenFlip.h"
 #include "ShurikenTurn.h"
+#include "ShurikenMove.h"
 
 class Shuriken : public ShurikenStateHandler, public Enemy
 {

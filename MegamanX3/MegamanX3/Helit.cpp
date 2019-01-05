@@ -23,10 +23,20 @@ Helit::Helit(Player *_player) : Enemy(EntityId::Helit_ID, _player)
 
 Helit::~Helit()
 {
-	if (currentState) {
+	/*if (currentState) {
 		delete currentState;
 		currentState = nullptr;
-	}	
+	}	*/
+
+	delete this->player;
+
+	delete this->camera;
+
+	delete this->currentState;
+	delete this->flyingState;
+	delete this->shootingState;
+	delete this->damagedState;
+	delete this->dieState;
 }
 
 void Helit::Initialize()

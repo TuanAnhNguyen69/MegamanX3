@@ -5,14 +5,6 @@
 
 HeadGunner::HeadGunner(Player * player) : Enemy(EntityId::HeadGunner_ID, player)
 {
-	/*
-	fireState = nullptr;
-	jumpState = nullptr;
-	damagedState = nullptr;
-	dieState = nullptr;
-	fallingState = nullptr;
-	*/
-	
 	standingState = new HeadGunnerStanding(this, this);
 	shootState = new HeadGunnerShoot(this, this);
 	damagedState = new HeadGunnerDamaged(this, this);
@@ -33,15 +25,15 @@ void HeadGunner::Initialize( bool isLeft)
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"head_gunner", 50, 50);
 	this->isLeft = isLeft;
-	ChangeState(Standing);
+	this->ChangeState(HeadGunnerStateHandler::StateName::Standing);
 }
 
 void HeadGunner::Update()
 {
-	Entity::Update();
 	if (currentState) {
 			currentState->Update();
 	}
+	Entity::Update();
 }
 
 HeadGunnerStateHandler::StateName HeadGunner::GetCurrentStateName()

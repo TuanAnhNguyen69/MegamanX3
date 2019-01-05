@@ -4,7 +4,7 @@
 
 ByteThrow::ByteThrow(ByteStateHandler *handler, Entity *entity) : ByteState(handler, entity)
 {
-	sprite = new AnimatedSprite(8, 1, true);
+	sprite = new AnimatedSprite(15, 0.5, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "byte",
 		8, 11, 4, 100, 100);
 }
@@ -28,6 +28,7 @@ void ByteThrow::Load()
 	entity->SetVelocity(0, 0);
 	hadThrow = false;
 	handler->SetPreAction(ByteStateHandler::StateName::Throw);
+	timeStartState = clock();
 }
 
 void ByteThrow::Update()
@@ -41,8 +42,8 @@ void ByteThrow::Update()
 		entity->SetReverse(true);
 	}
 
-	//if (sprite->GetCurrentFrame() == 2 && !hadThrow)
-	if(!hadThrow)
+	if (sprite->GetCurrentFrame() == 3 && !hadThrow)
+	//if(!hadThrow)
 	{
 		ByteBomb *bomb = new ByteBomb();
 		if (handler->IsFaceLeft())
@@ -63,7 +64,13 @@ void ByteThrow::Update()
 
 	if (sprite->IsFinished())
 	{
-		handler->ChangeState(ByteStateHandler::StateName::Standing);
+		timeCount = clock();
+		int dt = (timeCount - timeStartState) / 1000;
+		if (dt > 0.5)
+		{
+			sprite->ResetFrame();
+			handler->ChangeState(ByteStateHandler::StateName::Standing);
+		}
 	}
 }
 

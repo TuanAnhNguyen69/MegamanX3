@@ -103,6 +103,8 @@ public:
 	void SetBound(int width, int height);
 	void SetVelocity(float x = 0.0f, float y = 0.0f);
 	void SetReverse(bool reverse);
+	void SetPositionX(float x);
+	void SetPositionY(float y);
 
 	void SetVelocityX(float x);
 	void SetVelocityY(float y);
@@ -110,6 +112,9 @@ public:
 	void AddVelocityY(float y);
 
 	void AddPosition(float x, float y);
+
+	void GoTo(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed);
+	void GoOn(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed);
 
 protected:
 	int width;

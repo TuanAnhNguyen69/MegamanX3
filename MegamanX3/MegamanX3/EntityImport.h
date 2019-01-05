@@ -9,3 +9,4 @@
 #include "Elevator.h"
 #include "Byte.h"
 #include "BlastHornet.h"
+#include "Shuriken.h"

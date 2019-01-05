@@ -33,6 +33,8 @@ void Box::Update()
 void Box::Initialize(bool isFall)
 {
 	this->isFall = isFall;
+	this->SetVelocity(0, 0);
+	isCollPlatform = false;
 }
 
 void Box::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
@@ -46,6 +48,7 @@ void Box::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::Col
 			this->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
 			this->SetVelocity(0, 0);
 			this->isFall = false;
+			this->isCollPlatform = true;
 			break;
 		}
 		}
@@ -54,5 +57,15 @@ void Box::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::Col
 
 void Box::SetFall(bool isFall)
 {
-	this->isFall;
+	this->isFall = isFall;
+}
+
+bool Box::IsFall()
+{
+	return this->isFall;
+}
+
+bool Box::IsCollisionPlatform()
+{
+	return this->isCollPlatform;
 }
