@@ -17,14 +17,14 @@ void Door::Update()
 	if (state == DoorState::CLOSING) {
 		SetSprite(closingSprite);
 		std::cout << closingSprite->GetCurrentFrame() << std::endl;
-		if (closingSprite->GetCurrentFrame() == 0) {
+		if (closingSprite->GetCurrentFrame() == 1) {
 			state = DoorState::CLOSED;
 		}
 	}
 
 	if (state == DoorState::OPENNING) {
 		SetSprite(openningSprite);
-		if (openningSprite->GetCurrentFrame() == 16) {
+		if (openningSprite->GetCurrentFrame() == 15) {
 			state = DoorState::OPENED;
 		}
 	}
@@ -78,4 +78,9 @@ void Door::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::Co
 Door::DoorState Door::GetState()
 {
 	return this->state;
+}
+
+void Door::SetState(DoorState state)
+{
+	this->state = state;
 }

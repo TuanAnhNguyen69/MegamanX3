@@ -117,6 +117,7 @@ void Camera::CheckCameraPath()
 		}
 		else if (collidePercent > maxCollidePercent){
 			maxCollideRect = rangeRects.at(index);
+			maxCollidePercent = collidePercent;
 		}
 	}
 

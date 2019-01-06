@@ -39,6 +39,14 @@ void EntityManager::Update()
 
 			collidableEntity[index]->Update();
 		}
+		else {
+			if (collidableEntity[index]->GetEntityId() == EntityId::MegamanBullet_ID 
+				|| collidableEntity[index]->GetEntityId() == EntityId::GunnerRocket_ID 
+				|| collidableEntity[index]->GetEntityId() == EntityId::HeliRocket_ID
+				|| collidableEntity[index]->GetEntityId() == EntityId::Canon_ID) {
+				RemoveEntity(collidableEntity[index]);
+			}
+		}
 	}
 }
 
