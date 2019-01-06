@@ -12,6 +12,7 @@
 
 #include <iostream>
 
+
 Player::Player() : Entity(EntityId::Megaman_ID)
 {
 	//entity = nullptr;
@@ -72,6 +73,8 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 	ChangeState(Falling);
 	isJumping = true;
 	allowSlide = true;
+	movable = true;
+	autoMovedDistance = 0;
 }
 
 void Player::Update()
@@ -88,12 +91,6 @@ void Player::Update()
 	chargerSuper->SetPosition(this->GetPosition().x, this->GetPosition().y + 10);
 	chargerExtreme->SetPosition(this->GetPosition().x, this->GetPosition().y + 10);
 
-
-	if (currentState) {
-		currentState->UpdateInput();
-		currentState->Update();
-	}
-
 	if (bulletCharging < 50) {
 		bulletDamage = 2;
 	}
@@ -106,67 +103,61 @@ void Player::Update()
 		bulletDamage = 10;
 	}
 
-	Input *input = Engine::GetEngine()->GetInput();
-	if (input == nullptr) {
-		return;
+	if (!movable) {
+		this->SetVelocity(0, 0);
 	}
-
-	if (input->IsKeyDown(DIK_H)) {
-		ChangeState(Damaged);
-	}
-
-	if (input->IsKeyDown(DIK_Z)) {
-		if (allowSlide) {
-			ChangeState(Sliding);
-			allowSlide = false;
+	else {
+		if (currentState) {
+			currentState->UpdateInput();
+			currentState->Update();
 		}
-	}
 
-	if (input->IsKeyUp(DIK_Z)) {
-		ChangeState(Standing);
-		allowSlide = true;
-	}
+		Input *input = Engine::GetEngine()->GetInput();
+		if (input == nullptr) {
+			return;
+		}
 
-	if (input->IsKeyDown(DIK_T)) {
-		SetVelocityY(-100);
-	}
+		if (input->IsKeyDown(DIK_H)) {
+			ChangeState(Damaged);
+		}
 
-	if (input->IsKeyUp(DIK_T)) {
-		SetVelocityY(0);
-	}
-
-	if (input->IsKeyDown(DIK_SPACE)) {
-		if (!isJumping) {
-			if (currentStateName == Running || currentStateName == Standing) {
-				ChangeState(Jumping);
+		if (input->IsKeyDown(DIK_Z)) {
+			if (allowSlide) {
+				ChangeState(Sliding);
+				allowSlide = false;
 			}
-			isJumping = true;
 		}
-	}
-	
-	if (input->IsKeyUp(DIK_SPACE)) {
-		if (currentStateName == Jumping) {
-			ChangeState(Falling);
-		}
-	}
 
+		if (input->IsKeyUp(DIK_Z)) {
+			ChangeState(Standing);
+			allowSlide = true;
+		}
+
+		if (input->IsKeyDown(DIK_T)) {
+			SetVelocityY(-100);
+		}
+
+		if (input->IsKeyUp(DIK_T)) {
+			SetVelocityY(0);
+		}
+
+		if (input->IsKeyDown(DIK_SPACE)) {
+			if (!isJumping) {
+				if (currentStateName == Running || currentStateName == Standing) {
+					ChangeState(Jumping);
+				}
+				isJumping = true;
+			}
+		}
+
+		if (input->IsKeyUp(DIK_SPACE)) {
+			if (currentStateName == Jumping) {
+				ChangeState(Falling);
+			}
+		}
+	}
 	Entity::Update();
 }
-
-//void Player::SetPosition(int x, int y)
-//{
-//	entity->SetPosition(x, y);
-//}
-//
-//D3DXVECTOR3 Player::GetPosition()
-//{
-//	return entity->GetPosition();
-//}
-//
-//Entity * Player::GetEntity()
-//{
-//	return entity;
-//}
 
 PlayerStateHandler::StateName Player::GetCurrentStateName() {
 	return this->currentStateName;
@@ -229,6 +220,9 @@ void Player::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::C
 	case EntityId::LeftSmallConveyor_ID:
 	case EntityId::RightSmallConveyor_ID:
 		OnConveyorCollision(impactor, side, data);
+		break;
+	case EntityId::Door_ID:
+		OnDoorCollision(impactor, side, data);
 		break;
 	default:
 		break;
@@ -293,6 +287,33 @@ void Player::Render()
 	}
 }
 
+void Player::AutoMove()
+{
+	int moveDistance = 1;
+	autoMovedDistance += 1;
+	if (GetReverse()) {
+		moveDistance *= -1;
+	}
+
+	this->AddPosition(moveDistance, 0);
+}
+
+int Player::GetAutoMovedDistance()
+{
+	return autoMovedDistance;
+}
+
+bool Player::GetMovable()
+{
+	return movable;
+}
+
+void Player::SetMovable(bool movable)
+{
+	this->movable = movable;
+	autoMovedDistance = 0;
+}
+
 void Player::OnConveyorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	switch (side)
@@ -305,6 +326,25 @@ void Player::OnConveyorCollision(Entity * impactor, Entity::CollisionSide side, 
 	case Entity::BottomRight:
 	case Entity::BottomLeft:
 		this->AddPosition(((Conveyor*)(impactor))->GetSpeed() / 10, 0);
+		break;
+	default:
+		break;
+	}
+}
+
+void Player::OnDoorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side)
+	{
+	case Entity::Left:
+	case Entity::Right:
+	{
+		this->movable = false;
+	}
+	case Entity::Top:
+	case Entity::Bottom:
+	case Entity::BottomRight:
+	case Entity::BottomLeft:
 		break;
 	default:
 		break;

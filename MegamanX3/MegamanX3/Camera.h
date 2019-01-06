@@ -20,6 +20,10 @@ public:
 	void Initialize(LPCTSTR filePath);
 	void Update(D3DXVECTOR3 center);
 	void CheckCameraPath();
+	void StopAutoMove();
+	void AutoMove();
+	bool IsAutoMoving();
+	int GetAutoMovedDistance();
 
 	D3DXVECTOR3 GetCenter();
 	RECT GetBound();
@@ -31,6 +35,8 @@ private:
 	int height;
 	D3DXVECTOR3 center;
 	void SetRange(RECT * rect);
+	bool autoMoving;
+	int autoMovedDistance;
 };
 
 #endif

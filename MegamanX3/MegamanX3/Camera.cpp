@@ -63,6 +63,11 @@ void Camera::Initialize(LPCTSTR filePath)
 
 void Camera::Update(D3DXVECTOR3 center)
 {
+
+	if (autoMoving) {
+		return;
+	}
+
 	CheckCameraPath();
 
 	D3DXVECTOR3 cameraCenter = center;
@@ -88,6 +93,7 @@ void Camera::Update(D3DXVECTOR3 center)
 			cameraCenter.y = range->bottom - this->GetHeight() / 2;
 		}
 	}
+
 	this->SetCenter(cameraCenter);
 
 }
@@ -100,7 +106,7 @@ void Camera::CheckCameraPath()
 	int size = rangeRects.size();
 	for (int index = 0; index < size; index++)
 	{
-		if (index == 3) {
+		if (index == 9 || index == 10 ||index ==11) {
 			int a = 0;
 		}
 
@@ -131,6 +137,30 @@ void Camera::CheckCameraPath()
 	{
 		SetRange(currentRects.at(index));
 	}
+}
+
+void Camera::StopAutoMove()
+{
+	autoMoving = false;
+	autoMovedDistance = 0;
+}
+
+void Camera::AutoMove()
+{
+	autoMoving = true;
+	D3DXVECTOR3 center = GetCenter();
+	this->SetCenter(center.x + 3, center.y);
+	autoMovedDistance += 3;
+}
+
+bool Camera::IsAutoMoving()
+{
+	return autoMoving;
+}
+
+int Camera::GetAutoMovedDistance()
+{
+	return autoMovedDistance;
 }
 
 D3DXVECTOR3 Camera::GetCenter()

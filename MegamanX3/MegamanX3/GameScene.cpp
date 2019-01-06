@@ -4,6 +4,9 @@
 #include <iostream>
 #include <vector>
 
+const int PLAYER_AUTO_MOVE_DISTANCE = 176;
+const int CAMERA_AUTO_MOVE_DISTANCE = 511;
+
 GameScene::GameScene()
 {
 }
@@ -37,7 +40,7 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(11000, 2300);
+	player->SetPosition(10800, 2300);
 	camera->SetCenter(player->GetPosition());
 
 	EntityManager::GetInstance()->Initialize(player, camera, "testDoor", map->GetWidth(), map->GetHeight());
@@ -71,8 +74,20 @@ void GameScene::DrawQuadtree(QuadTree *quadtree)
 
 void GameScene::Update()
 {
+	if (!player->GetMovable()) {
+		player->AutoMove();
+		camera->AutoMove();
+		if (player->GetAutoMovedDistance() >= PLAYER_AUTO_MOVE_DISTANCE) {
+			player->SetMovable(true);
+			camera->AutoMove();
+		}
+	}
+
+	if (camera->GetAutoMovedDistance() >= CAMERA_AUTO_MOVE_DISTANCE) {
+		camera->StopAutoMove();
+	}
+
 	CheckCollision();
-	//camera->CheckCameraPath();
 	EntityManager::GetInstance()->CheckCollide();
 	camera->Update(player->GetPosition());
 	player->Update();
