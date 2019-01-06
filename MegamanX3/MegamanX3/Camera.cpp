@@ -59,45 +59,44 @@ void Camera::Initialize(LPCTSTR filePath)
 			rangeRects.push_back(rect);
 		}
 	}
-	if (!rangeRects.empty()) {
-		range = rangeRects.at(0);
-	}
 }
 
 void Camera::Update(D3DXVECTOR3 center)
 {
-	this->SetCenter(center);
+	CheckCameraPath();
 
-	if (!range) {
-		return;
-	}
+	D3DXVECTOR3 cameraCenter = center;
+	
+	if (range) {
+		if (center.x - this->width / 2 <= range->left)
+		{
+			cameraCenter.x = range->left + this->GetWidth() / 2;
+		}
 
-	if (this->GetBound().left <= range->left)
-	{
-		this->SetCenter(range->left + this->GetWidth() / 2, this->GetCenter().y);
-	}
+		if (center.x + this->width / 2 >= range->right)
+		{
+			cameraCenter.x = range->right - this->GetWidth() / 2;
+		}
 
-	if (this->GetBound().right >= range->right)
-	{
-		this->SetCenter(range->right - this->GetWidth() / 2,
-			this->GetCenter().y);
-	}
+		if (center.y - this->height / 2 <= range->top)
+		{
+			cameraCenter.y = range->top + this->GetHeight() / 2;
+		}
 
-	if (this->GetBound().top <= range->top)
-	{
-		this->SetCenter(this->GetCenter().x, range->top + this->GetHeight() / 2);
+		if (center.y + this->height / 2 >= range->bottom)
+		{
+			cameraCenter.y = range->bottom - this->GetHeight() / 2;
+		}
 	}
+	this->SetCenter(cameraCenter);
 
-	if (this->GetBound().bottom >= range->bottom)
-	{
-		this->SetCenter(this->GetCenter().x,
-			range->bottom - this->GetHeight() / 2);
-	}
 }
 
 void Camera::CheckCameraPath()
 {
 	std::vector<RECT*> currentRects;
+	RECT * maxCollideRect = NULL;
+	float maxCollidePercent = 0;
 	int size = rangeRects.size();
 	for (int index = 0; index < size; index++)
 	{
@@ -105,11 +104,20 @@ void Camera::CheckCameraPath()
 			int a = 0;
 		}
 
-		if (Collision::IsInside(this->GetBound(), *rangeRects.at(index))) {
+		float collidePercent = Collision::GetCollidePercent(this->GetBound(), *rangeRects.at(index));
+
+		if (collidePercent == 100.0) {
 			currentRects.push_back(rangeRects.at(index));
 		}
+		else if (collidePercent > maxCollidePercent){
+			maxCollideRect = rangeRects.at(index);
+		}
 	}
-	
+
+	if (maxCollideRect != nullptr && currentRects.size() == 0) {
+		currentRects.push_back(maxCollideRect);
+	}
+
 	size = currentRects.size();
 	if (size != 0) {
 		range = new RECT();
@@ -117,8 +125,8 @@ void Camera::CheckCameraPath()
 		range->right = -1;
 		range->top = -1;
 		range->bottom = -1;
-
 	}
+
 	for (int index = 0; index < size; index++)
 	{
 		SetRange(currentRects.at(index));

@@ -37,12 +37,10 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(3200, 700);
+	player->SetPosition(11000, 2300);
 	camera->SetCenter(player->GetPosition());
 
-	
-
-	EntityManager::GetInstance()->Initialize(player, camera, "testConveyor", map->GetWidth(), map->GetHeight());
+	EntityManager::GetInstance()->Initialize(player, camera, "testDoor", map->GetWidth(), map->GetHeight());
 	
 	debugDraw = new DebugDraw();
 	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));
@@ -74,7 +72,7 @@ void GameScene::DrawQuadtree(QuadTree *quadtree)
 void GameScene::Update()
 {
 	CheckCollision();
-	camera->CheckCameraPath();
+	//camera->CheckCameraPath();
 	EntityManager::GetInstance()->CheckCollide();
 	camera->Update(player->GetPosition());
 	player->Update();

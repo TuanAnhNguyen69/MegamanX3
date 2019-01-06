@@ -11,3 +11,5 @@
 #include "Conveyor.h"
 #include "Elevator.h"
 #include "Byte.h"
+#include "Door.h"
+

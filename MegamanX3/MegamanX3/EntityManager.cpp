@@ -252,9 +252,18 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 					break;
 					case EntityId::Helit:
 					break;
-				case EntityId::Door:
+					*/
+				case EntityId::Door_ID:
+				{
+					Door * door = new Door();
+					door->Initialize();
+					door->SetPosition(posX + width / 2, posY + height / 2);
+					door->SetBound(width, height);
+					AddEntity(door);
 					break;
-				case EntityId::Ladder:
+				}
+
+				/*case EntityId::Ladder:
 					break;
 				case EntityId::Thorn:
 					break;

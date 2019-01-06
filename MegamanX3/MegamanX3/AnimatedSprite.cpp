@@ -30,29 +30,60 @@ void AnimatedSprite::Initialize(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, f
 void AnimatedSprite::Update()
 {
 	if (maxFrames == 1.0f) {
+		int row = (long)(startFrame / maxFramesRow);
+		int column = (long)(startFrame) % (long)maxFramesRow;
+
+		top = row * frameHeight;
+		left = column * frameWidth;
 		return;
 	}
 
-	if (currentFrame < maxFrames) {
-		float dt = Timer::GetDeltaTime();
-		currentSpeed += animationSpeed * dt;
-		//std::cout << "Current speed: " << currentSpeed << std::endl;
+	if (reverse) {
+		if (currentFrame >= 0) {
+			float dt = Timer::GetDeltaTime();
+			currentSpeed += animationSpeed * dt;
+			//std::cout << "Current speed: " << currentSpeed << std::endl;
 
-		if (currentSpeed > framesPerSecond) {
-			currentFrame++;
-			currentSpeed = 0.0f;
+			if (currentSpeed > framesPerSecond) {
+				currentFrame--;
+				currentSpeed = 0.0f;
 
-			if (currentFrame >= maxFrames) {
-				if (isLooping) {
-					currentFrame = 0.0f;
-				}
-				else {
-					currentFrame = maxFrames - 1;
+				if (currentFrame < 0) {
+					if (isLooping) {
+						currentFrame = maxFrames - 1;
+					}
+					else {
+						currentFrame = 0.0f;
+					}
 				}
 			}
 		}
+
+	}
+	else {
+		if (currentFrame < maxFrames) {
+			float dt = Timer::GetDeltaTime();
+			currentSpeed += animationSpeed * dt;
+			//std::cout << "Current speed: " << currentSpeed << std::endl;
+
+			if (currentSpeed > framesPerSecond) {
+				currentFrame++;
+				currentSpeed = 0.0f;
+
+				if (currentFrame >= maxFrames) {
+					if (isLooping) {
+						currentFrame = 0.0f;
+					}
+					else {
+						currentFrame = maxFrames - 1;
+					}
+				}
+			}
+		}
+
 	}
 
+	
 	//std::cout << "Current frame: " << currentFrame << std::endl;
 
 	if (currentFrame == previousFrame) {
@@ -87,13 +118,39 @@ void AnimatedSprite::SetFrame(float frame)
 
 void AnimatedSprite::ResetFrame()
 {
-	currentFrame = 0;
-	previousFrame = -1.0f;
+
+	if (!reverse) {
+		currentFrame = 0;
+		previousFrame = -1.0f;
+		return;
+	}
+
+	currentFrame = endFrame;
+	previousFrame = maxFrames;
 }
 
 bool AnimatedSprite::IsFinished()
 {
 	return currentFrame == maxFrames - 1;
+}
+
+void AnimatedSprite::SetReverse(bool reverse)
+{
+	if (this->reverse != reverse) {
+		this->reverse = reverse;
+		if (reverse) {
+			currentFrame = endFrame;
+		}
+		else {
+			currentFrame = startFrame;
+		}
+		ResetFrame();
+	}
+}
+
+bool AnimatedSprite::GetReverse()
+{
+	return this->reverse;
 }
 
 int AnimatedSprite::GetCurrentFrame()
