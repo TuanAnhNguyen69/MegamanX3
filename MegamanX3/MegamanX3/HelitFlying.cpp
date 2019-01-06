@@ -94,6 +94,8 @@ void HelitFlying::OnCollision(Entity * impactor, Entity::CollisionSide side, Ent
 				entity->SetVelocity(0, 0);*/
 				entity->AddVelocityY(-20.0f);	
 				handler->ChangeState(HelitStateHandler::StateName::Die);
+				//Test
+				handler->SubHP(50);
 				break;
 			}
 		}

@@ -43,7 +43,6 @@ public:
 	void SetHadShootState(bool hadShootState);	
 	int GetHP();
 	void SubHP(int damage);
-	void Died();
 	Player* player;
 	
 

@@ -23,7 +23,6 @@ public:
 	virtual void SetHadShootState(bool hadShootState) = 0;
 	virtual int GetHP() = 0;
 	virtual void SubHP(int damage) = 0;
-	virtual void Died() = 0;
 
 	virtual StateName GetCurrentStateName() = 0;
 	virtual void ChangeState(StateName state) = 0;

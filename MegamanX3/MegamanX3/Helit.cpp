@@ -23,25 +23,33 @@ Helit::Helit(Player *_player) : Enemy(EntityId::Helit_ID, _player)
 
 Helit::~Helit()
 {
-	/*if (currentState) {
-		delete currentState;
-		currentState = nullptr;
-	}	*/
 
-	delete this->player;
+	if (dieState) {
+		delete dieState;
+		dieState = nullptr;
+	}
 
-	delete this->camera;
+	if (damagedState) {
+		delete damagedState;
+		damagedState = nullptr;
+	}
 
-	delete this->currentState;
-	delete this->flyingState;
-	delete this->shootingState;
-	delete this->damagedState;
-	delete this->dieState;
+	if (shootingState) {
+		delete shootingState;
+		shootingState = nullptr;
+	}
+
+	if (flyingState) {
+		delete flyingState;
+		flyingState = nullptr;
+	}
+
+	Entity::~Entity();
 }
 
 void Helit::Initialize()
 {
-	HP = 0;
+	HP = 30;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"helit", 50, 50);
 	this->ChangeState(HelitStateHandler::StateName::Flying);
@@ -49,7 +57,10 @@ void Helit::Initialize()
 
 void Helit::Update()
 {
-	//if (IsAction())
+	if (HP < 0) {
+		EntityManager::GetInstance()->RemoveEntity(this);
+		return;
+	}
 	
 	if (this->GetPosition().x > player->GetPosition().x)
 	{
@@ -70,10 +81,10 @@ void Helit::Update()
 	}
 
 	Entity::Update();
+
 	if (currentState) {
 		currentState->Update();
 	}
-
 }
 
 //void Helit::SetPosition(int x, int y)
@@ -175,13 +186,6 @@ void Helit::SubHP(int damage)
 {
 	this->HP -= damage;
 }
-
-void Helit::Died()
-{
-	EntityManager::GetInstance()->RemoveEntity(this);
-}
-
-
 
 //bool Helit::GetAction()
 //{
