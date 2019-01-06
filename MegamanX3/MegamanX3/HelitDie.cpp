@@ -11,12 +11,10 @@ HelitDie::HelitDie(HelitStateHandler *handler, Entity *entity) : HelitState(hand
 
 HelitDie::~HelitDie()
 {
-
 	if (sprite) {
 		delete sprite;
 		sprite = nullptr;
 	}
-	
 }
 
 void HelitDie::Load()
@@ -28,14 +26,8 @@ void HelitDie::Load()
 
 void HelitDie::Update()
 {
-	if (handler->GetHP() == 0) {
-		if (sprite->IsFinished()) {
-			/*entity->SetSprite(nullptr);	
-			entity->SetBound(0, 0);
-			handler->Died();
-			delete entity;*/
-			EntityManager::GetInstance()->RemoveEntity(entity);
-		}
+	if (sprite->IsFinished()) {
+		entity->SetRemove();
 	}
 }
 

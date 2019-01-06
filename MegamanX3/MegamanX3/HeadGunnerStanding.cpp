@@ -20,22 +20,35 @@ HeadGunnerStanding::~HeadGunnerStanding()
 
 void HeadGunnerStanding::Load()
 {
+	isLeft = handler->GetIsLeft();
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	timeStartState = clock();
+	entity->SetReverse(!isLeft);
 }
 
 void HeadGunnerStanding::Update()
 {
-	if (!handler->GetIsLeft()) {
-		entity->SetReverse(true);
-	}
 	timeCount = clock();
 	int dt = (timeCount - timeStartState) / 1000;
-	if (dt > 2)
-	{
-		handler->ChangeState(HeadGunnerStateHandler::StateName::Shoot);
+
+	if (handler->GetAmmoCanon() <= 0)
+	{	
+		if (dt > 2)
+		{
+			handler->ResetAmmoCanon();
+			handler->ChangeState(HeadGunnerStateHandler::StateName::ShootRocket);
+		}
 	}
+	else
+	{
+		if (dt > 1)
+		{
+			handler->SubAmmoCanon();
+			handler->ChangeState(HeadGunnerStateHandler::StateName::ShootCanon);
+		}
+	}
+	
 }
 
 void HeadGunnerStanding::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)

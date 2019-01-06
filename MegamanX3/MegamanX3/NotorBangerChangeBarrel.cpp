@@ -26,31 +26,36 @@ void NotorBangerChangeBarrel::Load()
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	sprite->ResetFrame();
-	hadStraight = -hadStraight;
+	
+	isLeft = handler->GetLeftTarget();
+	isHigh = handler->GetAboveTarget();
+
+	if (isLeft)
+	{
+		entity->SetReverse(false);
+	}
+	else
+	{
+		entity->SetReverse(true);
+	}
+	
 }
 
 void NotorBangerChangeBarrel::Update()
 {
-	if (!handler->GetLeftTarget())
-	{
-		entity->SetReverse(true);
-	}
-	else
-	{
-		entity->SetReverse(false);
-	}
+	
 	if (handler->GetPreAction() == NotorBangerStateHandler::StateName::Jump)
 	{
-		if (handler->GetAboveTarget())
+		if (isHigh)
 		{
 			//Sau khi bắn nòng súng sẽ ở tên cao
-			hadStraight = true;
+			handler->SetHadChangeHigh(true);
 			sprite->SetFrameRange(5, 9);	
 		}
 		else
 		{
 			//Sau khi bắn nòng súng sẽ nghiêng
-			hadStraight = false;
+			handler->SetHadChangeHigh(false);
 			sprite->SetFrameRange(5, 7);
 		}
 		if (sprite->IsFinished())
@@ -61,7 +66,7 @@ void NotorBangerChangeBarrel::Update()
 	}
 	if (handler->GetPreAction() == NotorBangerStateHandler::StateName::Shoot)
 	{
-		if (hadStraight)
+		if (handler->HadChangeHigh())
 		{
 			sprite->SetFrameRange(10, 14);
 			

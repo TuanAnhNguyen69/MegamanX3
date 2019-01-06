@@ -41,6 +41,17 @@ void BlastHornet::Initialize()
 
 void BlastHornet::Update()
 {
+	if (this->IsRemove())
+	{
+		EntityManager::GetInstance()->RemoveEntity(this);
+		return;
+	}
+
+	if (this->GetHP() <= 0)
+	{
+		this->ChangeState(BlastHornetStateHandler::StateName::Die);
+	}
+
 	Entity::Update();
 	playerPos = D3DXVECTOR3(player->GetPosition().x, player->GetPosition().y, 0);
 

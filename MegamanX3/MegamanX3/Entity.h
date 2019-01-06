@@ -116,6 +116,8 @@ public:
 	void GoTo(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed);
 	void GoOn(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed);
 
+	void SetRemove();
+	bool IsRemove();
 protected:
 	int width;
 	int height;
@@ -128,6 +130,8 @@ private:
 	EntityId entityId;
 	Sprite *sprite;
 	bool reverse;
+
+	bool isRemove;
 };
 
 #endif

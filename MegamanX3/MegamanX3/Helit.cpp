@@ -28,20 +28,28 @@ Helit::~Helit()
 		currentState = nullptr;
 	}	*/
 
-	delete this->player;
-
-	delete this->camera;
+	/*delete this->player;
+	this->player = nullptr;*/
 
 	delete this->currentState;
+	//this->currentState = nullptr;
+
 	delete this->flyingState;
+	//this->flyingState = nullptr;
+
 	delete this->shootingState;
+	//this->shootingState = nullptr;
+
 	delete this->damagedState;
+	//this->damagedState = nullptr;
+
 	delete this->dieState;
+	//this->dieState = nullptr;
 }
 
 void Helit::Initialize()
 {
-	HP = 0;
+	HP = 5;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"helit", 50, 50);
 	this->ChangeState(HelitStateHandler::StateName::Flying);
@@ -50,6 +58,17 @@ void Helit::Initialize()
 void Helit::Update()
 {
 	//if (IsAction())
+	
+	if (this->IsRemove())
+	{
+		EntityManager::GetInstance()->RemoveEntity(this);
+		return;
+	}
+
+	if (this->GetHP() <= 0)
+	{
+		this->ChangeState(HelitStateHandler::StateName::Die);
+	}
 	
 	if (this->GetPosition().x > player->GetPosition().x)
 	{
@@ -180,6 +199,7 @@ void Helit::Died()
 {
 	EntityManager::GetInstance()->RemoveEntity(this);
 }
+
 
 
 

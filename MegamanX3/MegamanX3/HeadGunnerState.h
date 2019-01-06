@@ -20,6 +20,7 @@ protected:
 	AnimatedSprite * sprite;
 	HeadGunnerStateHandler *handler;
 	Entity *entity;
+	bool isLeft;
 
 	clock_t timeStartState, timeCount;
 };

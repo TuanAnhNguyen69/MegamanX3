@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "Player.h"
+#include "PlayerBullet.h"
 class Enemy : public Entity
 {
 public:
@@ -9,8 +10,8 @@ public:
 	void Update();
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 
-	/*virtual void SubHP(int damage) = 0;
-	virtual int GetHP() = 0;*/
+	void SubHP(int damage);
+	int GetHP();
 
 protected:
 	Player * player;

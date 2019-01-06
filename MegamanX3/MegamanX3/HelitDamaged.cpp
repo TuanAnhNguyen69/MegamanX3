@@ -10,7 +10,8 @@ HelitDamaged::HelitDamaged(HelitStateHandler *handler, Entity *entity) : HelitSt
 }
 HelitDamaged::~HelitDamaged()
 {
-	if (handler->GetCurrentStateName() != HelitStateHandler::StateName::Damaged) {
+	//if (handler->GetCurrentStateName() != HelitStateHandler::StateName::Damaged) 
+	{
 		if (sprite) {
 			delete sprite;
 			sprite = nullptr;

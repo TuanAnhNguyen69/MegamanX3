@@ -21,13 +21,11 @@ void NotorBangerStanding::Load()
 {
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
-	//handler->SetPreAction(NotorBangerStateHandler::StateName::Jump);
 }
 
 void NotorBangerStanding::Update()
 {
 	handler->ChangeState(NotorBangerStateHandler::StateName::ChangeBarrel);
-	//handler->ChangeState(NotorBangerStateHandler::StateName::Jump);
 }
 
 void NotorBangerStanding::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
@@ -38,5 +36,5 @@ void NotorBangerStanding::OnCollision(Entity * impactor, Entity::CollisionSide s
 		entity->SetVelocityY(0);
 		handler->ChangeState(NotorBangerStateHandler::StateName::Standing);
 	}
-	return;
+	//return;
 }

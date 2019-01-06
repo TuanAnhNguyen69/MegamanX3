@@ -14,6 +14,7 @@ Entity::Entity(EntityId entityId)
 	translation = D3DXVECTOR2(0, 0);
 	reverse = false;
 	sprite = nullptr;
+	isRemove = false;
 }
 
 Entity::Entity()
@@ -24,6 +25,7 @@ Entity::Entity()
 	translation = D3DXVECTOR2(0, 0);
 	reverse = false;
 	sprite = nullptr;
+	isRemove = false;
 }
 
 Entity::~Entity()
@@ -229,6 +231,16 @@ void Entity::GoOn(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed)
 
 	this->AddVelocityX(moveVector.x / speedVector * speed);
 	this->AddVelocityY(moveVector.y / speedVector * speed);
+}
+
+void Entity::SetRemove()
+{
+	isRemove = true;
+}
+
+bool Entity::IsRemove()
+{
+	return isRemove;
 }
 
 void Entity::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)

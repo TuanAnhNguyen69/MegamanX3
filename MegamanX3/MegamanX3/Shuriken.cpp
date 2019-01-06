@@ -61,10 +61,22 @@ void Shuriken::Initialize()
 		"shuriken", 50, 50);
 	this->SetPreAction(ShurikenStateHandler::StateName::Jump);
 	this->ChangeState(ShurikenStateHandler::StateName::Turn);
+	this->HP = 40;
 }
 
 void Shuriken::Update()
 {
+	if (this->IsRemove())
+	{
+		EntityManager::GetInstance()->RemoveEntity(this);
+		return;
+	}
+
+	if (this->GetHP() <= 0)
+	{
+		this->ChangeState(ShurikenStateHandler::StateName::Die);
+	}
+
 	Entity::Update();
 	if (currentState)
 	{

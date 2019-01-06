@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 #include "Engine.h"
 #include "Camera.h"
 #include "HelitState.h"
@@ -11,7 +11,7 @@
 #include <list>
 #include <cmath>
 
-class Entity;
+//class Entity;
 
 using namespace std;
 
@@ -44,8 +44,6 @@ public:
 	int GetHP();
 	void SubHP(int damage);
 	void Died();
-	Player* player;
-	
 
 private:
 	bool targetIsLeft;
@@ -56,7 +54,6 @@ private:
 	HelitState *flyingState, *shootingState, *dieState, *damagedState;
 	HelitStateHandler::StateName currentStateName;
 	//Entity *entity;
-	Camera *camera;
 	HelitStateHandler::StateName preAction;
 };
 

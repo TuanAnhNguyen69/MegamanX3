@@ -28,6 +28,5 @@ public:
 	virtual StateName GetCurrentStateName() = 0;
 	virtual void ChangeState(StateName state) = 0;
 	virtual MoveDirection GetMoveDirection() = 0;
-	
 };
 

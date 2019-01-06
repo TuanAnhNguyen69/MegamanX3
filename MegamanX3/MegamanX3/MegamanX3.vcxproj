@@ -210,6 +210,8 @@
     <ClInclude Include="HeadGunnerDie.h" />
     <ClInclude Include="HeadGunnerRocket.h" />
     <ClInclude Include="HeadGunnerShoot.h" />
+    <ClInclude Include="HeadGunnerShootCanon.h" />
+    <ClInclude Include="HeadGunnerShootRocket.h" />
     <ClInclude Include="HeadGunnerStanding.h" />
     <ClInclude Include="HeadGunnerState.h" />
     <ClInclude Include="HeadGunnerStateHandler.h" />
@@ -316,6 +318,8 @@
     <ClCompile Include="HeadGunnerDie.cpp" />
     <ClCompile Include="HeadGunnerRocket.cpp" />
     <ClCompile Include="HeadGunnerShoot.cpp" />
+    <ClCompile Include="HeadGunnerShootCanon.cpp" />
+    <ClCompile Include="HeadGunnerShootRocket.cpp" />
     <ClCompile Include="HeadGunnerStanding.cpp" />
     <ClCompile Include="HeadGunnerState.cpp" />
     <ClCompile Include="Helit.cpp" />

@@ -2,7 +2,7 @@
 #include "HeadGunnerRocket.h"
 
 
-HeadGunnerRocket::HeadGunnerRocket(bool isLeft, bool isTop) : Entity(EntityId::GunnerRocket_ID)
+HeadGunnerRocket::HeadGunnerRocket() : Entity(EntityId::GunnerRocket_ID)
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"head_gunner_rocket", 25, 9);

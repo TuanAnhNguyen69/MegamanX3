@@ -10,7 +10,8 @@ HelitFlying::HelitFlying(HelitStateHandler *handler, Entity *entity) : HelitStat
 }
 HelitFlying::~HelitFlying()
 {
-	if (handler->GetCurrentStateName() != HelitStateHandler::StateName::Flying) {
+	//if (handler->GetCurrentStateName() != HelitStateHandler::StateName::Flying) 
+	{
 		if (sprite) {
 			delete sprite;
 			sprite = nullptr;
@@ -38,7 +39,7 @@ void HelitFlying::Update()
 			}
 			else {
 				entity->AddVelocityY(-10.0f);
-				handler->ChangeState(HelitStateHandler::StateName::Shooting);
+				//handler->ChangeState(HelitStateHandler::StateName::Shooting);
 			}
 		}
 		else {
@@ -48,7 +49,7 @@ void HelitFlying::Update()
 			}
 			else {
 				entity->AddVelocityY(-10.0f);
-				handler->ChangeState(HelitStateHandler::StateName::Shooting);
+				//handler->ChangeState(HelitStateHandler::StateName::Shooting);
 
 			}
 		}

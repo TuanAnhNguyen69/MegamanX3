@@ -291,6 +291,12 @@
     <ClCompile Include="BlastHornetDie.cpp">
       <Filter>Entities\Enemy\BlastHornet</Filter>
     </ClCompile>
+    <ClCompile Include="HeadGunnerShootCanon.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadGunnerShootRocket.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -617,6 +623,12 @@
     </ClInclude>
     <ClInclude Include="BlastHornetDie.h">
       <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerShootCanon.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerShootRocket.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

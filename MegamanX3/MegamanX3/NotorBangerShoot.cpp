@@ -6,7 +6,7 @@
 NotorBangerShoot::NotorBangerShoot(NotorBangerStateHandler *handler, Entity *entity) : NotorBangerState(handler, entity)
 {
 	ammo = 5;
-	sprite = new AnimatedSprite(5, true);
+	sprite = new AnimatedSprite(5, 1, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "notor_banger",
 		15, 24, 5, 50, 50);
 }
@@ -28,20 +28,30 @@ void NotorBangerShoot::Load()
 	entity->SetVelocity(0, 0);
 	hadShoot = false;
 	handler->SetPreAction(NotorBangerStateHandler::StateName::Shoot);
+
+	isLeft = handler->GetLeftTarget();
+	isHigh = handler->GetAboveTarget();
+
+	if (isHigh)
+	{
+		sprite->SetFrameRange(15, 17);
+	}
+	else
+	{
+		sprite->SetFrameRange(20, 22);
+	}
 }
 
 void NotorBangerShoot::Update()
 {
 	//nếu nòng súng không ở trên cao
-	if (!hadStraight)
+	
+
+	if (sprite->IsFinished())
 	{
-		sprite->SetFrameRange(20, 22);
+		sprite->ResetFrame();
 	}
-	//nếu nòng súng ở trên cao
-	else
-	{
-		sprite->SetFrameRange(15, 17);
-	}
+
 	if(ammo > 0)
 	{
 		if (sprite->GetCurrentFrame() == 1 )
@@ -49,15 +59,11 @@ void NotorBangerShoot::Update()
 			if (!hadShoot) 
 			{
 				Canon *canon = new Canon();
-				canon->SetPosition(entity->GetPosition().x+10, entity->GetPosition().y+5);
-				if (handler->GetLeftTarget())
-				{
-					canon->Initialize(false, true);
-				}	
+				if(isLeft)
+					canon->SetPosition(entity->GetPosition().x + 10, entity->GetPosition().y + 5);
 				else
-				{
-					canon->Initialize(false, false);
-				}
+					canon->SetPosition(entity->GetPosition().x + 10, entity->GetPosition().y - 8);
+				canon->Initialize(isHigh, isLeft);
 				canon->SetScale(2, 2);
 				canon->SetBound(7, 7);
 				EntityManager::GetInstance()->AddEntity(canon);

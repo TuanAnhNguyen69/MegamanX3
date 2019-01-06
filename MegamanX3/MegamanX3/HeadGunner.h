@@ -6,6 +6,8 @@
 #include "HeadGunnerDamaged.h"
 #include "HeadGunnerDie.h"
 #include "HeadGunnerShoot.h"
+#include "HeadGunnerShootCanon.h"
+#include "HeadGunnerShootRocket.h"
 #include "HeadGunnerStanding.h"
 #include "Enemy.h"
 #include "Player.h"
@@ -28,14 +30,18 @@ public:
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	void OnNoCollisionWithBottom();
 
+	int GetAmmoCanon();
+	void ResetAmmoCanon();
+	void SubAmmoCanon();
+
 	bool GetIsLeft();
 
 private:
 	bool isLeft;
 	HeadGunnerState * currentState;
-	HeadGunnerState *standingState, *shootState, *jumpState, *dieState, *damagedState, *fallingState;
+	HeadGunnerState *standingState, *shootState, *shootRocketState, *shootCanonState, *jumpState, *dieState, *damagedState, *fallingState;
 	HeadGunnerStateHandler::StateName currentStateName;
-	Camera *camera;
 	HeadGunnerStateHandler::StateName preAction;
+	int ammoCanon;
 };
 

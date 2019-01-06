@@ -33,8 +33,8 @@ void BlastHornetDie::Update()
 
 	timeCount = clock();
 	int dt = (timeCount - timeStartState) / 1000;
-	if (dt > 7)
-		EntityManager::GetInstance()->RemoveEntity(entity);
+	if (dt > 5)
+		entity->SetRemove();
 }
 
 void BlastHornetDie::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)

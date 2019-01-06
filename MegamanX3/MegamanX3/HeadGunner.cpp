@@ -7,6 +7,8 @@ HeadGunner::HeadGunner(Player * player) : Enemy(EntityId::HeadGunner_ID, player)
 {
 	standingState = new HeadGunnerStanding(this, this);
 	shootState = new HeadGunnerShoot(this, this);
+	shootRocketState = new HeadGunnerShootRocket(this, this);
+	shootCanonState = new HeadGunnerShootCanon(this, this);
 	damagedState = new HeadGunnerDamaged(this, this);
 	dieState = new HeadGunnerDie(this, this);
 }
@@ -22,18 +24,31 @@ HeadGunner::~HeadGunner()
 
 void HeadGunner::Initialize( bool isLeft)
 {
+	this->HP = 5;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"head_gunner", 50, 50);
 	this->isLeft = isLeft;
+	ammoCanon = 0;
 	this->ChangeState(HeadGunnerStateHandler::StateName::Standing);
 }
 
 void HeadGunner::Update()
 {
+	if (this->IsRemove())
+	{
+		EntityManager::GetInstance()->RemoveEntity(this);
+		return;
+	}
+
+	if (this->HP <= 0)
+	{
+		this->ChangeState(HeadGunnerStateHandler::StateName::Die);
+	}
+	Entity::Update();
 	if (currentState) {
 			currentState->Update();
 	}
-	Entity::Update();
+	
 }
 
 HeadGunnerStateHandler::StateName HeadGunner::GetCurrentStateName()
@@ -59,6 +74,14 @@ void HeadGunner::ChangeState(HeadGunnerStateHandler::StateName stateName)
 	case Die:
 		currentState = dieState;
 		currentStateName = Die;
+		break;
+	case ShootRocket:
+		currentState = shootRocketState;
+		currentStateName = ShootRocket;
+		break;
+	case ShootCanon:
+		currentState = shootCanonState;
+		currentStateName = ShootCanon;
 		break;
 	default:
 		currentState = standingState;
@@ -89,6 +112,21 @@ void HeadGunner::OnCollision(Entity * impactor, Entity::CollisionSide side, Enti
 
 void HeadGunner::OnNoCollisionWithBottom()
 {
+}
+
+int HeadGunner::GetAmmoCanon()
+{
+	return ammoCanon;
+}
+
+void HeadGunner::ResetAmmoCanon()
+{
+	ammoCanon = 2;
+}
+
+void HeadGunner::SubAmmoCanon()
+{
+	ammoCanon--;
 }
 
 bool HeadGunner::GetIsLeft()

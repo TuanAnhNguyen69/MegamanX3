@@ -12,4 +12,9 @@ public:
 private:
 	float acceleratorX;
 	float acceleratorY;
+
+	bool isLeft;
+	bool hadJump;
+
+	D3DXVECTOR3 startPos;
 };

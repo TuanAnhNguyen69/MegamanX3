@@ -29,6 +29,7 @@ CarryArm::~CarryArm()
 
 void CarryArm::Initialize()
 {
+	this->HP = 5;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"CarryArm", 50, 65);
 	this->ChangeState(CarryArmStateHandler::StateName::Flying);
@@ -44,6 +45,17 @@ void CarryArm::Initialize()
 
 void CarryArm::Update()
 {
+	if (this->IsRemove())
+	{
+		EntityManager::GetInstance()->RemoveEntity(this);
+		return;
+	}
+
+	if (this->GetHP() <= 0)
+	{
+		this->ChangeState(CarryArmStateHandler::StateName::Die);
+	}
+
 	//if (IsAction())
 	if (this->GetPosition().x > player->GetPosition().x)
 	{

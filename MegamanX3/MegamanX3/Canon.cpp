@@ -27,27 +27,19 @@ void Canon::Initialize(bool isHigh, bool isLeft)
 	this->isLeft = isLeft;
 	if (!isHigh)
 	{
-		if (isLeft)
-		{
-			this->SetVelocityX(-300.0f);
-			this->SetVelocityY(-400.0f);
-		}
-		else
-		{
-			this->SetVelocityX(300.0f);
-			this->SetVelocityY(-400.0f);
-		}
+		this->SetVelocityY(-Define::CANON_MAX_LOW_VELOCITY_Y);
 	}
 	else
 	{
-		if (isLeft)
-		{
-
-		}
-		else
-		{
-
-		}
+		this->SetVelocityY(-Define::CANON_MAX_LOW_VELOCITY_Y);
+	}
+	if (isLeft)
+	{
+		this->SetVelocityX(-Define::CANON_MAX_VELOCITY_X);
+	}
+	else
+	{
+		this->SetVelocityX(Define::CANON_MAX_VELOCITY_X);
 	}
 }
 
@@ -55,30 +47,37 @@ void Canon::Update()
 {
 	if (!isHigh)
 	{
-		this->AddVelocityY(10.0f);
+		this->AddVelocityY(Define::CANON_LOW_VELOCITY_Y);
 		if (this->GetVelocity().y > 0)
 		{
 			this->AddVelocityY(10.0f);
 		}
-
-		if (isLeft)
+	}
+	else
+	{
+		this->AddVelocityY(Define::CANON_HIGH_VELOCITY_Y);
+		if (this->GetVelocity().y > 0)
 		{
-			this->AddVelocityX(-20.0f);
-			if (this->GetVelocity().x < 0)
-			{
-				this->AddVelocityX(15.0f);
-			}
-		}
-		else
-		{
-			this->AddVelocityX(20.0f);
-			if (this->GetVelocity().x < 0)
-			{
-				this->AddVelocityX(-15.0f);
-			}
+			this->AddVelocityY(10.0f);
 		}
 	}
 
+	if (isLeft)
+	{
+		this->AddVelocityX(-Define::CANON_VELOCITY_X);
+		if (this->GetVelocity().x < 0)
+		{
+			this->AddVelocityX(15.0f);
+		}
+	}
+	else
+	{
+		this->AddVelocityX(Define::CANON_VELOCITY_X);
+		if (this->GetVelocity().x < 0)
+		{
+			this->AddVelocityX(-15.0f);
+		}
+	}
 	//this->AddVelocityY(-10.0f);
 	Entity::Update();
 	//float dt = Timer::GetDeltaTime();

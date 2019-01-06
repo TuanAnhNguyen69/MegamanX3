@@ -9,7 +9,7 @@ NotorBanger::NotorBanger(Player *_player) : Enemy(EntityId::NotorBanger_ID, _pla
 	jumpState = new NotorBangerJump(this, this);
 	damagedState = new NotorBangerDamaged(this, this);
 	dieState = new NotorBangerDie(this, this);
-	changeBarrel = new NotorBangerChangeBarrel(this, this);
+	changeBarrelState = new NotorBangerChangeBarrel(this, this);
 	player = _player;
 }
 
@@ -24,14 +24,26 @@ NotorBanger::~NotorBanger()
 
 void NotorBanger::Initialize()
 {
+	this->HP = 5;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"notor_banger", 50, 50);
 	this->SetPreAction(NotorBangerStateHandler::StateName::Jump);
-	ChangeState(Standing);
+	this->ChangeState(NotorBangerStateHandler::StateName::Standing);
 }
 
 void NotorBanger::Update()
 {
+	if (this->IsRemove())
+	{
+		EntityManager::GetInstance()->RemoveEntity(this);
+		return;
+	}
+
+	if (this->GetHP() <= 0)
+	{
+		this->ChangeState(NotorBangerStateHandler::StateName::Die);
+	}
+
 	if (this->GetPosition().x > player->GetPosition().x)
 	{
 		targetIsLeft = true;
@@ -41,7 +53,7 @@ void NotorBanger::Update()
 		targetIsLeft = false;
 	}
 
-	if (player->GetPosition().y > (this->GetPosition().y - this->GetHeight() * 2))
+	if (player->GetPosition().y <= -(this->GetPosition().y - this->GetHeight() * 2))
 	{
 		targetIsAbove = true;
 	}
@@ -89,7 +101,7 @@ void NotorBanger::ChangeState(StateName stateName)
 		currentStateName = Falling;
 		break;*/
 	case ChangeBarrel:
-		currentState = changeBarrel;
+		currentState = changeBarrelState;
 		currentStateName = ChangeBarrel;
 		break;
 	default:
@@ -151,4 +163,19 @@ bool NotorBanger::GetLeftTarget()
 bool NotorBanger::GetAboveTarget()
 {
 	return targetIsAbove;
+}
+
+D3DXVECTOR3 NotorBanger::GetPlayerPos()
+{
+	return this->player->GetPosition();
+}
+
+bool NotorBanger::HadChangeHigh()
+{
+	return hadChangeHigh;
+}
+
+void NotorBanger::SetHadChangeHigh(bool hadChangeHigh)
+{
+	this->hadChangeHigh = hadChangeHigh;
 }

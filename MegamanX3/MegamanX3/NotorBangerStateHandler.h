@@ -13,6 +13,7 @@ class NotorBangerStateHandler
 protected:
 	bool targetIsLeft;
 	bool targetIsAbove;
+	bool hadChangeHigh;
 public:
 	enum StateName {
 		Jump,
@@ -46,4 +47,8 @@ public:
 	virtual MoveDirection GetMoveDirection() = 0;
 	virtual void SetPreAction(StateName action) = 0;
 	virtual StateName GetPreAction() = 0;
+
+	virtual D3DXVECTOR3 GetPlayerPos() = 0;
+	virtual bool HadChangeHigh() = 0;
+	virtual void SetHadChangeHigh(bool hadChangeHigh) = 0;
 };

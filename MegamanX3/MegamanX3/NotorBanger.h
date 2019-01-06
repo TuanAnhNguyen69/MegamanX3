@@ -38,9 +38,13 @@ public:
 	bool GetLeftTarget();
 	bool GetAboveTarget();
 
+	D3DXVECTOR3 GetPlayerPos();
+	bool HadChangeHigh();
+	void SetHadChangeHigh(bool hadChangeHigh);
+
 private:
 	NotorBangerState * currentState;
-	NotorBangerState *standingState, *shootState, *jumpState, *dieState, *damagedState, *fallingState, *changeBarrel;
+	NotorBangerState *standingState, *shootState, *jumpState, *dieState, *damagedState, *fallingState, *changeBarrelState;
 	NotorBangerStateHandler::StateName currentStateName;
 	NotorBangerStateHandler::StateName preAction;
 	BarrelState barrelState;
