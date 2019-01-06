@@ -4,9 +4,23 @@
 
 PlayerJumpingState::PlayerJumpingState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
-	sprite = new AnimatedSprite(15, 0.5, false);
-	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x", 
+	jumpSprite = new AnimatedSprite(15, 1, false);
+	jumpSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
 		34, 36, 10, 50, 50);
+
+	fireSprite = new AnimatedSprite(15, 0.1, false);
+	fireSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+		41, 43, 10, 50, 50);
+
+	climbingJumpSprite = new AnimatedSprite(15, 0.1, false);
+	climbingJumpSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+		51, 52, 10, 50, 50);
+
+	climbingFireSprite = new AnimatedSprite(15, 0.1, false);
+	climbingFireSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+		56, 57, 10, 50, 50);
+
+	sprite = jumpSprite;
 }
 
 
@@ -25,9 +39,8 @@ void PlayerJumpingState::Load()
 	entity->SetSprite(sprite);
 	entity->SetVelocityY(Define::PLAYER_MIN_JUMP_VELOCITY);
 	acceleratorX = 14.0f;
-	acceleratorY = 15.0f;
+	acceleratorY = 10.0f;
 	noPressed = true;
-	sprite->ResetFrame();
 }
 
 void PlayerJumpingState::Update()
@@ -35,7 +48,7 @@ void PlayerJumpingState::Update()
 	entity->AddVelocityY(acceleratorY);
 
 	if (entity->GetVelocity().y >= 0) {
-		handler->ChangeState(PlayerStateHandler::StateName::Falling);
+   		handler->ChangeState(PlayerStateHandler::StateName::Falling);
 		return;
 	}
 
@@ -66,11 +79,35 @@ void PlayerJumpingState::UpdateInput()
 		return;
 	}
 
-	if (input->IsKeyDown(DIK_J)) {
-		sprite->SetFrameRange(41, 43);
+	if (input->IsKeyUp(DIK_J)) {
+		entity->fireCoolDown = 0;
+
+		if (entity->blockType == Player::None) {
+			sprite = fireSprite;
+		}
+		else {
+			sprite = climbingFireSprite;
+		}
+		entity->SetSprite(sprite);
+		entity->Shoot();
 	}
 	else {
-		sprite->SetFrameRange(34, 36);
+		if (entity->fireCoolDown < 20) {
+			entity->fireCoolDown++;
+		}
+		else {
+			if (entity->blockType == Player::None) {
+				sprite = jumpSprite;
+			}
+			else {
+				sprite = climbingJumpSprite;
+			}
+			entity->SetSprite(sprite);
+		}
+	}
+
+	if (input->IsKeyDown(DIK_J)) {
+		entity->bulletCharging++;
 	}
 
 	if (input->IsKeyDown(DIK_D)) {
@@ -100,6 +137,9 @@ void PlayerJumpingState::UpdateInput()
 
 void PlayerJumpingState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	if (impactor->GetEntityId() != Platform_ID) {
+		return;
+	}
 	switch (side)
 	{
 	case Entity::Left:
@@ -129,7 +169,6 @@ void PlayerJumpingState::OnCollision(Entity * impactor, Entity::CollisionSide si
 		noPressed = false;
 		entity->SetVelocityY(0);
 	}
-
 
 	default:
 		break;

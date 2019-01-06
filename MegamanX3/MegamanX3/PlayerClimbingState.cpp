@@ -5,9 +5,13 @@
 
 PlayerClimbingState::PlayerClimbingState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
-	sprite = new AnimatedSprite(15, 0.5, false);
-	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+	climbSprite = new AnimatedSprite(15, 0.5, false);
+	climbSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
 		49, 50, 10, 50, 50);
+
+	fireSprite = new AnimatedSprite(15, 0.5, false);
+	fireSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+		54, 55, 10, 50, 50);
 }
 
 
@@ -23,10 +27,10 @@ PlayerClimbingState::~PlayerClimbingState()
 
 void PlayerClimbingState::Load()
 {
+	sprite = climbSprite;
 	entity->SetSprite(sprite);
 	acceleratorX = 8.0f;
 	acceleratorY = 7.0f;
-	sprite->ResetFrame();
 }
 
 void PlayerClimbingState::Update()
@@ -44,11 +48,24 @@ void PlayerClimbingState::UpdateInput()
 		return;
 	}
 
-	if (input->IsKeyDown(DIK_J)) {
-		sprite->SetFrameRange(54, 55);
+	if (input->IsKeyUp(DIK_J)) {
+		entity->fireCoolDown = 0;
+		sprite = fireSprite;
+		entity->SetSprite(fireSprite);
+		entity->Shoot();
 	}
 	else {
-		sprite->SetFrameRange(50, 50);
+		if (entity->fireCoolDown < 20) {
+			entity->fireCoolDown++;
+		}
+		else {
+			sprite = climbSprite;
+			entity->SetSprite(climbSprite);
+		}
+	}
+
+	if (input->IsKeyDown(DIK_J)) {
+		entity->bulletCharging++;
 	}
 
 	if ((input->IsKeyDown(DIK_A) && climbingType == ClimbingLeft))
@@ -82,6 +99,9 @@ void PlayerClimbingState::UpdateInput()
 
 void PlayerClimbingState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	if (impactor->GetEntityId() != Platform_ID) {
+		return;
+	}
 	Input *input = Engine::GetEngine()->GetInput();
 	switch (side)
 	{

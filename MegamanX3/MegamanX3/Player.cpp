@@ -7,8 +7,11 @@
 #include "PlayerSlidingState.h"
 #include "PlayerDamagedState.h"
 #include "PlayerClimbingState.h"
+#include "PlayerBullet.h"
+#include "EntityImport.h"
 
 #include <iostream>
+
 
 Player::Player() : Entity(EntityId::Megaman_ID)
 {
@@ -47,11 +50,17 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 	this->SetScale(2, 2);
 	this->SetBound(60,100);
 
-	chargingSprite = new Entity();
-	AnimatedSprite * sprite = new AnimatedSprite(15, 1, true);
-	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "charging",
-		0, 0, 7, 100, 100);
-	chargingSprite->SetSprite(sprite);
+	chargerSuper = new Entity();
+	AnimatedSprite *chargeSuperSprite = new AnimatedSprite(15, 1.5, true);
+	chargeSuperSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "charging",
+		1, 14, 7, 100, 100);
+	chargerSuper->SetSprite(chargeSuperSprite);
+
+	chargerExtreme = new Entity();
+	AnimatedSprite *chargeExtremeSprite = new AnimatedSprite(15, 1.5, true);
+	chargeExtremeSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "charging",
+		14, 24, 7, 100, 100);
+	chargerExtreme->SetSprite(chargeExtremeSprite);
 
 
 	standingState = new PlayerStandingState(this, this);
@@ -62,7 +71,10 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 	damagedState = new PlayerDamagedState(this, this);
 	climbingState = new PlayerClimbingState(this, this);
 	ChangeState(Falling);
-	allowJump = true;
+	isJumping = true;
+	allowSlide = true;
+	movable = true;
+	autoMovedDistance = 0;
 }
 
 void Player::Update()
@@ -70,60 +82,82 @@ void Player::Update()
 	if (camera) {
 		this->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
-		this->chargingSprite->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+		this->chargerSuper->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
+		this->chargerExtreme->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
 	}
 
-	Entity::Update();
-	chargingSprite->SetPosition(this->GetPosition().x, this->GetPosition().y + 10);
-	chargingSprite->Update();
+	chargerSuper->SetPosition(this->GetPosition().x, this->GetPosition().y + 10);
+	chargerExtreme->SetPosition(this->GetPosition().x, this->GetPosition().y + 10);
 
-	if (currentState) {
-		currentState->UpdateInput();
-		currentState->Update();
+	if (bulletCharging < 50) {
+		bulletDamage = 2;
+	}
+	else if (bulletCharging >= 50 && bulletCharging < 150) {
+		chargerSuper->Update();
+		bulletDamage = 3;
+	}
+	else {
+		chargerExtreme->Update();
+		bulletDamage = 10;
 	}
 
-	Input *input = Engine::GetEngine()->GetInput();
-	if (input == nullptr) {
-		return;
+	if (!movable) {
+		this->SetVelocity(0, 0);
 	}
+	else {
+		if (currentState) {
+			currentState->UpdateInput();
+			currentState->Update();
+		}
 
-	if (input->IsKeyDown(DIK_H)) {
-		ChangeState(Damaged);
-	}
+		Input *input = Engine::GetEngine()->GetInput();
+		if (input == nullptr) {
+			return;
+		}
 
-	if (input->IsKeyDown(DIK_Z)) {
-		ChangeState(Sliding);
-	}
+		if (input->IsKeyDown(DIK_H)) {
+			ChangeState(Damaged);
+		}
 
-	if (input->IsKeyDown(DIK_SPACE)) {
-		if (allowJump) {
-			if (currentStateName == Running || currentStateName == Standing) {
-				ChangeState(Jumping);
+		if (input->IsKeyDown(DIK_Z)) {
+			if (allowSlide) {
+				ChangeState(Sliding);
+				allowSlide = false;
 			}
-			allowJump = false;
+		}
+
+		if (input->IsKeyUp(DIK_Z)) {
+			ChangeState(Standing);
+			allowSlide = true;
+		}
+
+		if (input->IsKeyDown(DIK_T)) {
+			SetVelocityY(-100);
+		}
+
+		if (input->IsKeyUp(DIK_T)) {
+			SetVelocityY(0);
+		}
+
+		if (input->IsKeyDown(DIK_SPACE)) {
+			if (!isJumping) {
+				if (currentStateName == Running || currentStateName == Standing) {
+					ChangeState(Jumping);
+				}
+				isJumping = true;
+			}
+		}
+
+		if (input->IsKeyUp(DIK_SPACE)) {
+			if (currentStateName == Jumping) {
+				ChangeState(Falling);
+			}
 		}
 	}
-	
-	if (input->IsKeyHit(DIK_SPACE)) {
-		allowJump = true;
-	}
+	Entity::Update();
 }
-
-//void Player::SetPosition(int x, int y)
-//{
-//	entity->SetPosition(x, y);
-//}
-//
-//D3DXVECTOR3 Player::GetPosition()
-//{
-//	return entity->GetPosition();
-//}
-//
-//Entity * Player::GetEntity()
-//{
-//	return entity;
-//}
 
 PlayerStateHandler::StateName Player::GetCurrentStateName() {
 	return this->currentStateName;
@@ -175,6 +209,25 @@ PlayerStateHandler::MoveDirection Player::GetMoveDirection() {
 
 void Player::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	
+	switch (impactor->GetEntityId()) {
+	case EntityId::MegamanBullet_ID:
+		return;
+	case EntityId::LeftBlueConveyor_ID:
+	case EntityId::RightBlueConveyor_ID:
+	case EntityId::LeftYellowConveyor_ID:
+	case EntityId::RightYellowConveyor_ID:
+	case EntityId::LeftSmallConveyor_ID:
+	case EntityId::RightSmallConveyor_ID:
+		OnConveyorCollision(impactor, side, data);
+		break;
+	case EntityId::Door_ID:
+		OnDoorCollision(impactor, side, data);
+		break;
+	default:
+		break;
+	}
+
 	if (currentState) {
 		currentState->OnCollision(impactor, side, data);
 	}
@@ -185,6 +238,32 @@ void Player::OnNoCollisionWithBottom()
 	if (currentStateName != Jumping && currentStateName != Falling && currentStateName != Climbing) {
 		ChangeState(Falling);
 	}
+}
+
+void Player::Shoot()
+{
+	PlayerBullet *bullet = new PlayerBullet();
+	bullet->Initialize(bulletDamage);
+	bullet->SetPosition(this->GetPosition().x, this->GetPosition().y + 10);
+	bullet->SetReverse(this->GetReverse());
+
+	float accelX = 0;
+	if (this->GetReverse()) {
+		accelX = -700.0;
+	}
+	else {
+		accelX = 700.0;
+	}
+
+	if (currentStateName == Climbing) {
+		accelX *= -1;
+		bullet->SetReverse(!this->GetReverse());
+	}
+
+	bullet->SetVelocity(this->GetVelocity().x + accelX, 0);
+	bullet->SetScale(2, 2);
+	EntityManager::GetInstance()->AddEntity(bullet);
+	this->bulletCharging = 0;
 }
 
 void Player::ChangeBulletState()
@@ -200,5 +279,74 @@ void Player::ChangeBulletState()
 void Player::Render()
 {
 	Entity::Render();
-	chargingSprite->Render();
+	if (bulletCharging >= 50 && bulletCharging < 150) {
+		chargerSuper->Render();
+	}
+	else if (bulletCharging >= 150) {
+		chargerExtreme->Render();
+	}
+}
+
+void Player::AutoMove()
+{
+	int moveDistance = 1;
+	autoMovedDistance += 1;
+	if (GetReverse()) {
+		moveDistance *= -1;
+	}
+
+	this->AddPosition(moveDistance, 0);
+}
+
+int Player::GetAutoMovedDistance()
+{
+	return autoMovedDistance;
+}
+
+bool Player::GetMovable()
+{
+	return movable;
+}
+
+void Player::SetMovable(bool movable)
+{
+	this->movable = movable;
+	autoMovedDistance = 0;
+}
+
+void Player::OnConveyorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side)
+	{
+	case Entity::Left:
+	case Entity::Right:
+	case Entity::Top:
+		break;
+	case Entity::Bottom:
+	case Entity::BottomRight:
+	case Entity::BottomLeft:
+		this->AddPosition(((Conveyor*)(impactor))->GetSpeed() / 10, 0);
+		break;
+	default:
+		break;
+	}
+}
+
+void Player::OnDoorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side)
+	{
+	case Entity::Left:
+	case Entity::Right:
+	{
+		this->movable = false;
+	}
+	case Entity::Top:
+	case Entity::Bottom:
+	case Entity::BottomRight:
+	case Entity::BottomLeft:
+		break;
+	default:
+		break;
+	}
 }

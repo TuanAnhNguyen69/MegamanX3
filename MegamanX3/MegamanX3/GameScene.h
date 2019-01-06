@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "Background.h"
 #include "DebugDraw.h"
+#include "Door.h"
 
 class GameScene :
 	public GameComponent
@@ -20,13 +21,13 @@ public:
 
 private:
 	void CheckCollision();
-	void CheckCamera();
 	void DrawQuadtree(QuadTree *quadtree);
 
 	DebugDraw *debugDraw;
 	Camera *camera;
 	Background *map;
 	Player *player;
+	Door * currentDoor;
 };
 
 #endif

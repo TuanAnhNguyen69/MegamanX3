@@ -3,6 +3,9 @@
 #include "NotorBanger.h"
 #include "HeadGunner.h"
 #include "Helit.h"
+#include "Roof.h"
+#include "UpPlatform.h"
+#include "DownPlatform.h"
 #include "CarryArm.h"
 #include "Life.h"
 #include "Conveyor.h"
@@ -10,3 +13,5 @@
 #include "Byte.h"
 #include "BlastHornet.h"
 #include "Shuriken.h"
+#include "Door.h"
+

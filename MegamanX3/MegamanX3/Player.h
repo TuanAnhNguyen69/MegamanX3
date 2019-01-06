@@ -28,17 +28,40 @@ public:
 	void OnNoCollisionWithBottom();
 	int fireCoolDown;
 	int bulletCharging;
+	bool isJumping;
+	void Shoot();
 	void ChangeBulletState();
 	void Render();
-
+	void AutoMove();
+	int GetAutoMovedDistance();
+	bool GetMovable();
+	void SetMovable(bool movable);
+	enum BlockType
+	{
+		BlockLeft,
+		BlockRight,
+		None
+	};
+	BlockType blockType;
 private:
+
+
 	PlayerState *currentState;
 	PlayerState *standingState, *runningState, *jumpingState, *fallingState, *damagedState, *slidingState, *climbingState;
 	PlayerStateHandler::StateName currentStateName;
 	//Entity *entity;
 	Camera *camera;
-	bool allowJump;
-	Entity *chargingSprite;
+	Entity *chargerSuper;
+	Entity *chargerExtreme;
+	int bulletDamage;
+	bool allowSlide;
+	bool movable;
+	int autoMovedDistance;
+
+	void OnConveyorCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+	void OnDoorCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+
+
 };
 
 #endif

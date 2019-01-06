@@ -3,7 +3,7 @@
 #include <ctime>
 
 
-HeadGunner::HeadGunner(Player * player) : Enemy(EntityId::HeadGunner_ID, player)
+HeadGunner::HeadGunner(Player * player, EntityId id) : Enemy(id, player)
 {
 	standingState = new HeadGunnerStanding(this, this);
 	shootRocketState = new HeadGunnerShootRocket(this, this);

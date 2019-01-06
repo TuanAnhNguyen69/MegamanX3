@@ -1,13 +1,18 @@
 #include "pch.h"
 #include "PlayerSlidingState.h"
 #include "Engine.h"
+#include "EntityImport.h"
 
 PlayerSlidingState::PlayerSlidingState(PlayerStateHandler * handler, Player * entity) : PlayerState(handler, entity)
 {
 
-	sprite = new AnimatedSprite(15, 2.0f, false);
-	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+	slideSprite = new AnimatedSprite(15, 2.0f, false);
+	slideSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
 		73, 74, 10, 50, 50);
+
+	fireSprite = new AnimatedSprite(15, 2.0f, false);
+	fireSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
+		75, 76, 10, 50, 50);
 }
 
 
@@ -23,6 +28,7 @@ PlayerSlidingState::~PlayerSlidingState()
 
 void PlayerSlidingState::Load()
 {
+	sprite = slideSprite;
 	entity->SetSprite(sprite);
 	if (entity->GetReverse()) {
 		acceleratorX = -30.0f;
@@ -30,7 +36,7 @@ void PlayerSlidingState::Load()
 	else {
 		acceleratorX = 30.0f;
 	}
-	sprite->ResetFrame();
+	slidedDistance = 0;
 }
 
 void PlayerSlidingState::Update()
@@ -50,15 +56,50 @@ void PlayerSlidingState::UpdateInput()
 		return;
 	}
 
-	if (input->IsKeyDown(DIK_J)) {
-		sprite->SetFrameRange(75, 76);
+	if (input->IsKeyUp(DIK_J)) {
+		entity->fireCoolDown = 0;
+		sprite = fireSprite;
+		entity->SetSprite(sprite);
+		entity->Shoot();
 	}
 	else {
-		sprite->SetFrameRange(73, 74);
-	}	
+		if (entity->fireCoolDown < 20) {
+			entity->fireCoolDown++;
+		}
+		else {
+			sprite = slideSprite;
+			entity->SetSprite(sprite);
+		}
+	}
+
+	if (input->IsKeyDown(DIK_J)) {
+		entity->bulletCharging++;
+	}
 }
 
 void PlayerSlidingState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (impactor->GetEntityId())
+	{
+	case Platform_ID:
+		OnPlatformCollide(impactor, side, data);
+		break;
+	case Roof_ID:
+		OnRoofCollide(impactor, side, data);
+		break;
+	case UpPlatform_ID:
+		OnUpPlatformCollide(impactor, side, data);
+		break;
+	case DownPlatform_ID:
+		OnDownPlatformCollide(impactor, side, data);
+		break;
+	default:
+		break;
+	}
+
+}
+
+void PlayerSlidingState::OnPlatformCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	switch (side) {
 	case Entity::Left:
@@ -85,6 +126,10 @@ void PlayerSlidingState::OnCollision(Entity * impactor, Entity::CollisionSide si
 		}
 		return;
 	}
+
+	case Entity::Top:
+		break;
+
 	case Entity::Bottom: case Entity::BottomLeft: case Entity::BottomRight:
 	{
 		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
@@ -95,3 +140,123 @@ void PlayerSlidingState::OnCollision(Entity * impactor, Entity::CollisionSide si
 	}
 	}
 }
+
+void PlayerSlidingState::OnRoofCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side) {
+	case Entity::Left:
+	{
+		//va cham phia ben trai player
+		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
+		{
+			//day Player ra phia ben phai de cho player khong bi xuyen qua object
+			entity->AddPosition(-5, -5);
+			//handler->ChangeState(PlayerStateHandler::Standing);
+		}
+
+		return;
+	}
+
+	case Entity::Right:
+	{
+		//va cham phia ben phai player
+		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
+		{
+			entity->AddPosition(5, -5);
+			//handler->ChangeState(PlayerStateHandler::Standing);
+		}
+		return;
+	}
+
+	case Entity::Top:
+		break;
+
+	case Entity::Bottom: case Entity::BottomLeft: case Entity::BottomRight:
+	{
+		entity->SetPosition(entity->GetPosition().x, ((Roof *)impactor)->GetCollidePosition(entity) - entity->GetWidth() / 2);
+		entity->SetVelocityY(0);
+		return;
+	}
+	}
+}
+
+void PlayerSlidingState::OnUpPlatformCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side) {
+	case Entity::Left:
+	{
+		//va cham phia ben trai player
+		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
+		{
+			//day Player ra phia ben phai de cho player khong bi xuyen qua object
+			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+
+			//handler->ChangeState(PlayerStateHandler::Standing);
+		}
+
+		return;
+	}
+
+	case Entity::Right:
+	{
+		//va cham phia ben phai player
+		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
+		{
+			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+			//handler->ChangeState(PlayerStateHandler::Standing);
+		}
+		return;
+	}
+
+	case Entity::Top:
+		break;
+
+	case Entity::Bottom: case Entity::BottomLeft: case Entity::BottomRight:
+	{
+		entity->SetPosition(entity->GetPosition().x, ((UpPlatform *)impactor)->GetCollidePosition(entity) - entity->GetWidth() / 2 - 20);
+		entity->SetVelocityY(0);
+		return;
+	}
+	}
+}
+
+void PlayerSlidingState::OnDownPlatformCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side) {
+	case Entity::Left:
+	{
+		//va cham phia ben trai player
+		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
+		{
+			//day Player ra phia ben phai de cho player khong bi xuyen qua object
+			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+
+			//handler->ChangeState(PlayerStateHandler::Standing);
+		}
+
+		return;
+	}
+
+	case Entity::Right:
+	{
+		//va cham phia ben phai player
+		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
+		{
+			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+			//handler->ChangeState(PlayerStateHandler::Standing);
+		}
+		return;
+	}
+
+	case Entity::Top:
+		break;
+
+	case Entity::Bottom: case Entity::BottomLeft: case Entity::BottomRight:
+	{
+		entity->SetPosition(entity->GetPosition().x, ((DownPlatform *)impactor)->GetCollidePosition(entity) - entity->GetWidth() / 2 - 20);
+		entity->SetVelocityY(0);
+		return;
+	}
+	}
+}
+

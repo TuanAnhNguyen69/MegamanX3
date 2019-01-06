@@ -4,6 +4,9 @@
 #include <iostream>
 #include <vector>
 
+const int PLAYER_AUTO_MOVE_DISTANCE = 176;
+const int CAMERA_AUTO_MOVE_DISTANCE = 528;
+
 GameScene::GameScene()
 {
 }
@@ -35,16 +38,14 @@ bool GameScene::Initialize()
 	
 
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
-	camera->SetCenter(SCREEN_WIDTH / 2, 0);
+	camera->Initialize("testCam");
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(1115, 1630);
-	//player->SetPosition(4700, 2100);
+	player->SetPosition(10800, 2300);
+	camera->SetCenter(player->GetPosition());
 
-	EntityManager::GetInstance()->Initialize(player, camera, "aaaaa", map->GetWidth(), map->GetHeight());
-	//EntityManager::GetInstance()->Initialize(player, camera, "testBoss", map->GetWidth(), map->GetHeight());
-
+	EntityManager::GetInstance()->Initialize(player, camera, "testDoor", map->GetWidth(), map->GetHeight());
 	
 	debugDraw = new DebugDraw();
 	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));
@@ -75,9 +76,25 @@ void GameScene::DrawQuadtree(QuadTree *quadtree)
 
 void GameScene::Update()
 {
+	if (currentDoor && currentDoor->GetState() == Door::DoorState::OPENED) {
+		if (!player->GetMovable()) {
+			player->AutoMove();
+			camera->AutoMove();
+			if (player->GetAutoMovedDistance() >= PLAYER_AUTO_MOVE_DISTANCE) {
+				player->SetMovable(true);
+			}
+		}
+
+		if (camera->GetAutoMovedDistance() >= CAMERA_AUTO_MOVE_DISTANCE) {
+			camera->StopAutoMove();
+			currentDoor->SetState(Door::DoorState::CLOSING);
+		}
+	}
+	
+
 	CheckCollision();
 	EntityManager::GetInstance()->CheckCollide();
-	CheckCamera();
+	camera->Update(player->GetPosition());
 	player->Update();
 	EntityManager::GetInstance()->Update();
 }
@@ -87,13 +104,11 @@ void GameScene::CheckCollision()
 	int widthBottom = 0;
 	std::vector<Entity*> collidableEntity;
 	EntityManager::GetInstance()->GetQuadTree()->GetEntitiesCollideAble(collidableEntity, camera->GetBound());
-	collidableEntity.clear();
-	EntityManager::GetInstance()->GetQuadTree()->GetAllEntities(collidableEntity);
 	for (size_t index = 0; index < collidableEntity.size(); index++) {
 		RECT broadphase = Collision::GetSweptBroadphaseRect(player);
 		if (Collision::IsCollide(broadphase, collidableEntity.at(index)->GetBound()))
 		{
-			if (collidableEntity.at(index)->GetEntityId() == EntityId::BlastHornet_ID) {
+			if (collidableEntity.at(index)->GetEntityId() == EntityId::DownPlatform_ID) {
 				int a = 0;
 			}
 			Entity::CollisionReturn collideData;
@@ -105,6 +120,10 @@ void GameScene::CheckCollision()
 
 				player->OnCollision( collidableEntity.at(index), sidePlayer, collideData);
 				collidableEntity.at(index)->OnCollision(player, sideImpactor, collideData);
+
+				if (collidableEntity.at(index)->GetEntityId() == EntityId::Door_ID) {
+					currentDoor = (Door *) collidableEntity.at(index);
+				}
 
 				if (sidePlayer == Entity::Bottom || sidePlayer == Entity::BottomLeft
 					|| sidePlayer == Entity::BottomRight) {
@@ -119,31 +138,6 @@ void GameScene::CheckCollision()
 
 	if (widthBottom < Define::PLAYER_BOTTOM_RANGE_FALLING) {
 		player->OnNoCollisionWithBottom();
-	}
-}
-
-void GameScene::CheckCamera() {
-	camera->SetCenter(player->GetPosition());
-	if (camera->GetBound().left < 0)
-	{
-		camera->SetCenter(camera->GetWidth() / 2, camera->GetCenter().y);
-	}
-
-	if (camera->GetBound().right > map->GetWidth())
-	{
-		camera->SetCenter(map->GetWidth() - camera->GetWidth() / 2,
-			camera->GetCenter().y);
-	}
-
-	if (camera->GetBound().top < 0)
-	{
-		camera->SetCenter(camera->GetCenter().x, camera->GetHeight() / 2);
-	}
-
-	if (camera->GetBound().bottom > map->GetHeight())
-	{
-		camera->SetCenter(camera->GetCenter().x,
-			map->GetHeight() - camera->GetHeight() / 2);
 	}
 }
 

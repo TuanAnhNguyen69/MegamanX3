@@ -246,6 +246,9 @@
     <ClCompile Include="ShurikenTurn.cpp">
       <Filter>Entities\Enemy\Shuriken</Filter>
     </ClCompile>
+    <ClCompile Include="Roof.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
     <ClCompile Include="HelitRocket.cpp">
       <Filter>Entities\Enemy\Helit</Filter>
     </ClCompile>
@@ -563,6 +566,9 @@
     </ClInclude>
     <ClInclude Include="ShurikenTurn.h">
       <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="Roof.h">
+      <Filter>Entities\Ground</Filter>
     </ClInclude>
     <ClInclude Include="HelitRocket.h">
       <Filter>Entities\Enemy\Helit</Filter>
