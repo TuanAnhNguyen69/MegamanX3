@@ -5,16 +5,8 @@
 
 Helit::Helit(Player *_player) : Enemy(EntityId::Helit_ID, _player)
 {
-	/*
-	shootingState = nullptr;
-	flyingState = nullptr;
-	damagedState = nullptr;
-	dieState = nullptr;
-	*/
-
 	flyingState = new HelitFlying(this, this);
 	shootingState = new HelitShooting(this, this);
-	damagedState = new HelitDamaged(this, this);
 	dieState = new HelitDie(this, this);
 
 	player = _player;
@@ -23,33 +15,29 @@ Helit::Helit(Player *_player) : Enemy(EntityId::Helit_ID, _player)
 
 Helit::~Helit()
 {
-	/*if (currentState) {
-		delete currentState;
-		currentState = nullptr;
-	}	*/
 
-	/*delete this->player;
-	this->player = nullptr;*/
+	if (dieState) {
+		delete dieState;
+		dieState = nullptr;
+	}
 
-	delete this->currentState;
-	//this->currentState = nullptr;
+	if (shootingState) {
+		delete shootingState;
+		shootingState = nullptr;
+	}
 
-	delete this->flyingState;
-	//this->flyingState = nullptr;
+	if (flyingState) {
+		delete flyingState;
+		flyingState = nullptr;
+	}
 
-	delete this->shootingState;
-	//this->shootingState = nullptr;
-
-	delete this->damagedState;
-	//this->damagedState = nullptr;
-
-	delete this->dieState;
-	//this->dieState = nullptr;
+	Entity::~Entity();
 }
 
 void Helit::Initialize()
 {
 	HP = 5;
+
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"helit", 50, 50);
 	this->ChangeState(HelitStateHandler::StateName::Flying);
@@ -57,7 +45,10 @@ void Helit::Initialize()
 
 void Helit::Update()
 {
-	//if (IsAction())
+	if (HP < 0) {
+		EntityManager::GetInstance()->RemoveEntity(this);
+		return;
+	}
 	
 	if (this->IsRemove())
 	{
@@ -89,10 +80,10 @@ void Helit::Update()
 	}
 
 	Entity::Update();
+
 	if (currentState) {
 		currentState->Update();
 	}
-
 }
 
 //void Helit::SetPosition(int x, int y)
@@ -125,10 +116,6 @@ void Helit::ChangeState(StateName stateName)
 	case Shooting:
 		currentState = shootingState;
 		currentStateName = Shooting;
-		break;
-	case Damaged:
-		currentState = damagedState;
-		currentStateName = Damaged;
 		break;
 	case Die:
 		currentState = dieState;
@@ -195,20 +182,3 @@ void Helit::SubHP(int damage)
 	this->HP -= damage;
 }
 
-void Helit::Died()
-{
-	EntityManager::GetInstance()->RemoveEntity(this);
-}
-
-
-
-
-//bool Helit::GetAction()
-//{
-//	return action;
-//}
-//
-//void Helit::SetAction(bool _action)
-//{
-//	action = _action;
-//}

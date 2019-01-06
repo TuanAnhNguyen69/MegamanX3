@@ -15,10 +15,7 @@ Canon::Canon() : Entity(EntityId::Canon_ID)
 
 Canon::~Canon()
 {
-	if (sprite) {
-		delete sprite;
-		sprite = nullptr;
-	}
+	Entity::~Entity();
 }
 
 void Canon::Initialize(bool isHigh, bool isLeft)

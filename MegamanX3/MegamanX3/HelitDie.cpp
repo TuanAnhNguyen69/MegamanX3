@@ -13,7 +13,6 @@ HelitDie::~HelitDie()
 {
 	if (sprite) {
 		delete sprite;
-		sprite = nullptr;
 	}
 }
 

@@ -3,7 +3,6 @@
 #include "Camera.h"
 #include "NotorBangerState.h"
 #include "NotorBangerStateHandler.h"
-#include "NotorBangerDamaged.h"
 #include "NotorBangerDie.h"
 #include "NotorBangerJump.h"
 #include "NotorBangerShoot.h"
@@ -44,11 +43,8 @@ public:
 
 private:
 	NotorBangerState * currentState;
-	NotorBangerState *standingState, *shootState, *jumpState, *dieState, *damagedState, *fallingState, *changeBarrelState;
+	NotorBangerState *standingState, *shootState, *jumpState, *dieState, *fallingState, *changeBarrelState;
 	NotorBangerStateHandler::StateName currentStateName;
 	NotorBangerStateHandler::StateName preAction;
-	BarrelState barrelState;
-	
-
 };
 

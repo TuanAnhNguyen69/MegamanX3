@@ -7,7 +7,6 @@ NotorBanger::NotorBanger(Player *_player) : Enemy(EntityId::NotorBanger_ID, _pla
 	standingState = new NotorBangerStanding(this, this);
 	shootState = new NotorBangerShoot(this, this);
 	jumpState = new NotorBangerJump(this, this);
-	damagedState = new NotorBangerDamaged(this, this);
 	dieState = new NotorBangerDie(this, this);
 	changeBarrelState = new NotorBangerChangeBarrel(this, this);
 	player = _player;
@@ -20,6 +19,32 @@ NotorBanger::~NotorBanger()
 		delete standingState;
 		standingState = nullptr;
 	}
+
+	if (shootState)
+	{
+		delete shootState;
+		shootState = nullptr;
+	}
+
+	if (jumpState)
+	{
+		delete jumpState;
+		jumpState = nullptr;
+	}
+	
+	if (dieState)
+	{
+		delete dieState;
+		dieState = nullptr;
+	}
+
+	if (changeBarrelState)
+	{
+		delete changeBarrelState;
+		changeBarrelState = nullptr;
+	}
+
+	Entity::~Entity();
 }
 
 void NotorBanger::Initialize()
@@ -88,18 +113,10 @@ void NotorBanger::ChangeState(StateName stateName)
 		currentState = jumpState;
 		currentStateName = Jump;
 		break;
-	case Damaged:
-		currentState = damagedState;
-		currentStateName = Damaged;
-		break;
 	case Die:
 		currentState = dieState;
 		currentStateName = Die;
 		break;
-	/*case Falling:
-		currentState = fallingState;
-		currentStateName = Falling;
-		break;*/
 	case ChangeBarrel:
 		currentState = changeBarrelState;
 		currentStateName = ChangeBarrel;
@@ -143,16 +160,6 @@ NotorBangerStateHandler::StateName NotorBanger::GetPreAction()
 void NotorBanger::SetPreAction(StateName action)
 {
 	preAction = action;
-}
-
-void NotorBanger::SetBarrelState(BarrelState bt)
-{
-	barrelState = bt;
-}
-
-NotorBangerStateHandler::BarrelState NotorBanger::GetBarrelState()
-{
-	return barrelState;
 }
 
 bool NotorBanger::GetLeftTarget()

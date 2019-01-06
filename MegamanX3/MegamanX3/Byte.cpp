@@ -18,6 +18,26 @@ Byte::~Byte()
 		delete standingState;
 		standingState = nullptr;
 	}
+
+	if (throwState)
+	{
+		delete throwState;
+		throwState = nullptr;
+	}
+
+	if (attackState)
+	{
+		delete attackState;
+		attackState = nullptr;
+	}
+
+	if (dieState)
+	{
+		delete dieState;
+		dieState = nullptr;
+	}
+
+	Entity::~Entity();
 }
 
 void Byte::Initialize()

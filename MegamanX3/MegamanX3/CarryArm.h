@@ -3,7 +3,6 @@
 #include "Camera.h"
 #include "CarryArmState.h"
 #include "CarryArmStateHandler.h"
-#include "CarryArmDamaged.h"
 #include "CarryArmDie.h"
 #include "CarryArmDropping.h"
 #include "CarryArmFlying.h"
@@ -25,19 +24,12 @@ public:
 	void Initialize();
 	void Update();
 
-
-	/*void SetPosition(int x, int y);
-	D3DXVECTOR3 GetPosition();*/
-
-	//Entity *GetEntity();
 	CarryArmStateHandler::StateName GetCurrentStateName();
 	void ChangeState(StateName stateName);
 	CarryArmStateHandler::MoveDirection GetMoveDirection();
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	void OnNoCollisionWithBottom();
 
-	//bool GetAction();
-	//void SetAction(bool action);
 	bool GetLeftTarget();
 	bool GetAboveTarget();
 	bool GetHadDropState();
@@ -49,12 +41,9 @@ private:
 	bool targetIsAbove;
 	bool hadDropState;
 	CarryArmState * currentState;
-	CarryArmState *flyingState, *droppingState, *dieState, *damagedState;
+	CarryArmState *flyingState, *droppingState, *dieState;
 	CarryArmStateHandler::StateName currentStateName;
-	//Entity *entity;
-	Camera *camera;
-	CarryArmStateHandler::StateName preAction;
 
-	//Box *box;
+	CarryArmStateHandler::StateName preAction;
 };
 

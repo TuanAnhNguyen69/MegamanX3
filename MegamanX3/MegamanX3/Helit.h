@@ -3,7 +3,6 @@
 #include "Camera.h"
 #include "HelitState.h"
 #include "HelitStateHandler.h"
-#include "HelitDamaged.h"
 #include "HelitDie.h"
 #include "HelitShooting.h"
 #include "HelitFlying.h"
@@ -24,26 +23,18 @@ public:
 	void Initialize();
 	void Update();
 
-
-	/*void SetPosition(int x, int y);
-	D3DXVECTOR3 GetPosition();*/
-
-	//Entity *GetEntity();
 	HelitStateHandler::StateName GetCurrentStateName();
 	void ChangeState(StateName stateName);
 	HelitStateHandler::MoveDirection GetMoveDirection();
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	void OnNoCollisionWithBottom();
 
-	//bool GetAction();
-	//void SetAction(bool action);
 	bool GetLeftTarget();
 	bool GetAboveTarget();
 	bool GetHadShootState();
 	void SetHadShootState(bool hadShootState);	
 	int GetHP();
 	void SubHP(int damage);
-	void Died();
 
 private:
 	bool targetIsLeft;
@@ -51,9 +42,8 @@ private:
 	bool hadShootState;
 	
 	HelitState * currentState;
-	HelitState *flyingState, *shootingState, *dieState, *damagedState;
+	HelitState *flyingState, *shootingState, *dieState;
 	HelitStateHandler::StateName currentStateName;
-	//Entity *entity;
 	HelitStateHandler::StateName preAction;
 };
 

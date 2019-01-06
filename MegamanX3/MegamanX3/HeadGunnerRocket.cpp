@@ -14,11 +14,13 @@ HeadGunnerRocket::HeadGunnerRocket() : Entity(EntityId::GunnerRocket_ID)
 
 HeadGunnerRocket::~HeadGunnerRocket()
 {
-	if (sprite)
+	/*if (sprite)
 	{
 		delete sprite;
 		sprite = nullptr;
-	}
+	}*/
+
+	Entity::~Entity();
 }
 
 void HeadGunnerRocket::Initialize(bool isLeft)
@@ -53,42 +55,7 @@ void HeadGunnerRocket::OnCollision(Entity * impactor,  Entity::CollisionSide sid
 {
 	if (impactor->GetEntityId() == EntityId::Platform_ID || impactor->GetEntityId() == EntityId::Megaman_ID)
 	{
-		switch (side)
-		{
-		case Entity::Left: case Entity::TopLeft: case Entity::BottomLeft:
-		{
-			/*this->AddPosition(data.RegionCollision.right - data.RegionCollision.left + 1, 0);
-			this->SetVelocity(0, 0);*/
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
-
-		case Entity::Right: case Entity::TopRight: case Entity::BottomRight:
-		{
-			/*this->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left + 1), 0);
-			this->SetVelocity(0, 0);*/
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
-
-		case Entity::Top:
-		{
-			/*this->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top + 1);
-			this->SetVelocity(0, 0);*/
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
-
-		case Entity::Bottom:
-		{
-
-			/*this->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
-			this->SetVelocity(0, 0);*/
-			/*this->AddVelocityY(-10.0f);*/
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
-		}
+		EntityManager::GetInstance()->RemoveEntity(this);
 	}
 	if (impactor->GetEntityId() == EntityId::MegamanBullet_ID)
 	{

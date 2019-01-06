@@ -36,5 +36,4 @@ void NotorBangerStanding::OnCollision(Entity * impactor, Entity::CollisionSide s
 		entity->SetVelocityY(0);
 		handler->ChangeState(NotorBangerStateHandler::StateName::Standing);
 	}
-	//return;
 }

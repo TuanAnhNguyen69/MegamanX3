@@ -17,12 +17,43 @@ BlastHornet::BlastHornet(Player *player) : Enemy(EntityId::BlastHornet_ID, playe
 
 BlastHornet::~BlastHornet()
 {
-	delete prepareState;
-	delete returnState;
-	delete prickState;
-	delete dropState;
-	delete flyState;
-	delete dieState;
+	if (prepareState)
+	{
+		delete prepareState;
+		prepareState = nullptr;
+	}
+
+	if (returnState)
+	{
+		delete returnState;
+		returnState = nullptr;
+	}
+
+	if (prickState)
+	{
+		delete prickState;
+		prickState = nullptr;
+	}
+
+	if (dropState)
+	{
+		delete dropState;
+		dropState = nullptr;
+	}
+
+	if (dieState)
+	{
+		delete dieState;
+		dieState = nullptr;
+	}
+
+	if (flyState)
+	{
+		delete flyState;
+		flyState = nullptr;
+	}
+
+	Entity::~Entity();
 }
 
 void BlastHornet::Initialize()

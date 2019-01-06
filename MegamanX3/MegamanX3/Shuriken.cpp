@@ -51,6 +51,8 @@ Shuriken::~Shuriken()
 		delete dieState;
 		dieState = nullptr;
 	}
+
+	Entity::~Entity();
 }
 
 void Shuriken::Initialize()

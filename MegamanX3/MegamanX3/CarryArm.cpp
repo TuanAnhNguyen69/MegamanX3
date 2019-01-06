@@ -5,26 +5,35 @@
 
 CarryArm::CarryArm(Player *_player) : Enemy(EntityId::CarryArm_ID, _player)
 {
-	/*
-	shootingState = nullptr;
-	flyingState = nullptr;
-	damagedState = nullptr;
-	dieState = nullptr;
-	*/
-
 	flyingState = new CarryArmFlying(this, this);
 	droppingState = new CarryArmDropping(this, this);
-	damagedState = new CarryArmDamaged(this, this);
 	dieState = new CarryArmDie(this, this);
 
 	player = _player;
-
-	
 }
 
 
 CarryArm::~CarryArm()
 {
+	if (flyingState)
+	{
+		delete flyingState;
+		flyingState = nullptr;
+	}
+
+	if (droppingState)
+	{
+		delete droppingState;
+		droppingState = nullptr;
+	}
+
+	if(dieState)
+	{
+		delete dieState;
+		dieState = nullptr;
+	}
+
+	Entity::~Entity();
 }
 
 void CarryArm::Initialize()
@@ -113,10 +122,6 @@ void CarryArm::ChangeState(StateName stateName)
 	case Dropping:
 		currentState = droppingState;
 		currentStateName = Dropping;
-		break;
-	case Damaged:
-		currentState = damagedState;
-		currentStateName = Damaged;
 		break;
 	case Die:
 		currentState = dieState;

@@ -17,7 +17,6 @@ protected:
 public:
 	enum StateName {
 		Jump,
-		Damaged,
 		Shoot,
 		Die,
 		Standing,
@@ -40,8 +39,6 @@ public:
 	};
 	virtual bool GetLeftTarget() = 0;
 	virtual bool GetAboveTarget() = 0;
-	//virtual bool GetAction() = 0;
-	//virtual void SetAction(bool action) = 0;
 	virtual StateName GetCurrentStateName() = 0;
 	virtual void ChangeState(StateName state) = 0;
 	virtual MoveDirection GetMoveDirection() = 0;

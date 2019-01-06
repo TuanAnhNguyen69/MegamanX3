@@ -6,10 +6,8 @@
 HeadGunner::HeadGunner(Player * player) : Enemy(EntityId::HeadGunner_ID, player)
 {
 	standingState = new HeadGunnerStanding(this, this);
-	shootState = new HeadGunnerShoot(this, this);
 	shootRocketState = new HeadGunnerShootRocket(this, this);
 	shootCanonState = new HeadGunnerShootCanon(this, this);
-	damagedState = new HeadGunnerDamaged(this, this);
 	dieState = new HeadGunnerDie(this, this);
 }
 
@@ -20,6 +18,26 @@ HeadGunner::~HeadGunner()
 		delete standingState;
 		standingState = nullptr;
 	}
+
+	if (shootCanonState)
+	{
+		delete shootCanonState;
+		shootCanonState = nullptr;
+	}
+
+	if (shootRocketState)
+	{
+		delete shootRocketState;
+		shootRocketState = nullptr;
+	}
+
+	if (dieState)
+	{
+		delete dieState;
+		dieState = nullptr;
+	}
+
+	Entity::~Entity();
 }
 
 void HeadGunner::Initialize( bool isLeft)
@@ -62,14 +80,6 @@ void HeadGunner::ChangeState(HeadGunnerStateHandler::StateName stateName)
 	case Standing:
 		currentState = standingState;
 		currentStateName = Standing;
-		break;
-	case Shoot:
-		currentState = shootState;
-		currentStateName = Shoot;
-		break;
-	case Damaged:
-		currentState = damagedState;
-		currentStateName = Damaged;
 		break;
 	case Die:
 		currentState = dieState;

@@ -147,9 +147,6 @@
     <ClCompile Include="PlayerClimbingState.cpp">
       <Filter>Entities\Player</Filter>
     </ClCompile>
-    <ClCompile Include="NotorBangerDamaged.cpp">
-      <Filter>Entities\Enemy\NotorBanger</Filter>
-    </ClCompile>
     <ClCompile Include="NotorBangerDie.cpp">
       <Filter>Entities\Enemy\NotorBanger</Filter>
     </ClCompile>
@@ -162,9 +159,6 @@
     <ClCompile Include="NotorBangerStanding.cpp">
       <Filter>Entities\Enemy\NotorBanger</Filter>
     </ClCompile>
-    <ClCompile Include="HeadGunnerDamaged.cpp">
-      <Filter>Entities\Enemy\HeadGunner</Filter>
-    </ClCompile>
     <ClCompile Include="HeadGunnerDie.cpp">
       <Filter>Entities\Enemy\HeadGunner</Filter>
     </ClCompile>
@@ -175,9 +169,6 @@
       <Filter>Entities\Enemy\HeadGunner</Filter>
     </ClCompile>
     <ClCompile Include="HelitState.cpp">
-      <Filter>Entities\Enemy\Helit</Filter>
-    </ClCompile>
-    <ClCompile Include="HelitDamaged.cpp">
       <Filter>Entities\Enemy\Helit</Filter>
     </ClCompile>
     <ClCompile Include="HelitDie.cpp">
@@ -257,9 +248,6 @@
     </ClCompile>
     <ClCompile Include="HelitRocket.cpp">
       <Filter>Entities\Enemy\Helit</Filter>
-    </ClCompile>
-    <ClCompile Include="CarryArmDamaged.cpp">
-      <Filter>Entities\Enemy\CarryArm</Filter>
     </ClCompile>
     <ClCompile Include="CarryArmDropping.cpp">
       <Filter>Entities\Enemy\CarryArm</Filter>
@@ -468,9 +456,6 @@
     <ClInclude Include="EntityImport.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="NotorBangerDamaged.h">
-      <Filter>Entities\Enemy\NotorBanger</Filter>
-    </ClInclude>
     <ClInclude Include="NotorBangerDie.h">
       <Filter>Entities\Enemy\NotorBanger</Filter>
     </ClInclude>
@@ -483,9 +468,6 @@
     <ClInclude Include="NotorBangerStanding.h">
       <Filter>Entities\Enemy\NotorBanger</Filter>
     </ClInclude>
-    <ClInclude Include="HeadGunnerDamaged.h">
-      <Filter>Entities\Enemy\HeadGunner</Filter>
-    </ClInclude>
     <ClInclude Include="HeadGunnerDie.h">
       <Filter>Entities\Enemy\HeadGunner</Filter>
     </ClInclude>
@@ -496,9 +478,6 @@
       <Filter>Entities\Enemy\HeadGunner</Filter>
     </ClInclude>
     <ClInclude Include="HelitState.h">
-      <Filter>Entities\Enemy\Helit</Filter>
-    </ClInclude>
-    <ClInclude Include="HelitDamaged.h">
       <Filter>Entities\Enemy\Helit</Filter>
     </ClInclude>
     <ClInclude Include="HelitDie.h">
@@ -587,9 +566,6 @@
     </ClInclude>
     <ClInclude Include="HelitRocket.h">
       <Filter>Entities\Enemy\Helit</Filter>
-    </ClInclude>
-    <ClInclude Include="CarryArmDamaged.h">
-      <Filter>Entities\Enemy\CarryArm</Filter>
     </ClInclude>
     <ClInclude Include="CarryArmDropping.h">
       <Filter>Entities\Enemy\CarryArm</Filter>

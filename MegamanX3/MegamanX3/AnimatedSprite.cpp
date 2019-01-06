@@ -12,6 +12,7 @@ AnimatedSprite::AnimatedSprite(float framesPerSecond, float animationSpeed, bool
 
 AnimatedSprite::~AnimatedSprite()
 {
+	Sprite::~Sprite();
 }
 
 void AnimatedSprite::Initialize(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float startFrame, float endFrame, float maxFramesRow, float frameWidth, float frameHeight)

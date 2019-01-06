@@ -3,7 +3,6 @@
 #include "Camera.h"
 #include "HeadGunnerState.h"
 #include "HeadGunnerStateHandler.h"
-#include "HeadGunnerDamaged.h"
 #include "HeadGunnerDie.h"
 #include "HeadGunnerShoot.h"
 #include "HeadGunnerShootCanon.h"
@@ -39,7 +38,7 @@ public:
 private:
 	bool isLeft;
 	HeadGunnerState * currentState;
-	HeadGunnerState *standingState, *shootState, *shootRocketState, *shootCanonState, *jumpState, *dieState, *damagedState, *fallingState;
+	HeadGunnerState *standingState, *shootRocketState, *shootCanonState, *jumpState, *dieState, *fallingState;
 	HeadGunnerStateHandler::StateName currentStateName;
 	HeadGunnerStateHandler::StateName preAction;
 	int ammoCanon;
