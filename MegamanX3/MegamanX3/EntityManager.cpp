@@ -222,14 +222,20 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				AddEntity(shuriken);
 				break;*/
 
-				Byte *byte = new Byte(player);
+				/*Byte *byte = new Byte(player);
 				byte->Initialize();
 				byte->SetPosition(posX + width / 2, (posY + height / 2) - 30);
 				byte->SetScale(2, 2);
 				byte->SetBound(54, 74);
 				AddEntity(byte);
-				break;
+				break;*/
 
+				Box *box = new Box(EntityId::DoubleBox_ID);
+				box->SetPosition(posX + width / 2 + 20, (posY + height / 2) + 150);
+				box->SetScale(1, 1);
+				box->Initialize(false);
+				AddEntity(box);
+				break;
 				/*CarryArm * carryArm = new CarryArm(player);
 				carryArm->SetPosition(posX + width / 2, (posY + height / 2));
 				carryArm->SetScale(1, 1);
@@ -279,6 +285,8 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 					byte->SetBound(54 * 2, 74 * 2);
 					AddEntity(byte);
 					break;*/
+
+
 				}
 
 				case EntityId::NotorBanger_ID:

@@ -1,63 +1,78 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Box.h"
 
 
 Box::Box(EntityId id) : Entity(id)
 {
+	this->isFall = false;
 	this->id = id;
-	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box", 50, 50);
 	sprite = new AnimatedSprite(30, 1, true);
 	switch (id)
 	{
 	case Box_ID:
 	{
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box", 72, 72);
 		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box",
-			0, 0, 1, 50, 50);
-		this->SetBound(50, 50);
+			0, 0, 1, 72, 72);
+		this->SetBound(72, 72);
 	}
 	break;
 
 	case DoubleBox_ID:
 	{
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box",
-			0, 0, 1, 100, 50);
-		this->SetBound(100, 50);
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box2", 144, 72);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box3",
+			0, 0, 1, 144, 72);
+		this->SetBound(144, 72);
 	}
 	break;
 	case TrippleBox_ID:
 	{
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box",
-			0, 0, 1, 50, 150);
-		this->SetBound(50, 150);
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box3", 72, 216);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box3",
+			0, 0, 1, 72, 216);
+		this->SetBound(72, 216);
 	}
 	break;
 
 	case QuadraBox_ID:
 	{
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box",
-			0, 0, 1, 50, 200);
-		this->SetBound(50, 200);
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box4", 72, 288);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box4",
+			0, 0, 1, 72, 288);
+		this->SetBound(72, 288);
 	}
 	break;
 
 	case VerticalBombBox_ID:
 	{
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box",
-			0, 0, 1, 50, 50);
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box_vetical", 118, 144);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box_vetical",
+			0, 0, 1, 118, 144);
+		this->SetBound(118, 144);
+
 	}
 	break;
 
 	case HorizontalBombBox_ID:
 	{
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box",
-			0, 0, 1, 50, 50);
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box_vetical", 144, 96);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box_horizontal",
+			0, 0, 1, 144, 96);
+		this->SetBound(144, 96);
 	}
 	break;
 
 	default:
+	{
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box", 72, 72);
 		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box",
 			0, 0, 1, 50, 50);
+		this->SetBound(50, 50);
 	}
+	break;
+	}
+	
 }
 
 
@@ -72,6 +87,11 @@ void Box::Update()
 	if (this->isFall)
 	{
 		this->SetVelocityY(Define::BOX_SPEED);
+	}
+
+	if (HP <= 0)
+	{
+		//Nổ
 	}
 }
 
@@ -97,6 +117,11 @@ void Box::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::Col
 			break;
 		}
 		}
+	}
+
+	if (impactor->GetEntityId() == EntityId::MegamanBullet_ID)
+	{
+		//Nhận damage
 	}
 }
 
