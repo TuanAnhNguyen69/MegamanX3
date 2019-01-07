@@ -33,6 +33,7 @@ public:
 	void Initailize(MoveDirection moveDirection);
 	void Update();
 	void OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+	bool IsHitted();
 
 private:
 	AnimatedSprite * sprite;
@@ -40,5 +41,6 @@ private:
 	CollisionDirection collDirection;
 	bool isRemove;
 	bool isAddWall;
+	bool hitted;
 };
 
