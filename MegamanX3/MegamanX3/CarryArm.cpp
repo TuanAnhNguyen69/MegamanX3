@@ -44,11 +44,11 @@ void CarryArm::Initialize()
 	this->ChangeState(CarryArmStateHandler::StateName::Flying);
 
 
-	this->box = new Box();
-	this->box->Initialize(false);
+	this->box = new Box(EntityId::Box_ID);
 	this->box->SetPosition(this->GetPosition().x, this->GetPosition().y + 50);
 	this->box->SetScale(1, 1);
-	this->box->SetBound(50 * 1, 50 * 1);
+	//this->box->SetBound(50 * 1, 50 * 1);
+	this->box->Initialize(false);
 	EntityManager::GetInstance()->AddEntity(this->box);
 }
 
@@ -84,12 +84,10 @@ void CarryArm::Update()
 		targetIsAbove = false;
 	}
 
-	//this->box->SetVelocity(this->GetVelocity().x, this->GetVelocity().y);
 	Entity::Update();
 	if (currentState) {
 		currentState->Update();
 	}
-	//this->box->Update();
 }
 
 //void CarryArm::SetPosition(int x, int y)

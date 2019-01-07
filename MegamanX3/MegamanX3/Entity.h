@@ -8,6 +8,7 @@ enum EntityId{
 	// Player
 	Megaman_ID,
 	MegamanBullet_ID,
+	CheckPoint_ID,
 
 	// Boss
 	BlastHornet_ID,
@@ -35,7 +36,11 @@ enum EntityId{
 	RightSmallConveyor_ID,
 	Thorn_ID,
 	Box_ID,
-	BoxWall_ID,
+	DoubleBox_ID,
+	TrippleBox_ID,
+	QuadraBox_ID,
+	VerticalBombBox_ID,
+	HorizontalBombBox_ID,
 	Roof_ID,
 	BreakPlatform_ID,
 	UpPlatform_ID,
@@ -52,6 +57,7 @@ enum EntityId{
 	SmallEnergy_ID,
 	BigEnergy_ID,
 	ChimeraArmor_ID,
+	CameraRange_ID
 };
 
 class Entity

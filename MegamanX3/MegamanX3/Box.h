@@ -10,7 +10,7 @@ namespace Define
 class Box : public Entity
 {
 public:
-	Box();
+	Box(EntityId id);
 	~Box();
 
 	void Update();
@@ -24,9 +24,14 @@ public:
 
 	bool IsCollisionPlatform();
 
+	int GetHP();
+	void SubHP(int damage);
+
 private:
 	AnimatedSprite * sprite;
 	bool isFall;
 	bool isCollPlatform;
+	int HP;
+	EntityId id;
 };
 
