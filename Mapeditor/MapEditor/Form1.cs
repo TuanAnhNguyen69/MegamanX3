@@ -13,6 +13,7 @@ public enum EnumID
     // Player
     Megaman_ID,
     MegamanBullet_ID,
+    CheckPoint_ID,
 
     // Boss
     BlastHornet_ID,
@@ -40,12 +41,19 @@ public enum EnumID
     RightSmallConveyor_ID,
     Thorn_ID,
     Box_ID,
-    BoxWall_ID,
+    DoubleBox_ID,
+    TrippleBox_ID,
+    QuadraBox_ID,
+    VerticalBombBox_ID,
+    HorizontalBombBox_ID,
     Roof_ID,
     BreakPlatform_ID,
     UpPlatform_ID,
     DownPlatform_ID,
     Platform_ID,
+    WallHoleLeft_ID,
+    WallHoleRight_ID,
+    HallHole_ID,
 
     //weapon
     Canon_ID,
@@ -417,8 +425,6 @@ namespace MapEditor
                     return new Bitmap(Path.Combine(Application.StartupPath, @"resource\thorn.png"));
                 case EnumID.Box_ID:
                     return new Bitmap(Path.Combine(Application.StartupPath, @"resource\box.png"));
-                case EnumID.BoxWall_ID:
-                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\box_wall.png"));
                 case EnumID.Roof_ID:
                     return new Bitmap(Path.Combine(Application.StartupPath, @"resource\roof.png"));
                 case EnumID.UpPlatform_ID:
@@ -448,6 +454,24 @@ namespace MapEditor
                     return new Bitmap(Path.Combine(Application.StartupPath, @"resource\small_conveyor.png"));
                 case EnumID.CameraRange_ID:
                     return new Bitmap(Path.Combine(Application.StartupPath, @"resource\platform.png"));
+                case EnumID.CheckPoint_ID:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\checkpoint.png"));
+                case EnumID.DoubleBox_ID:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\double_box.png"));
+                case EnumID.TrippleBox_ID:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\tripple_box.png"));
+                case EnumID.QuadraBox_ID:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\quadra_box.png"));
+                case EnumID.VerticalBombBox_ID:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\vertical_bomb_box.png"));
+                case EnumID.HorizontalBombBox_ID:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\horizontal_bomb_box.png"));
+                case EnumID.WallHoleLeft_ID:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\wall_hole_left.png"));
+                case EnumID.WallHoleRight_ID:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\wall_hole_right.png"));
+                case EnumID.HallHole_ID:
+                    return new Bitmap(Path.Combine(Application.StartupPath, @"resource\hall_hole.png"));
                 default:
                     return new Bitmap(Path.Combine(Application.StartupPath, @"resource\platform.png"));
             }
@@ -658,9 +682,6 @@ namespace MapEditor
                 case EnumID.SmallElevator_ID:
                     drawItem(@"resource\small_elevator.png");
                     break;
-                case EnumID.BoxWall_ID:
-                    drawItem(@"resource\box_wall.png");
-                    break;
                 case EnumID.UpPlatform_ID:
                     drawItem(@"resource\up_ground.png");
                     break;
@@ -694,6 +715,33 @@ namespace MapEditor
                     break;
                 case EnumID.CameraRange_ID:
                     drawItem(@"resource\platform.png");
+                    break;
+                case EnumID.CheckPoint_ID:
+                    drawItem(@"resource\checkpoint.png");
+                    break;
+                case EnumID.DoubleBox_ID:
+                    drawItem(@"resource\double_box.png");
+                    break;
+                case EnumID.TrippleBox_ID:
+                    drawItem(@"resource\tripple_box.png");
+                    break;
+                case EnumID.QuadraBox_ID:
+                    drawItem(@"resource\quadra_box.png");
+                    break;
+                case EnumID.VerticalBombBox_ID: 
+                    drawItem(@"resource\vertical_bomb_box.png");
+                    break;
+                case EnumID.HorizontalBombBox_ID:
+                    drawItem(@"resource\horizontal_bomb_box.png");
+                    break;
+                case EnumID.WallHoleLeft_ID:
+                    drawItem(@"resource\wall_hole_left.png");
+                    break;
+                case EnumID.WallHoleRight_ID:
+                    drawItem(@"resource\wall_hole_right.png");
+                    break;
+                case EnumID.HallHole_ID:
+                    drawItem(@"resource\hall_hole.png");
                     break;
                 default:
                     drawItem(@"resource\platform.png");
@@ -885,11 +933,6 @@ namespace MapEditor
             curentType = EnumID.Box_ID;
         }
 
-        private void breakableWallToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            curentType = EnumID.BoxWall_ID;
-        }
-
         private void roofToolStripMenuItem_Click(object sender, EventArgs e)
         {
             curentType = EnumID.Roof_ID;
@@ -940,9 +983,54 @@ namespace MapEditor
             curentType = EnumID.RightBlueConveyor_ID;
         }
 
+        private void trippleBoxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.TrippleBox_ID;
+        }
+
+        private void quadraBoxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.QuadraBox_ID;
+        }
+
+        private void verticalBombBoxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.VerticalBombBox_ID;
+        }
+
+        private void horizontalBombBoxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.HorizontalBombBox_ID;
+        }
+
         private void rightSmallConveyorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             curentType = EnumID.RightSmallConveyor_ID;
+        }
+
+        private void checkpointToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.CheckPoint_ID;
+        }
+
+        private void doubleBoxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.DoubleBox_ID;
+        }
+
+        private void wallHoleLeftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.WallHoleLeft_ID;
+        }
+
+        private void wallHoleRightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.WallHoleRight_ID;
+        }
+
+        private void hallHoleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.HallHole_ID;
         }
 
         void addObject(ObjectGame obj)
@@ -978,16 +1066,10 @@ namespace MapEditor
                         numOfRow++;
                     }
 
-                    for (int col = 0; col < numOfCol; col++)
-                    {
-                        for (int row = 0; row < numOfRow; row++)
-                        {
-                            Point point = new Point((objectGame.topLeft.X / 32) * 32 + col * 32, (objectGame.topLeft.Y / 32) * 32 + row * 32);
-                            int bitmapIndex = matTile[objectGame.topLeft.Y / 32 + row, objectGame.topLeft.X / 32 + col];
-                            Bitmap bm = listTile[bitmapIndex];
-                            DrawImage(pictureBox1.Image, bm, point, new Rectangle(0, 0, bm.Width, bm.Height));
-                        }
-                    }
+                  
+                    Point point = new Point(objectGame.topLeft.X, objectGame.topLeft.Y);
+                    DrawImage(pictureBox1.Image, image, point, new Rectangle(objectGame.topLeft.X, objectGame.topLeft.Y, objectGame.width, objectGame.height));
+
                     for (int col = 0; col < numOfCol; col++)
                     {
                         for (int row = 0; row < numOfRow; row++)
@@ -1017,6 +1099,5 @@ namespace MapEditor
             }
             return true;
         }
-
     }
 }

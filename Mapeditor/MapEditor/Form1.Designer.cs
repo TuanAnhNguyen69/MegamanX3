@@ -59,7 +59,12 @@
             this.conveyorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thornToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.boxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.breakableWallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.boxToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.doubleBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trippleBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quadraBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verticalBombBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.horizontalBombBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.roofToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.upGroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downGroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,6 +77,7 @@
             this.bigEnergyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chimeraArmorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cameraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkpointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.bossToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,6 +130,10 @@
             this.fireToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.holeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wallHoleLeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wallHoleRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hallHoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -225,9 +235,11 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToolStripMenuItem,
-            this.cameraToolStripMenuItem});
+            this.cameraToolStripMenuItem,
+            this.checkpointToolStripMenuItem,
+            this.holeToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(136, 92);
             // 
             // addToolStripMenuItem
             // 
@@ -237,7 +249,7 @@
             this.groundToolStripMenuItem1,
             this.itemToolStripMenuItem1});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.addToolStripMenuItem.Text = "Add";
             // 
             // bossToolStripMenuItem1
@@ -247,7 +259,7 @@
             this.byteToolStripMenuItem,
             this.shurikeinToolStripMenuItem});
             this.bossToolStripMenuItem1.Name = "bossToolStripMenuItem1";
-            this.bossToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
+            this.bossToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.bossToolStripMenuItem1.Text = "Boss";
             // 
             // blastHornetToolStripMenuItem
@@ -279,7 +291,7 @@
             this.carryArmToolStripMenuItem,
             this.rightFaceHeadGunnerToolStripMenuItem});
             this.enemyToolStripMenuItem1.Name = "enemyToolStripMenuItem1";
-            this.enemyToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
+            this.enemyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.enemyToolStripMenuItem1.Text = "Enemy";
             // 
             // headGunnerToolStripMenuItem
@@ -329,7 +341,6 @@
             this.conveyorToolStripMenuItem,
             this.thornToolStripMenuItem,
             this.boxToolStripMenuItem,
-            this.breakableWallToolStripMenuItem,
             this.roofToolStripMenuItem,
             this.upGroundToolStripMenuItem,
             this.downGroundToolStripMenuItem,
@@ -338,7 +349,7 @@
             this.rightBlueConveyprToolStripMenuItem,
             this.rightSmallConveyorToolStripMenuItem});
             this.groundToolStripMenuItem1.Name = "groundToolStripMenuItem1";
-            this.groundToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
+            this.groundToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.groundToolStripMenuItem1.Text = "Ground";
             // 
             // cargoToolStripMenuItem
@@ -399,17 +410,58 @@
             // 
             // boxToolStripMenuItem
             // 
+            this.boxToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.boxToolStripMenuItem1,
+            this.doubleBoxToolStripMenuItem,
+            this.trippleBoxToolStripMenuItem,
+            this.quadraBoxToolStripMenuItem,
+            this.verticalBombBoxToolStripMenuItem,
+            this.horizontalBombBoxToolStripMenuItem});
             this.boxToolStripMenuItem.Name = "boxToolStripMenuItem";
             this.boxToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.boxToolStripMenuItem.Text = "Box";
-            this.boxToolStripMenuItem.Click += new System.EventHandler(this.boxToolStripMenuItem_Click);
             // 
-            // breakableWallToolStripMenuItem
+            // boxToolStripMenuItem1
             // 
-            this.breakableWallToolStripMenuItem.Name = "breakableWallToolStripMenuItem";
-            this.breakableWallToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.breakableWallToolStripMenuItem.Text = "Box Wall";
-            this.breakableWallToolStripMenuItem.Click += new System.EventHandler(this.breakableWallToolStripMenuItem_Click);
+            this.boxToolStripMenuItem1.Name = "boxToolStripMenuItem1";
+            this.boxToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.boxToolStripMenuItem1.Text = "Box";
+            this.boxToolStripMenuItem1.Click += new System.EventHandler(this.boxToolStripMenuItem_Click);
+            // 
+            // doubleBoxToolStripMenuItem
+            // 
+            this.doubleBoxToolStripMenuItem.Name = "doubleBoxToolStripMenuItem";
+            this.doubleBoxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.doubleBoxToolStripMenuItem.Text = "DoubleBox";
+            this.doubleBoxToolStripMenuItem.Click += new System.EventHandler(this.doubleBoxToolStripMenuItem_Click);
+            // 
+            // trippleBoxToolStripMenuItem
+            // 
+            this.trippleBoxToolStripMenuItem.Name = "trippleBoxToolStripMenuItem";
+            this.trippleBoxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.trippleBoxToolStripMenuItem.Text = "TrippleBox";
+            this.trippleBoxToolStripMenuItem.Click += new System.EventHandler(this.trippleBoxToolStripMenuItem_Click);
+            // 
+            // quadraBoxToolStripMenuItem
+            // 
+            this.quadraBoxToolStripMenuItem.Name = "quadraBoxToolStripMenuItem";
+            this.quadraBoxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quadraBoxToolStripMenuItem.Text = "QuadraBox";
+            this.quadraBoxToolStripMenuItem.Click += new System.EventHandler(this.quadraBoxToolStripMenuItem_Click);
+            // 
+            // verticalBombBoxToolStripMenuItem
+            // 
+            this.verticalBombBoxToolStripMenuItem.Name = "verticalBombBoxToolStripMenuItem";
+            this.verticalBombBoxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verticalBombBoxToolStripMenuItem.Text = "VerticalBombBox";
+            this.verticalBombBoxToolStripMenuItem.Click += new System.EventHandler(this.verticalBombBoxToolStripMenuItem_Click);
+            // 
+            // horizontalBombBoxToolStripMenuItem
+            // 
+            this.horizontalBombBoxToolStripMenuItem.Name = "horizontalBombBoxToolStripMenuItem";
+            this.horizontalBombBoxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.horizontalBombBoxToolStripMenuItem.Text = "HorizontalBombBox";
+            this.horizontalBombBoxToolStripMenuItem.Click += new System.EventHandler(this.horizontalBombBoxToolStripMenuItem_Click);
             // 
             // roofToolStripMenuItem
             // 
@@ -467,7 +519,7 @@
             this.bigEnergyToolStripMenuItem,
             this.chimeraArmorToolStripMenuItem});
             this.itemToolStripMenuItem1.Name = "itemToolStripMenuItem1";
-            this.itemToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
+            this.itemToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.itemToolStripMenuItem1.Text = "Item";
             // 
             // smallEnergyToolStripMenuItem
@@ -494,9 +546,16 @@
             // cameraToolStripMenuItem
             // 
             this.cameraToolStripMenuItem.Name = "cameraToolStripMenuItem";
-            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.cameraToolStripMenuItem.Text = "Camera";
             this.cameraToolStripMenuItem.Click += new System.EventHandler(this.cameraToolStripMenuItem_Click_1);
+            // 
+            // checkpointToolStripMenuItem
+            // 
+            this.checkpointToolStripMenuItem.Name = "checkpointToolStripMenuItem";
+            this.checkpointToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.checkpointToolStripMenuItem.Text = "Checkpoint";
+            this.checkpointToolStripMenuItem.Click += new System.EventHandler(this.checkpointToolStripMenuItem_Click);
             // 
             // panel3
             // 
@@ -762,6 +821,37 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // holeToolStripMenuItem
+            // 
+            this.holeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.wallHoleLeftToolStripMenuItem,
+            this.wallHoleRightToolStripMenuItem,
+            this.hallHoleToolStripMenuItem});
+            this.holeToolStripMenuItem.Name = "holeToolStripMenuItem";
+            this.holeToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.holeToolStripMenuItem.Text = "Hole";
+            // 
+            // wallHoleLeftToolStripMenuItem
+            // 
+            this.wallHoleLeftToolStripMenuItem.Name = "wallHoleLeftToolStripMenuItem";
+            this.wallHoleLeftToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wallHoleLeftToolStripMenuItem.Text = "WallHoleLeft";
+            this.wallHoleLeftToolStripMenuItem.Click += new System.EventHandler(this.wallHoleLeftToolStripMenuItem_Click);
+            // 
+            // wallHoleRightToolStripMenuItem
+            // 
+            this.wallHoleRightToolStripMenuItem.Name = "wallHoleRightToolStripMenuItem";
+            this.wallHoleRightToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wallHoleRightToolStripMenuItem.Text = "WallHoleRight";
+            this.wallHoleRightToolStripMenuItem.Click += new System.EventHandler(this.wallHoleRightToolStripMenuItem_Click);
+            // 
+            // hallHoleToolStripMenuItem
+            // 
+            this.hallHoleToolStripMenuItem.Name = "hallHoleToolStripMenuItem";
+            this.hallHoleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hallHoleToolStripMenuItem.Text = "HallHole";
+            this.hallHoleToolStripMenuItem.Click += new System.EventHandler(this.hallHoleToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -865,7 +955,6 @@
         private System.Windows.Forms.ToolStripMenuItem conveyorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thornToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem boxToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem breakableWallToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem roofToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem upGroundToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downGroundToolStripMenuItem;
@@ -881,6 +970,17 @@
         private System.Windows.Forms.ToolStripMenuItem rightBlueConveyprToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rightSmallConveyorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cameraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem boxToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem checkpointToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem doubleBoxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trippleBoxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quadraBoxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verticalBombBoxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem horizontalBombBoxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem holeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wallHoleLeftToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wallHoleRightToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hallHoleToolStripMenuItem;
     }
 }
 
