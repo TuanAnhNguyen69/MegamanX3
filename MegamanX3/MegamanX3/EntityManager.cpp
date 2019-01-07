@@ -27,7 +27,7 @@ void EntityManager::Update()
 
 	int size = collidableEntity.size();
 	for (int index = 0; index < size; index++) {
-		if (Collision::IsCollide(collidableEntity[index]->GetBound(), camera->GetBound())) 
+		if (Collision::IsCollide(collidableEntity[index]->GetBound(), camera->GetBound()))
 		{
 			if (camera) {
 				collidableEntity[index]->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
@@ -41,8 +41,8 @@ void EntityManager::Update()
 			collidableEntity[index]->Update();
 		}
 		else {
-			if (collidableEntity[index]->GetEntityId() == EntityId::MegamanBullet_ID 
-				|| collidableEntity[index]->GetEntityId() == EntityId::GunnerRocket_ID 
+			if (collidableEntity[index]->GetEntityId() == EntityId::MegamanBullet_ID
+				|| collidableEntity[index]->GetEntityId() == EntityId::GunnerRocket_ID
 				|| collidableEntity[index]->GetEntityId() == EntityId::HeliRocket_ID
 				|| collidableEntity[index]->GetEntityId() == EntityId::Canon_ID) {
 				RemoveEntity(collidableEntity[index]);
@@ -78,7 +78,7 @@ void EntityManager::CheckCollide()
 			if (playerCollidableEntity.at(index) == collidableEntity.at(otherIndex)) {
 				continue;
 			}
-			
+
 			RECT broadphase = Collision::GetSweptBroadphaseRect(playerCollidableEntity.at(index));
 			if (Collision::IsCollide(broadphase, collidableEntity.at(otherIndex)->GetBound()))
 			{
@@ -89,8 +89,9 @@ void EntityManager::CheckCollide()
 					Entity::CollisionSide entitySide = Collision::GetSideCollision(playerCollidableEntity.at(index), collideData);
 					Entity::CollisionSide impactorSide = Collision::GetSideCollision(collidableEntity.at(otherIndex), collideData);
 
-					playerCollidableEntity.at(index)->OnCollision(collidableEntity.at(otherIndex), entitySide, collideData);
 					collidableEntity.at(otherIndex)->OnCollision(playerCollidableEntity.at(index), impactorSide, collideData);
+					playerCollidableEntity.at(index)->OnCollision(collidableEntity.at(otherIndex), entitySide, collideData);
+
 				}
 			}
 		}
@@ -206,7 +207,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 						break;
 					case EntityId::CarryArm:
 						break;*/
-			case EntityId::BlastHornet_ID:
+			case EntityId::CheckPoint_ID:
 			{
 				/*BlastHornet *boss = new BlastHornet(player);
 				boss->SetPosition(posX + width / 2 + 100, (posY + height / 2));
@@ -216,18 +217,26 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				AddEntity(boss);
 				break;*/
 
-				Shuriken *shuriken = new Shuriken(player);
+				/*Shuriken *shuriken = new Shuriken(player);
 				shuriken->SetPosition(posX + width / 2 + 20, (posY + height / 2) + 150);
 				shuriken->Initialize();
 				AddEntity(shuriken);
-				break;
+				break;*/
 
-				/*Byte *byte = new Byte(player);
+				Byte *byte = new Byte(player);
 				byte->Initialize();
 				byte->SetPosition(posX + width / 2, (posY + height / 2) - 30);
 				byte->SetScale(2, 2);
-				byte->SetBound(54 * 2, 74 * 2);
+				byte->SetBound(54, 74);
 				AddEntity(byte);
+				break;
+
+				/*CarryArm * carryArm = new CarryArm(player);
+				carryArm->SetPosition(posX + width / 2, (posY + height / 2));
+				carryArm->SetScale(1, 1);
+				carryArm->SetBound(width, height);
+				carryArm->Initialize();
+				AddEntity(carryArm);
 				break;*/
 			}
 				case EntityId::LeftFaceHeadGunner_ID:
@@ -298,98 +307,151 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 					break;
 				}
 
-				/*case EntityId::Ladder:
-					break;
-				case EntityId::Thorn:
-					break;
-				case EntityId::Box:
-					break;*/
-				case EntityId::Roof_ID:
-				{
-					Roof * roof = new Roof();
-					roof->SetPosition(posX + width / 2, posY + height / 2);
-					roof->SetBound(width, height);
-					roof->Initialize();
-					AddEntity(roof);
-					break;
-				}
-				/*case EntityId::BreakPlatform:
-					break;
-				case EntityId::Canon:
-					break;
-				case EntityId::GunnerRocket:
-					break;
-				case EntityId::HeliRocket:
-					break;
-				case EntityId::ByteBomb:
-					break;
-				case EntityId::SmallEnergy:
-					break;
-				case EntityId::BigEnergy:
-					break;
-				case EntityId::ChimeraArmor:
-					break;
-				case EntityId::MegamanBullet:
-					break;
-				case EntityId::Cargo:
-					break;
-				case EntityId::BigElevator:
-					break;
-				case EntityId::SmallElevator:
-					break;
-				case EntityId::BoxWall:
-					break;*/
-				case EntityId::UpPlatform_ID:
-				{
-					UpPlatform * upPlatform = new UpPlatform();
-					upPlatform->SetPosition(posX + width / 2, posY + height / 2);
-					upPlatform->SetBound(width, height);
-					upPlatform->Initialize();
-					AddEntity(upPlatform);
-					break;
-				}
-				case EntityId::DownPlatform_ID:
-				{
-					DownPlatform * downPlatform = new DownPlatform();
-					downPlatform->SetPosition(posX + width / 2, posY + height / 2);
-					downPlatform->SetBound(width, height);
-					downPlatform->Initialize();
-					AddEntity(downPlatform);
-					break;
-				}
-				case EntityId::Platform_ID:
-				{
-					Platform * platform = new Platform();
-					platform->SetPosition(posX + width / 2, posY + height / 2);
-					platform->SetBound(width, height);
-					platform->Initialize();
-					AddEntity(platform);
-					break;
-				}
+				Helit * helit = new Helit(player);
+				helit->Initialize();
+				helit->SetPosition(posX + width / 2, (posY + height / 2) - 100);
+				helit->SetScale(2, 2);
+				helit->SetBound(width, height);
+				AddEntity(helit);
+				break;
 
-				case EntityId::LeftBlueConveyor_ID:
-				case EntityId::RightBlueConveyor_ID:
-				case EntityId::LeftYellowConveyor_ID:
-				case EntityId::RightYellowConveyor_ID:
-				case EntityId::LeftSmallConveyor_ID:
-				case EntityId::RightSmallConveyor_ID:
-				{
-					Conveyor *conveyor = new Conveyor(entityId);
-					conveyor->Initialize();
-					conveyor->SetPosition(posX + width / 2, posY + height / 2);
-					conveyor->SetBound(width, height);
-					AddEntity(conveyor);
-					break;
-				}
-				default:
-				{
-					Platform * platform = new Platform();
-					platform->SetPosition(posX + width / 2, posY + height / 2);
-					platform->SetBound(width, height);
-					platform->Initialize();
-					AddEntity(platform);
-					break;
-				}
+
+				/*NotorBanger * notoBanger = new NotorBanger(player);
+				notoBanger->Initialize();
+				notoBanger->SetPosition(posX + width / 2, posY + height / 2);
+				notoBanger->SetScale(2, 2);
+				notoBanger->SetBound(width, height);
+				AddEntity(notoBanger);
+				break;*/
+
+				/*
+				Byte *byte = new Byte(player);
+				byte->Initialize();
+				byte->SetPosition(posX + width / 2, (posY + height / 2) - 30);
+				byte->SetScale(2, 2);
+				byte->SetBound(54 * 2, 74 * 2);
+				AddEntity(byte);
+				break;*/
+			}
+
+			case EntityId::NotorBanger_ID:
+			{
+				NotorBanger * notoBanger = new NotorBanger(player);
+				notoBanger->Initialize();
+				notoBanger->SetPosition(posX + width / 2, posY + height / 2);
+				notoBanger->SetScale(2, 2);
+				notoBanger->SetBound(width, height);
+				AddEntity(notoBanger);
+				break;
+			}
+			/*case EntityId::Bee:
+				break;
+				case EntityId::Helit:
+				break;
+				*/
+
+			case EntityId::Door_ID:
+			{
+				Door * door = new Door();
+				door->Initialize();
+				door->SetPosition(posX + width / 2, posY + height / 2);
+				door->SetBound(width, height);
+				AddEntity(door);
+				break;
+			}
+
+			/*case EntityId::Ladder:
+				break;
+			case EntityId::Thorn:
+				break;
+			case EntityId::Box:
+				break;*/
+			case EntityId::Roof_ID:
+			{
+				Roof * roof = new Roof();
+				roof->SetPosition(posX + width / 2, posY + height / 2);
+				roof->SetBound(width, height);
+				roof->Initialize();
+				AddEntity(roof);
+				break;
+			}
+			/*case EntityId::BreakPlatform:
+				break;
+			case EntityId::Canon:
+				break;
+			case EntityId::GunnerRocket:
+				break;
+			case EntityId::HeliRocket:
+				break;
+			case EntityId::ByteBomb:
+				break;
+			case EntityId::SmallEnergy:
+				break;
+			case EntityId::BigEnergy:
+				break;
+			case EntityId::ChimeraArmor:
+				break;
+			case EntityId::MegamanBullet:
+				break;
+			case EntityId::Cargo:
+				break;
+			case EntityId::BigElevator:
+				break;
+			case EntityId::SmallElevator:
+				break;
+			case EntityId::BoxWall:
+				break;*/
+			case EntityId::UpPlatform_ID:
+			{
+				UpPlatform * upPlatform = new UpPlatform();
+				upPlatform->SetPosition(posX + width / 2, posY + height / 2);
+				upPlatform->SetBound(width, height);
+				upPlatform->Initialize();
+				AddEntity(upPlatform);
+				break;
+			}
+			case EntityId::DownPlatform_ID:
+			{
+				DownPlatform * downPlatform = new DownPlatform();
+				downPlatform->SetPosition(posX + width / 2, posY + height / 2);
+				downPlatform->SetBound(width, height);
+				downPlatform->Initialize();
+				AddEntity(downPlatform);
+				break;
+			}
+			case EntityId::Platform_ID:
+			{
+				Platform * platform = new Platform();
+				platform->SetPosition(posX + width / 2, posY + height / 2);
+				platform->SetBound(width, height);
+				platform->Initialize();
+				AddEntity(platform);
+				break;
+			}
+
+			case EntityId::LeftBlueConveyor_ID:
+			case EntityId::RightBlueConveyor_ID:
+			case EntityId::LeftYellowConveyor_ID:
+			case EntityId::RightYellowConveyor_ID:
+			case EntityId::LeftSmallConveyor_ID:
+			case EntityId::RightSmallConveyor_ID:
+			{
+				Conveyor *conveyor = new Conveyor(entityId);
+				conveyor->Initialize();
+				conveyor->SetPosition(posX + width / 2, posY + height / 2);
+				conveyor->SetBound(width, height);
+				AddEntity(conveyor);
+				break;
+			}
+			default:
+			{
+				Platform * platform = new Platform();
+				platform->SetPosition(posX + width / 2, posY + height / 2);
+				platform->SetBound(width, height);
+				platform->Initialize();
+				AddEntity(platform);
+				break;
+			}
 			}
 		}
 	}

@@ -212,7 +212,7 @@ void Player::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::C
 	
 	switch (impactor->GetEntityId()) {
 	case EntityId::MegamanBullet_ID:
-		return;
+		return;	
 	case EntityId::LeftBlueConveyor_ID:
 	case EntityId::RightBlueConveyor_ID:
 	case EntityId::LeftYellowConveyor_ID:

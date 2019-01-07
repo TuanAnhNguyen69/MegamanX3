@@ -8,7 +8,7 @@ public:
 	Enemy(EntityId entityId, Player * player);
 	~Enemy();
 	void Update();
-	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+	virtual void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 
 	void SubHP(int damage);
 	int GetHP();

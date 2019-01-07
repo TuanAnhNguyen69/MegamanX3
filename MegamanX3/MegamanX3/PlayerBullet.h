@@ -14,9 +14,14 @@ public:
 	void Initialize(int damage);
 	void Update();
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+	bool IsHitted();
+
+	int GetDamage();
 	~PlayerBullet();
+
 private:
 	AnimatedSprite *sprite;
 	int damage;
+	bool hitted;
 };
 

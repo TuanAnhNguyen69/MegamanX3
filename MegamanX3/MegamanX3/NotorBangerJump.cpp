@@ -71,6 +71,10 @@ void NotorBangerJump::Update()
 
 void NotorBangerJump::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	if (impactor->GetEntityId() != EntityId::Platform_ID)
+	{
+		return;
+	}
 	switch (side)
 	{
 

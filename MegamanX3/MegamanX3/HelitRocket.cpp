@@ -2,7 +2,7 @@
 #include "HelitRocket.h"
 
 
-HelitRocket::HelitRocket() : Entity(EntityId::GunnerRocket_ID)
+HelitRocket::HelitRocket() : Entity(EntityId::Helit_ID)
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"helit_rocket", 20, 14);
@@ -14,11 +14,12 @@ HelitRocket::HelitRocket() : Entity(EntityId::GunnerRocket_ID)
 
 HelitRocket::~HelitRocket()
 {
-	Entity::~Entity();
+	
 }
 
 void HelitRocket::Initialize(bool isLeft)
 {
+	this->hitted = false;
 	this->SetSprite(sprite);
 	this->isLeft = isLeft;
 	if (isLeft) {
@@ -34,12 +35,21 @@ void HelitRocket::Initialize(bool isLeft)
 
 void HelitRocket::Update()
 {
-	if (isLeft) {
-		this->AddVelocityX(-10.0);
+	if (this->hitted) {
+		if (sprite->IsFinished()) {
+			EntityManager::GetInstance()->RemoveEntity(this);
+			return;
+		}
 	}
 	else {
-		this->AddVelocityX(+10.0);
+		if (isLeft) {
+			this->AddVelocityX(-10.0);
+		}
+		else {
+			this->AddVelocityX(+10.0);
+		}
 	}
+	
 	
 	Entity::Update();
 }
@@ -48,74 +58,23 @@ void HelitRocket::Update()
 
 void HelitRocket::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() == EntityId::Platform_ID || impactor->GetEntityId() == EntityId::Megaman_ID)
-	{
-		switch (side)
+	if(!hitted){
+		if (!(impactor->GetEntityId() == EntityId::Helit_ID || impactor->GetEntityId() == EntityId::HeliRocket_ID))
 		{
-		case Entity::Left: case Entity::TopLeft: case Entity::BottomLeft:
-		{ 
-			/*this->AddPosition(data.RegionCollision.right - data.RegionCollision.left + 1, 0);
-			this->SetVelocity(0, 0);*/	
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
+			this->SetVelocityX(0);
+			sprite = new AnimatedSprite(15, 1, false);
+			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
+				0, 7, 8, 50, 50);
+			this->SetSprite(sprite);
+			this->hitted = true;
 		}
+		else {
+			return;
+		}
+	}	
+}
 
-		case Entity::Right: case Entity::TopRight: case Entity::BottomRight:
-		{ 
-			/*this->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left + 1), 0);
-			this->SetVelocity(0, 0);*/			
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
-
-		case Entity::Top:
-		{
-			/*this->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top + 1);
-			this->SetVelocity(0, 0);*/			
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
-
-		case Entity::Bottom:
-		{
-
-			/*this->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
-			this->SetVelocity(0, 0);*/
-			/*this->AddVelocityY(-10.0f);*/			
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
-		}
-	}
-	if (impactor->GetEntityId() == EntityId::MegamanBullet_ID)
-	{
-		switch (side)
-		{
-
-		case Entity::Left: case Entity::TopLeft: case Entity::BottomLeft:
-		{			
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
-
-		case Entity::Right: case Entity::TopRight: case Entity::BottomRight:
-		{			
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
-
-		case Entity::Top:
-		{			
-			EntityManager::GetInstance()->RemoveEntity(this);
-
-			break;
-		}
-
-		case Entity::Bottom:
-		{			
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
-		}
-	}
+bool HelitRocket::IsHitted()
+{
+	return this->hitted;
 }

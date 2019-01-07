@@ -44,10 +44,10 @@ void CarryArm::Initialize()
 	this->ChangeState(CarryArmStateHandler::StateName::Flying);
 
 
-	this->box = new Box();
+	this->box = new Box(EntityId::Box_ID);
 	this->box->SetPosition(this->GetPosition().x, this->GetPosition().y + 50);
 	this->box->SetScale(1, 1);
-	this->box->SetBound(50 * 1, 50 * 1);
+	//this->box->SetBound(50 * 1, 50 * 1);
 	this->box->Initialize(false);
 	EntityManager::GetInstance()->AddEntity(this->box);
 }
@@ -146,6 +146,7 @@ CarryArmStateHandler::MoveDirection CarryArm::GetMoveDirection()
 
 void CarryArm::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	Enemy::OnCollision(impactor, side, data);
 	if (currentState)
 	{
 		currentState->OnCollision(impactor, side, data);

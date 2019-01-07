@@ -32,9 +32,7 @@ public:
 	bool GetLeftTarget();
 	bool GetAboveTarget();
 	bool GetHadShootState();
-	void SetHadShootState(bool hadShootState);	
-	int GetHP();
-	void SubHP(int damage);
+	void SetHadShootState(bool hadShootState);		
 
 private:
 	bool targetIsLeft;

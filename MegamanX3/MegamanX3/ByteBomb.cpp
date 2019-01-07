@@ -14,11 +14,6 @@ ByteBomb::ByteBomb() : Entity(EntityId::ByteBomb_ID)
 
 ByteBomb::~ByteBomb()
 {
-	if (sprite)
-	{
-		delete sprite;
-		sprite = nullptr;
-	}
 }
 
 void ByteBomb::Initailize(MoveDirection moveDirection)
@@ -33,38 +28,27 @@ void ByteBomb::Initailize(MoveDirection moveDirection)
 
 void ByteBomb::Update()
 {
-	/*if (collDirection == CollisionDirection::CollLeft)
+	if (isRemove)
 	{
-		this->sprite->SetFrameRange(7, 8);
-		Entity::Update();
+		EntityManager::GetInstance()->RemoveEntity(this);
 		return;
 	}
-	if (collDirection == CollisionDirection::CollRight)
-	{
-		this->sprite->SetFrameRange(9, 10);
-		Entity::Update();
-		return;
-	}*/
+
 	if(collDirection == CollisionDirection::None)
 	{
 		sprite->SetFrameRange(0, 6);
 		if (moveDirection == MoveDirection::Left)
 		{
 			this->SetVelocityX(-Define::BYTEBOMB_SPEED);
-			//this->AddVelocityX(-Define::BYTEBOMB_ACCELERATION);
 		}
 		else if (moveDirection == MoveDirection::Right)
 		{
 			this->SetVelocityX(Define::BYTEBOMB_SPEED);
-			//this->AddVelocityX(Define::BYTEBOMB_ACCELERATION);
 		}
 	}	
+
 	Entity::Update();
-	if (isRemove)
-	{
-		EntityManager::GetInstance()->RemoveEntity(this);
-		return;
-	}
+	
 }
 
 void ByteBomb::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
@@ -75,27 +59,29 @@ void ByteBomb::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity
 		{
 		case Entity::Left:
 		{
+			this->SetBound(1, 30);
 			isAddWall = true;
-			this->AddPosition(data.RegionCollision.right - data.RegionCollision.left + 10, 0);
+			this->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
 			this->SetVelocity(0, 0);
-			this->sprite->SetFrameRange(7, 8);
+			this->sprite->SetFrame(7);
 			collDirection = CollisionDirection::CollLeft;
 			break;
 		}
 
 		case Entity::Right:
 		{
+			this->SetBound(1, 30);
 			isAddWall = true;
-			this->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left + 10), 0);
+			this->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left) - 5, 0);
 			this->SetVelocity(0, 0);
-			this->sprite->SetFrameRange(9, 10);
+			this->sprite->SetFrame(9);
 			collDirection = CollisionDirection::CollRight;
 			break;
 		}
 		}
 	}
-	/*if (impactor->GetEntityId() == EntityId::Byte_ID && isAddWall)
+	if (impactor->GetEntityId() == EntityId::Byte_ID && isAddWall)
 	{
 		isRemove = true;
-	}*/
+	}
 }

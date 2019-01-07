@@ -31,7 +31,6 @@ Helit::~Helit()
 		flyingState = nullptr;
 	}
 
-	//Entity::~Entity();
 }
 
 void Helit::Initialize()
@@ -50,7 +49,7 @@ void Helit::Update()
 
 	if (this->GetHP() <= 0)
 	{
-		//this->ChangeState(HelitStateHandler::StateName::Die);
+		this->ChangeState(HelitStateHandler::StateName::Die);
 	}
 	
 	if (this->GetPosition().x > player->GetPosition().x)
@@ -134,6 +133,7 @@ HelitStateHandler::MoveDirection Helit::GetMoveDirection()
 
 void Helit::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	Enemy::OnCollision(impactor, side, data);
 	if (currentState)
 	{
 		currentState->OnCollision(impactor, side, data);
@@ -164,13 +164,4 @@ void Helit::SetHadShootState(bool hadShootState)
 	this->hadShootState = hadShootState;
 }
 
-int Helit::GetHP()
-{
-	return HP;
-}
-
-void Helit::SubHP(int damage)
-{
-	this->HP -= damage;
-}
 
