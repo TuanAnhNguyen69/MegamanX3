@@ -258,13 +258,13 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 					Helit * helit = new Helit(player);
 					helit->Initialize();
-					helit->SetPosition(posX + width / 2, (posY + height / 2) - 150);
+					helit->SetPosition(posX + width / 2, (posY + height / 2) - 100);
 					helit->SetScale(2, 2);
 					helit->SetBound(width, height);
 					AddEntity(helit);
 					break;
-
-					/*Byte *byte = new Byte(player);
+/*
+					Byte *byte = new Byte(player);
 					byte->Initialize();
 					byte->SetPosition(posX + width / 2, (posY + height / 2) - 30);
 					byte->SetScale(2, 2);

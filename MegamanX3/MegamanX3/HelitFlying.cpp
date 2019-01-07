@@ -11,6 +11,13 @@ HelitFlying::HelitFlying(HelitStateHandler *handler, Entity *entity) : HelitStat
 }
 HelitFlying::~HelitFlying()
 {
+	if (handler->GetCurrentStateName() != HelitStateHandler::StateName::Flying) 
+	{
+		if (sprite) {
+			delete sprite;
+			sprite = nullptr;
+		}
+	}
 }
 
 void HelitFlying::Load()

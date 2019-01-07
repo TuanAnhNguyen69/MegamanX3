@@ -42,11 +42,6 @@ void Helit::Initialize()
 
 void Helit::Update()
 {
-	if (HP < 0) {
-		EntityManager::GetInstance()->RemoveEntity(this);
-		return;
-	}
-	
 	if (this->IsRemove())
 	{
 		EntityManager::GetInstance()->RemoveEntity(this);

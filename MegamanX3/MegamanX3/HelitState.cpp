@@ -11,11 +11,6 @@ HelitState::HelitState(HelitStateHandler *handler, Entity *entity)
 
 HelitState::~HelitState()
 {
-	if (sprite)
-	{
-		delete sprite;
-		sprite = nullptr;
-	}
 }
 
 void HelitState::Load()
