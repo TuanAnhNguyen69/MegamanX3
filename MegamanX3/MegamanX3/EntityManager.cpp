@@ -212,7 +212,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				BlastHornet *boss = new BlastHornet(player);
 				boss->SetPosition(posX + width / 2 + 100, (posY + height / 2));
 				boss->SetScale(1.5, 1.5);
-				boss->SetBound(45 * 1.5, 50 * 1.5);
+				boss->SetBound(45, 50);
 				boss->Initialize();
 				AddEntity(boss);
 				break;

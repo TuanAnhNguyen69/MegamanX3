@@ -61,8 +61,8 @@ void BlastHornet::Initialize()
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"blast_hornet", 100, 100);
 	//this->ChangeState(Fly);
-	pointA = D3DXVECTOR3(this->GetPosition().x + 50, this->GetPosition().y - 50, 0);
-	pointB = D3DXVECTOR3(pointA.x - 500, pointA.y, 0);
+	pointA = D3DXVECTOR3(this->GetPosition().x - 50, this->GetPosition().y, 0);
+	pointB = D3DXVECTOR3(pointA.x - 350, pointA.y, 0);
 	this->SetPreAction(BlastHornetStateHandler::StateName::Drop);
 	this->ChangeState(BlastHornetStateHandler::StateName::Return);
 	//this->ChangeState(BlastHornetStateHandler::StateName::Fly);
