@@ -206,7 +206,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 						break;
 					case EntityId::CarryArm:
 						break;*/
-			case EntityId::BlastHornet_ID:
+			case EntityId::CheckPoint_ID:
 			{
 				/*BlastHornet *boss = new BlastHornet(player);
 				boss->SetPosition(posX + width / 2 + 100, (posY + height / 2));
@@ -216,18 +216,26 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				AddEntity(boss);
 				break;*/
 
-				Shuriken *shuriken = new Shuriken(player);
+				/*Shuriken *shuriken = new Shuriken(player);
 				shuriken->SetPosition(posX + width / 2 + 20, (posY + height / 2) + 150);
 				shuriken->Initialize();
 				AddEntity(shuriken);
-				break;
+				break;*/
 
-				/*Byte *byte = new Byte(player);
+				Byte *byte = new Byte(player);
 				byte->Initialize();
 				byte->SetPosition(posX + width / 2, (posY + height / 2) - 30);
 				byte->SetScale(2, 2);
-				byte->SetBound(54 * 2, 74 * 2);
+				byte->SetBound(54, 74);
 				AddEntity(byte);
+				break;
+
+				/*CarryArm * carryArm = new CarryArm(player);
+				carryArm->SetPosition(posX + width / 2, (posY + height / 2));
+				carryArm->SetScale(1, 1);
+				carryArm->SetBound(width, height);
+				carryArm->Initialize();
+				AddEntity(carryArm);
 				break;*/
 			}
 				case EntityId::LeftFaceHeadGunner_ID:

@@ -33,8 +33,8 @@ bool GameScene::Initialize()
 {
 
 	map = new Background();
-	map->Initialize("blast_hornet_state", 4);
-	//map->Initialize("testBoss", 2);
+	//map->Initialize("blast_hornet_state", 4);
+	map->Initialize("testBoss", 2);
 	
 
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -42,10 +42,12 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(10800, 2300);
+	//player->SetPosition(10800, 2300);
+	player->SetPosition(4700, 2100);
 	camera->SetCenter(player->GetPosition());
 
-	EntityManager::GetInstance()->Initialize(player, camera, "testDoor", map->GetWidth(), map->GetHeight());
+	//EntityManager::GetInstance()->Initialize(player, camera, "testDoor", map->GetWidth(), map->GetHeight());
+	EntityManager::GetInstance()->Initialize(player, camera, "testBoss", map->GetWidth(), map->GetHeight());
 	
 	debugDraw = new DebugDraw();
 	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));
