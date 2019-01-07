@@ -26,7 +26,7 @@ void BlastHornetFly::Load()
 	entity->SetSprite(sprite);
 
 	startPoint = entity->GetPosition();
-	intersectionPoint = D3DXVECTOR3(handler->GetPointA().x - 300, handler->GetPointA().y + 100, 0);
+	intersectionPoint = D3DXVECTOR3(handler->GetPointA().x - 200, handler->GetPointA().y + 50, 0);
 
 	point1 = D3DXVECTOR3(intersectionPoint.x - 150, intersectionPoint.y + 100, 0);
 	point2 = D3DXVECTOR3(intersectionPoint.x - 150, intersectionPoint.y - 100, 0);
@@ -67,22 +67,22 @@ void BlastHornetFly::Update()
 	switch (route)
 	{
 	case BlastHornetFly::Unknow:
-		GoTo(startPoint, intersectionPoint, Define::BLASTHORNET_RETURN_SPEED);
+		entity->GoTo(startPoint, intersectionPoint, Define::BLASTHORNET_RETURN_SPEED);
 		break;
 	case BlastHornetFly::AtIntersection:
-		GoTo(intersectionPoint, point1, Define::BLASTHORNET_RETURN_SPEED);
+		entity->GoTo(intersectionPoint, point1, Define::BLASTHORNET_FLY_SPEED);
 		break;
 	case BlastHornetFly::AtPoint1:
-		GoTo(point1, point2, Define::BLASTHORNET_RETURN_SPEED);
+		entity->GoTo(point1, point2, Define::BLASTHORNET_FLY_SPEED);
 		break;
 	case BlastHornetFly::AtPoint2:
-		GoTo(point2, point3, Define::BLASTHORNET_RETURN_SPEED);
+		entity->GoTo(point2, point3, Define::BLASTHORNET_FLY_SPEED);
 		break;
 	case BlastHornetFly::AtPoint3:
-		GoTo(point3, point4, Define::BLASTHORNET_RETURN_SPEED);
+		entity->GoTo(point3, point4, Define::BLASTHORNET_FLY_SPEED);
 		break;
 	case BlastHornetFly::AtPoint4:
-		GoTo(point4, point1, Define::BLASTHORNET_RETURN_SPEED);
+		entity->GoTo(point4, point1, Define::BLASTHORNET_FLY_SPEED);
 		break;
 	}
 
@@ -99,15 +99,10 @@ void BlastHornetFly::Update()
 		Bee *bee = new Bee(handler->GetPlayer());
 		bee->SetPosition(entity->GetPosition().x, entity->GetPosition().y);
 		bee->SetScale(2, 2);
-		bee->SetBound(15 * 2, 15 * 2);
+		bee->SetBound(15, 15);
 		bee->Initailize();
 		EntityManager::GetInstance()->AddEntity(bee);
 		hadDrop = false;
-	}
-
-	if (handler->GetHP() == 0)
-	{
-		handler->ChangeState(BlastHornetStateHandler::StateName::Die);
 	}
 }
 

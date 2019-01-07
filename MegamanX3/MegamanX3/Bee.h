@@ -21,9 +21,11 @@ public:
 	void OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	void GoOn(D3DXVECTOR3 desPoint);
 	void Follow();
+	bool IsHitted();
 
 private:
 	AnimatedSprite * sprite;
+	AnimatedSprite * dieSprite;
 	D3DXVECTOR3 startPos;
 	D3DXVECTOR3 desPos;
 	bool isFollow;
@@ -31,5 +33,6 @@ private:
 	clock_t timeBorn;
 	clock_t timeCount;
 	bool isStop;
+	bool hitted;
 };
 

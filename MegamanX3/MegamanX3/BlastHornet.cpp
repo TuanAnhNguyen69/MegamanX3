@@ -58,15 +58,14 @@ BlastHornet::~BlastHornet()
 
 void BlastHornet::Initialize()
 {
+	this->hadFly = false;
+	this->hadDie = false;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"blast_hornet", 100, 100);
-	//this->ChangeState(Fly);
 	pointA = D3DXVECTOR3(this->GetPosition().x + 50, this->GetPosition().y - 50, 0);
-	pointB = D3DXVECTOR3(pointA.x - 500, pointA.y, 0);
+	pointB = D3DXVECTOR3(pointA.x - 350, pointA.y, 0);
 	this->SetPreAction(BlastHornetStateHandler::StateName::Drop);
 	this->ChangeState(BlastHornetStateHandler::StateName::Return);
-	//this->ChangeState(BlastHornetStateHandler::StateName::Fly);
-	//this->ChangeState(BlastHornetStateHandler::StateName::Die);
 	HP = Define::BLASTHORNET_HP;
 }
 
@@ -78,8 +77,16 @@ void BlastHornet::Update()
 		return;
 	}
 
-	if (this->GetHP() <= 0)
+
+
+	if (this->GetHP() <= Define::BLASTHORNET_HP / 2 && this->GetHP() > 0 && !hadFly)
 	{
+		hadFly = true;
+		this->ChangeState(BlastHornetStateHandler::Fly);
+	}
+	else if (this->GetHP() <= 0 && !hadDie)
+	{
+		hadDie = true;
 		this->ChangeState(BlastHornetStateHandler::StateName::Die);
 	}
 

@@ -2,7 +2,7 @@
 #include "Bee.h"
 
 
-Bee::Bee(Player *player)
+Bee::Bee(Player *player) : Entity(EntityId::Bee_ID)
 {
 	isFollow = true;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
@@ -10,12 +10,10 @@ Bee::Bee(Player *player)
 	sprite = new AnimatedSprite(15, 1, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "bee",
 		0, 2, 3, 30, 30);
-	//this->player = player;
-	//this->startPos = D3DXVECTOR3(this->GetPosition().x, this->GetPosition().y, 0);
-	//this->startPos = this->GetPosition();
+	this->player = player;
 }
 
-Bee::Bee(D3DXVECTOR3 desPos)
+Bee::Bee(D3DXVECTOR3 desPos) : Entity(EntityId::Bee_ID)
 {
 	isFollow = false;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
@@ -24,21 +22,17 @@ Bee::Bee(D3DXVECTOR3 desPos)
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "bee",
 		0, 2, 3, 30, 30);
 	this->desPos = desPos;
-	//this->startPos = this->GetPosition();
 }
 
 
 Bee::~Bee()
 {
-	if (sprite)
-	{
-		delete sprite;
-		sprite = nullptr;
-	}
+
 }
 
 void Bee::Initailize()
 {
+	this->hitted = false;
 	timeBorn = clock();
 	this->SetSprite(sprite);
 	isStop = false;
@@ -47,42 +41,60 @@ void Bee::Initailize()
 
 void Bee::Update()
 {
-	if (this->GetVelocity().x > 0) 
-	{
-		this->SetReverse(false);
+	if (this->hitted) {
+		if (sprite->IsFinished()) {
+			EntityManager::GetInstance()->RemoveEntity(this);
+			return;
+		}
 	}
-	else if (this->GetVelocity().x < 0) 
-	{
-		this->SetReverse(true);
-	}
-
-	if (isFollow)
-	{
-		this->Follow();
-
+	else {
 		timeCount = clock();
 		int dt = (timeCount - timeBorn) / 1000;
 
-		if (dt > 2)
+		if (this->GetVelocity().x > 0)
 		{
-			EntityManager::GetInstance()->RemoveEntity(this);
-			//return;
+			this->SetReverse(false);
 		}
-	}
-	else
-	{
-		if (!isStop)
-			this->GoOn(desPos);
-		else
-			this->SetVelocity(0, 0);
-	}
-	Entity::Update();
+		else if (this->GetVelocity().x < 0)
+		{
+			this->SetReverse(true);
+		}
 
-	
+		if (isFollow)
+		{
+			this->Follow();
+
+			if (dt > 3)
+			{
+				EntityManager::GetInstance()->RemoveEntity(this);
+				return;
+			}
+		}
+		else
+		{
+			if (!isStop)
+				this->GoOn(desPos);
+			else
+				this->SetVelocity(0, 0);
+
+			if (dt > 6)
+			{
+				EntityManager::GetInstance()->RemoveEntity(this);
+				return;
+			}
+		}
+
+		
+
+		
+	}
+
+	Entity::Update();
 }
 
 void Bee::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+
 	if (impactor->GetEntityId() == EntityId::Platform_ID)
 	{
 		switch (side)
@@ -117,6 +129,19 @@ void Bee::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::Col
 		}
 		}
 	}
+
+	if (!this->hitted) {
+		if (impactor->GetEntityId() == EntityId::Megaman_ID) {
+
+			this->SetVelocity(0, 0);
+			sprite = new AnimatedSprite(15, 1, false);
+			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
+				0, 7, 8, 50, 50);
+			this->SetSprite(sprite);
+			this->hitted = true;
+		}
+	}
+
 }
 
 void Bee::GoOn(D3DXVECTOR3 desPoint)
@@ -131,13 +156,18 @@ void Bee::GoOn(D3DXVECTOR3 desPoint)
 
 void Bee::Follow()
 {
-	D3DXVECTOR3 moveVector = D3DXVECTOR3(player->GetPosition().x - this->GetPosition().x, 
+	D3DXVECTOR3 moveVector = D3DXVECTOR3(player->GetPosition().x - this->GetPosition().x,
 		player->GetPosition().y - this->GetPosition().y, 0);
 
 	float moveVectorSize = sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y);
 
 	this->AddVelocityX(moveVector.x / moveVectorSize * Define::BEE_FOLLOW_SPEED);
 	this->AddVelocityY(moveVector.y / moveVectorSize * Define::BEE_FOLLOW_SPEED);
+}
+
+bool Bee::IsHitted()
+{
+	return this->hitted;
 }
 
 

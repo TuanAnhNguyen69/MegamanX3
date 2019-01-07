@@ -28,45 +28,38 @@ void BlastHornetReturn::Load()
 	//isGoToPointA = false;
 	route = Route::Unknow;
 
-	//Nếu player ở gần B hơn A
-	if (abs(handler->GetPlayerPos().x - handler->GetPointA().x) > abs(handler->GetPlayerPos().x - handler->GetPointB().x))
+	if (handler->GetPreAction() == BlastHornetStateHandler::StateName::Drop)
 	{
-		isGoToPointA = false;
+		//Nếu player ở gần B hơn A sẽ đi về B
+		if (abs(handler->GetPlayerPos().x - handler->GetPointA().x) > abs(handler->GetPlayerPos().x - handler->GetPointB().x))
+		{
+			isGoToPointA = false;
+		}
+		//Nếu player ở gần A hơn B sẽ đi về A
+		else
+		{
+			isGoToPointA = true;
+		}
 	}
-	//Nếu player ở gần A hơn B
-	else
+	else if (handler->GetPreAction() == BlastHornetStateHandler::StateName::Prick)
 	{
-		isGoToPointA = true;
+		//Nếu player ở gần B hơn A sẽ đi về A
+		if (abs(handler->GetPlayerPos().x - handler->GetPointA().x) > abs(handler->GetPlayerPos().x - handler->GetPointB().x))
+		{
+			isGoToPointA = true;
+		}
+		//Nếu player ở gần A hơn B sẽ đi về B
+		else
+		{
+			isGoToPointA = false;
+		}
 	}
+	
 }
 
 void BlastHornetReturn::Update()
 {
 	BlastHornetState::Update();
-
-	/*if ((entity->GetPosition().x == handler->GetPointA().x && entity->GetPosition().y == handler->GetPointA().y) ||
-		(entity->GetPosition().x == handler->GetPointB().x && entity->GetPosition().y == handler->GetPointB().y))
-	{
-		isChangePos = true;
-	}
-	else
-	{
-		isChangePos = false;
-	}*/
-
-	/*if (entity->GetPosition().x == handler->GetPointA().x && entity->GetPosition().y == handler->GetPointA().y)
-	{
-		route = Route::AtA;
-	}
-	else if (entity->GetPosition().x == handler->GetPointB().x && entity->GetPosition().y == handler->GetPointB().y)
-	{
-		route = Route::AtB;
-	}
-	else
-	{
-		route = Route::Moving;
-	}*/
-
 
 	//Nếu BlastHornet trở về A
 	if (isGoToPointA)
@@ -81,8 +74,7 @@ void BlastHornetReturn::Update()
 		else
 		{
 			if(route == Route::AtA || route)
-			//if (isChangePos)
-				GoTo(curPos, handler->GetPointA(), 10);
+				entity->GoTo(curPos, handler->GetPointA(), 10);
 		}
 	}
 	//Nếu BlastHornet trở về B
@@ -97,14 +89,8 @@ void BlastHornetReturn::Update()
 		//Nếu chưa ở B
 		else
 		{
-			//if(isChangePos)
-				GoTo(curPos, handler->GetPointB(), 10);
+			entity->GoTo(curPos, handler->GetPointB(), 10);
 		}
-	}
-
-	if (handler->GetHP() <= Define::BLASTHORNET_HP / 2)
-	{
-		handler->ChangeState(BlastHornetStateHandler::StateName::Fly);
 	}
 }
 

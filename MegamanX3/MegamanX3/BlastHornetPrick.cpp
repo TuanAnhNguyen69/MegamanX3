@@ -26,7 +26,6 @@ void BlastHornetPrick::Load()
 	entity->SetVelocity(0, 0);
 	entity->SetSprite(sprite);
 	handler->SetPreAction(BlastHornetStateHandler::StateName::Prick);
-	targetPos = handler->GetPlayerPos();
 	timeStartState = clock();
 }
 
@@ -49,7 +48,9 @@ void BlastHornetPrick::Update()
 
 	if (sprite->IsFinished())
 	{
-		GoOn(curPos, targetPos, 50);
+		targetPos = handler->GetPlayerPos();
+
+		entity->GoOn(curPos, targetPos, 50);
 	}
 	
 	if (isStopState)

@@ -288,6 +288,24 @@
     <ClCompile Include="HeadGunnerShootRocket.cpp">
       <Filter>Entities\Enemy\HeadGunner</Filter>
     </ClCompile>
+    <ClCompile Include="CargoShip.cpp">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClCompile>
+    <ClCompile Include="CargoShipState.cpp">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClCompile>
+    <ClCompile Include="CargoShipDownState.cpp">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClCompile>
+    <ClCompile Include="CargoShipDropState.cpp">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClCompile>
+    <ClCompile Include="CargoShipUpState.cpp">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClCompile>
+    <ClCompile Include="CargoSole.cpp">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -612,6 +630,27 @@
     <ClInclude Include="HeadGunnerShootRocket.h">
       <Filter>Entities\Enemy\HeadGunner</Filter>
     </ClInclude>
+    <ClInclude Include="CargoShipState.h">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoShipStateHandler.h">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoShipDownState.h">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoShipDropState.h">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoShipUpState.h">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoShip.h">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoSole.h">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
@@ -670,6 +709,9 @@
     </Filter>
     <Filter Include="Entities\Enemy\Shuriken">
       <UniqueIdentifier>{355ebffe-196e-4a8f-857f-cfc32506640c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemy\CargoShip">
+      <UniqueIdentifier>{f6dd8fa4-6bca-4834-acfb-9f35d383ce44}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

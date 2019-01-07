@@ -96,7 +96,7 @@ public:
 	virtual void Render();
 
 	D3DXVECTOR3 GetPosition();
-	RECT GetBound();
+	virtual RECT GetBound();
 	D3DXVECTOR3 GetVelocity();
 	float GetWidth();
 	float GetHeight();

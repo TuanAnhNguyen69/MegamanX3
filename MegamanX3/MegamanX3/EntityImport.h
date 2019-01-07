@@ -14,4 +14,5 @@
 #include "BlastHornet.h"
 #include "Shuriken.h"
 #include "Door.h"
+#include "CargoShip.h"
 

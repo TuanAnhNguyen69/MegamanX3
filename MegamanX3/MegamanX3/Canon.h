@@ -24,10 +24,13 @@ public:
 
 	void OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::CollisionReturn data);
 
+	bool IsHitted();
+
 private:
 	AnimatedSprite * sprite;
 	bool isLeft;
 	bool isHigh;
+	bool hitted;
 	float x0;
 	float y0;
 };

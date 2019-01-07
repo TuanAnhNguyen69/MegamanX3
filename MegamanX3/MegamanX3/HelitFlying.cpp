@@ -96,11 +96,5 @@ void HelitFlying::OnCollision(Entity * impactor, Entity::CollisionSide side, Ent
 		}
 	}
 
-	if ( impactor->GetEntityId() == EntityId::MegamanBullet_ID)
-	{
-		if (handler->GetHP() > 0) {
-			handler->SubHP(50);
-		}
-		
-	}
+	
 }

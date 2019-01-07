@@ -25,6 +25,7 @@ void BlastHornetDie::Load()
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	timeStartState = clock();
+	entity->SetBound(30, 100);
 }
 
 void BlastHornetDie::Update()

@@ -53,36 +53,36 @@ float BlastHornetState::UCLN(float a, float b)
 
 }
 
-void BlastHornetState::GoTo(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed)
-{
-	D3DXVECTOR3 moveVector;
-
-	moveVector = D3DXVECTOR3(desPoint.x - curPoint.x, desPoint.y - curPoint.y, 0);
-
-	float speedVector = sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y);
-
-	entity->AddVelocityX(moveVector.x / speedVector * speed);
-	entity->AddVelocityY(moveVector.y / speedVector * speed);
-
-	if ((((desPoint.x >= curPoint.x) && (entity->GetPosition().x >= desPoint.x)) ||
-		((desPoint.x <= curPoint.x) && (entity->GetPosition().x <= desPoint.x))) &&
-		(((desPoint.y >= curPoint.y) && (entity->GetPosition().y >= desPoint.y)) ||
-		((desPoint.y <= curPoint.y) && (entity->GetPosition().y <= desPoint.y)))
-		)
-	{
-		entity->SetVelocity(0, 0);
-		entity->SetPosition(desPoint.x, desPoint.y);
-	}
-}
-
-void BlastHornetState::GoOn(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed)
-{
-	D3DXVECTOR3 moveVector;
-
-	moveVector = D3DXVECTOR3(desPoint.x - curPoint.x, desPoint.y - curPoint.y, 0);
-
-	float speedVector = sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y);
-
-	entity->AddVelocityX(moveVector.x / speedVector * speed);
-	entity->AddVelocityY(moveVector.y / speedVector * speed);
-}
+//void BlastHornetState::GoTo(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed)
+//{
+//	D3DXVECTOR3 moveVector;
+//
+//	moveVector = D3DXVECTOR3(desPoint.x - curPoint.x, desPoint.y - curPoint.y, 0);
+//
+//	float speedVector = sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y);
+//
+//	entity->AddVelocityX(moveVector.x / speedVector * speed);
+//	entity->AddVelocityY(moveVector.y / speedVector * speed);
+//
+//	if ((((desPoint.x >= curPoint.x) && (entity->GetPosition().x >= desPoint.x)) ||
+//		((desPoint.x <= curPoint.x) && (entity->GetPosition().x <= desPoint.x))) &&
+//		(((desPoint.y >= curPoint.y) && (entity->GetPosition().y >= desPoint.y)) ||
+//		((desPoint.y <= curPoint.y) && (entity->GetPosition().y <= desPoint.y)))
+//		)
+//	{
+//		entity->SetVelocity(0, 0);
+//		entity->SetPosition(desPoint.x, desPoint.y);
+//	}
+//}
+//
+//void BlastHornetState::GoOn(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed)
+//{
+//	D3DXVECTOR3 moveVector;
+//
+//	moveVector = D3DXVECTOR3(desPoint.x - curPoint.x, desPoint.y - curPoint.y, 0);
+//
+//	float speedVector = sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y);
+//
+//	entity->AddVelocityX(moveVector.x / speedVector * speed);
+//	entity->AddVelocityY(moveVector.y / speedVector * speed);
+//}

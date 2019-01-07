@@ -100,6 +100,14 @@ bool Engine::Initialize(HINSTANCE instance, HWND hwnd)
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "box_vertical.png", D3DCOLOR_XRGB(255, 255, 255));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "box_horizontal.png", D3DCOLOR_XRGB(255, 255, 255));
 
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "die_2_horizontal.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "die_2_vertical.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "die_3_vertical.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "die_4_vertical.png", D3DCOLOR_XRGB(255, 255, 255));
+
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "cargo_body.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "cargo_sole.png", D3DCOLOR_XRGB(255, 255, 255));
+
 	//D3DCOLOR_XRGB(50, 96, 166)
 
 	input = new Input();

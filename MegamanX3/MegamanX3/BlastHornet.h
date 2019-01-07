@@ -42,6 +42,9 @@ private:
 	BlastHornetStateHandler::StateName currentStateName;
 	BlastHornetStateHandler::StateName preAction;
 
+	bool hadFly;
+	bool hadDie;
+
 	D3DXVECTOR3 playerPos;
 	D3DXVECTOR3 pointA, pointB;
 };

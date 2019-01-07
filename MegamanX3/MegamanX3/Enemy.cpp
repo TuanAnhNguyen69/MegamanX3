@@ -21,7 +21,9 @@ void Enemy::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::C
 {
 	if (impactor->GetEntityId() == EntityId::MegamanBullet_ID)
 	{
-		
+		if (this->GetHP() > 0 && !((PlayerBullet*) impactor)->IsHitted()) {
+			this->SubHP(((PlayerBullet*)impactor)->GetDamage());
+		}
 	}
 }
 

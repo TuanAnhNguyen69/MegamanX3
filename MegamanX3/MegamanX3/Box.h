@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Entity.h"
 #include "Engine.h"
+#include "PlayerBullet.h"
 
 namespace Define
 {
@@ -33,5 +34,6 @@ private:
 	bool isCollPlatform;
 	int HP;
 	EntityId id;
+	bool hadBurst;
 };
 

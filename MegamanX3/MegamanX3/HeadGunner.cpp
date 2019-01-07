@@ -114,6 +114,7 @@ HeadGunnerStateHandler::MoveDirection HeadGunner::GetMoveDirection()
 
 void HeadGunner::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	Enemy::OnCollision(impactor, side, data);
 	if (currentState)
 	{
 		currentState->OnCollision(impactor, side, data);
