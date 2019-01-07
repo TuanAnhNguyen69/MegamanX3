@@ -240,13 +240,13 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 					AddEntity(headGunner);
 					break;*/
 
-					/*CarryArm * carryArm = new CarryArm(player);
-					carryArm->Initialize();
-					carryArm->SetPosition(posX + width / 2, (posY + height / 2) - 250);
-					carryArm->SetScale(2, 2);
+					CarryArm * carryArm = new CarryArm(player);
+					carryArm->SetPosition(posX + width / 2, (posY + height / 2) - 100);
+					carryArm->SetScale(1, 1);
 					carryArm->SetBound(width, height);
+					carryArm->Initialize();
 					AddEntity(carryArm);
-					break;*/
+					break;
 
 					/*Life * life = new Life();
 					life->Initialize();
@@ -256,15 +256,15 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 					AddEntity(life);
 					break;*/
 
-					Helit * helit = new Helit(player);
+					/*Helit * helit = new Helit(player);
 					helit->Initialize();
 					helit->SetPosition(posX + width / 2, (posY + height / 2) - 100);
 					helit->SetScale(2, 2);
 					helit->SetBound(width, height);
 					AddEntity(helit);
-					break;
-/*
-					Byte *byte = new Byte(player);
+					break;*/
+
+					/*Byte *byte = new Byte(player);
 					byte->Initialize();
 					byte->SetPosition(posX + width / 2, (posY + height / 2) - 30);
 					byte->SetScale(2, 2);
@@ -275,14 +275,13 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 				case EntityId::NotorBanger_ID:
 				{				
-
-					/*NotorBanger * notoBanger = new NotorBanger(player);
+					NotorBanger * notoBanger = new NotorBanger(player);
 					notoBanger->Initialize();
 					notoBanger->SetPosition(posX + width / 2, posY + height / 2);
 					notoBanger->SetScale(2, 2);
 					notoBanger->SetBound(width, height);
 					AddEntity(notoBanger);
-					break;*/
+					break;
 				}
 				/*case EntityId::Bee:
 					break;
