@@ -256,21 +256,21 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 					AddEntity(life);
 					break;*/
 
-					/*Helit * helit = new Helit(player);
+					Helit * helit = new Helit(player);
 					helit->Initialize();
-					helit->SetPosition(posX + width / 2, (posY + height / 2) - 250);
+					helit->SetPosition(posX + width / 2, (posY + height / 2) - 100);
 					helit->SetScale(2, 2);
 					helit->SetBound(width, height);
 					AddEntity(helit);
-					break;*/
-
+					break;
+/*
 					Byte *byte = new Byte(player);
 					byte->Initialize();
 					byte->SetPosition(posX + width / 2, (posY + height / 2) - 30);
 					byte->SetScale(2, 2);
 					byte->SetBound(54 * 2, 74 * 2);
 					AddEntity(byte);
-					break;
+					break;*/
 				}
 
 				case EntityId::NotorBanger_ID:

@@ -12,7 +12,7 @@ HelitShooting::HelitShooting(HelitStateHandler *handler, Entity *entity) : Helit
 
 HelitShooting::~HelitShooting()
 {
-	//if (handler->GetCurrentStateName() != HelitStateHandler::StateName::Shooting) 
+	if (handler->GetCurrentStateName() != HelitStateHandler::StateName::Shooting) 
 	{
 		if (sprite) {
 			delete sprite;

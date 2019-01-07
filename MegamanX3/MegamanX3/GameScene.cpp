@@ -42,10 +42,10 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(10800, 2300);
+	player->SetPosition(1115, 1700);
 	camera->SetCenter(player->GetPosition());
 
-	EntityManager::GetInstance()->Initialize(player, camera, "testDoor", map->GetWidth(), map->GetHeight());
+	EntityManager::GetInstance()->Initialize(player, camera, "aaaaa", map->GetWidth(), map->GetHeight());
 	
 	debugDraw = new DebugDraw();
 	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));

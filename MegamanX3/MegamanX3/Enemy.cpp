@@ -10,8 +10,6 @@ Enemy::Enemy(EntityId entityId, Player * player) : Entity(entityId)
 
 Enemy::~Enemy()
 {
-	delete this->player;
-	this->player = nullptr;
 }
 
 void Enemy::Update()

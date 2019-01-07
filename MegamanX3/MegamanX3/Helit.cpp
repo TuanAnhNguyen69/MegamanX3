@@ -37,19 +37,11 @@ Helit::~Helit()
 void Helit::Initialize()
 {
 	HP = 5;
-
-	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-		"helit", 50, 50);
 	this->ChangeState(HelitStateHandler::StateName::Flying);
 }
 
 void Helit::Update()
 {
-	if (HP < 0) {
-		EntityManager::GetInstance()->RemoveEntity(this);
-		return;
-	}
-	
 	if (this->IsRemove())
 	{
 		EntityManager::GetInstance()->RemoveEntity(this);
