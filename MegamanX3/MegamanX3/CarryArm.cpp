@@ -32,8 +32,6 @@ CarryArm::~CarryArm()
 		delete dieState;
 		dieState = nullptr;
 	}
-
-	Entity::~Entity();
 }
 
 void CarryArm::Initialize()
@@ -84,7 +82,7 @@ void CarryArm::Update()
 		targetIsAbove = false;
 	}
 
-	Entity::Update();
+	Enemy::Update();
 	if (currentState) {
 		currentState->Update();
 	}

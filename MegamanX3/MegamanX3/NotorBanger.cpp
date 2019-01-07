@@ -87,7 +87,7 @@ void NotorBanger::Update()
 		targetIsAbove = false;
 	}
 
-	Entity::Update();
+	Enemy::Update();
 	if (currentState) {
 		currentState->Update();
 	}

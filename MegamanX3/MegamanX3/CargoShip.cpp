@@ -49,7 +49,7 @@ void CargoShip::Initialize()
 
 void CargoShip::Update()
 {
-	Entity::Update();
+	Enemy::Update();
 	if (currentState)
 	{
 		currentState->Update();

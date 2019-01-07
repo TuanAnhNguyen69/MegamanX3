@@ -26,6 +26,7 @@ Player::Player() : Entity(EntityId::Megaman_ID)
 	climbingState = nullptr;
 	this->bulletCharging = 0;
 	this->fireCoolDown = 10;
+	this->hp = 30;
 }
 
 
@@ -224,6 +225,14 @@ void Player::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::C
 	case EntityId::Door_ID:
 		OnDoorCollision(impactor, side, data);
 		break;
+	case EntityId::GunnerRocket_ID:
+	case EntityId::HeliRocket_ID:
+	case EntityId::Canon_ID:
+	case EntityId::Bee_ID:	
+	{
+		ChangeState(Damaged);
+		this->hp -= 2;
+	}
 	default:
 		break;
 	}

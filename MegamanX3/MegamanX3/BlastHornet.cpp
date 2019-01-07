@@ -91,7 +91,7 @@ void BlastHornet::Update()
 		this->ChangeState(BlastHornetStateHandler::StateName::Die);
 	}
 
-	Entity::Update();
+	Enemy::Update();
 	playerPos = D3DXVECTOR3(player->GetPosition().x, player->GetPosition().y, 0);
 
 	if (currentState)

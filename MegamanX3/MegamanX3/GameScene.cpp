@@ -76,6 +76,11 @@ void GameScene::DrawQuadtree(QuadTree *quadtree)
 	}
 }
 
+void GameScene::Revive()
+{
+	player->SetPosition(checkPoint->GetPosition().x, checkPoint->GetPosition().y - 100);
+}
+
 void GameScene::Update()
 {
 	if (currentDoor && currentDoor->GetState() == Door::DoorState::OPENED) {
@@ -107,7 +112,6 @@ void GameScene::CheckCollision()
 	EntityManager::GetInstance()->GetQuadTree()->GetEntitiesCollideAble(collidableEntity, player->GetBound());
 	int size = collidableEntity.size();
 	for (size_t index = 0; index < size; index++) {
-
 		if (Collision::IsCollide(collidableEntity.at(index)->GetBound(), camera->GetBound())) {
 			RECT broadphase = Collision::GetSweptBroadphaseRect(player);
 			if (Collision::IsCollide(broadphase, collidableEntity.at(index)->GetBound()))
@@ -127,6 +131,10 @@ void GameScene::CheckCollision()
 
 					if (collidableEntity.at(index)->GetEntityId() == EntityId::Door_ID) {
 						currentDoor = (Door *)collidableEntity.at(index);
+					}
+
+					if (collidableEntity.at(index)->GetEntityId() == EntityId::CheckPoint_ID) {
+						checkPoint = collidableEntity.at(index);
 					}
 
 					if (sidePlayer == Entity::Bottom || sidePlayer == Entity::BottomLeft
