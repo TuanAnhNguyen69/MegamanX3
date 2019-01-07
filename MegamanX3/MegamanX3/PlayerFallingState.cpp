@@ -207,8 +207,6 @@ void PlayerFallingState::OnPlatformCollide(Entity * impactor, Entity::CollisionS
 
 void PlayerFallingState::OnRoofCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	std::cout << ((Roof*)impactor)->GetCollidePosition(entity) << std::endl;
-
 	switch (side)
 	{
 	case Entity::Left:

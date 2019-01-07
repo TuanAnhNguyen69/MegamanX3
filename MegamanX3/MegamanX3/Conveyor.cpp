@@ -57,11 +57,6 @@ Conveyor::Conveyor(EntityId id) : Entity(id)
 
 Conveyor::~Conveyor()
 {
-	if (sprite)
-	{
-		delete sprite;
-		sprite = nullptr;
-	}
 }
 
 void Conveyor::Initialize()

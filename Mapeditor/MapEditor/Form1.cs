@@ -640,7 +640,7 @@ namespace MapEditor
                     drawItem(@"resource\carry_arm.png");
                     break;
                 case EnumID.LeftFaceHeadGunner_ID:
-                    drawItem(@"resource\head_gunner.png");
+                    drawItem(@"resource\left_face_head_gunner.png");
                     break;
                 case EnumID.Helit_ID:
                     drawItem(@"resource\helit.png");
@@ -1031,6 +1031,11 @@ namespace MapEditor
         private void hallHoleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             curentType = EnumID.HallHole_ID;
+        }
+
+        private void byteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            curentType = EnumID.Byte_ID;
         }
 
         void addObject(ObjectGame obj)
