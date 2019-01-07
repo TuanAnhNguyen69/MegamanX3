@@ -30,13 +30,13 @@ void Background::RenderBackground(Camera *camera)
 		D3DXMATRIX transformMatrix;
 		D3DXVECTOR2 translation = D3DXVECTOR2(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
-		D3DXVECTOR2 center = D3DXVECTOR2(backgroundSprite->GetFrameWidth(), backgroundSprite->GetFrameHeight());
+		D3DXVECTOR2 center = D3DXVECTOR2(backgroundSprite->GetFrameWidth() * scale.x / 2, backgroundSprite->GetFrameHeight() * scale.x / 2);
 		D3DXMatrixTransformation2D(&transformMatrix, &center, 0.0f, &scale, nullptr, 0.0f, &translation);
 		LPD3DXSPRITE spriteHandler = Engine::GetEngine()->GetSpriteHandler();
 		D3DXMATRIX oldMatrix;
 		spriteHandler->GetTransform(&oldMatrix);
 		spriteHandler->SetTransform(&transformMatrix);
-		backgroundSprite->Render(D3DXVECTOR3(backgroundSprite->GetFrameWidth(), backgroundSprite->GetFrameHeight(), 0));
+		backgroundSprite->Render(D3DXVECTOR3(center.x, center.y, 0));
 		spriteHandler->SetTransform(&oldMatrix);
 	}
 }
