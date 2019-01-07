@@ -12,13 +12,6 @@ HelitShooting::HelitShooting(HelitStateHandler *handler, Entity *entity) : Helit
 
 HelitShooting::~HelitShooting()
 {
-	//if (handler->GetCurrentStateName() != HelitStateHandler::StateName::Shooting) 
-	{
-		if (sprite) {
-			delete sprite;
-			sprite = nullptr;
-		}
-	}
 }
 
 void HelitShooting::Load()
@@ -130,34 +123,28 @@ void HelitShooting::OnCollision(Entity *impactor, Entity::CollisionSide side, En
 
 		case Entity::Left:
 		{
-			/*entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left + 1, 0);
-			entity->SetVelocity(0, 0);	*/
+		
 			break;
 		}
 
 		case Entity::Right:
 		{
-			/*entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left + 1), 0);
-			entity->SetVelocity(0, 0);		*/
+			
 			break;
 		}
 
 		case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
-		{
-
-			/*entity->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top + 1);
-			entity->SetVelocity(0, 0);	*/
+		{			
 			entity->AddVelocityY(+20.0f);
 			break;
 		}
 
 		case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
 		{
-
 			/*entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
 			entity->SetVelocity(0, 0);*/
 			entity->AddVelocityY(-20.0f);
-			handler->ChangeState(HelitStateHandler::StateName::Die);
+			//handler->ChangeState(HelitStateHandler::StateName::Die);
 			break;
 		}
 		}
@@ -165,68 +152,9 @@ void HelitShooting::OnCollision(Entity *impactor, Entity::CollisionSide side, En
 
 	if (impactor->GetEntityId() == EntityId::MegamanBullet_ID)
 	{
-		switch (side)
-		{
-
-		case Entity::Left: case Entity::TopLeft: case Entity::BottomLeft:
-		{
-			/*entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left + 1, 0);
-			entity->SetVelocity(0, 0);*/
-			if (handler->GetHP() > 0) {
-				handler->SubHP(handler->GetHP() - 50);
-			}
-			else {
-				EntityManager::GetInstance()->RemoveEntity(entity);
-			}
-
-			break;
+		if (handler->GetHP() > 0) {
+			handler->SubHP(50);
 		}
-
-		case Entity::Right:  case Entity::BottomRight: case Entity::TopRight:
-		{
-			/*	entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left + 1), 0);
-				entity->SetVelocity(0, 0);*/
-
-			if (handler->GetHP() > 0) {
-				handler->SubHP(handler->GetHP() - 50);
-			}
-			else {
-				EntityManager::GetInstance()->RemoveEntity(entity);
-			}
-
-			break;
-		}
-
-		case Entity::Top:
-		{
-			/*entity->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top + 1);
-			entity->SetVelocity(0, 0);*/
-
-			if (handler->GetHP() > 0) {
-				handler->SubHP(handler->GetHP() - 50);
-			}
-			else {
-				EntityManager::GetInstance()->RemoveEntity(entity);
-			}
-
-			break;
-		}
-
-		case Entity::Bottom:
-		{
-
-			/*entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
-			entity->SetVelocity(0, 0);*/
-
-			if (handler->GetHP() > 0) {
-				handler->SubHP(handler->GetHP() - 50);
-			}
-			else {
-				EntityManager::GetInstance()->RemoveEntity(entity);
-			}
-
-			break;
-		}
-		}
+		
 	}
 }

@@ -11,9 +11,6 @@ HelitDie::HelitDie(HelitStateHandler *handler, Entity *entity) : HelitState(hand
 
 HelitDie::~HelitDie()
 {
-	if (sprite) {
-		delete sprite;
-	}
 }
 
 void HelitDie::Load()

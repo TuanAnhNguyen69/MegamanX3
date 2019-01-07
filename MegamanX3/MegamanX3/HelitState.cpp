@@ -11,22 +11,10 @@ HelitState::HelitState(HelitStateHandler *handler, Entity *entity)
 
 HelitState::~HelitState()
 {
-	//if (sprite)
+	if (sprite)
 	{
 		delete sprite;
 		sprite = nullptr;
-	}
-
-	if (handler)
-	{
-		delete handler;
-		handler = nullptr;
-	}
-
-	if (entity)
-	{
-		delete entity;
-		entity = nullptr;
 	}
 }
 
