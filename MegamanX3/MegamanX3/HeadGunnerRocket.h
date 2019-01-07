@@ -8,7 +8,7 @@ private:
 	AnimatedSprite * sprite;
 	bool isLeft;
 public:
-	HeadGunnerRocket(bool isLeft, bool isTop);
+	HeadGunnerRocket();
 	~HeadGunnerRocket();
 
 	void Update();

@@ -20,6 +20,9 @@ public:
 	void ResetFrame();
 	bool IsFinished();
 
+	void SetReverse(bool reverse);
+	bool GetReverse();
+
 	int GetCurrentFrame();
 
 private:
@@ -34,6 +37,7 @@ private:
 	float currentSpeed;
 	float framesPerSecond;
 	bool isLooping;
+	bool reverse;
 };
 
 #endif

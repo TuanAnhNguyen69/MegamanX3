@@ -4,6 +4,9 @@
 #include <iostream>
 #include <vector>
 
+const int PLAYER_AUTO_MOVE_DISTANCE = 176;
+const int CAMERA_AUTO_MOVE_DISTANCE = 528;
+
 GameScene::GameScene()
 {
 }
@@ -30,19 +33,19 @@ bool GameScene::Initialize()
 {
 
 	map = new Background();
-	map->Initialize("roof", 2);
+	map->Initialize("aaaaa", 2);
+	//map->Initialize("testBoss", 2);
+	
 
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 	camera->Initialize("testCam");
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(3200, 700);
+	player->SetPosition(10800, 2300);
 	camera->SetCenter(player->GetPosition());
 
-	
-
-	EntityManager::GetInstance()->Initialize(player, camera, "testConveyor", map->GetWidth(), map->GetHeight());
+	EntityManager::GetInstance()->Initialize(player, camera, "testDoor", map->GetWidth(), map->GetHeight());
 	
 	debugDraw = new DebugDraw();
 	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));
@@ -73,8 +76,23 @@ void GameScene::DrawQuadtree(QuadTree *quadtree)
 
 void GameScene::Update()
 {
+	if (currentDoor && currentDoor->GetState() == Door::DoorState::OPENED) {
+		if (!player->GetMovable()) {
+			player->AutoMove();
+			camera->AutoMove();
+			if (player->GetAutoMovedDistance() >= PLAYER_AUTO_MOVE_DISTANCE) {
+				player->SetMovable(true);
+			}
+		}
+
+		if (camera->GetAutoMovedDistance() >= CAMERA_AUTO_MOVE_DISTANCE) {
+			camera->StopAutoMove();
+			currentDoor->SetState(Door::DoorState::CLOSING);
+		}
+	}
+	
+
 	CheckCollision();
-	camera->CheckCameraPath();
 	EntityManager::GetInstance()->CheckCollide();
 	camera->Update(player->GetPosition());
 	player->Update();
@@ -102,6 +120,10 @@ void GameScene::CheckCollision()
 
 				player->OnCollision( collidableEntity.at(index), sidePlayer, collideData);
 				collidableEntity.at(index)->OnCollision(player, sideImpactor, collideData);
+
+				if (collidableEntity.at(index)->GetEntityId() == EntityId::Door_ID) {
+					currentDoor = (Door *) collidableEntity.at(index);
+				}
 
 				if (sidePlayer == Entity::Bottom || sidePlayer == Entity::BottomLeft
 					|| sidePlayer == Entity::BottomRight) {

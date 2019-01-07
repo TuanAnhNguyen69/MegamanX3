@@ -4,11 +4,7 @@
 
 Elevator::Elevator() : Entity(EntityId::BigElevator_ID)
 {
-	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-		"elevator", 100, 45);
-	sprite = new AnimatedSprite(30, 1, true);
-	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "elevator",
-		0, 2, 3, 100, 45);
+	
 }
 
 
@@ -23,6 +19,10 @@ Elevator::~Elevator()
 
 void Elevator::Initialize(float stopPointX, float stopPointY)
 {
+	sprite = new AnimatedSprite(30, 1, true);
+	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "elevator",
+		0, 2, 3, 100, 45);
+
 	stopPoint = D3DXVECTOR3(stopPointX, stopPointY, 0);
 	isAction = false;
 	this->SetSprite(sprite);

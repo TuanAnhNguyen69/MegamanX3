@@ -4,6 +4,12 @@ class ShurikenAttack2 :
 	public ShurikenState
 {
 public:
+	enum Route
+	{
+		AtStartPoint,
+		AtWallPoint,
+		Unknow,
+	};
 	ShurikenAttack2(ShurikenStateHandler *handler, Entity *entity);
 	~ShurikenAttack2();
 
@@ -12,7 +18,11 @@ public:
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 
 private:
-	bool leaveStartPoint;
-	D3DXVECTOR3 vAttack;
+	bool hadLeaveStartPoint;
+
+	D3DXVECTOR3 wallPoint;
+	D3DXVECTOR3 startPoint;
+
+	Route route;
 };
 

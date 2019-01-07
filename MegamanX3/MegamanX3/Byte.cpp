@@ -18,23 +18,56 @@ Byte::~Byte()
 		delete standingState;
 		standingState = nullptr;
 	}
+
+	if (throwState)
+	{
+		delete throwState;
+		throwState = nullptr;
+	}
+
+	if (attackState)
+	{
+		delete attackState;
+		attackState = nullptr;
+	}
+
+	if (dieState)
+	{
+		delete dieState;
+		dieState = nullptr;
+	}
+
+	Entity::~Entity();
 }
 
 void Byte::Initialize()
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "byte", 100, 100);
+	this->SetFace(true);
 	this->ChangeState(ByteStateHandler::StateName::Standing);
+	this->HP = 40;
 }
 
 
 void Byte::Update()
 {
+	if (this->IsRemove())
+	{
+		EntityManager::GetInstance()->RemoveEntity(this);
+		return;
+	}
+
+	if (this->GetHP() <= 0)
+	{
+		this->ChangeState(ByteStateHandler::StateName::Die);
+
+	}
+
 	Entity::Update();
 	if (currentState)
 	{
 		currentState->Update();
 	}
-
 }
 
 ByteStateHandler::StateName Byte::GetCurrentStateName()

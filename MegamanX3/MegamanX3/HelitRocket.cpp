@@ -14,11 +14,7 @@ HelitRocket::HelitRocket() : Entity(EntityId::GunnerRocket_ID)
 
 HelitRocket::~HelitRocket()
 {
-	if (sprite)
-	{
-		delete sprite;
-		sprite = nullptr;
-	}
+	Entity::~Entity();
 }
 
 void HelitRocket::Initialize(bool isLeft)

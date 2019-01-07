@@ -1,5 +1,11 @@
 #pragma once
 #include "Box.h"
+
+namespace Define
+{
+	const float CARRYARM_FLY_SPEED = 5.0f; //van toc bay
+}
+
 class CarryArmStateHandler
 {
 protected:
@@ -24,7 +30,6 @@ public:
 	virtual StateName GetCurrentStateName() = 0;
 	virtual void ChangeState(StateName state) = 0;
 	virtual MoveDirection GetMoveDirection() = 0;
-	//virtual Box GetBox() = 0;
 
 	Box *box;
 };

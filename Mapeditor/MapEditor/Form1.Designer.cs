@@ -202,7 +202,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(635, 253);
+            this.panel4.Size = new System.Drawing.Size(635, 269);
             this.panel4.TabIndex = 1;
             // 
             // pictureBox1
@@ -237,7 +237,7 @@
             this.groundToolStripMenuItem1,
             this.itemToolStripMenuItem1});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.addToolStripMenuItem.Text = "Add";
             // 
             // bossToolStripMenuItem1
@@ -247,7 +247,7 @@
             this.byteToolStripMenuItem,
             this.shurikeinToolStripMenuItem});
             this.bossToolStripMenuItem1.Name = "bossToolStripMenuItem1";
-            this.bossToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.bossToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
             this.bossToolStripMenuItem1.Text = "Boss";
             // 
             // blastHornetToolStripMenuItem
@@ -279,7 +279,7 @@
             this.carryArmToolStripMenuItem,
             this.rightFaceHeadGunnerToolStripMenuItem});
             this.enemyToolStripMenuItem1.Name = "enemyToolStripMenuItem1";
-            this.enemyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.enemyToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
             this.enemyToolStripMenuItem1.Text = "Enemy";
             // 
             // headGunnerToolStripMenuItem
@@ -338,7 +338,7 @@
             this.rightBlueConveyprToolStripMenuItem,
             this.rightSmallConveyorToolStripMenuItem});
             this.groundToolStripMenuItem1.Name = "groundToolStripMenuItem1";
-            this.groundToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.groundToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
             this.groundToolStripMenuItem1.Text = "Ground";
             // 
             // cargoToolStripMenuItem
@@ -467,7 +467,7 @@
             this.bigEnergyToolStripMenuItem,
             this.chimeraArmorToolStripMenuItem});
             this.itemToolStripMenuItem1.Name = "itemToolStripMenuItem1";
-            this.itemToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.itemToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
             this.itemToolStripMenuItem1.Text = "Item";
             // 
             // smallEnergyToolStripMenuItem
@@ -504,9 +504,9 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.pictureBox2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 253);
+            this.panel3.Location = new System.Drawing.Point(0, 269);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(635, 57);
+            this.panel3.Size = new System.Drawing.Size(635, 41);
             this.panel3.TabIndex = 0;
             // 
             // pictureBox2

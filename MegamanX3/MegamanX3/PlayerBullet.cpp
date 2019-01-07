@@ -25,18 +25,10 @@ void PlayerBullet::Initialize(int damage)
 	}
 
 	this->SetSprite(sprite);
-	this->lifeTime = 40;
 }
 
 void PlayerBullet::Update()
 {
-	if (lifeTime-- < 0) {
-		EntityManager::GetInstance()->RemoveEntity(this);
-		return;
-	}
-	//std::cout << "life" << lifeTime << std::endl;
-
-
 	switch (damage) {
 	case 2:
 		break;

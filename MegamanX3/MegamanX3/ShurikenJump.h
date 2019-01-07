@@ -4,6 +4,12 @@ class ShurikenJump :
 	public ShurikenState
 {
 public:
+	enum Route
+	{
+		AtStartPoint,
+		AtWallPoint,
+		Unknow,
+	};
 	ShurikenJump(ShurikenStateHandler *handler, Entity *entity);
 	~ShurikenJump();
 
@@ -11,10 +17,14 @@ public:
 	void Update();
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 
+	void JumpTo(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float far, float high);
+
 private:
-	bool isJumping;
-	bool leaveStartPoint;
-	D3DXVECTOR3 vJump;
-	D3DXVECTOR3 aJump;
+	bool hadLeaveStartPoint;
+
+	D3DXVECTOR3 startPoint, wallPoint;
+
+	Route route;
+	bool isUp;
 };
 

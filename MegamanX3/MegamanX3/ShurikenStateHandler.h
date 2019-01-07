@@ -2,13 +2,11 @@
 
 namespace Define
 {
-	const float SHURIKEN_SPEED_ATTACK = 400.0f;			//Vận tốc tấn công
+	const float SHURIKEN_SPEED_ATTACK = 30.0f;			//Vận tốc tấn công
 	const float SHURIKEN_ACCELERATION_ATTACK = 15.0f;	//Gia tốc
-	const float SHURIKEN_SPEED_MOVE = 250.0f;			//Vận tốc đi quanh màn hình
-	const float SHURIKEN_SPEED_JUMP_X = 200.0f;			//Vận tốc nhảy
-	const float SHURIKEN_SPEED_JUMP_Y = 300.0f;
-	const float SHURIKEN_ACCELERATION_JUMP_X = 10.0f;	//Gia tốc nhảy
-	const float SHURIKEN_ACCELERATION_JUMP_Y = 15.0f;
+
+	const float SHURIKEN_SPEED_JUMP_X = 60.0f;			//Vận tốc nhảy
+	const float SHURIKEN_SPEED_JUMP_Y = 60.0f;
 
 	const float SHURIKEN_ACCELERATION_FALL_Y = 15.0f;	//Gia tốc rơi
 }

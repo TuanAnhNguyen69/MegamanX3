@@ -23,6 +23,6 @@ protected:
 	Entity *entity;
 
 	//Biến để test các hoạt động của NotorBanger, sau này truyền player vào sẽ bỏ đi
-	bool hadStraight = false;
-	bool hadShoot = true;
+	bool isLeft;
+	bool isHigh;
 };

@@ -4,6 +4,7 @@
 #include "Engine.h"
 #include "ByteStateHandler.h"
 #include "ByteBomb.h"
+#include <time.h>
 
 class ByteState
 {
@@ -19,6 +20,9 @@ protected:
 	AnimatedSprite * sprite;
 	ByteStateHandler *handler;
 	Entity *entity;
+
+	clock_t timeStartState;
+	clock_t timeCount;
 
 };
 

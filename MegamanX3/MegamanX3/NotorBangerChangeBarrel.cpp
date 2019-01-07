@@ -8,7 +8,7 @@ NotorBangerChangeBarrel::NotorBangerChangeBarrel(NotorBangerStateHandler * handl
 {
 	sprite = new AnimatedSprite(5, 1, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "notor_banger",
-		5, 9, 5, 50, 50);
+		5, 7, 5, 50, 50);
 }
 
 NotorBangerChangeBarrel::~NotorBangerChangeBarrel()
@@ -26,65 +26,60 @@ void NotorBangerChangeBarrel::Load()
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	sprite->ResetFrame();
-	hadStraight = -hadStraight;
+	
+	isLeft = handler->GetLeftTarget();
+	isHigh = handler->GetAboveTarget();
+
+	if (isLeft)
+	{
+		entity->SetReverse(false);
+	}
+	else
+	{
+		entity->SetReverse(true);
+	}
+	
 }
 
 void NotorBangerChangeBarrel::Update()
 {
-	if (!handler->GetLeftTarget())
-	{
-		entity->SetReverse(true);
-	}
-	else
-	{
-		entity->SetReverse(false);
-	}
+	
 	if (handler->GetPreAction() == NotorBangerStateHandler::StateName::Jump)
 	{
-		if (handler->GetAboveTarget())
+		if (isHigh)
 		{
 			//Sau khi bắn nòng súng sẽ ở tên cao
-			hadStraight = true;
-			sprite->SetFrameRange(5, 9);
-			if (sprite->IsFinished())
-			{
-				handler->ChangeState(NotorBangerStateHandler::StateName::Shoot);
-				return;
-			}
+			handler->SetHadChangeHigh(true);
+			sprite->SetFrameRange(5, 9);	
 		}
 		else
 		{
 			//Sau khi bắn nòng súng sẽ nghiêng
-			hadStraight = false;
+			handler->SetHadChangeHigh(false);
 			sprite->SetFrameRange(5, 7);
-			if (sprite->IsFinished())
-			{
-				handler->ChangeState(NotorBangerStateHandler::StateName::Shoot);
-				return;
-			}
+		}
+		if (sprite->IsFinished())
+		{
+			sprite->ResetFrame();
+			handler->ChangeState(NotorBangerStateHandler::StateName::Shoot);
 		}
 	}
-	else if (handler->GetPreAction() == NotorBangerStateHandler::StateName::Shoot)
+	if (handler->GetPreAction() == NotorBangerStateHandler::StateName::Shoot)
 	{
-		if (hadStraight)
+		if (handler->HadChangeHigh())
 		{
 			sprite->SetFrameRange(10, 14);
-			if (sprite->IsFinished())
-			{
-				//hadStraight = false;
-				handler->ChangeState(NotorBangerStateHandler::StateName::Jump);
-				return;
-			}
+			
 		}
 		else
 		{
 			sprite->SetFrameRange(12, 14);
-			if (sprite->IsFinished())
-			{
-				//hadStraight = true;
-				handler->ChangeState(NotorBangerStateHandler::StateName::Jump);
-				return;
-			}
+		}
+		if (sprite->IsFinished())
+		{
+			//hadStraight = false;
+			sprite->ResetFrame();
+			handler->ChangeState(NotorBangerStateHandler::StateName::Jump);
 		}
 	}
 	

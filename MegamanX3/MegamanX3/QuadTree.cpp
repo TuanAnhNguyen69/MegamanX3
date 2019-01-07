@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "QuadTree.h"
 #include <set>
+#include "Collision.h"
 
 QuadTree::~QuadTree()
 {
@@ -138,7 +139,11 @@ bool QuadTree::IsContain(Entity *entity)
 void QuadTree::CheckNodeChange(std::vector<Entity*> &changeList)
 {
 	for (int index = 0; index < entities.size(); index++) {
-		if (GetNodeIndex(entities[index]->GetBound()) != -1) {
+		if (!IsContain(entities[index])) {
+			changeList.push_back(entities[index]);
+			entities.erase(entities.begin() + index);
+		}
+		else if (GetNodeIndex(entities[index]->GetBound()) != -1) {
 			changeList.push_back(entities[index]);
 			entities.erase(entities.begin() + index);
 		}

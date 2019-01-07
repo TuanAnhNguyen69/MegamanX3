@@ -27,7 +27,8 @@ void EntityManager::Update()
 
 	int size = collidableEntity.size();
 	for (int index = 0; index < size; index++) {
-		if (Collision::IsCollide(collidableEntity[index]->GetBound(), camera->GetBound())) {
+		if (Collision::IsCollide(collidableEntity[index]->GetBound(), camera->GetBound())) 
+		{
 			if (camera) {
 				collidableEntity[index]->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 					SCREEN_HEIGHT / 2 - camera->GetCenter().y);
@@ -38,6 +39,14 @@ void EntityManager::Update()
 			}
 
 			collidableEntity[index]->Update();
+		}
+		else {
+			if (collidableEntity[index]->GetEntityId() == EntityId::MegamanBullet_ID 
+				|| collidableEntity[index]->GetEntityId() == EntityId::GunnerRocket_ID 
+				|| collidableEntity[index]->GetEntityId() == EntityId::HeliRocket_ID
+				|| collidableEntity[index]->GetEntityId() == EntityId::Canon_ID) {
+				RemoveEntity(collidableEntity[index]);
+			}
 		}
 	}
 }
@@ -61,12 +70,15 @@ void EntityManager::CheckCollide()
 	quadTree->GetEntitiesCollideAble(playerCollidableEntity, camera->GetBound());
 	for (size_t index = 0; index < playerCollidableEntity.size(); index++) {
 		std::vector<Entity*> collidableEntity;
+		if (playerCollidableEntity.at(index)->GetEntityId() == EntityId::BlastHornet_ID) {
+			int a = 0;
+		}
 		quadTree->GetEntitiesCollideAble(collidableEntity, playerCollidableEntity.at(index)->GetBound());
 		for (size_t otherIndex = 0; otherIndex < collidableEntity.size(); otherIndex++) {
 			if (playerCollidableEntity.at(index) == collidableEntity.at(otherIndex)) {
 				continue;
 			}
-
+			
 			RECT broadphase = Collision::GetSweptBroadphaseRect(playerCollidableEntity.at(index));
 			if (Collision::IsCollide(broadphase, collidableEntity.at(otherIndex)->GetBound()))
 			{
@@ -194,6 +206,30 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 						break;
 					case EntityId::CarryArm:
 						break;*/
+			case EntityId::BlastHornet_ID:
+			{
+				/*BlastHornet *boss = new BlastHornet(player);
+				boss->SetPosition(posX + width / 2 + 100, (posY + height / 2));
+				boss->SetScale(1.5, 1.5);
+				boss->SetBound(45 * 1.5, 50 * 1.5);
+				boss->Initialize();
+				AddEntity(boss);
+				break;*/
+
+				Shuriken *shuriken = new Shuriken(player);
+				shuriken->SetPosition(posX + width / 2 + 20, (posY + height / 2) + 150);
+				shuriken->Initialize();
+				AddEntity(shuriken);
+				break;
+
+				/*Byte *byte = new Byte(player);
+				byte->Initialize();
+				byte->SetPosition(posX + width / 2, (posY + height / 2) - 30);
+				byte->SetScale(2, 2);
+				byte->SetBound(54 * 2, 74 * 2);
+				AddEntity(byte);
+				break;*/
+			}
 				case EntityId::LeftFaceHeadGunner_ID:
 				{
 					/*HeadGunner * headGunner = new HeadGunner(this->player);
@@ -252,9 +288,18 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 					break;
 					case EntityId::Helit:
 					break;
-				case EntityId::Door:
+					*/
+				case EntityId::Door_ID:
+				{
+					Door * door = new Door();
+					door->Initialize();
+					door->SetPosition(posX + width / 2, posY + height / 2);
+					door->SetBound(width, height);
+					AddEntity(door);
 					break;
-				case EntityId::Ladder:
+				}
+
+				/*case EntityId::Ladder:
 					break;
 				case EntityId::Thorn:
 					break;

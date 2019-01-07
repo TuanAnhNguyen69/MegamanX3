@@ -20,5 +20,7 @@ protected:
 	CarryArmStateHandler *handler;
 	Entity *entity;
 	/*bool hadShootState;*/
+
+	
 };
 

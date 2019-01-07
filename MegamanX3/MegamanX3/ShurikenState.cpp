@@ -6,8 +6,6 @@ ShurikenState::ShurikenState(ShurikenStateHandler * handler, Entity * entity)
 {
 	this->handler = handler;
 	this->entity = entity;
-	startPoint = entity->GetPosition();
-	jumpPoint = D3DXVECTOR3(startPoint.x - 400, startPoint.y, 0);
 }
 
 ShurikenState::~ShurikenState()

@@ -27,7 +27,7 @@ void ByteStanding::Load()
 {
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
-	startState = clock();
+	timeStartState = clock();
 }
 
 void ByteStanding::Update()
@@ -40,8 +40,8 @@ void ByteStanding::Update()
 	{
 		entity->SetReverse(true);
 	}
-	clock_t cout = clock();
-	int dt = (cout - startState) / 600;
+	timeCount = clock();
+	int dt = (timeCount - timeStartState) / 600;
 	if (dt > 3)
 	{
 		if (handler->GetPreAction() == ByteStateHandler::StateName::Throw)

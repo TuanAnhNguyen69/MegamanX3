@@ -79,7 +79,7 @@ public:
 	friend class EntityManager;
 	Entity(EntityId entityId);
 	Entity();
-	~Entity();
+	virtual ~Entity();
 
 	void InitializeSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float frameWidth, float frameHeight, float top = 0, float left = 0);
 	void InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureName, float framesPerSecond, float startFrame, float endFrame, float maxFramesRow, float frameWidth, float frameHeight, float animationSpeed = 1.0f, bool isLooping = true);
@@ -105,6 +105,8 @@ public:
 	void SetBound(int width, int height);
 	void SetVelocity(float x = 0.0f, float y = 0.0f);
 	void SetReverse(bool reverse);
+	void SetPositionX(float x);
+	void SetPositionY(float y);
 
 	void SetVelocityX(float x);
 	void SetVelocityY(float y);
@@ -113,6 +115,11 @@ public:
 
 	void AddPosition(float x, float y);
 
+	void GoTo(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed);
+	void GoOn(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed);
+
+	void SetRemove();
+	bool IsRemove();
 protected:
 	int width;
 	int height;
@@ -125,6 +132,8 @@ private:
 	EntityId entityId;
 	Sprite *sprite;
 	bool reverse;
+
+	bool isRemove;
 };
 
 #endif

@@ -3,7 +3,7 @@
 
 NotorBangerJump::NotorBangerJump(NotorBangerStateHandler *handler, Entity *entity) : NotorBangerState(handler, entity)
 {
-	sprite = new AnimatedSprite(5, 1, false);
+	sprite = new AnimatedSprite(15, 1, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "notor_banger",
 		0, 4, 5, 50, 50);
 }
@@ -19,12 +19,16 @@ NotorBangerJump::~NotorBangerJump()
 
 void NotorBangerJump::Load()
 {
+	hadJump = false;
 	//Jump
 	entity->SetSprite(sprite);
 	entity->SetVelocityY(Define::NOTORBANGER_MIN_JUMP_VELOCITY);
 	acceleratorX = 20.0f;
 	acceleratorY = 20.0f;
-	sprite->ResetFrame();
+
+	startPos = entity->GetPosition();
+
+	isLeft = handler->GetLeftTarget();
 
 	//Gán giá trị preAction là Jump tiếp tục thực hiện Shoot
 	handler->SetPreAction(NotorBangerStateHandler::StateName::Jump);
@@ -37,57 +41,32 @@ void NotorBangerJump::Update()
 {
 	//Jump
 	entity->AddVelocityY(acceleratorY);
-
-	if (entity->GetVelocity().y >= 0) {
-		//Fall
-		acceleratorX = 8.0f;
+	if (entity->GetVelocity().y >= 0)
+	{
 		entity->AddVelocityY(acceleratorY);
-		if (entity->GetVelocity().y > Define::NOTORBANGER_MAX_JUMP_VELOCITY) {
-			entity->SetVelocityY(Define::NOTORBANGER_MAX_JUMP_VELOCITY);
-		}
-		if (entity->GetVelocity().x > -Define::NOTORBANGER_MAX_RUNNING_SPEED) {
-			entity->AddVelocityX(-acceleratorX);
-			if (entity->GetVelocity().x < -Define::NOTORBANGER_MAX_RUNNING_SPEED) {
-				entity->SetVelocityX(-Define::NOTORBANGER_MAX_RUNNING_SPEED);
-			}
-		}
-		return;
 	}
 
-	if (handler->GetMoveDirection() == NotorBangerStateHandler::MoveDirection::MoveToLeft) {
-		if (entity->GetVelocity().x < 0) {
-			entity->AddVelocityX(acceleratorX);
-			if (entity->GetVelocity().x > 0) {
-				entity->SetVelocityX(0);
-			}
+	if (isLeft)
+	{
+		entity->AddVelocityX(-acceleratorX);
+		if (entity->GetVelocity().x < 0)
+		{
+			entity->AddVelocityX(acceleratorX - 5.0f);
 		}
 	}
-	/*else if (handler->GetMoveDirection() == NotorBangerStateHandler::MoveDirection::MoveToRight) {
-		if (entity->GetVelocity().x > 0) {
-			entity->AddVelocityX(-acceleratorX);
-			if (entity->GetVelocity().x < 0) {
-				entity->SetVelocityX(0);
-			}
+	else
+	{
+		entity->AddVelocityX(acceleratorX);
+		if (entity->GetVelocity().x > 0)
+		{
+			entity->AddVelocityX(-(acceleratorX - 5.0f));
 		}
-	}*/
+	}
 
-		/*entity->SetReverse(false);
-		if (entity->GetVelocity().x < Define::NOTORBANGER_MAX_RUNNING_SPEED) {
-			entity->AddVelocityX(acceleratorX);
-			if (entity->GetVelocity().x >= Define::NOTORBANGER_MAX_RUNNING_SPEED) {
-				entity->SetVelocityX(Define::NOTORBANGER_MAX_RUNNING_SPEED);
-			}
-		}*/
-	
-		entity->SetReverse(false);
-		if (entity->GetVelocity().x > -Define::NOTORBANGER_MAX_RUNNING_SPEED) {
-			entity->AddVelocityX(-acceleratorX);
-			if (entity->GetVelocity().x < -Define::NOTORBANGER_MAX_RUNNING_SPEED) {
-				entity->SetVelocityX(-Define::NOTORBANGER_MAX_RUNNING_SPEED);
-			}
-		}
-
-
+	if (entity->GetPosition().y - startPos.y <= -40)
+	{
+		hadJump = true;
+	}
 }
 
 void NotorBangerJump::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
@@ -120,11 +99,16 @@ void NotorBangerJump::OnCollision(Entity *impactor, Entity::CollisionSide side, 
 	{
 		//if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
 		{
-			entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
-			entity->SetVelocityY(0);
-			handler->ChangeState(NotorBangerStateHandler::StateName::Standing);
+			if (hadJump)
+			{
+				entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+				entity->SetVelocityY(0);
+				sprite->ResetFrame();
+				handler->ChangeState(NotorBangerStateHandler::StateName::Standing);
+				return;
+			}
 		}
-		return;
+		break;
 		
 	}
 

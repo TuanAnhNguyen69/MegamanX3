@@ -5,16 +5,8 @@
 
 Helit::Helit(Player *_player) : Enemy(EntityId::Helit_ID, _player)
 {
-	/*
-	shootingState = nullptr;
-	flyingState = nullptr;
-	damagedState = nullptr;
-	dieState = nullptr;
-	*/
-
 	flyingState = new HelitFlying(this, this);
 	shootingState = new HelitShooting(this, this);
-	damagedState = new HelitDamaged(this, this);
 	dieState = new HelitDie(this, this);
 
 	player = _player;
@@ -23,11 +15,29 @@ Helit::Helit(Player *_player) : Enemy(EntityId::Helit_ID, _player)
 
 Helit::~Helit()
 {
+
+	if (dieState) {
+		delete dieState;
+		dieState = nullptr;
+	}
+
+	if (shootingState) {
+		delete shootingState;
+		shootingState = nullptr;
+	}
+
+	if (flyingState) {
+		delete flyingState;
+		flyingState = nullptr;
+	}
+
+	Entity::~Entity();
 }
 
 void Helit::Initialize()
 {
-	hp = 100;
+	HP = 5;
+
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"helit", 50, 50);
 	this->ChangeState(HelitStateHandler::StateName::Flying);
@@ -35,7 +45,21 @@ void Helit::Initialize()
 
 void Helit::Update()
 {
-	//if (IsAction())
+	if (HP < 0) {
+		EntityManager::GetInstance()->RemoveEntity(this);
+		return;
+	}
+	
+	if (this->IsRemove())
+	{
+		EntityManager::GetInstance()->RemoveEntity(this);
+		return;
+	}
+
+	if (this->GetHP() <= 0)
+	{
+		this->ChangeState(HelitStateHandler::StateName::Die);
+	}
 	
 	if (this->GetPosition().x > player->GetPosition().x)
 	{
@@ -56,10 +80,10 @@ void Helit::Update()
 	}
 
 	Entity::Update();
+
 	if (currentState) {
 		currentState->Update();
 	}
-
 }
 
 //void Helit::SetPosition(int x, int y)
@@ -92,10 +116,6 @@ void Helit::ChangeState(StateName stateName)
 	case Shooting:
 		currentState = shootingState;
 		currentStateName = Shooting;
-		break;
-	case Damaged:
-		currentState = damagedState;
-		currentStateName = Damaged;
 		break;
 	case Die:
 		currentState = dieState;
@@ -154,21 +174,11 @@ void Helit::SetHadShootState(bool hadShootState)
 
 int Helit::GetHP()
 {
-	return hp;
+	return HP;
 }
 
-void Helit::SetHP(int hp)
+void Helit::SubHP(int damage)
 {
-	this->hp = hp;
+	this->HP -= damage;
 }
 
-
-//bool Helit::GetAction()
-//{
-//	return action;
-//}
-//
-//void Helit::SetAction(bool _action)
-//{
-//	action = _action;
-//}

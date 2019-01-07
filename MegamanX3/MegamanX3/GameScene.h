@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "Background.h"
 #include "DebugDraw.h"
+#include "Door.h"
 
 class GameScene :
 	public GameComponent
@@ -26,6 +27,7 @@ private:
 	Camera *camera;
 	Background *map;
 	Player *player;
+	Door * currentDoor;
 };
 
 #endif

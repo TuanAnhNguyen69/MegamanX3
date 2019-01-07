@@ -145,15 +145,18 @@ Entity::CollisionSide Collision::GetSideCollision(Entity * e1, Entity * e2)
 				return Entity::Right;
 			}
 		}
-		else if (wy > -hx)
-		{
-			/*va cham ben trai e1*/
-			return Entity::Left;
-		}
 		else
 		{
-			/*va cham phia duoi e1*/
-			return Entity::Bottom;
+			if (wy > -hx)
+			{
+				/*va cham ben trai e1*/
+				return Entity::Left;
+			}
+			else
+			{
+				/*va cham phia duoi e1*/
+				return Entity::Bottom;
+			}
 		}
 	}
 	return Entity::NotKnow;
@@ -198,14 +201,31 @@ bool Collision::IsCollide(RECT rect1, RECT rect2)
 	return true;
 }
 
-bool Collision::IsInside(RECT rect1, RECT rect2)	
+float Collision::GetCollidePercent(RECT rect1, RECT rect2)
 {
-	if (rect1.left < rect2.left || rect1.right > rect2.right || rect1.top < rect2.top || rect1.bottom > rect2.bottom)
+	if (rect1.left >= rect2.left && rect1.right <= rect2.right && rect1.top >= rect2.top && rect1.bottom <= rect2.bottom)
 	{
-		return false;
+		return 100.0;
 	}
 
-	return true;
+	if (!IsCollide(rect1, rect2)) {
+		return 0.0;
+	}
+
+	RECT collisionRegion;
+
+	collisionRegion.left = rect1.left > rect2.left ? rect1.left : rect2.left;
+	//chon max right
+	collisionRegion.right = rect1.right < rect2.right ? rect1.right : rect2.right;
+	//chon min bottom
+	collisionRegion.bottom = rect1.bottom < rect2.bottom ? rect1.bottom : rect2.bottom;
+	//chon max top
+	collisionRegion.top = rect1.top > rect2.top ? rect1.top : rect2.top;
+
+	float rect2Area = GetRectArea(rect2);
+	float collisionRegionArea = GetRectArea(collisionRegion);
+
+	return (collisionRegionArea / rect2Area) * 100.0;
 }
 
 RECT Collision::GetSweptBroadphaseRect(Entity * entity)
@@ -337,4 +357,9 @@ float Collision::SweptAABB(Entity *e1, Entity *e2, Entity::CollisionReturn & dat
 	data.RegionCollision.top = e1->GetBound().top > e2->GetBound().top ? e1->GetBound().top : e2->GetBound().top;
 
 	return entryTime;
+}
+
+float Collision::GetRectArea(RECT rect)
+{
+	return (rect.right - rect.left) * (rect.bottom - rect.top);
 }

@@ -20,9 +20,13 @@ public:
 	void OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 
 	void SetFall(bool isFall);
+	bool IsFall();
+
+	bool IsCollisionPlatform();
 
 private:
 	AnimatedSprite * sprite;
 	bool isFall;
+	bool isCollPlatform;
 };
 

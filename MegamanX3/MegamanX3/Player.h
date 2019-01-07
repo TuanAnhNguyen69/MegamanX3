@@ -32,6 +32,10 @@ public:
 	void Shoot();
 	void ChangeBulletState();
 	void Render();
+	void AutoMove();
+	int GetAutoMovedDistance();
+	bool GetMovable();
+	void SetMovable(bool movable);
 	enum BlockType
 	{
 		BlockLeft,
@@ -51,7 +55,12 @@ private:
 	Entity *chargerExtreme;
 	int bulletDamage;
 	bool allowSlide;
+	bool movable;
+	int autoMovedDistance;
+
 	void OnConveyorCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+	void OnDoorCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+
 
 };
 

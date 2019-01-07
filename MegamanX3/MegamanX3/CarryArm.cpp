@@ -5,16 +5,8 @@
 
 CarryArm::CarryArm(Player *_player) : Enemy(EntityId::CarryArm_ID, _player)
 {
-	/*
-	shootingState = nullptr;
-	flyingState = nullptr;
-	damagedState = nullptr;
-	dieState = nullptr;
-	*/
-
 	flyingState = new CarryArmFlying(this, this);
 	droppingState = new CarryArmDropping(this, this);
-	damagedState = new CarryArmDamaged(this, this);
 	dieState = new CarryArmDie(this, this);
 
 	player = _player;
@@ -23,17 +15,56 @@ CarryArm::CarryArm(Player *_player) : Enemy(EntityId::CarryArm_ID, _player)
 
 CarryArm::~CarryArm()
 {
+	if (flyingState)
+	{
+		delete flyingState;
+		flyingState = nullptr;
+	}
+
+	if (droppingState)
+	{
+		delete droppingState;
+		droppingState = nullptr;
+	}
+
+	if(dieState)
+	{
+		delete dieState;
+		dieState = nullptr;
+	}
+
+	Entity::~Entity();
 }
 
 void CarryArm::Initialize()
 {
+	this->HP = 5;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"CarryArm", 50, 65);
 	this->ChangeState(CarryArmStateHandler::StateName::Flying);
+
+
+	this->box = new Box();
+	this->box->Initialize(false);
+	this->box->SetPosition(this->GetPosition().x, this->GetPosition().y + 50);
+	this->box->SetScale(1, 1);
+	this->box->SetBound(50 * 1, 50 * 1);
+	EntityManager::GetInstance()->AddEntity(this->box);
 }
 
 void CarryArm::Update()
 {
+	if (this->IsRemove())
+	{
+		EntityManager::GetInstance()->RemoveEntity(this);
+		return;
+	}
+
+	if (this->GetHP() <= 0)
+	{
+		this->ChangeState(CarryArmStateHandler::StateName::Die);
+	}
+
 	//if (IsAction())
 	if (this->GetPosition().x > player->GetPosition().x)
 	{
@@ -53,11 +84,12 @@ void CarryArm::Update()
 		targetIsAbove = false;
 	}
 
+	//this->box->SetVelocity(this->GetVelocity().x, this->GetVelocity().y);
 	Entity::Update();
 	if (currentState) {
 		currentState->Update();
 	}
-
+	//this->box->Update();
 }
 
 //void CarryArm::SetPosition(int x, int y)
@@ -90,10 +122,6 @@ void CarryArm::ChangeState(StateName stateName)
 	case Dropping:
 		currentState = droppingState;
 		currentStateName = Dropping;
-		break;
-	case Damaged:
-		currentState = damagedState;
-		currentStateName = Damaged;
 		break;
 	case Die:
 		currentState = dieState;

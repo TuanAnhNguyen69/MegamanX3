@@ -6,5 +6,8 @@ class ShurikenDie :
 public:
 	ShurikenDie(ShurikenStateHandler *handler, Entity *entity);
 	~ShurikenDie();
+	void Load();
+	void Update();
+	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 };
 

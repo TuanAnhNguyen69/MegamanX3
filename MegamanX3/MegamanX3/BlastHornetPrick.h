@@ -11,6 +11,10 @@ public:
 	virtual void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 
 private:
+	D3DXVECTOR3 curPos;
 	D3DXVECTOR3 targetPos;
+	bool isStopState;
+
+
 };
 

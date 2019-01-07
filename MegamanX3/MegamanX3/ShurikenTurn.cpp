@@ -4,7 +4,7 @@
 
 ShurikenTurn::ShurikenTurn(ShurikenStateHandler *handler, Entity *entity) : ShurikenState(handler, entity)
 {
-	sprite = new AnimatedSprite(20, 2, true);
+	sprite = new AnimatedSprite(40, 4, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "shuriken",
 		0, 9, 10, 50, 50);
 }
@@ -49,13 +49,14 @@ void ShurikenTurn::Update()
 	//	handler->ChangeState(ShurikenStateHandler::StateName::Flip);
 	//	break;*/
 	//}
-	entity->AddVelocityY(Define::SHURIKEN_ACCELERATION_FALL_Y);
+
+
 
 	if (handler->GetPreAction() == ShurikenStateHandler::StateName::Jump)
 	{
 		clock_t cout = clock();
-		int dt = (cout - startState) / 40;
-		if ((dt > 3) && (dt % 3 == 0))
+		int dt = (cout - startState) / 1000;
+		if (dt > 3)
 		{
 			handler->ChangeState(ShurikenStateHandler::StateName::Attack1);
 		}
@@ -68,19 +69,28 @@ void ShurikenTurn::Update()
 	{
 		handler->ChangeState(ShurikenStateHandler::StateName::Move);
 	}
+	else if (handler->GetPreAction() == ShurikenStateHandler::StateName::Move)
+	{
+		clock_t cout = clock();
+		int dt = (cout - startState) / 1000;
+		if (dt > 2)
+		{
+			handler->ChangeState(ShurikenStateHandler::StateName::Flip);
+		}
+	}
 
 }
 
 void ShurikenTurn::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() == EntityId::Platform_ID)
+	/*if (impactor->GetEntityId() == EntityId::Platform_ID)
 	{
 		switch (side)
 		{
 		case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
 		{
-			entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+			entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top) - 10);
 		}
 		}
-	}
+	}*/
 }

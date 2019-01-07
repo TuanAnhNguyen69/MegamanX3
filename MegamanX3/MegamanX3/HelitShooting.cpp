@@ -12,7 +12,8 @@ HelitShooting::HelitShooting(HelitStateHandler *handler, Entity *entity) : Helit
 
 HelitShooting::~HelitShooting()
 {
-	if (handler->GetCurrentStateName() != HelitStateHandler::StateName::Shooting) {
+	//if (handler->GetCurrentStateName() != HelitStateHandler::StateName::Shooting) 
+	{
 		if (sprite) {
 			delete sprite;
 			sprite = nullptr;
@@ -22,12 +23,12 @@ HelitShooting::~HelitShooting()
 
 void HelitShooting::Load()
 {
-	startState = clock();
+	/*startState = clock();*/
 	hadShoot = false;
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	hadShoot = false;
-	ammo = 2;
+	ammo = 10;
 }
 
 void HelitShooting::Update()
@@ -156,6 +157,7 @@ void HelitShooting::OnCollision(Entity *impactor, Entity::CollisionSide side, En
 			/*entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
 			entity->SetVelocity(0, 0);*/
 			entity->AddVelocityY(-20.0f);
+			handler->ChangeState(HelitStateHandler::StateName::Die);
 			break;
 		}
 		}
@@ -171,7 +173,7 @@ void HelitShooting::OnCollision(Entity *impactor, Entity::CollisionSide side, En
 			/*entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left + 1, 0);
 			entity->SetVelocity(0, 0);*/
 			if (handler->GetHP() > 0) {
-				handler->SetHP(handler->GetHP() - 50);
+				handler->SubHP(handler->GetHP() - 50);
 			}
 			else {
 				EntityManager::GetInstance()->RemoveEntity(entity);
@@ -186,7 +188,7 @@ void HelitShooting::OnCollision(Entity *impactor, Entity::CollisionSide side, En
 				entity->SetVelocity(0, 0);*/
 
 			if (handler->GetHP() > 0) {
-				handler->SetHP(handler->GetHP() - 50);
+				handler->SubHP(handler->GetHP() - 50);
 			}
 			else {
 				EntityManager::GetInstance()->RemoveEntity(entity);
@@ -201,7 +203,7 @@ void HelitShooting::OnCollision(Entity *impactor, Entity::CollisionSide side, En
 			entity->SetVelocity(0, 0);*/
 
 			if (handler->GetHP() > 0) {
-				handler->SetHP(handler->GetHP() - 50);
+				handler->SubHP(handler->GetHP() - 50);
 			}
 			else {
 				EntityManager::GetInstance()->RemoveEntity(entity);
@@ -217,7 +219,7 @@ void HelitShooting::OnCollision(Entity *impactor, Entity::CollisionSide side, En
 			entity->SetVelocity(0, 0);*/
 
 			if (handler->GetHP() > 0) {
-				handler->SetHP(handler->GetHP() - 50);
+				handler->SubHP(handler->GetHP() - 50);
 			}
 			else {
 				EntityManager::GetInstance()->RemoveEntity(entity);
