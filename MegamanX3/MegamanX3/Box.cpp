@@ -39,7 +39,7 @@ void Box::Initialize(bool isFall)
 
 void Box::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() == EntityId::Platform_ID)
+	if (impactor->GetEntityId() == EntityId::Platform_ID || impactor->GetEntityId() == EntityId::BoxWall_ID)
 	{
 		switch (side)
 		{

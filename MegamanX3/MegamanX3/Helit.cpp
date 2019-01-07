@@ -31,7 +31,7 @@ Helit::~Helit()
 		flyingState = nullptr;
 	}
 
-	Entity::~Entity();
+	//Entity::~Entity();
 }
 
 void Helit::Initialize()
@@ -50,7 +50,7 @@ void Helit::Update()
 
 	if (this->GetHP() <= 0)
 	{
-		this->ChangeState(HelitStateHandler::StateName::Die);
+		//this->ChangeState(HelitStateHandler::StateName::Die);
 	}
 	
 	if (this->GetPosition().x > player->GetPosition().x)
