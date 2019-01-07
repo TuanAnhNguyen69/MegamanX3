@@ -1,63 +1,80 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Box.h"
 
 
 Box::Box(EntityId id) : Entity(id)
 {
+	hadBurst = false;
+	HP = 12;
+	this->isFall = false;
 	this->id = id;
-	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box", 50, 50);
-	sprite = new AnimatedSprite(30, 1, true);
+	sprite = new AnimatedSprite(15, 1, false);
 	switch (id)
 	{
 	case Box_ID:
 	{
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box", 72, 72);
 		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box",
-			0, 0, 1, 50, 50);
-		this->SetBound(50, 50);
+			0, 0, 1, 72, 72);
+		this->SetBound(72, 72);
 	}
 	break;
 
 	case DoubleBox_ID:
 	{
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box",
-			0, 0, 1, 100, 50);
-		this->SetBound(100, 50);
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box2", 144, 72);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box3",
+			0, 0, 1, 144, 72);
+		this->SetBound(144, 72);
 	}
 	break;
 	case TrippleBox_ID:
 	{
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box",
-			0, 0, 1, 50, 150);
-		this->SetBound(50, 150);
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box3", 72, 216);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box3",
+			0, 0, 1, 72, 216);
+		this->SetBound(72, 216);
 	}
 	break;
 
 	case QuadraBox_ID:
 	{
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box",
-			0, 0, 1, 50, 200);
-		this->SetBound(50, 200);
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box4", 72, 288);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box4",
+			0, 0, 1, 72, 288);
+		this->SetBound(72, 288);
 	}
 	break;
 
 	case VerticalBombBox_ID:
 	{
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box",
-			0, 0, 1, 50, 50);
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box_vertical", 118, 144);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box_vertical",
+			0, 0, 1, 118, 144);
+		this->SetBound(118, 144);
+
 	}
 	break;
 
 	case HorizontalBombBox_ID:
 	{
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box",
-			0, 0, 1, 50, 50);
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box_horizontal", 144, 96);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box_horizontal",
+			0, 0, 1, 144, 96);
+		this->SetBound(144, 96);
 	}
 	break;
 
 	default:
+	{
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "box", 72, 72);
 		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "box",
 			0, 0, 1, 50, 50);
+		this->SetBound(50, 50);
 	}
+	break;
+	}
+	
 }
 
 
@@ -72,6 +89,55 @@ void Box::Update()
 	if (this->isFall)
 	{
 		this->SetVelocityY(Define::BOX_SPEED);
+	}
+
+	if (HP <= 0)
+	{
+		if (!hadBurst)
+		{
+			//sprite = new AnimatedSprite(15, 1, false);
+			switch (id)
+			{
+			case Box_ID:
+				this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "die", 50, 50);
+				sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
+					0, 7, 8, 50, 50);
+				break;
+			case DoubleBox_ID:
+			case HorizontalBombBox_ID:
+				this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "die_2_horizontal", 100, 50);
+				sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die_2_horizontal",
+					0, 7, 1, 100, 50);
+				break;
+			case TrippleBox_ID:
+				this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "die_3_vertical", 50, 150);
+				sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die_3_vertical",
+					0, 7, 8, 50, 150);
+				break;
+			case QuadraBox_ID:
+				this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "die_4_vertical", 50, 200);
+				sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die_4_vertical",
+					0, 7, 8, 50, 200);
+				break;
+			case VerticalBombBox_ID:
+				this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "die_2_vertical", 50, 100);
+				sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die_2_vertical",
+					0, 8, 2, 100, 50);
+				break;
+			default:
+				this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "die", 50, 50);
+				sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
+					0, 7, 8, 50, 50);
+				break;
+			}
+			this->SetSprite(sprite);
+			this->SetScale(1.44, 1.44);
+			hadBurst = true;
+		}
+		if (sprite->IsFinished())
+		{
+			EntityManager::GetInstance()->RemoveEntity(this);
+		}
 	}
 }
 
@@ -96,6 +162,13 @@ void Box::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::Col
 			this->isCollPlatform = true;
 			break;
 		}
+		}
+	}
+
+	if (impactor->GetEntityId() == EntityId::MegamanBullet_ID)
+	{
+		if (this->GetHP() > 0 && !((PlayerBullet*)impactor)->IsHitted()) {
+			this->SubHP(((PlayerBullet*)impactor)->GetDamage());
 		}
 	}
 }

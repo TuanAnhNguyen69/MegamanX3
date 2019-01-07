@@ -13,8 +13,10 @@ public:
 	void SubHP(int damage);
 	int GetHP();
 
-protected:
 	Player * player;
+
+protected:
+	
 	int HP;
 };
 

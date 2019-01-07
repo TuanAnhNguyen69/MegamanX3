@@ -25,6 +25,7 @@ public:
 
 private:
 	AnimatedSprite * sprite;
+	AnimatedSprite * dieSprite;
 	D3DXVECTOR3 startPos;
 	D3DXVECTOR3 desPos;
 	bool isFollow;

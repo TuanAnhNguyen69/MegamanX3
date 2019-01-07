@@ -180,6 +180,13 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Canon.h" />
     <ClInclude Include="Cargo.h" />
+    <ClInclude Include="CargoShip.h" />
+    <ClInclude Include="CargoShipDownState.h" />
+    <ClInclude Include="CargoShipDropState.h" />
+    <ClInclude Include="CargoShipState.h" />
+    <ClInclude Include="CargoShipStateHandler.h" />
+    <ClInclude Include="CargoShipUpState.h" />
+    <ClInclude Include="CargoSole.h" />
     <ClInclude Include="CarryArm.h" />
     <ClInclude Include="CarryArmDie.h" />
     <ClInclude Include="CarryArmDropping.h" />
@@ -288,6 +295,12 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Canon.cpp" />
     <ClCompile Include="Cargo.cpp" />
+    <ClCompile Include="CargoShip.cpp" />
+    <ClCompile Include="CargoShipDownState.cpp" />
+    <ClCompile Include="CargoShipDropState.cpp" />
+    <ClCompile Include="CargoShipState.cpp" />
+    <ClCompile Include="CargoShipUpState.cpp" />
+    <ClCompile Include="CargoSole.cpp" />
     <ClCompile Include="CarryArm.cpp" />
     <ClCompile Include="CarryArmDie.cpp" />
     <ClCompile Include="CarryArmDropping.cpp" />

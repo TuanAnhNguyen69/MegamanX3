@@ -93,6 +93,21 @@ bool Engine::Initialize(HINSTANCE instance, HWND hwnd)
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "bee.png", D3DCOLOR_XRGB(255, 255, 255));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "die.png", D3DCOLOR_XRGB(255, 255, 255));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "shuriken.png", D3DCOLOR_XRGB(255, 255, 255));
+
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "box2.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "box3.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "box4.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "box_vertical.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "box_horizontal.png", D3DCOLOR_XRGB(255, 255, 255));
+
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "die_2_horizontal.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "die_2_vertical.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "die_3_vertical.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "die_4_vertical.png", D3DCOLOR_XRGB(255, 255, 255));
+
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "cargo_body.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "cargo_sole.png", D3DCOLOR_XRGB(255, 255, 255));
+
 	//D3DCOLOR_XRGB(50, 96, 166)
 
 	input = new Input();

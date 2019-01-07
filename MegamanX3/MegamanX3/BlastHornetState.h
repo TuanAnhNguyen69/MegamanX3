@@ -20,8 +20,8 @@ public:
 
 	float UCLN(float a, float b);
 
-	void GoTo(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed);
-	void GoOn(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed);
+	//void GoTo(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed);
+	//void GoOn(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed);
 
 protected:
 	AnimatedSprite *sprite;
