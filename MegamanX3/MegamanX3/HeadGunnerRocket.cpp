@@ -14,17 +14,12 @@ HeadGunnerRocket::HeadGunnerRocket() : Entity(EntityId::GunnerRocket_ID)
 
 HeadGunnerRocket::~HeadGunnerRocket()
 {
-	/*if (sprite)
-	{
-		delete sprite;
-		sprite = nullptr;
-	}*/
-
-	Entity::~Entity();
+	
 }
 
 void HeadGunnerRocket::Initialize(bool isLeft)
 {
+	this->hitted = false;
 	this->SetSprite(sprite);
 	this->isLeft = isLeft;
 	if (isLeft) {
@@ -39,53 +34,43 @@ void HeadGunnerRocket::Initialize(bool isLeft)
 
 void HeadGunnerRocket::Update()
 {
-	if (isLeft) {
-		this->AddVelocityX(-10.0);
+	if (this->hitted) {
+		if (sprite->IsFinished()) {
+			EntityManager::GetInstance()->RemoveEntity(this);
+			return;
+		}
 	}
 	else {
-		this->AddVelocityX(+10.0);
+		if (isLeft) {
+			this->AddVelocityX(-10.0);
+		}
+		else {
+			this->AddVelocityX(+10.0);
+		}
 	}
 
 	Entity::Update();
 }
 
-
-
 void HeadGunnerRocket::OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() == EntityId::Platform_ID || impactor->GetEntityId() == EntityId::Megaman_ID)
-	{
-		EntityManager::GetInstance()->RemoveEntity(this);
-	}
-	if (impactor->GetEntityId() == EntityId::MegamanBullet_ID)
-	{
-		switch (side)
-		{
+	if (!hitted) {
+		if (impactor->GetEntityId() != EntityId::LeftFaceHeadGunner_ID
+			&& impactor->GetEntityId() != EntityId::RightFaceHeadGunner_ID
+			&& impactor->GetEntityId() != EntityId::GunnerRocket_ID) {
 
-		case Entity::Left: case Entity::TopLeft: case Entity::BottomLeft:
-		{
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
-
-		case Entity::Right: case Entity::TopRight: case Entity::BottomRight:
-		{
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
-
-		case Entity::Top:
-		{
-			EntityManager::GetInstance()->RemoveEntity(this);
-
-			break;
-		}
-
-		case Entity::Bottom:
-		{
-			EntityManager::GetInstance()->RemoveEntity(this);
-			break;
-		}
+			this->SetVelocityX(0);
+			sprite = new AnimatedSprite(15, 1, false);
+			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
+				0, 7, 8, 50, 50);
+			this->SetSprite(sprite);
+			this->hitted = true;
 		}
 	}
+
+}
+
+bool HeadGunnerRocket::IsHitted()
+{
+	return this->hitted;
 }

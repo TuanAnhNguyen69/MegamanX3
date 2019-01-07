@@ -15,13 +15,14 @@ Canon::Canon() : Entity(EntityId::Canon_ID)
 
 Canon::~Canon()
 {
-	Entity::~Entity();
 }
 
 void Canon::Initialize(bool isHigh, bool isLeft)
 {
 	this->isHigh = isHigh;
 	this->isLeft = isLeft;
+	this->hitted = false;
+
 	if (!isHigh)
 	{
 		this->SetVelocityY(-Define::CANON_MAX_LOW_VELOCITY_Y);
@@ -42,39 +43,48 @@ void Canon::Initialize(bool isHigh, bool isLeft)
 
 void Canon::Update()
 {
-	if (!isHigh)
-	{
-		this->AddVelocityY(Define::CANON_LOW_VELOCITY_Y);
-		if (this->GetVelocity().y > 0)
-		{
-			this->AddVelocityY(10.0f);
+	if (this->hitted) {
+		if (sprite->IsFinished()) {
+			EntityManager::GetInstance()->RemoveEntity(this);
+			return;
 		}
 	}
-	else
-	{
-		this->AddVelocityY(Define::CANON_HIGH_VELOCITY_Y);
-		if (this->GetVelocity().y > 0)
+	else {
+		if (!isHigh)
 		{
-			this->AddVelocityY(10.0f);
+			this->AddVelocityY(Define::CANON_LOW_VELOCITY_Y);
+			if (this->GetVelocity().y > 0)
+			{
+				this->AddVelocityY(10.0f);
+			}
 		}
-	}
+		else
+		{
+			this->AddVelocityY(Define::CANON_HIGH_VELOCITY_Y);
+			if (this->GetVelocity().y > 0)
+			{
+				this->AddVelocityY(10.0f);
+			}
+		}
 
-	if (isLeft)
-	{
-		this->AddVelocityX(-Define::CANON_VELOCITY_X);
-		if (this->GetVelocity().x < 0)
+		if (isLeft)
 		{
-			this->AddVelocityX(15.0f);
+			this->AddVelocityX(-Define::CANON_VELOCITY_X);
+			if (this->GetVelocity().x < 0)
+			{
+				this->AddVelocityX(15.0f);
+			}
+		}
+		else
+		{
+			this->AddVelocityX(Define::CANON_VELOCITY_X);
+			if (this->GetVelocity().x < 0)
+			{
+				this->AddVelocityX(-15.0f);
+			}
 		}
 	}
-	else
-	{
-		this->AddVelocityX(Define::CANON_VELOCITY_X);
-		if (this->GetVelocity().x < 0)
-		{
-			this->AddVelocityX(-15.0f);
-		}
-	}
+	
 	//this->AddVelocityY(-10.0f);
 	Entity::Update();
 	//float dt = Timer::GetDeltaTime();
@@ -93,42 +103,22 @@ void Canon::Update()
 
 void Canon::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() == EntityId::Platform_ID || impactor->GetEntityId() == EntityId::Megaman_ID)
-	{
-		switch (side)
-		{
 
-			case Entity::Left:
-			{
-				/*this->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
-				this->SetVelocity(0, 0);*/
-				EntityManager::GetInstance()->RemoveEntity(this);
-				break;
-			}
-
-			case Entity::Right:
-			{
-				/*this->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
-				this->SetVelocity(0, 0);*/
-				EntityManager::GetInstance()->RemoveEntity(this);
-				break;
-			}
-
-			case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
-			{
-				/*this->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top);
-				this->SetVelocity(0, 0);*/
-				EntityManager::GetInstance()->RemoveEntity(this);
-				break;
-			}
-
-			case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
-			{
-				/*this->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
-				this->SetVelocity(0, 0);*/
-				EntityManager::GetInstance()->RemoveEntity(this);
-				break;
-			}
+	if (!this->hitted) {
+		if (!(impactor->GetEntityId() == EntityId::NotorBanger_ID || impactor->GetEntityId() == EntityId::Canon_ID)) {
+			this->SetVelocity(0, 0);
+			sprite = new AnimatedSprite(15, 1, false);
+			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
+				0, 7, 8, 50, 50);
+			this->SetSprite(sprite);
+			this->hitted = true;
 		}
 	}
+	
+	return;
 }
+
+bool Canon::IsHitted() {
+	return this->hitted;
+}
+
