@@ -95,6 +95,7 @@ bool FrameWork::CreateDxWindow(char* windowTitle, int x, int y, int width, int h
 	}
 
 	hwnd = CreateWindowEx(WS_EX_APPWINDOW, windowTitle, windowTitle, style, x, y, screenWidth, screenHeight, nullptr, nullptr, instance, nullptr);
+	GameGlobal::SetCurrentHWND(hwnd);
 
 	if (hwnd == nullptr) {
 		MessageBox(nullptr, "CreateWindowEx() failed", "Error", MB_OK);

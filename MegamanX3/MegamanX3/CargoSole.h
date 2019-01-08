@@ -15,9 +15,11 @@ public:
 	//RECT GetBound();
 
 	bool HadAlight();
+	void SetRemove();
 
 private:
 	AnimatedSprite * sprite;
 	bool alight;
+	bool remove;
 };
 

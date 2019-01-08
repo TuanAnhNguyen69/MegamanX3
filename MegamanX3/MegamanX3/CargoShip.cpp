@@ -33,14 +33,16 @@ CargoShip::~CargoShip()
 	}
 }
 
-void CargoShip::Initialize()
+void CargoShip::Initialize(Camera *camera)
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"cargo_body", 256, 88);
 	this->ChangeState(CargoShipStateHandler::StateName::Down);
 
+	this->originalSolePos = D3DXVECTOR3(this->GetPosition().x + 20, this->GetPosition().y, 0);
+
 	this->sole = new CargoSole();
-	this->sole->SetPosition(this->GetPosition().x + 20, this->GetPosition().y);
+	this->sole->SetPosition(this->originalSolePos.x, this->originalSolePos.y);
 	this->sole->SetScale(2, 2);
 	this->sole->SetBound(144 * 2, 88 * 2);
 	this->sole->Initialize();
@@ -49,6 +51,13 @@ void CargoShip::Initialize()
 
 void CargoShip::Update()
 {
+	if (this->camera)
+	{
+		this->sole->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
+		this->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
+	}
 	Enemy::Update();
 	if (currentState)
 	{
@@ -81,4 +90,14 @@ void CargoShip::ChangeState(CargoShipStateHandler::StateName state)
 		break;
 	}
 	currentState->Load();
+}
+
+D3DXVECTOR3 CargoShip::GetOriginalSolePos()
+{
+	return this->originalSolePos;
+}
+
+void CargoShip::SetRemoveSole()
+{
+	this->sole->SetRemove();
 }
