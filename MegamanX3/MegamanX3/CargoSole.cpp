@@ -9,6 +9,7 @@ CargoSole::CargoSole()
 	sprite = new AnimatedSprite(10, 1, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "cargo_sole",
 		0, 0, 1, 144, 88);
+	remove = false;
 }
 
 
@@ -25,6 +26,11 @@ void CargoSole::Initialize()
 
 void CargoSole::Update()
 {
+	if (remove)
+	{
+		EntityManager::GetInstance()->RemoveEntity(this);
+		return;
+	}
 	Entity::Update();
 	if (alight)
 	{
@@ -62,4 +68,9 @@ void CargoSole::OnCollision(Entity * impactor, Entity::CollisionSide side, Entit
 bool CargoSole::HadAlight()
 {
 	return this->alight;
+}
+
+void CargoSole::SetRemove()
+{
+	remove = true;
 }

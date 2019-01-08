@@ -14,6 +14,9 @@ public:
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 
 private:
-	bool hadDrop;
+	bool hadDrop, done, dropLeft;
+	int countCarryArm, originalCountCarryArm;
+
+	clock_t timeStartUp, timeCountAfterDrop;
 };
 

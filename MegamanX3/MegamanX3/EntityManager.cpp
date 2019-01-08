@@ -221,7 +221,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				cargo->SetPosition((posX + width / 2) - 150, (posY + height / 2) - 100);
 				cargo->SetScale(2, 2);
 				cargo->SetBound(256, 88);
-				cargo->Initialize();
+				cargo->Initialize(camera);
 				AddEntity(cargo);
 				break;
 

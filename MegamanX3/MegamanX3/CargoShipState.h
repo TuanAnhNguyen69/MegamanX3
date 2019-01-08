@@ -4,6 +4,8 @@
 #include "CargoShipStateHandler.h"
 #include "Engine.h"
 #include <iostream>
+#include <time.h>
+#include "Sound.h"
 
 class CargoShipState
 {
@@ -18,5 +20,7 @@ protected:
 	AnimatedSprite * sprite;
 	CargoShipStateHandler *handler;
 	Entity *entity;
+
+	clock_t timeStartState, timeCount;
 };
 

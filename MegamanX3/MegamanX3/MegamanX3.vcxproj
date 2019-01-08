@@ -209,6 +209,8 @@
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="FrameWork.h" />
     <ClInclude Include="GameComponent.h" />
+    <ClInclude Include="GameGlobal.h" />
+    <ClInclude Include="GameLog.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="HeadGunner.h" />
@@ -262,6 +264,7 @@
     <ClInclude Include="ShurikenMove.h" />
     <ClInclude Include="ShurikenState.h" />
     <ClInclude Include="ShurikenTurn.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="NotorBangerState.h" />
     <ClInclude Include="ShurikenStateHandler.h" />
@@ -320,6 +323,8 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="FrameWork.cpp" />
+    <ClCompile Include="GameGlobal.cpp" />
+    <ClCompile Include="GameLog.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="HeadGunner.cpp" />
@@ -375,6 +380,7 @@
     <ClCompile Include="ShurikenMove.cpp" />
     <ClCompile Include="ShurikenState.cpp" />
     <ClCompile Include="ShurikenTurn.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="NotorBangerState.cpp" />
     <ClCompile Include="Texture.cpp" />

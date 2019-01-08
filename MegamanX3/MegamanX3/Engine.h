@@ -8,6 +8,7 @@
 #include "EntityManager.h"
 #include "ResourceManager.h"
 #include "GameComponent.h"
+#include "GameGlobal.h"
 
 class Engine
 {
