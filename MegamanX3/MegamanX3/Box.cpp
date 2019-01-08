@@ -132,6 +132,8 @@ void Box::Update()
 			}
 			this->SetSprite(sprite);
 			this->SetScale(1.44, 1.44);
+			Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_die");
+			Sound::getInstance()->play("explosion_die", false, 1);
 			hadBurst = true;
 		}
 		if (sprite->IsFinished())

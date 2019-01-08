@@ -53,6 +53,8 @@ void Byte::Update()
 {
 	if (this->IsRemove())
 	{
+		Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_die");
+		Sound::getInstance()->play("explosion_die", false, 5);
 		EntityManager::GetInstance()->RemoveEntity(this);
 		return;
 	}

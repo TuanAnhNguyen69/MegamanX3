@@ -334,6 +334,12 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 			case EntityId::DoubleBox_ID:
 			{
+				Box * box = new Box(EntityId::DoubleBox_ID);
+				box->Initialize(false);
+				box->SetPosition(posX + width / 2, posY + height / 2);
+				box->SetScale(1.5, 1.5);
+				box->SetBound(width, height);
+				AddEntity(box);		
 				break;
 			}
 				

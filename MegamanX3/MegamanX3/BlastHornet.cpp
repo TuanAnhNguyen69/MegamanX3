@@ -67,13 +67,14 @@ void BlastHornet::Initialize()
 	pointB = D3DXVECTOR3(pointA.x - 350, pointA.y, 0);
 	this->SetPreAction(BlastHornetStateHandler::StateName::Drop);
 	this->ChangeState(BlastHornetStateHandler::StateName::Return);
-	HP = Define::BLASTHORNET_HP;
+	//HP = Define::BLASTHORNET_HP;
+	HP = 0;
 }
 
 void BlastHornet::Update()
 {
 	if (this->IsRemove())
-	{
+	{	
 		EntityManager::GetInstance()->RemoveEntity(this);
 		return;
 	}

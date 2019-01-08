@@ -96,6 +96,8 @@ void ByteBomb::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity
 			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
 				0, 7, 8, 50, 50);
 			this->SetSprite(sprite);
+			Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_bomb");
+			Sound::getInstance()->play("explosion_bomb", false, 1);
 			this->hitted = true;
 			isRemove = true;
 		}
