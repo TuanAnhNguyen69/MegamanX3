@@ -8,7 +8,7 @@ CargoShipDropState::CargoShipDropState(CargoShipStateHandler *handler, Entity *e
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "cargo_body",
 		0, 0, 1, 256, 88);
 	dropLeft = false;
-	countCarryArm = 9;
+	countCarryArm = 3;
 }
 
 
@@ -39,11 +39,11 @@ void CargoShipDropState::Update()
 		CarryArm *carryArm = new CarryArm(((Enemy*)entity)->player);
 		if (dropLeft)
 		{
-			carryArm->SetPosition(entity->GetPosition().x - 10, entity->GetPosition().y - 88);
+			carryArm->SetPosition(entity->GetPosition().x, entity->GetPosition().y - 88);
 		}
 		else
 		{
-			carryArm->SetPosition(entity->GetPosition().x + 100, entity->GetPosition().y - 88);
+			carryArm->SetPosition(entity->GetPosition().x + 150, entity->GetPosition().y - 88);
 		}
 		carryArm->SetScale(1.5, 1.5);
 		carryArm->SetBound(30 * 1.5, 58 * 1.5);
@@ -58,7 +58,7 @@ void CargoShipDropState::Update()
 	if (countCarryArm > 0)
 	{
 		timeCount = clock();
-		if (((float)(timeCount - timeStartState) / 1000) > 5)
+		if (((float)(timeCount - timeStartState) / 1000) > 2)
 		{
 			this->Load();
 		}

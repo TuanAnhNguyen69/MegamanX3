@@ -278,7 +278,6 @@ void Player::Shoot()
 	switch(bulletDamage) {
 	case 2:
 	{
-		Sound::getInstance()->loadSound((char*)"sound/normal_bullet.wav", "normal_Bullet");
 		Sound::getInstance()->play("normal_Bullet", false, 1);
 		break;
 	}

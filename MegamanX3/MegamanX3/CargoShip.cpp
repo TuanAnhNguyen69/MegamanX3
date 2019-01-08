@@ -35,11 +35,12 @@ CargoShip::~CargoShip()
 
 void CargoShip::Initialize(Camera *camera)
 {
+	remove = false;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"cargo_body", 256, 88);
 	this->ChangeState(CargoShipStateHandler::StateName::Down);
 
-	this->originalSolePos = D3DXVECTOR3(this->GetPosition().x + 20, this->GetPosition().y, 0);
+	this->originalSolePos = D3DXVECTOR3(this->GetPosition().x + 115, this->GetPosition().y, 0);
 
 	this->sole = new CargoSole();
 	this->sole->SetPosition(this->originalSolePos.x, this->originalSolePos.y);
@@ -51,6 +52,11 @@ void CargoShip::Initialize(Camera *camera)
 
 void CargoShip::Update()
 {
+	if (remove)
+	{
+		EntityManager::GetInstance()->RemoveEntity(this);
+		return;
+	}
 	if (this->camera)
 	{
 		this->sole->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
@@ -101,6 +107,11 @@ void CargoShip::SetRemoveSole()
 {
 	this->sole->SetRemove();
 	this->sole = nullptr;
+}
+
+void CargoShip::SetRemove()
+{
+	this->remove = true;
 }
 
 void CargoShip::Render()

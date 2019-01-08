@@ -38,6 +38,9 @@ public:
 
 	int GetHP();
 
+	void Seen();
+	bool GetSeen();
+
 private:
 	BlastHornetState * currentState;
 	BlastHornetState *flyState, *prepareState, *prickState, *dieState, *returnState, *dropState;
@@ -46,6 +49,7 @@ private:
 
 	bool hadFly;
 	bool hadDie;
+	bool seen;
 
 	D3DXVECTOR3 playerPos;
 	D3DXVECTOR3 pointA, pointB;

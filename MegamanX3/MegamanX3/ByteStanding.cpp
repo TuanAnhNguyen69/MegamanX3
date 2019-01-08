@@ -28,11 +28,23 @@ void ByteStanding::Load()
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	timeStartState = clock();
+	timeCreated = clock();
 }
 
 void ByteStanding::Update()
 {
-	if(handler->IsFaceLeft())
+	if (!handler->GetSeen())
+	{
+		timeSeen = clock();
+		float dt = (timeSeen - timeCreated) / 1000;
+		if (dt > 7)
+		{
+			handler->Seen();
+		}
+		return;
+	}
+
+	if (handler->IsFaceLeft())
 	{
 		entity->SetReverse(false);
 	}

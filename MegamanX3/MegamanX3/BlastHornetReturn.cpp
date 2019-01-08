@@ -61,6 +61,17 @@ void BlastHornetReturn::Update()
 {
 	BlastHornetState::Update();
 
+	if (!handler->GetSeen())
+	{
+		timeSeen = clock();
+		float dt = (timeSeen - timeCreated) / 1000;
+		if (dt > 8)
+		{
+			handler->Seen();
+		}
+		return;
+	}
+
 	//Nếu BlastHornet trở về A
 	if (isGoToPointA)
 	{

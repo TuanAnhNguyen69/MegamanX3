@@ -37,7 +37,7 @@ void CarryArmFlying::Update()
 		else {
 			entity->SetReverse(false);
 		}
-		if(!handler->box->IsCollisionPlatform())
+		if(!handler->box->IsCollisionBottom())
 		{
 			entity->AddVelocityY(Define::CARRYARM_FLY_SPEED);
 			handler->box->AddVelocityY(Define::CARRYARM_FLY_SPEED);

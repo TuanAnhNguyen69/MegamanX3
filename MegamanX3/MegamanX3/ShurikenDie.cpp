@@ -12,10 +12,11 @@ ShurikenDie::ShurikenDie(ShurikenStateHandler *handler, Entity *entity) : Shurik
 
 ShurikenDie::~ShurikenDie()
 {
-	if (sprite)
-	{
-		delete sprite;
-		sprite = nullptr;
+	if (handler->GetCurrentStateName() != ShurikenStateHandler::StateName::Die) {
+		if (sprite) {
+			delete sprite;
+			sprite = nullptr;
+		}
 	}
 }
 
@@ -26,7 +27,7 @@ void ShurikenDie::Load()
 	timeStartState = clock();
 
 	Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_die");
-	Sound::getInstance()->play("explosion_die", true, 0);
+	Sound::getInstance()->play("explosion_die", false, 4);
 }
 
 void ShurikenDie::Update()
@@ -34,13 +35,17 @@ void ShurikenDie::Update()
 	entity->AddVelocityY(15.0f);
 
 	timeCount = clock();
-	int dt = (timeCount - timeStartState) / 1000;
+	float dt = (timeCount - timeStartState) / 1000;
 	if (dt > 4)
-		EntityManager::GetInstance()->RemoveEntity(entity);
+		handler->SetRemove();
 }
 
 void ShurikenDie::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	if (impactor->GetEntityId() != EntityId::Platform_ID)
+	{
+		return;
+	}
 	switch (side)
 	{
 	case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:

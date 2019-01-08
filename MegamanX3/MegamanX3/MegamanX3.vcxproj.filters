@@ -315,6 +315,7 @@
     <ClCompile Include="HealthBar.cpp">
       <Filter>World</Filter>
     </ClCompile>
+    <ClCompile Include="HealthX.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -669,6 +670,7 @@
     <ClInclude Include="HealthBar.h">
       <Filter>World</Filter>
     </ClInclude>
+    <ClInclude Include="HealthX.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

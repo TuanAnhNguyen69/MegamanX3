@@ -40,6 +40,8 @@ Byte::~Byte()
 
 void Byte::Initialize()
 {
+	seen = false;
+	dead = false;
 	this->damage = 1;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "byte", 100, 100);
 	this->SetFace(true);
@@ -58,10 +60,10 @@ void Byte::Update()
 		return;
 	}
 
-	if (this->GetHP() <= 0)
+	if (this->GetHP() <= 0 && !dead)
 	{
 		this->ChangeState(ByteStateHandler::StateName::Die);
-
+		dead = true;
 	}
 
 	Enemy::Update();
@@ -116,6 +118,7 @@ ByteStateHandler::MoveDirection Byte::GetMoveDirection()
 
 void Byte::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	Enemy::OnCollision(impactor, side, data);
 	if (currentState)
 	{
 		currentState->OnCollision(impactor, side, data);
@@ -144,4 +147,14 @@ bool Byte::IsFaceLeft()
 void Byte::SetFace(bool isLeft)
 {
 	isFaceLeft = isLeft;
+}
+
+void Byte::Seen()
+{
+	this->seen = true;
+}
+
+bool Byte::GetSeen()
+{
+	return this->seen;
 }

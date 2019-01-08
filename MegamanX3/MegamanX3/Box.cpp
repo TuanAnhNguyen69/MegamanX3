@@ -85,10 +85,10 @@ Box::~Box()
 
 void Box::Update()
 {
-	Entity::Update();
+	Enemy::Update();
 	if (this->isFall)
 	{
-		this->SetVelocityY(Define::BOX_SPEED);
+		this->AddVelocityY(Define::BOX_SPEED);
 	}
 
 	if (HP <= 0)
@@ -140,31 +140,36 @@ void Box::Update()
 		{
 			EntityManager::GetInstance()->RemoveEntity(this);
 		}
+	}
 
-		if (this->GetEntityId() == EntityId::Box_ID)
+
+	if (this->GetEntityId() == EntityId::Box_ID)
+	{
+		if (this->GetVelocity().y != 0)
 		{
-			if (this->GetVelocity().y != 0)
-			{
-				this->damage = 1;
-			}
-			else
-			{
-				this->damage = 0;
-			}
+			this->damage = 1;
+		}
+		else
+		{
+			this->damage = 0;
 		}
 	}
+
+	
 }
 
 void Box::Initialize(bool isFall)
 {
 	this->isFall = isFall;
 	this->SetVelocity(0, 0);
-	isCollPlatform = false;
+	isCollBottom = false;
 }
 
 void Box::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() == EntityId::Platform_ID && this->id == EntityId::Box_ID)
+	EntityId impactorID = impactor->GetEntityId();
+	if ((impactorID == EntityId::Platform_ID || impactorID == EntityId::TrippleBox_ID || impactorID == EntityId::QuadraBox_ID) 
+		&& this->id == EntityId::Box_ID)
 	{
 		switch (side)
 		{
@@ -172,8 +177,7 @@ void Box::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::Col
 		{
 			this->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
 			this->SetVelocity(0, 0);
-			this->isFall = false;
-			this->isCollPlatform = true;
+			this->isCollBottom = true;
 			break;
 		}
 		}
@@ -197,9 +201,9 @@ bool Box::IsFall()
 	return this->isFall;
 }
 
-bool Box::IsCollisionPlatform()
+bool Box::IsCollisionBottom()
 {
-	return this->isCollPlatform;
+	return this->isCollBottom;
 }
 
 int Box::GetHP()

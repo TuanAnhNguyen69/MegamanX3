@@ -48,6 +48,11 @@ public:
 	virtual MoveDirection GetMoveDirection() = 0;
 	virtual void SetPreAction(StateName action) = 0;
 	virtual StateName GetPreAction() = 0;
+
+	virtual void Seen() = 0;
+	virtual bool GetSeen() = 0;
+
+	virtual void SetRemove() = 0;
 };
 
 #pragma once
