@@ -10,7 +10,7 @@
 #include <list>
 #include <cmath>
 
-//class Entity;
+class Entity;
 
 class Helit : public HelitStateHandler, public Enemy
 {

@@ -100,4 +100,14 @@ D3DXVECTOR3 CargoShip::GetOriginalSolePos()
 void CargoShip::SetRemoveSole()
 {
 	this->sole->SetRemove();
+	this->sole = nullptr;
+}
+
+void CargoShip::Render()
+{
+	if (sole)
+	{
+		this->sole->Render();
+	}
+	Entity::Render();
 }

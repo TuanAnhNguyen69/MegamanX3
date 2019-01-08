@@ -2,7 +2,7 @@
 #include "Box.h"
 
 
-Box::Box(EntityId id) : Entity(id)
+Box::Box(EntityId id, Player *player) : Enemy(id, player)
 {
 	hadBurst = false;
 	HP = 12;
@@ -139,6 +139,18 @@ void Box::Update()
 		if (sprite->IsFinished())
 		{
 			EntityManager::GetInstance()->RemoveEntity(this);
+		}
+
+		if (this->GetEntityId() == EntityId::Box_ID)
+		{
+			if (this->GetVelocity().y != 0)
+			{
+				this->damage = 1;
+			}
+			else
+			{
+				this->damage = 0;
+			}
 		}
 	}
 }

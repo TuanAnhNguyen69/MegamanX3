@@ -10,6 +10,8 @@
 #include "BlastHornetReturn.h"
 #include "BlastHornetDie.h"
 
+class Entity;
+
 class BlastHornet : public BlastHornetStateHandler, public Enemy
 {
 public:

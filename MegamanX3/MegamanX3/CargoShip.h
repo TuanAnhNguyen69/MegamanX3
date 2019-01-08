@@ -7,6 +7,9 @@
 #include "CargoShipDropState.h"
 #include "CargoShipStateHandler.h"
 #include "Sound.h"
+
+class Entity;
+
 class CargoShip : public CargoShipStateHandler, public Enemy
 {
 public:
@@ -22,6 +25,8 @@ public:
 
 	D3DXVECTOR3 GetOriginalSolePos();
 	void SetRemoveSole();
+
+	void Render();
 
 private:
 	CargoShipState * currentState, *downState, *upState, *dropState;

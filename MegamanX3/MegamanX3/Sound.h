@@ -8,6 +8,7 @@
 #include <d3dx9.h>
 #include <d3d9.h>
 #include <Windows.h>
+#include "dsound.h"
 #pragma comment(lib, "dsound.lib")
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "winmm.lib")

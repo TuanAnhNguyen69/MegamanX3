@@ -36,7 +36,7 @@ void HeadGunnerShootRocket::Update()
 	{
 		if (!hadShoot) 
 		{
-			HeadGunnerRocket *rocket = new HeadGunnerRocket();
+			HeadGunnerRocket *rocket = new HeadGunnerRocket(((Enemy*)entity)->player);
 			rocket->SetPosition(entity->GetPosition().x, entity->GetPosition().y - 10);
 			rocket->Initialize(isLeft);
 			rocket->SetScale(2, 2);

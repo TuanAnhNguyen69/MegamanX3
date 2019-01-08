@@ -3,7 +3,7 @@
 
 
 
-Canon::Canon() : Entity(EntityId::Canon_ID)
+Canon::Canon(Player *player) : Enemy(EntityId::Canon_ID, player)
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"canon", 9, 9);
@@ -19,6 +19,7 @@ Canon::~Canon()
 
 void Canon::Initialize(bool isHigh, bool isLeft)
 {
+	this->damage = 1;
 	this->isHigh = isHigh;
 	this->isLeft = isLeft;
 	this->hitted = false;

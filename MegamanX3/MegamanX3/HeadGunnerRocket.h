@@ -1,15 +1,15 @@
 #pragma once
-#include "Entity.h"
 #include "Engine.h"
+#include "Enemy.h"
 
-class HeadGunnerRocket : public Entity
+class HeadGunnerRocket : public Enemy
 {
 private:
 	AnimatedSprite * sprite;
 	bool isLeft;
 	bool hitted;
 public:
-	HeadGunnerRocket();
+	HeadGunnerRocket(Player *player);
 	~HeadGunnerRocket();
 
 	void Update();

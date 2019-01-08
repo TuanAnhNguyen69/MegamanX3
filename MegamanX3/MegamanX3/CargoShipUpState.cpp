@@ -30,14 +30,20 @@ void CargoShipUpState::Load()
 
 void CargoShipUpState::Update()
 {
-	if (handler->sole->GetPosition().y > desSolePos.y)
+	if (handler->sole)
 	{
-		handler->sole->GoTo(startSolePos, desSolePos, 20.0f);
+		if (handler->sole->GetPosition().y > desSolePos.y)
+		{
+			handler->sole->GoTo(startSolePos, desSolePos, 20.0f);
+		}
+		else
+		{
+			handler->SetRemoveSole();
+		}
 	}
 	else
 	{
 		entity->AddVelocityY(-5.0f);
-		handler->SetRemoveSole();
 	}
 }
 

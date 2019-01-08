@@ -16,6 +16,8 @@ public:
 
 	Player * player;
 
+	int GetDamage();
+
 protected:
 	void SetActiveRange(int activeRange);
 	virtual void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
@@ -23,5 +25,6 @@ protected:
 	int activeRange;
 	int GetPlayerDistance();
 	int HP;
+	int damage;
 };
 

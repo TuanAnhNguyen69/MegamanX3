@@ -8,8 +8,7 @@ CargoShipDropState::CargoShipDropState(CargoShipStateHandler *handler, Entity *e
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "cargo_body",
 		0, 0, 1, 256, 88);
 	dropLeft = false;
-	countCarryArm = 3;
-	originalCountCarryArm = 3;
+	countCarryArm = 9;
 }
 
 
@@ -51,9 +50,6 @@ void CargoShipDropState::Update()
 		carryArm->Initialize();
 		EntityManager::GetInstance()->AddEntity(carryArm);
 
-		Sound::getInstance()->loadSound((char*)"sound/shoot_canon.wav", "shoot_canon");
-		Sound::getInstance()->play("shoot_canon", false, 1);
-
 		hadDrop = true;
 		timeStartUp = clock();
 		countCarryArm--;
@@ -62,7 +58,7 @@ void CargoShipDropState::Update()
 	if (countCarryArm > 0)
 	{
 		timeCount = clock();
-		if (((float)(timeCount - timeStartState) / 1000) > 2)
+		if (((float)(timeCount - timeStartState) / 1000) > 5)
 		{
 			this->Load();
 		}

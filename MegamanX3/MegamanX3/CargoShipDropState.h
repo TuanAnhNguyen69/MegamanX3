@@ -15,7 +15,7 @@ public:
 
 private:
 	bool hadDrop, done, dropLeft;
-	int countCarryArm, originalCountCarryArm;
+	int countCarryArm;
 
 	clock_t timeStartUp, timeCountAfterDrop;
 };

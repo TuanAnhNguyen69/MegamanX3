@@ -36,12 +36,11 @@ HeadGunner::~HeadGunner()
 		delete dieState;
 		dieState = nullptr;
 	}
-
-	Entity::~Entity();
 }
 
 void HeadGunner::Initialize( bool isLeft)
 {
+	this->damage = 1;
 	this->HP = 5;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"head_gunner", 50, 50);

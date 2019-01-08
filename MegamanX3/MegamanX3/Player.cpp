@@ -222,6 +222,9 @@ void Player::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::C
 	case EntityId::RightSmallConveyor_ID:
 		OnConveyorCollision(impactor, side, data);
 		break;
+	case EntityId::BigElevator_ID:
+		OnElevatorCollision(impactor, side, data);
+		break;
 	case EntityId::Door_ID:
 		OnDoorCollision(impactor, side, data);
 		break;
@@ -376,6 +379,27 @@ void Player::OnDoorCollision(Entity * impactor, Entity::CollisionSide side, Enti
 	case Entity::Bottom:
 	case Entity::BottomRight:
 	case Entity::BottomLeft:
+		break;
+	default:
+		break;
+	}
+}
+
+void Player::OnElevatorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side)
+	{
+	case Entity::Left:
+	case Entity::Right:
+	case Entity::Top:
+		break;
+	case Entity::Bottom:
+	case Entity::BottomRight:
+	case Entity::BottomLeft:
+		if (((Elevator *)(impactor))->IsActive()) {
+			this->AddPosition(0, ((Elevator *)(impactor))->GetSpeed());
+		}
+		SetVelocityY(0);
 		break;
 	default:
 		break;

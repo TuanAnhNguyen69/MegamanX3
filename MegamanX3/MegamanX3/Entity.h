@@ -5,7 +5,6 @@
 #include "Sprite.h"
 #include "Sound.h"
 
-
 enum EntityId{
 	// Player
 	Megaman_ID,
@@ -48,6 +47,9 @@ enum EntityId{
 	UpPlatform_ID,
 	DownPlatform_ID,
 	Platform_ID,
+	WallHoleLeft_ID,
+	WallHoleRight_ID,
+	HallHole_ID,
 
 	//weapon
 	Canon_ID,
@@ -59,7 +61,9 @@ enum EntityId{
 	SmallEnergy_ID,
 	BigEnergy_ID,
 	ChimeraArmor_ID,
-	CameraRange_ID
+	CameraRange_ID,
+
+	CargoSole_ID
 };
 
 class Entity
