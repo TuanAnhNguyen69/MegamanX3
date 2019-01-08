@@ -45,7 +45,6 @@ public:
 	BlockType blockType;
 private:
 
-
 	PlayerState *currentState;
 	PlayerState *standingState, *runningState, *jumpingState, *fallingState, *damagedState, *slidingState, *climbingState;
 	PlayerStateHandler::StateName currentStateName;
@@ -60,11 +59,9 @@ private:
 	int hp;
 	int life;
 
-
-
 	void OnConveyorCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	void OnDoorCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
-
+	void OnElevatorCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 };
 
 #endif

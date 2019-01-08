@@ -42,7 +42,7 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(300, 1700);
+	player->SetPosition(14200, 3700);
 	//player->SetPosition(4700, 2100);
 	camera->SetCenter(player->GetPosition());
 
@@ -97,19 +97,19 @@ void GameScene::Update()
 			currentDoor->SetState(Door::DoorState::CLOSING);
 		}
 	}
-	
 	CheckCollision();
 	EntityManager::GetInstance()->CheckCollide();
 	camera->Update(player->GetPosition());
 	player->Update();
 	EntityManager::GetInstance()->Update();
+
 }
 
 void GameScene::CheckCollision()
 {
 	int widthBottom = 0;
 	std::vector<Entity*> collidableEntity;
-	EntityManager::GetInstance()->GetQuadTree()->GetEntitiesCollideAble(collidableEntity, player->GetBound());
+	EntityManager::GetInstance()->GetQuadTree()->GetEntitiesCollideAble(collidableEntity, camera->GetBound());
 	int size = collidableEntity.size();
 	for (size_t index = 0; index < size; index++) {
 		if (Collision::IsCollide(collidableEntity.at(index)->GetBound(), camera->GetBound())) {

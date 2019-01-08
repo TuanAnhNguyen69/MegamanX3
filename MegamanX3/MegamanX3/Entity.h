@@ -46,6 +46,9 @@ enum EntityId{
 	UpPlatform_ID,
 	DownPlatform_ID,
 	Platform_ID,
+	WallHoleLeft_ID,
+	WallHoleRight_ID,
+	HallHole_ID,
 
 	//weapon
 	Canon_ID,

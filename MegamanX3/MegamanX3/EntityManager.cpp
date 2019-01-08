@@ -67,7 +67,7 @@ void EntityManager::Render()
 void EntityManager::CheckCollide()
 {
 	std::vector<Entity*> playerCollidableEntity;
-	quadTree->GetEntitiesCollideAble(playerCollidableEntity, player->GetBound());
+	quadTree->GetEntitiesCollideAble(playerCollidableEntity, camera->GetBound());
 	int playerCollidableEntitySize = playerCollidableEntity.size();
 	for (size_t index = 0; index < playerCollidableEntitySize; index++) {
 		if (Collision::IsCollide(playerCollidableEntity.at(index)->GetBound(), camera->GetBound())) {
@@ -196,16 +196,16 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 		std::cout << "numOBJ" << count << std::endl;
 		for (int i = 0; i < count; i++)
 		{
+			if (i == 167) {
+				int a = 0;
+			}
+
 			float enumValue;
 			int id;
 			objects >> id >> posX >> posY >> width >> height;
 			EntityId entityId = (EntityId)id;
 			switch (entityId)
 			{
-				/*case EntityId::Megaman_ID:
-					break;
-				case EntityId::CarryArm_ID:
-					break;*/
 			case EntityId::Shurikein_ID:
 			{
 				Shuriken *shuriken = new Shuriken(player);
@@ -240,29 +240,10 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 			case EntityId::CheckPoint_ID:
 			{
-
-				/*CargoShip *cargo = new CargoShip(player);
-				cargo->SetPosition((posX + width / 2) - 150, (posY + height / 2) - 100);
-				cargo->SetScale(2, 2);
-				cargo->SetBound(256, 88);
-				cargo->Initialize();
-				AddEntity(cargo);
-				break;*/
-
-				/*Box *box = new Box(EntityId::VerticalBombBox_ID);
-				box->SetPosition(posX + width / 2 + 20, (posY + height / 2) + 150);
-				box->SetScale(1, 1);
-				box->Initialize(false);
-				AddEntity(box);
-				break;*/
-
-				/*CarryArm * carryArm = new CarryArm(player);
-				carryArm->SetPosition(posX + width / 2, (posY + height / 2));
-				carryArm->SetScale(1, 1);
-				carryArm->SetBound(width, height);
-				carryArm->Initialize();
-				AddEntity(carryArm);
-				break;*/
+				Entity * checkPoint = new Entity(CheckPoint_ID);
+				checkPoint->SetPosition(posX + width / 2, (posY + height / 2));
+				checkPoint->SetBound(width, height);
+				AddEntity(checkPoint);
 				break;
 			}
 
@@ -391,14 +372,11 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			{
 				Elevator * elevator = new Elevator();
 				elevator->SetPosition(posX + width / 2, posY + height / 2);
-				elevator->SetBound(width, height);
-				elevator->Initialize(posX, posY);
+				elevator->SetBound(width, height * 0.6);
+				elevator->SetScale(2, 2);
+				elevator->Initialize();
 				AddEntity(elevator);
 				break;
-				//case EntityId::SmallElevator:
-				//	break;
-				//case EntityId::BoxWall:
-				//	break;*/
 			}
 			case EntityId::UpPlatform_ID:
 			{
@@ -425,6 +403,36 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				platform->SetBound(width, height);
 				platform->Initialize();
 				AddEntity(platform);
+				break;
+			}
+
+			case EntityId::HallHole_ID:
+			{
+				Entity * hallHole = new Entity(CheckPoint_ID);
+				hallHole->SetPosition(posX + width / 2, (posY + height / 2));
+				hallHole->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "hall_hole", width, height);
+				hallHole->SetBound(width, height);
+				AddEntity(hallHole);
+				break;
+			}
+
+			case EntityId::WallHoleLeft_ID:
+			{
+				Entity * wallHoleLeft = new Entity(CheckPoint_ID);
+				wallHoleLeft->SetPosition(posX + width / 2, (posY + height / 2));
+				wallHoleLeft->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "wall_hole_left", width, height);
+				wallHoleLeft->SetBound(width, height);
+				AddEntity(wallHoleLeft);
+				break;
+			}
+
+			case EntityId::WallHoleRight_ID:
+			{
+				Entity * wallHoleRight = new Entity(CheckPoint_ID);
+				wallHoleRight->SetPosition(posX + width / 2, (posY + height / 2));
+				wallHoleRight->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "wall_hole_right", width, height);
+				wallHoleRight->SetBound(width, height);
+				AddEntity(wallHoleRight);
 				break;
 			}
 
