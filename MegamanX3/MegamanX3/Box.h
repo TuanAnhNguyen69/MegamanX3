@@ -25,7 +25,7 @@ public:
 	void SetFall(bool isFall);
 	bool IsFall();
 
-	bool IsCollisionPlatform();
+	bool IsCollisionBottom();
 
 	int GetHP();
 	void SubHP(int damage);
@@ -33,7 +33,7 @@ public:
 private:
 	AnimatedSprite * sprite;
 	bool isFall;
-	bool isCollPlatform;
+	bool isCollBottom;
 	EntityId id;
 	bool hadBurst;
 };

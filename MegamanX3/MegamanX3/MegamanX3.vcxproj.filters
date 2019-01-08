@@ -321,6 +321,7 @@
     <ClCompile Include="PlayerReviveState.cpp">
       <Filter>Entities\Player</Filter>
     </ClCompile>
+    <ClCompile Include="HealthX.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -681,6 +682,7 @@
     <ClInclude Include="PlayerReviveState.h">
       <Filter>Entities\Player</Filter>
     </ClInclude>
+    <ClInclude Include="HealthX.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

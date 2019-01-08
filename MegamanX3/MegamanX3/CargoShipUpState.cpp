@@ -26,6 +26,8 @@ void CargoShipUpState::Load()
 	entity->SetVelocity(0, 0);
 	startSolePos = handler->sole->GetPosition();
 	desSolePos = handler->GetOriginalSolePos();
+	startPos = entity->GetPosition();
+	desPos = D3DXVECTOR3(startPos.x, startPos.y - 120, 0);
 }
 
 void CargoShipUpState::Update()
@@ -34,7 +36,7 @@ void CargoShipUpState::Update()
 	{
 		if (handler->sole->GetPosition().y > desSolePos.y)
 		{
-			handler->sole->GoTo(startSolePos, desSolePos, 20.0f);
+			handler->sole->GoTo(startSolePos, desSolePos, 50.0f);
 		}
 		else
 		{
@@ -43,7 +45,11 @@ void CargoShipUpState::Update()
 	}
 	else
 	{
-		entity->AddVelocityY(-5.0f);
+		entity->GoTo(startPos, desPos, 5.0f);
+		if (entity->GetPosition() == desPos)
+		{
+			handler->SetRemove();
+		}
 	}
 }
 

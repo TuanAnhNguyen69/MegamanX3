@@ -188,6 +188,8 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 	objFilePath.append(filePath).append("OBJ.txt");
 	std::ifstream objects(objFilePath);
 
+	float scaleBox = 1.33f;
+
 	if (objects.is_open())
 	{
 		float posX, posY; int width, height;
@@ -222,7 +224,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				byte->Initialize();
 				byte->SetPosition(posX + width / 2, (posY + height / 2));
 				byte->SetScale(2, 2);
-				byte->SetBound(54, 74);
+				byte->SetBound(54*2, 74*2);
 				AddEntity(byte);
 				break;
 			}
@@ -232,7 +234,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				BlastHornet *boss = new BlastHornet(player);
 				boss->SetPosition(posX + width / 2, (posY + height / 2));
 				boss->SetScale(1.5, 1.5);
-				boss->SetBound(30, 40);
+				boss->SetBound(30, 80);
 				boss->Initialize();
 				AddEntity(boss);
 				break;
@@ -240,10 +242,13 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 			case EntityId::CheckPoint_ID:
 			{
+<<<<<<< HEAD
 				Entity * checkPoint = new Entity(CheckPoint_ID);
 				checkPoint->SetPosition(posX + width / 2, (posY + height / 2));
 				checkPoint->SetBound(width, height);
 				AddEntity(checkPoint);
+=======
+>>>>>>> c5a7264fcce969f34d88c687a8fb1a023d78eb39
 				break;
 			}
 
@@ -267,13 +272,6 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				notoBanger->SetBound(width, height);
 				AddEntity(notoBanger);
 				break;
-			/*	Helit * helit = new Helit(player);
-				helit->Initialize();
-				helit->SetPosition(posX + width / 2, (posY + height / 2));
-				helit->SetScale(2, 2);
-				helit->SetBound(width, height);
-				AddEntity(helit);
-				break;*/
 			}
 
 			case EntityId::RightFaceHeadGunner_ID:
@@ -313,12 +311,25 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				break;
 			}
 
+			case EntityId::Box_ID:
+			{
+				Box *box = new Box(EntityId::Box_ID, player);
+				box->SetPosition(posX + width / 2, posY + height / 2);
+				box->SetScale(scaleBox, scaleBox);
+				box->SetBound(width, height);
+				box->Initialize(true);
+				AddEntity(box);
+				break;
+			}
+
 			case EntityId::DoubleBox_ID:
 			{
 				Box *doubleBox = new Box(EntityId::DoubleBox_ID, player);
 				doubleBox->SetPosition(posX + width / 2, posY + height / 2);
+				doubleBox->SetScale(scaleBox, scaleBox);
 				doubleBox->SetBound(width, height);
 				doubleBox->Initialize(false);
+				AddEntity(doubleBox);
 				break;
 			}
 
@@ -326,8 +337,10 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			{
 				Box *trippleBox = new Box(EntityId::TrippleBox_ID, player);
 				trippleBox->SetPosition(posX + width / 2, posY + height / 2);
+				trippleBox->SetScale(scaleBox, scaleBox);
 				trippleBox->SetBound(width, height);
 				trippleBox->Initialize(false);
+				AddEntity(trippleBox);
 				break;
 			}
 				
@@ -335,8 +348,10 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			{
 				Box *quadraBox = new Box(EntityId::QuadraBox_ID, player);
 				quadraBox->SetPosition(posX + width / 2, posY + height / 2);
+				quadraBox->SetScale(scaleBox, scaleBox);
 				quadraBox->SetBound(width, height);
 				quadraBox->Initialize(false);
+				AddEntity(quadraBox);
 				break;
 			}
 
@@ -344,8 +359,10 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			{
 				Box *verticalBox = new Box(EntityId::VerticalBombBox_ID, player);
 				verticalBox->SetPosition(posX + width / 2, posY + height / 2);
+				verticalBox->SetScale(scaleBox, scaleBox);
 				verticalBox->SetBound(width, height);
 				verticalBox->Initialize(false);
+				AddEntity(verticalBox);
 				break;
 			}
 
@@ -353,8 +370,10 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			{
 				Box *horizoltalBox = new Box(EntityId::HorizontalBombBox_ID, player);
 				horizoltalBox->SetPosition(posX + width / 2, posY + height / 2);
+				horizoltalBox->SetScale(scaleBox, scaleBox);
 				horizoltalBox->SetBound(width, height);
 				horizoltalBox->Initialize(false);
+				AddEntity(horizoltalBox);
 				break;
 			}
 	

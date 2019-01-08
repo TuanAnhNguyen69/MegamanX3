@@ -12,6 +12,7 @@ public:
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 private:
 	D3DXVECTOR3 startSolePos, desSolePos;
+	D3DXVECTOR3 startPos, desPos;
 	bool done;
 };
 

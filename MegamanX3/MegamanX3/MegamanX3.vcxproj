@@ -223,6 +223,7 @@
     <ClInclude Include="HeadGunnerState.h" />
     <ClInclude Include="HeadGunnerStateHandler.h" />
     <ClInclude Include="HealthBar.h" />
+    <ClInclude Include="HealthX.h" />
     <ClInclude Include="Helit.h" />
     <ClInclude Include="HelitDie.h" />
     <ClInclude Include="HelitFlying.h" />
@@ -338,6 +339,7 @@
     <ClCompile Include="HeadGunnerStanding.cpp" />
     <ClCompile Include="HeadGunnerState.cpp" />
     <ClCompile Include="HealthBar.cpp" />
+    <ClCompile Include="HealthX.cpp" />
     <ClCompile Include="Helit.cpp" />
     <ClCompile Include="HelitDie.cpp" />
     <ClCompile Include="HelitFlying.cpp" />

@@ -7,6 +7,7 @@
 #include "Background.h"
 #include "DebugDraw.h"
 #include "Door.h"
+#include "HealthX.h"
 
 class GameScene :
 	public GameComponent
@@ -30,6 +31,7 @@ private:
 	Player *player;
 	Door * currentDoor;
 	Entity * checkPoint;
+	Entity *x_health;
 };
 
 #endif

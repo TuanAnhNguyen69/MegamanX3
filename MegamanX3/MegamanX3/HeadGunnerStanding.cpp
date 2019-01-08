@@ -25,6 +25,7 @@ void HeadGunnerStanding::Load()
 	entity->SetVelocity(0, 0);
 	timeStartState = clock();
 	entity->SetReverse(!isLeft);
+	entity->AddVelocityY(10.0f);
 }
 
 void HeadGunnerStanding::Update()
@@ -48,9 +49,23 @@ void HeadGunnerStanding::Update()
 			handler->ChangeState(HeadGunnerStateHandler::StateName::ShootCanon);
 		}
 	}
+
+
 	
 }
 
 void HeadGunnerStanding::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	if (impactor->GetEntityId() == EntityId::Platform_ID)
+	{
+		switch (side)
+		{
+		case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
+		{
+			entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
+			entity->SetVelocity(0, 0);
+			break;
+		}
+		}
+	}
 }

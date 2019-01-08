@@ -33,6 +33,8 @@ public:
 
 	virtual bool IsFaceLeft() = 0;
 	virtual void SetFace(bool isLeft) = 0;
+	virtual void Seen() = 0;
+	virtual bool GetSeen() = 0;
 
 }; 
 

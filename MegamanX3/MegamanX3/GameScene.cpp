@@ -42,14 +42,35 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
+<<<<<<< HEAD
 	player->SetPosition(300, 1712);
+=======
+	//player->SetPosition(4680, 2300);
+	player->SetPosition(14000, 3860);
+	//player->SetPosition(300, 1700);
+
+
+	//player->SetPosition(9800, 2200);
+>>>>>>> c5a7264fcce969f34d88c687a8fb1a023d78eb39
 	camera->SetCenter(player->GetPosition());
 
 	//EntityManager::GetInstance()->Initialize(player, camera, "testDoor", map->GetWidth(), map->GetHeight());
 	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());	
 
-	//Sound::getInstance()->loadSound((char*)"sound/BlastHornet.wav", "blasthornet");
-	//Sound::getInstance()->play("blasthornet", false, 1);
+	Sound::getInstance()->loadSound((char*)"sound/normal_bullet.wav", "normal_Bullet");
+	Sound::getInstance()->setVolume(120.0f, "normal_Bullet");
+
+	Sound::getInstance()->loadSound((char*)"sound/soundtrack.wav", "soundtrack");
+	Sound::getInstance()->setVolume(90.0f, "soundtrack");
+
+	
+	x_health = new HealthX(player);
+	x_health->SetPosition(player->GetPosition().x - 100, player->GetPosition().y - 100);
+	x_health->SetBound(14, 52);
+
+
+
+	Sound::getInstance()->play("soundtrack", true, 0);
 
 	debugDraw = new DebugDraw();
 	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));
@@ -112,8 +133,8 @@ void GameScene::Update()
 	EntityManager::GetInstance()->CheckCollide();
 	camera->Update(player->GetPosition());
 	player->Update();
+	x_health->Update();
 	EntityManager::GetInstance()->Update();
-
 }
 
 void GameScene::CheckCollision()
@@ -170,6 +191,7 @@ void GameScene::Render()
 {
 	map->RenderBackground(camera);
 	player->Render();
+	x_health->Render();
 	auto list = EntityManager::GetInstance()->GetAllEntities();
 	for (int index = 0; index < list.size(); index++) {
 		debugDraw->DrawRect(list.at(index)->GetBound(), camera);

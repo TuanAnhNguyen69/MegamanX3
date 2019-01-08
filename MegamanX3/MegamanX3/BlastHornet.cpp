@@ -56,6 +56,7 @@ BlastHornet::~BlastHornet()
 
 void BlastHornet::Initialize()
 {
+	this->activeRange = 500;
 	this->damage = 1;
 	this->hadFly = false;
 	this->hadDie = false;
@@ -67,17 +68,16 @@ void BlastHornet::Initialize()
 	this->SetPreAction(BlastHornetStateHandler::StateName::Drop);
 	this->ChangeState(BlastHornetStateHandler::StateName::Return);
 	HP = Define::BLASTHORNET_HP;
+	//HP = 0;
 }
 
 void BlastHornet::Update()
 {
 	if (this->IsRemove())
-	{
+	{	
 		EntityManager::GetInstance()->RemoveEntity(this);
 		return;
 	}
-
-
 
 	if (this->GetHP() <= Define::BLASTHORNET_HP / 2 && this->GetHP() > 0 && !hadFly)
 	{
@@ -152,6 +152,7 @@ BlastHornetStateHandler::MoveDirection BlastHornet::GetMoveDirection()
 
 void BlastHornet::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	Enemy::OnCollision(impactor, side, data);
 	if (currentState)
 	{
 		currentState->OnCollision(impactor, side, data);
@@ -195,4 +196,14 @@ Player * BlastHornet::GetPlayer()
 int BlastHornet::GetHP()
 {
 	return this->HP;
+}
+
+void BlastHornet::Seen()
+{
+	this->seen = true;
+}
+
+bool BlastHornet::GetSeen()
+{
+	return this->seen;
 }

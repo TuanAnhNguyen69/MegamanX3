@@ -125,7 +125,7 @@ void HelitShooting::Update()
 
 void HelitShooting::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() == EntityId::Platform_ID || impactor->GetEntityId() == EntityId::Megaman_ID)
+	if (impactor->GetEntityId() == EntityId::Platform_ID || impactor->GetEntityId() == EntityId::Megaman_ID || impactor->GetEntityId() == EntityId::Roof_ID)
 	{
 		switch (side)
 		{

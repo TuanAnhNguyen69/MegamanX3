@@ -34,6 +34,9 @@ public:
 	bool GetLeftTarget();
 	bool GetAboveTarget();
 
+	void Seen();
+	bool GetSeen();
+	void SetRemove();
 private:
 	ShurikenState * currentState;
 	ShurikenState *turnState, *attack1State, *attack2State, *jumpState, *dieState, *flipState, *moveState;
@@ -41,5 +44,8 @@ private:
 	ShurikenStateHandler::StateName preAction;
 	bool targetIsLeft;
 	bool targetIsAbout;
+	bool seen;
+	bool remove;
+	bool dead;
 };
 
