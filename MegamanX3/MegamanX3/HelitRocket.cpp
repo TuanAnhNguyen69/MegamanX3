@@ -66,6 +66,8 @@ void HelitRocket::OnCollision(Entity * impactor, Entity::CollisionSide side, Ent
 			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
 				0, 7, 8, 50, 50);
 			this->SetSprite(sprite);
+			Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_helitrocket");
+			Sound::getInstance()->play("explosion_helitrocket", false, 1);
 			this->hitted = true;
 		}
 		else {

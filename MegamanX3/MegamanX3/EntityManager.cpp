@@ -286,6 +286,13 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				notoBanger->SetBound(width, height);
 				AddEntity(notoBanger);
 				break;
+			/*	Helit * helit = new Helit(player);
+				helit->Initialize();
+				helit->SetPosition(posX + width / 2, (posY + height / 2));
+				helit->SetScale(2, 2);
+				helit->SetBound(width, height);
+				AddEntity(helit);
+				break;*/
 			}
 
 			case EntityId::RightFaceHeadGunner_ID:

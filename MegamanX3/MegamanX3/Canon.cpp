@@ -105,12 +105,14 @@ void Canon::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::C
 {
 
 	if (!this->hitted) {
-		if (!(impactor->GetEntityId() == EntityId::NotorBanger_ID || impactor->GetEntityId() == EntityId::Canon_ID)) {
+		if (!(impactor->GetEntityId() == EntityId::NotorBanger_ID || impactor->GetEntityId() == EntityId::LeftFaceHeadGunner_ID || impactor->GetEntityId() == EntityId::RightFaceHeadGunner_ID || impactor->GetEntityId() == EntityId::Canon_ID)) {
 			this->SetVelocity(0, 0);
 			sprite = new AnimatedSprite(15, 1, false);
 			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
 				0, 7, 8, 50, 50);
 			this->SetSprite(sprite);
+			Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_canon");
+			Sound::getInstance()->play("explosion_canon", false, 1);
 			this->hitted = true;
 		}
 	}

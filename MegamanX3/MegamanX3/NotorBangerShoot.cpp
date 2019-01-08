@@ -24,6 +24,7 @@ NotorBangerShoot::~NotorBangerShoot()
 void NotorBangerShoot::Load()
 {
 	ammo = 5;
+	
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	hadShoot = false;
@@ -67,6 +68,9 @@ void NotorBangerShoot::Update()
 				canon->SetScale(2, 2);
 				canon->SetBound(7, 7);
 				EntityManager::GetInstance()->AddEntity(canon);
+				Sound::getInstance()->loadSound((char*)"sound/shoot_canon.wav", "canon");
+				Sound::getInstance()->play("canon", false, 1);
+
 				hadShoot = true;
 				ammo--;
 			}

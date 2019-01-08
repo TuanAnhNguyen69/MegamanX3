@@ -90,6 +90,8 @@ void PlayerBullet::OnCollision(Entity * impactor, Entity::CollisionSide side, En
 {
 	if (impactor->GetEntityId() != EntityId::Megaman_ID && impactor->GetEntityId()!=  EntityId::MegamanBullet_ID) {
 		this->SetVelocityX(0);
+		Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_bullet");
+		Sound::getInstance()->play("explosion_bullet", false, 1);
 		this->hitted = true;
 	}
 	

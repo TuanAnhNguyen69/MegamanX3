@@ -3,6 +3,8 @@
 
 #include <d3d9.h>
 #include "Sprite.h"
+#include "Sound.h"
+
 
 enum EntityId{
 	// Player

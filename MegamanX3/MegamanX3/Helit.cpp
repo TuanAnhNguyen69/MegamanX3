@@ -35,7 +35,7 @@ Helit::~Helit()
 
 void Helit::Initialize()
 {
-	HP = 5;
+	HP = 3;
 	this->ChangeState(HelitStateHandler::StateName::Flying);
 }
 
@@ -43,6 +43,8 @@ void Helit::Update()
 {
 	if (this->IsRemove())
 	{
+		Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_helit");
+		Sound::getInstance()->play("explosion_helit", false, 1);
 		EntityManager::GetInstance()->RemoveEntity(this);
 		return;
 	}

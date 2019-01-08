@@ -9,8 +9,6 @@ namespace Define
 	const float BYTEBOMB_ACCELERATION = 10.0f;	//gia tốc
 }
 
-using namespace std;
-
 class ByteBomb : public Entity
 {
 public:

@@ -12,8 +12,6 @@
 
 //class Entity;
 
-using namespace std;
-
 class Helit : public HelitStateHandler, public Enemy
 {
 public:

@@ -11,8 +11,6 @@
 #include "Enemy.h"
 #include <list>
 
-class Entity;
-
 class NotorBanger : public NotorBangerStateHandler, public Enemy
 {
 public:
