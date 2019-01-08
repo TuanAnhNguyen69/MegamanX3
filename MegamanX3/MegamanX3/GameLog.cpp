@@ -9,7 +9,7 @@
 #define OUTLOG(s)  \
 {                   \
     std::ostringstream os;\
-    os << s << endl;\
+    os << s << std::endl;\
     OutputDebugStringA(os.str().c_str());   \
 }
 

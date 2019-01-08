@@ -53,6 +53,8 @@ void HeadGunner::Update()
 {
 	if (this->IsRemove())
 	{
+		Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_headgunner");
+		Sound::getInstance()->play("explosion_headgunner", false, 1);
 		EntityManager::GetInstance()->RemoveEntity(this);
 		return;
 	}

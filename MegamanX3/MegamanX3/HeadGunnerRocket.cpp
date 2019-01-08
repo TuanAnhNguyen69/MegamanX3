@@ -65,6 +65,8 @@ void HeadGunnerRocket::OnCollision(Entity * impactor,  Entity::CollisionSide sid
 			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
 				0, 7, 8, 50, 50);
 			this->SetSprite(sprite);
+			Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_headgunner");
+			Sound::getInstance()->play("explosion_headgunner", false, 1);
 			this->hitted = true;
 		}
 	}

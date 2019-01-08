@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <mmsystem.h>
+#include "dsound.h"
 #include <d3dx9.h>
 #include <d3d9.h>
 #include <Windows.h>

@@ -3,8 +3,6 @@
 #include "SystemDefs.h"
 #include "Timer.h"
 
-using namespace std;
-
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 FrameWork::FrameWork()

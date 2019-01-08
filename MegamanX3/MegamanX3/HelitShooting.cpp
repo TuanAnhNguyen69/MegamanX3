@@ -28,7 +28,7 @@ void HelitShooting::Load()
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	hadShoot = false;
-	ammo = 10;
+	ammo = 6;
 }
 
 void HelitShooting::Update()
@@ -51,6 +51,8 @@ void HelitShooting::Update()
 						rocket->SetScale(2, 2);
 						rocket->SetBound(16, 12);
 						EntityManager::GetInstance()->AddEntity(rocket);
+						Sound::getInstance()->loadSound((char*)"sound/shoot_rocket.wav", "rocket_helit");
+						Sound::getInstance()->play("rocket_helit", false, 1);
 						hadShoot = true;
 						ammo--;
 					}
