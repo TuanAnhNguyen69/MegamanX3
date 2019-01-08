@@ -42,14 +42,7 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-<<<<<<< HEAD
-	player->SetPosition(14200, 3700);
-	//player->SetPosition(4700, 2100);
-=======
-	//player->SetPosition(300, 1700);
-
-	player->SetPosition(9800, 2200);
->>>>>>> 324acf3ad3371af500cd22f0f5e12f6f9658c9c5
+	player->SetPosition(300, 1712);
 	camera->SetCenter(player->GetPosition());
 
 	//EntityManager::GetInstance()->Initialize(player, camera, "testDoor", map->GetWidth(), map->GetHeight());
@@ -91,10 +84,16 @@ void GameScene::DrawQuadtree(QuadTree *quadtree)
 void GameScene::Revive()
 {
 	player->SetPosition(checkPoint->GetPosition().x, checkPoint->GetPosition().y - 100);
+	player->Revive();
+	camera->SetCenter(player->GetPosition());
 }
 
 void GameScene::Update()
 {
+	if (player->NeedRevive()) {
+		Revive();
+	}
+
 	if (currentDoor && currentDoor->GetState() == Door::DoorState::OPENED) {
 		if (!player->GetMovable()) {
 			player->AutoMove();

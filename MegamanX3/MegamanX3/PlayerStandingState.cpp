@@ -29,6 +29,7 @@ void PlayerStandingState::Load()
 {
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
+	entity->SetMovable(true);
 }
 
 void PlayerStandingState::Update()

@@ -21,7 +21,9 @@ public:
 		Falling,
 		Sliding,
 		Damaged,
-		Climbing
+		Climbing,
+		Dying,
+		Reviving
 	};
 
 	enum MoveDirection

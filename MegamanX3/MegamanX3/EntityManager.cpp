@@ -240,36 +240,10 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 			case EntityId::CheckPoint_ID:
 			{
-<<<<<<< HEAD
 				Entity * checkPoint = new Entity(CheckPoint_ID);
 				checkPoint->SetPosition(posX + width / 2, (posY + height / 2));
 				checkPoint->SetBound(width, height);
 				AddEntity(checkPoint);
-=======
-
-				/*CargoShip *cargo = new CargoShip(player);
-				cargo->SetPosition((posX + width / 2) - 150, (posY + height / 2) - 100);
-				cargo->SetScale(2, 2);
-				cargo->SetBound(256, 88);
-				cargo->Initialize(camera);
-				AddEntity(cargo);
-				break;*/
-
-				/*Box *box = new Box(EntityId::VerticalBombBox_ID);
-				box->SetPosition(posX + width / 2 + 20, (posY + height / 2) + 150);
-				box->SetScale(1, 1);
-				box->Initialize(false);
-				AddEntity(box);
-				break;*/
-
-				/*CarryArm * carryArm = new CarryArm(player);
-				carryArm->SetPosition(posX + width / 2, (posY + height / 2));
-				carryArm->SetScale(1, 1);
-				carryArm->SetBound(width, height);
-				carryArm->Initialize();
-				AddEntity(carryArm);
-				break;*/
->>>>>>> 324acf3ad3371af500cd22f0f5e12f6f9658c9c5
 				break;
 			}
 

@@ -7,9 +7,11 @@
 #include "PlayerSlidingState.h"
 #include "PlayerDamagedState.h"
 #include "PlayerClimbingState.h"
+#include "PlayerReviveState.h"
+#include "PlayerDieState.h"
 #include "PlayerBullet.h"
 #include "EntityImport.h"
-
+#include "Collision.h"
 #include <iostream>
 
 
@@ -24,9 +26,9 @@ Player::Player() : Entity(EntityId::Megaman_ID)
 	slidingState = nullptr;
 	damagedState = nullptr;
 	climbingState = nullptr;
-	this->bulletCharging = 0;
-	this->fireCoolDown = 10;
-	this->hp = 30;
+	dieState = nullptr;
+	reviveState = nullptr;
+	
 }
 
 
@@ -71,11 +73,20 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 	slidingState = new PlayerSlidingState(this, this);
 	damagedState = new PlayerDamagedState(this, this);
 	climbingState = new PlayerClimbingState(this, this);
-	ChangeState(Falling);
+	dieState = new PlayerDieState(this, this);
+	reviveState = new PlayerReviveState(this, this);
+
+	ChangeState(Reviving);
+
 	isJumping = true;
 	allowSlide = true;
 	movable = true;
+	this->bulletCharging = 0;
+	this->fireCoolDown = 10;
+	this->hp = 30;
 	autoMovedDistance = 0;
+	reviving = false;
+	noBottomCollide = false;
 }
 
 void Player::Update()
@@ -104,13 +115,29 @@ void Player::Update()
 		bulletDamage = 10;
 	}
 
-	if (!movable) {
-		this->SetVelocity(0, 0);
+	if (immute && immuteTime < 80) {
+		immuteTime++;
 	}
 	else {
+		immute = false;
+		immuteTime = 0;
+	}
+
+
+	if (!Collision::IsCollide(this->GetBound(), camera->GetBound()) && noBottomCollide) {
+		hp = 0;
+		SetVelocity(0, 0);
+	}
+
+	if (hp <= 0 && currentStateName != Dying) {
+		ChangeState(Dying);
+		movable = false;
+	}
+
+
+	if (movable ) {
 		if (currentState) {
 			currentState->UpdateInput();
-			currentState->Update();
 		}
 
 		Input *input = Engine::GetEngine()->GetInput();
@@ -134,12 +161,9 @@ void Player::Update()
 			allowSlide = true;
 		}
 
-		if (input->IsKeyDown(DIK_T)) {
-			SetVelocityY(-100);
-		}
-
 		if (input->IsKeyUp(DIK_T)) {
-			SetVelocityY(0);
+			ChangeState(Damaged);
+			hp -= 5;
 		}
 
 		if (input->IsKeyDown(DIK_SPACE)) {
@@ -157,6 +181,11 @@ void Player::Update()
 			}
 		}
 	}
+
+	if (currentState) {
+		currentState->Update();
+	}
+
 	Entity::Update();
 }
 
@@ -193,6 +222,14 @@ void Player::ChangeState(PlayerStateHandler::StateName stateName) {
 	case Climbing:
 		currentState = climbingState;
 		currentStateName = Climbing;
+		break;
+	case Dying:
+		currentState = dieState;
+		currentStateName = Dying;
+		break;
+	case Reviving:
+		currentState = reviveState;
+		currentStateName = Reviving;
 		break;
 	}
 	currentState->Load();
@@ -232,7 +269,17 @@ void Player::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::C
 	case EntityId::HeliRocket_ID:
 	case EntityId::Canon_ID:
 	case EntityId::Bee_ID:	
+	case EntityId::BlastHornet_ID:
+	case EntityId::Byte_ID:
+	case EntityId::Helit_ID:
+	case EntityId::NotorBanger_ID:
+	case EntityId::Shurikein_ID:
 	{
+		if (immute) {
+			return;
+		}
+
+		immute = true;
 		ChangeState(Damaged);
 		this->hp -= 2;
 	}
@@ -247,8 +294,11 @@ void Player::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::C
 
 void Player::OnNoCollisionWithBottom()
 {
-	if (currentStateName != Jumping && currentStateName != Falling && currentStateName != Climbing) {
+	if (currentStateName != Jumping && currentStateName != Falling 
+		&& currentStateName != Climbing && currentStateName != Reviving
+		&& currentStateName != Dying) {
 		ChangeState(Falling);
+		noBottomCollide = true;
 	}
 }
 
@@ -337,6 +387,16 @@ int Player::GetAutoMovedDistance()
 	return autoMovedDistance;
 }
 
+bool Player::NeedRevive()
+{
+	return reviving;
+}
+
+void Player::RequireRevive()
+{
+	this->reviving = true;
+}
+
 bool Player::GetMovable()
 {
 	return movable;
@@ -346,6 +406,28 @@ void Player::SetMovable(bool movable)
 {
 	this->movable = movable;
 	autoMovedDistance = 0;
+}
+
+void Player::SetImmute(bool immute)
+{
+	this->immute = true;
+}
+
+bool Player::IsImmute()
+{
+	return immute;
+}
+
+void Player::Revive()
+{
+	ChangeState(Reviving);
+	isJumping = false;
+	allowSlide = true;
+	autoMovedDistance = 0;
+	this->bulletCharging = 0;
+	this->fireCoolDown = 10;
+	this->hp = 30;
+	reviving = false;
 }
 
 void Player::OnConveyorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
