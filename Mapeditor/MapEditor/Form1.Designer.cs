@@ -78,6 +78,10 @@
             this.chimeraArmorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cameraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkpointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.holeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wallHoleLeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wallHoleRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hallHoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.bossToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -130,10 +134,6 @@
             this.fireToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.holeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wallHoleLeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wallHoleRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hallHoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -239,7 +239,7 @@
             this.checkpointToolStripMenuItem,
             this.holeToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(136, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 114);
             // 
             // addToolStripMenuItem
             // 
@@ -249,7 +249,7 @@
             this.groundToolStripMenuItem1,
             this.itemToolStripMenuItem1});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addToolStripMenuItem.Text = "Add";
             // 
             // bossToolStripMenuItem1
@@ -265,20 +265,21 @@
             // blastHornetToolStripMenuItem
             // 
             this.blastHornetToolStripMenuItem.Name = "blastHornetToolStripMenuItem";
-            this.blastHornetToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.blastHornetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.blastHornetToolStripMenuItem.Text = "BlastHornet";
             this.blastHornetToolStripMenuItem.Click += new System.EventHandler(this.blastHornetToolStripMenuItem_Click);
             // 
             // byteToolStripMenuItem
             // 
             this.byteToolStripMenuItem.Name = "byteToolStripMenuItem";
-            this.byteToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.byteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.byteToolStripMenuItem.Text = "Byte";
+            this.byteToolStripMenuItem.Click += new System.EventHandler(this.byteToolStripMenuItem_Click);
             // 
             // shurikeinToolStripMenuItem
             // 
             this.shurikeinToolStripMenuItem.Name = "shurikeinToolStripMenuItem";
-            this.shurikeinToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.shurikeinToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.shurikeinToolStripMenuItem.Text = "Shurikein";
             this.shurikeinToolStripMenuItem.Click += new System.EventHandler(this.shurikeinToolStripMenuItem_Click);
             // 
@@ -546,16 +547,47 @@
             // cameraToolStripMenuItem
             // 
             this.cameraToolStripMenuItem.Name = "cameraToolStripMenuItem";
-            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.cameraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cameraToolStripMenuItem.Text = "Camera";
             this.cameraToolStripMenuItem.Click += new System.EventHandler(this.cameraToolStripMenuItem_Click_1);
             // 
             // checkpointToolStripMenuItem
             // 
             this.checkpointToolStripMenuItem.Name = "checkpointToolStripMenuItem";
-            this.checkpointToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.checkpointToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.checkpointToolStripMenuItem.Text = "Checkpoint";
             this.checkpointToolStripMenuItem.Click += new System.EventHandler(this.checkpointToolStripMenuItem_Click);
+            // 
+            // holeToolStripMenuItem
+            // 
+            this.holeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.wallHoleLeftToolStripMenuItem,
+            this.wallHoleRightToolStripMenuItem,
+            this.hallHoleToolStripMenuItem});
+            this.holeToolStripMenuItem.Name = "holeToolStripMenuItem";
+            this.holeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.holeToolStripMenuItem.Text = "Hole";
+            // 
+            // wallHoleLeftToolStripMenuItem
+            // 
+            this.wallHoleLeftToolStripMenuItem.Name = "wallHoleLeftToolStripMenuItem";
+            this.wallHoleLeftToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.wallHoleLeftToolStripMenuItem.Text = "WallHoleLeft";
+            this.wallHoleLeftToolStripMenuItem.Click += new System.EventHandler(this.wallHoleLeftToolStripMenuItem_Click);
+            // 
+            // wallHoleRightToolStripMenuItem
+            // 
+            this.wallHoleRightToolStripMenuItem.Name = "wallHoleRightToolStripMenuItem";
+            this.wallHoleRightToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.wallHoleRightToolStripMenuItem.Text = "WallHoleRight";
+            this.wallHoleRightToolStripMenuItem.Click += new System.EventHandler(this.wallHoleRightToolStripMenuItem_Click);
+            // 
+            // hallHoleToolStripMenuItem
+            // 
+            this.hallHoleToolStripMenuItem.Name = "hallHoleToolStripMenuItem";
+            this.hallHoleToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.hallHoleToolStripMenuItem.Text = "HallHole";
+            this.hallHoleToolStripMenuItem.Click += new System.EventHandler(this.hallHoleToolStripMenuItem_Click);
             // 
             // panel3
             // 
@@ -820,37 +852,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // holeToolStripMenuItem
-            // 
-            this.holeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.wallHoleLeftToolStripMenuItem,
-            this.wallHoleRightToolStripMenuItem,
-            this.hallHoleToolStripMenuItem});
-            this.holeToolStripMenuItem.Name = "holeToolStripMenuItem";
-            this.holeToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-            this.holeToolStripMenuItem.Text = "Hole";
-            // 
-            // wallHoleLeftToolStripMenuItem
-            // 
-            this.wallHoleLeftToolStripMenuItem.Name = "wallHoleLeftToolStripMenuItem";
-            this.wallHoleLeftToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.wallHoleLeftToolStripMenuItem.Text = "WallHoleLeft";
-            this.wallHoleLeftToolStripMenuItem.Click += new System.EventHandler(this.wallHoleLeftToolStripMenuItem_Click);
-            // 
-            // wallHoleRightToolStripMenuItem
-            // 
-            this.wallHoleRightToolStripMenuItem.Name = "wallHoleRightToolStripMenuItem";
-            this.wallHoleRightToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.wallHoleRightToolStripMenuItem.Text = "WallHoleRight";
-            this.wallHoleRightToolStripMenuItem.Click += new System.EventHandler(this.wallHoleRightToolStripMenuItem_Click);
-            // 
-            // hallHoleToolStripMenuItem
-            // 
-            this.hallHoleToolStripMenuItem.Name = "hallHoleToolStripMenuItem";
-            this.hallHoleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.hallHoleToolStripMenuItem.Text = "HallHole";
-            this.hallHoleToolStripMenuItem.Click += new System.EventHandler(this.hallHoleToolStripMenuItem_Click);
             // 
             // Form1
             // 

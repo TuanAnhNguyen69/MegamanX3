@@ -57,10 +57,13 @@ private:
 	bool allowSlide;
 	bool movable;
 	int autoMovedDistance;
+	int hp;
+	int life;
+
+
 
 	void OnConveyorCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	void OnDoorCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
-
 
 };
 

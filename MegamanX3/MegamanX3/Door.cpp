@@ -16,7 +16,6 @@ void Door::Update()
 {
 	if (state == DoorState::CLOSING) {
 		SetSprite(closingSprite);
-		std::cout << closingSprite->GetCurrentFrame() << std::endl;
 		if (closingSprite->GetCurrentFrame() == 1) {
 			state = DoorState::CLOSED;
 		}

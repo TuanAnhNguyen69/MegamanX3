@@ -24,17 +24,12 @@ int Roof::GetCollidePosition(Entity * entity)
 	if (entity->GetPosition().x < this->GetPosition().x + this->GetWidth() / 6
 		&& entity->GetPosition().x > this->GetPosition().x - this->GetWidth() / 6)
 	{ 
-		std::cout << this->GetPosition().y - this->height / 2 << std::endl;
 		return this->GetPosition().y + this->height / 2 - (cbrt(this->GetWidth() / 3) * 20);
 	}
 	else if (entity->GetPosition().x < this->GetPosition().x - this->GetWidth() / 6) {
-		float a = this->GetPosition().y + this->height / 2 - (cbrt(entity->GetPosition().x - (this->GetPosition().x - this->GetWidth() / 2)) * 20);
-		std::cout << a << std::endl;
 		return this->GetPosition().y + this->height / 2 - (cbrt(entity->GetPosition().x - (this->GetPosition().x - this->GetWidth()/2))* 20);
 	}
 	else if (entity->GetPosition().x > this->GetPosition().x + this->GetWidth() / 6) {
-		float a = this->GetPosition().y + this->height / 2 - (cbrt((this->GetPosition().x + this->GetWidth() / 2) - entity->GetPosition().x) * 20);
-		std::cout << a << std::endl;
 		return this->GetPosition().y + this->height / 2 - (cbrt((this->GetPosition().x + this->GetWidth() / 2) - entity->GetPosition().x) * 20);
 	}
 }

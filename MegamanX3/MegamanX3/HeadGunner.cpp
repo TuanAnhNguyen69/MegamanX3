@@ -62,7 +62,7 @@ void HeadGunner::Update()
 	{
 		this->ChangeState(HeadGunnerStateHandler::StateName::Die);
 	}
-	Entity::Update();
+	Enemy::Update();
 	if (currentState) {
 			currentState->Update();
 	}

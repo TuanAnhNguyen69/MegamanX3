@@ -58,8 +58,7 @@ void CargoShip::Update()
 		this->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
 	}
-
-	Entity::Update();
+	Enemy::Update();
 	if (currentState)
 	{
 		currentState->Update();

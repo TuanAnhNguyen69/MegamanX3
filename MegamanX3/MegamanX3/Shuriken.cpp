@@ -79,7 +79,7 @@ void Shuriken::Update()
 		this->ChangeState(ShurikenStateHandler::StateName::Die);
 	}
 
-	Entity::Update();
+	Enemy::Update();
 	if (currentState)
 	{
 		currentState->Update();

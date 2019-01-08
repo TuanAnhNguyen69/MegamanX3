@@ -141,9 +141,6 @@
     <ClCompile Include="HeadGunnerState.cpp">
       <Filter>Entities\Enemy\HeadGunner</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>World</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerClimbingState.cpp">
       <Filter>Entities\Player</Filter>
     </ClCompile>
@@ -315,6 +312,9 @@
     <ClCompile Include="GameGlobal.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="HealthBar.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -476,9 +476,6 @@
     </ClInclude>
     <ClInclude Include="HeadGunnerState.h">
       <Filter>Entities\Enemy\HeadGunner</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="PlayerClimbingState.h">
       <Filter>Entities\Player</Filter>
@@ -668,6 +665,9 @@
     </ClInclude>
     <ClInclude Include="GameGlobal.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthBar.h">
+      <Filter>World</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

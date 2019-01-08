@@ -22,12 +22,14 @@ public:
 private:
 	void CheckCollision();
 	void DrawQuadtree(QuadTree *quadtree);
+	void Revive();
 
 	DebugDraw *debugDraw;
 	Camera *camera;
 	Background *map;
 	Player *player;
 	Door * currentDoor;
+	Entity * checkPoint;
 };
 
 #endif

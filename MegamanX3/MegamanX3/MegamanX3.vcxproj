@@ -222,6 +222,7 @@
     <ClInclude Include="HeadGunnerStanding.h" />
     <ClInclude Include="HeadGunnerState.h" />
     <ClInclude Include="HeadGunnerStateHandler.h" />
+    <ClInclude Include="HealthBar.h" />
     <ClInclude Include="Helit.h" />
     <ClInclude Include="HelitDie.h" />
     <ClInclude Include="HelitFlying.h" />
@@ -272,7 +273,6 @@
     <ClInclude Include="SystemDefs.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Thorn.h" />
-    <ClInclude Include="Tile.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UpPlatform.h" />
   </ItemGroup>
@@ -335,6 +335,7 @@
     <ClCompile Include="HeadGunnerShootRocket.cpp" />
     <ClCompile Include="HeadGunnerStanding.cpp" />
     <ClCompile Include="HeadGunnerState.cpp" />
+    <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="Helit.cpp" />
     <ClCompile Include="HelitDie.cpp" />
     <ClCompile Include="HelitFlying.cpp" />
@@ -385,7 +386,6 @@
     <ClCompile Include="NotorBangerState.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Thorn.cpp" />
-    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UpPlatform.cpp" />
   </ItemGroup>

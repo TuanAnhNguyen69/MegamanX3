@@ -47,7 +47,7 @@ void Camera::Initialize(LPCTSTR filePath)
 		float posX, posY; int width, height;
 		int count;
 		camera >> count;
-		std::cout << count;
+		std::cout << "NumCam" << count << std::endl;
 		for (int i = 0; i < count; i++)
 		{
 			camera >> posX >> posY >> width >> height;
