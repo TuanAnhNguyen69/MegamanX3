@@ -2,6 +2,8 @@
 #include "Enemy.h"
 #include "Entity.h"
 
+class Entity;
+
 namespace Define
 {
 	const float CANON_MAX_VELOCITY_X = 400.0f;
@@ -12,10 +14,10 @@ namespace Define
 	const float CANON_LOW_VELOCITY_Y = 15.0f; //vY khi bắn thấp
 }
 
-class Canon : public Entity
+class Canon : public Enemy
 {
 public:
-	Canon();
+	Canon(Player *player);
 	~Canon();
 
 	void Update();

@@ -57,8 +57,8 @@ void EntityManager::Render()
 	quadTree->GetEntitiesCollideAble(collidableEntity, camera->GetBound());
 	int size = collidableEntity.size();
 	for (int index = 0; index < size; index++) {
-		if (collidableEntity[index]->entityId == Canon_ID) {
-			int a = 0;
+		if (collidableEntity[index]->entityId == EntityId::CargoSole_ID) {
+			continue;
 		}
 		collidableEntity[index]->Render();
 	}
@@ -240,10 +240,36 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 			case EntityId::CheckPoint_ID:
 			{
+<<<<<<< HEAD
 				Entity * checkPoint = new Entity(CheckPoint_ID);
 				checkPoint->SetPosition(posX + width / 2, (posY + height / 2));
 				checkPoint->SetBound(width, height);
 				AddEntity(checkPoint);
+=======
+
+				/*CargoShip *cargo = new CargoShip(player);
+				cargo->SetPosition((posX + width / 2) - 150, (posY + height / 2) - 100);
+				cargo->SetScale(2, 2);
+				cargo->SetBound(256, 88);
+				cargo->Initialize(camera);
+				AddEntity(cargo);
+				break;*/
+
+				/*Box *box = new Box(EntityId::VerticalBombBox_ID);
+				box->SetPosition(posX + width / 2 + 20, (posY + height / 2) + 150);
+				box->SetScale(1, 1);
+				box->Initialize(false);
+				AddEntity(box);
+				break;*/
+
+				/*CarryArm * carryArm = new CarryArm(player);
+				carryArm->SetPosition(posX + width / 2, (posY + height / 2));
+				carryArm->SetScale(1, 1);
+				carryArm->SetBound(width, height);
+				carryArm->Initialize();
+				AddEntity(carryArm);
+				break;*/
+>>>>>>> 324acf3ad3371af500cd22f0f5e12f6f9658c9c5
 				break;
 			}
 
@@ -267,6 +293,13 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				notoBanger->SetBound(width, height);
 				AddEntity(notoBanger);
 				break;
+			/*	Helit * helit = new Helit(player);
+				helit->Initialize();
+				helit->SetPosition(posX + width / 2, (posY + height / 2));
+				helit->SetScale(2, 2);
+				helit->SetBound(width, height);
+				AddEntity(helit);
+				break;*/
 			}
 
 			case EntityId::RightFaceHeadGunner_ID:
@@ -308,21 +341,46 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 			case EntityId::DoubleBox_ID:
 			{
+				Box *doubleBox = new Box(EntityId::DoubleBox_ID, player);
+				doubleBox->SetPosition(posX + width / 2, posY + height / 2);
+				doubleBox->SetBound(width, height);
+				doubleBox->Initialize(false);
+				break;
+			}
+
+			case EntityId::TrippleBox_ID:
+			{
+				Box *trippleBox = new Box(EntityId::TrippleBox_ID, player);
+				trippleBox->SetPosition(posX + width / 2, posY + height / 2);
+				trippleBox->SetBound(width, height);
+				trippleBox->Initialize(false);
 				break;
 			}
 				
 			case EntityId::QuadraBox_ID:
 			{
+				Box *quadraBox = new Box(EntityId::QuadraBox_ID, player);
+				quadraBox->SetPosition(posX + width / 2, posY + height / 2);
+				quadraBox->SetBound(width, height);
+				quadraBox->Initialize(false);
 				break;
 			}
 
 			case EntityId::VerticalBombBox_ID:
 			{
+				Box *verticalBox = new Box(EntityId::VerticalBombBox_ID, player);
+				verticalBox->SetPosition(posX + width / 2, posY + height / 2);
+				verticalBox->SetBound(width, height);
+				verticalBox->Initialize(false);
 				break;
 			}
 
 			case EntityId::HorizontalBombBox_ID:
 			{
+				Box *horizoltalBox = new Box(EntityId::HorizontalBombBox_ID, player);
+				horizoltalBox->SetPosition(posX + width / 2, posY + height / 2);
+				horizoltalBox->SetBound(width, height);
+				horizoltalBox->Initialize(false);
 				break;
 			}
 	
@@ -360,10 +418,10 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			case EntityId::Cargo_ID:
 			{
 				CargoShip *cargo = new CargoShip(player);
-				cargo->SetPosition((posX + width / 2) - 150, (posY + height / 2));
+				cargo->SetPosition((posX + width / 2) - 150, (posY + height / 2) + 150);
 				cargo->SetScale(2, 2);
 				cargo->SetBound(256, 88);
-				cargo->Initialize();
+				cargo->Initialize(camera);
 				AddEntity(cargo);
 				break;
 			}

@@ -36,12 +36,14 @@ void HeadGunnerShootRocket::Update()
 	{
 		if (!hadShoot) 
 		{
-			HeadGunnerRocket *rocket = new HeadGunnerRocket();
+			HeadGunnerRocket *rocket = new HeadGunnerRocket(((Enemy*)entity)->player);
 			rocket->SetPosition(entity->GetPosition().x, entity->GetPosition().y - 10);
 			rocket->Initialize(isLeft);
 			rocket->SetScale(2, 2);
 			rocket->SetBound(25, 9);
 			EntityManager::GetInstance()->AddEntity(rocket);
+			Sound::getInstance()->loadSound((char*)"sound/shoot_rocket.wav", "rocket_headgunner");
+			Sound::getInstance()->play("rocket_headgunner", false, 1);
 			hadShoot = true;
 		}
 	}

@@ -28,7 +28,7 @@ void HelitShooting::Load()
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	hadShoot = false;
-	ammo = 10;
+	ammo = 6;
 }
 
 void HelitShooting::Update()
@@ -45,12 +45,14 @@ void HelitShooting::Update()
 			if (ammo > 0) {
 				if (sprite->GetCurrentFrame() == 1) {
 					if (!hadShoot) {
-						HelitRocket *rocket = new HelitRocket();
+						HelitRocket *rocket = new HelitRocket(((Enemy*)entity)->player);
 						rocket->SetPosition(entity->GetPosition().x, entity->GetPosition().y + 22);
 						rocket->Initialize(handler->GetLeftTarget());
 						rocket->SetScale(2, 2);
 						rocket->SetBound(16, 12);
 						EntityManager::GetInstance()->AddEntity(rocket);
+						Sound::getInstance()->loadSound((char*)"sound/shoot_rocket.wav", "rocket_helit");
+						Sound::getInstance()->play("rocket_helit", false, 1);
 						hadShoot = true;
 						ammo--;
 					}
@@ -76,7 +78,7 @@ void HelitShooting::Update()
 			if (ammo > 0) {
 				if (sprite->GetCurrentFrame() == 1) {
 					if (!hadShoot) {
-						HelitRocket *rocket = new HelitRocket();
+						HelitRocket *rocket = new HelitRocket(((Enemy*)entity)->player);
 						rocket->SetPosition(entity->GetPosition().x, entity->GetPosition().y + 22);
 						rocket->Initialize(handler->GetLeftTarget());
 						rocket->SetScale(2, 2);

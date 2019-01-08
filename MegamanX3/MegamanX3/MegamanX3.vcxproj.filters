@@ -303,6 +303,15 @@
     <ClCompile Include="CargoSole.cpp">
       <Filter>Entities\Enemy\CargoShip</Filter>
     </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Core\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLog.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GameGlobal.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
     <ClCompile Include="HealthBar.cpp">
       <Filter>World</Filter>
     </ClCompile>
@@ -648,6 +657,15 @@
     <ClInclude Include="CargoSole.h">
       <Filter>Entities\Enemy\CargoShip</Filter>
     </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Core\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLog.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GameGlobal.h">
+      <Filter>Core</Filter>
+    </ClInclude>
     <ClInclude Include="HealthBar.h">
       <Filter>World</Filter>
     </ClInclude>
@@ -712,6 +730,9 @@
     </Filter>
     <Filter Include="Entities\Enemy\CargoShip">
       <UniqueIdentifier>{f6dd8fa4-6bca-4834-acfb-9f35d383ce44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Sound">
+      <UniqueIdentifier>{2412c1db-1a83-49f7-80e5-87bf3a1eb4cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

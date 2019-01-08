@@ -36,12 +36,11 @@ Byte::~Byte()
 		delete dieState;
 		dieState = nullptr;
 	}
-
-	Entity::~Entity();
 }
 
 void Byte::Initialize()
 {
+	this->damage = 1;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "byte", 100, 100);
 	this->SetFace(true);
 	this->ChangeState(ByteStateHandler::StateName::Standing);

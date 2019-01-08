@@ -48,6 +48,11 @@ void Enemy::SetActive(bool active)
 	this->active = active;
 }
 
+int Enemy::GetDamage()
+{
+	return this->damage;
+}
+
 void Enemy::SetActiveRange(int activeRange)
 {
 	this->activeRange = activeRange;

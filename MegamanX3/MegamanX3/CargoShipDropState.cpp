@@ -7,6 +7,8 @@ CargoShipDropState::CargoShipDropState(CargoShipStateHandler *handler, Entity *e
 	sprite = new AnimatedSprite(15, 1, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "cargo_body",
 		0, 0, 1, 256, 88);
+	dropLeft = false;
+	countCarryArm = 9;
 }
 
 
@@ -24,22 +26,53 @@ void CargoShipDropState::Load()
 {
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
-
 	hadDrop = false;
+	dropLeft = !dropLeft;
+	timeStartState = clock();
 }
 
 void CargoShipDropState::Update()
 {
+
 	if (!hadDrop)
 	{
 		CarryArm *carryArm = new CarryArm(((Enemy*)entity)->player);
-		carryArm->SetPosition(entity->GetPosition().x, entity->GetPosition().y - 88);
+		if (dropLeft)
+		{
+			carryArm->SetPosition(entity->GetPosition().x - 10, entity->GetPosition().y - 88);
+		}
+		else
+		{
+			carryArm->SetPosition(entity->GetPosition().x + 100, entity->GetPosition().y - 88);
+		}
 		carryArm->SetScale(1.5, 1.5);
 		carryArm->SetBound(30 * 1.5, 58 * 1.5);
 		carryArm->Initialize();
 		EntityManager::GetInstance()->AddEntity(carryArm);
+
 		hadDrop = true;
+		timeStartUp = clock();
+		countCarryArm--;
 	}
+
+	if (countCarryArm > 0)
+	{
+		timeCount = clock();
+		if (((float)(timeCount - timeStartState) / 1000) > 5)
+		{
+			this->Load();
+		}
+	}
+	else
+	{
+		timeCountAfterDrop = clock();
+		float dt = (timeCountAfterDrop - timeStartUp) / 1000;
+		if(dt > 4)
+		{
+			handler->ChangeState(CargoShipStateHandler::StateName::Up);
+		}
+	}
+
 }
 
 void CargoShipDropState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)

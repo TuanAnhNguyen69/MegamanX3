@@ -36,11 +36,11 @@ void BlastHornetDrop::Update()
 		targetPos = handler->GetPlayerPos();
 
 		Bee *bee1, *bee2, *bee3, *bee4, *bee5;
-		bee1 = new Bee(D3DXVECTOR3(targetPos.x + 150, targetPos.y, 0));
-		bee2 = new Bee(D3DXVECTOR3(targetPos.x + 70, targetPos.y, 0));
-		bee3 = new Bee(targetPos);
-		bee4 = new Bee(D3DXVECTOR3(targetPos.x - 70, targetPos.y, 0));
-		bee5 = new Bee(D3DXVECTOR3(targetPos.x - 150, targetPos.y, 0));
+		bee1 = new Bee(((Enemy*)entity)->player, D3DXVECTOR3(targetPos.x + 150, targetPos.y, 0));
+		bee2 = new Bee(((Enemy*)entity)->player, D3DXVECTOR3(targetPos.x + 70, targetPos.y, 0));
+		bee3 = new Bee(((Enemy*)entity)->player, targetPos);
+		bee4 = new Bee(((Enemy*)entity)->player, D3DXVECTOR3(targetPos.x - 70, targetPos.y, 0));
+		bee5 = new Bee(((Enemy*)entity)->player, D3DXVECTOR3(targetPos.x - 150, targetPos.y, 0));
 
 		bee1->SetPosition(curPos.x, curPos.y);
 		bee2->SetPosition(curPos.x, curPos.y);

@@ -5,6 +5,7 @@
 
 #include <Windows.h>
 #include "Engine.h"
+#include "GameGlobal.h"
 
 class FrameWork
 {

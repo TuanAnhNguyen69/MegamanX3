@@ -51,6 +51,7 @@ Engine::~Engine()
 
 bool Engine::InitializeGraphics(HWND hwnd)
 {
+	//GameGlobal::SetCurrentHWND(hwnd);
 	graphics = new Graphics();
 	graphics->SetHwnd(hwnd);
 	return graphics->InitializeDX();

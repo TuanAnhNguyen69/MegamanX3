@@ -11,6 +11,8 @@
 #include "ShurikenTurn.h"
 #include "ShurikenMove.h"
 
+class Entity;
+
 class Shuriken : public ShurikenStateHandler, public Enemy
 {
 public:

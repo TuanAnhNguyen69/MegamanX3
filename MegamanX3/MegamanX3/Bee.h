@@ -3,17 +3,21 @@
 #include "Enemy.h"
 #include <time.h>
 
+class Entity;	
+
 namespace Define
 {
 	const float BEE_SPEED = 15.0;
 	const float BEE_FOLLOW_SPEED = 7.0f;
 }
 
-class Bee : public Entity
+
+
+class Bee : public Enemy
 {
 public:
 	Bee(Player *player);
-	Bee(D3DXVECTOR3 desPost);
+	Bee(Player *player, D3DXVECTOR3 desPost);
 	~Bee();
 
 	void Initailize();

@@ -13,6 +13,9 @@ public:
 	virtual StateName GetCurrentStateName() = 0;
 	virtual void ChangeState(StateName state) = 0;
 
+	virtual D3DXVECTOR3 GetOriginalSolePos() = 0;
+	virtual void SetRemoveSole() = 0;
+
 	CargoSole *sole;
 
 };

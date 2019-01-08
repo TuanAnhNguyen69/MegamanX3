@@ -52,12 +52,11 @@ BlastHornet::~BlastHornet()
 		delete flyState;
 		flyState = nullptr;
 	}
-
-	Entity::~Entity();
 }
 
 void BlastHornet::Initialize()
 {
+	this->damage = 1;
 	this->hadFly = false;
 	this->hadDie = false;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),

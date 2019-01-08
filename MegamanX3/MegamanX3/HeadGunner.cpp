@@ -36,12 +36,11 @@ HeadGunner::~HeadGunner()
 		delete dieState;
 		dieState = nullptr;
 	}
-
-	Entity::~Entity();
 }
 
 void HeadGunner::Initialize( bool isLeft)
 {
+	this->damage = 1;
 	this->HP = 5;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"head_gunner", 50, 50);
@@ -54,6 +53,8 @@ void HeadGunner::Update()
 {
 	if (this->IsRemove())
 	{
+		Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_headgunner");
+		Sound::getInstance()->play("explosion_headgunner", false, 1);
 		EntityManager::GetInstance()->RemoveEntity(this);
 		return;
 	}

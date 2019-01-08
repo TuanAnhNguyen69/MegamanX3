@@ -1,15 +1,15 @@
 #pragma once
-#include "Entity.h"
+#include "Enemy.h"
 #include "Engine.h"
 
-class HelitRocket : public Entity
+class HelitRocket : public Enemy
 {
 private:
 	AnimatedSprite * sprite;
 	bool isLeft;
 	bool hitted;
 public:
-	HelitRocket();
+	HelitRocket(Player *player);
 	~HelitRocket();
 
 	void Update();

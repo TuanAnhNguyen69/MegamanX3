@@ -1,17 +1,19 @@
 ﻿#pragma once
-#include "Entity.h"
+#include "Enemy.h"
 #include "Engine.h"
 #include "PlayerBullet.h"
+
+class Entity;
 
 namespace Define
 {
 	const float BOX_SPEED = 40.0f;		//Vận tốc rơi
 }
 
-class Box : public Entity
+class Box : public Enemy
 {
 public:
-	Box(EntityId id);
+	Box(EntityId id, Player *player);
 	~Box();
 
 	void Update();
@@ -32,7 +34,6 @@ private:
 	AnimatedSprite * sprite;
 	bool isFall;
 	bool isCollPlatform;
-	int HP;
 	EntityId id;
 	bool hadBurst;
 };

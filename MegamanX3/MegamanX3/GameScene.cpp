@@ -42,16 +42,28 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
+<<<<<<< HEAD
 	player->SetPosition(14200, 3700);
 	//player->SetPosition(4700, 2100);
+=======
+	//player->SetPosition(300, 1700);
+
+	player->SetPosition(9800, 2200);
+>>>>>>> 324acf3ad3371af500cd22f0f5e12f6f9658c9c5
 	camera->SetCenter(player->GetPosition());
 
 	//EntityManager::GetInstance()->Initialize(player, camera, "testDoor", map->GetWidth(), map->GetHeight());
-	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());
-	
+	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());	
+
+	//Sound::getInstance()->loadSound((char*)"sound/BlastHornet.wav", "blasthornet");
+	//Sound::getInstance()->play("blasthornet", false, 1);
+
 	debugDraw = new DebugDraw();
 	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));
 	debugDraw->SetLineSize(5);
+
+	
+
 	return true;
 }
 

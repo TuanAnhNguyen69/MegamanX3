@@ -13,8 +13,6 @@
 
 class Entity;
 
-using namespace std;
-
 class CarryArm : public CarryArmStateHandler, public Enemy
 {
 public:

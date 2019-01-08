@@ -43,8 +43,6 @@ NotorBanger::~NotorBanger()
 		delete changeBarrelState;
 		changeBarrelState = nullptr;
 	}
-
-	Entity::~Entity();
 }
 
 void NotorBanger::Initialize()
@@ -60,7 +58,9 @@ void NotorBanger::Update()
 {
 	if (this->IsRemove())
 	{
-		EntityManager::GetInstance()->RemoveEntity(this);
+		Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_notorbanger");
+		Sound::getInstance()->play("explosion_notorbanger", false, 1);
+		EntityManager::GetInstance()->RemoveEntity(this);		
 		return;
 	}
 

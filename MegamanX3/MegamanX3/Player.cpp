@@ -275,6 +275,28 @@ void Player::Shoot()
 	bullet->SetVelocity(this->GetVelocity().x + accelX, 0);
 	bullet->SetScale(2, 2);
 	EntityManager::GetInstance()->AddEntity(bullet);
+	switch(bulletDamage) {
+	case 2:
+	{
+		Sound::getInstance()->loadSound((char*)"sound/normal_bullet.wav", "normal_Bullet");
+		Sound::getInstance()->play("normal_Bullet", false, 1);
+		break;
+	}
+	case 3:
+	{
+		Sound::getInstance()->loadSound((char*)"sound/power_bullet.wav", "power_bullet");
+		Sound::getInstance()->play("power_bullet", false, 1);
+		break;
+	}
+	case 10:
+	{
+		Sound::getInstance()->loadSound((char*)"sound/power_bullet.wav", "power_bullet");
+		Sound::getInstance()->play("power_bullet", false, 1);
+		break;
+	}
+
+	}
+
 	this->bulletCharging = 0;
 }
 

@@ -2,7 +2,7 @@
 #include "HelitRocket.h"
 
 
-HelitRocket::HelitRocket() : Entity(EntityId::Helit_ID)
+HelitRocket::HelitRocket(Player *player) : Enemy(EntityId::Helit_ID, player)
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"helit_rocket", 20, 14);
@@ -19,6 +19,7 @@ HelitRocket::~HelitRocket()
 
 void HelitRocket::Initialize(bool isLeft)
 {
+	this->damage = 1;
 	this->hitted = false;
 	this->SetSprite(sprite);
 	this->isLeft = isLeft;
@@ -66,6 +67,8 @@ void HelitRocket::OnCollision(Entity * impactor, Entity::CollisionSide side, Ent
 			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
 				0, 7, 8, 50, 50);
 			this->SetSprite(sprite);
+			Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_helitrocket");
+			Sound::getInstance()->play("explosion_helitrocket", false, 1);
 			this->hitted = true;
 		}
 		else {

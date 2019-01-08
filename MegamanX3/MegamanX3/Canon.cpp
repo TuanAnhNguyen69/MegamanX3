@@ -3,7 +3,7 @@
 
 
 
-Canon::Canon() : Entity(EntityId::Canon_ID)
+Canon::Canon(Player *player) : Enemy(EntityId::Canon_ID, player)
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"canon", 9, 9);
@@ -19,6 +19,7 @@ Canon::~Canon()
 
 void Canon::Initialize(bool isHigh, bool isLeft)
 {
+	this->damage = 1;
 	this->isHigh = isHigh;
 	this->isLeft = isLeft;
 	this->hitted = false;
@@ -105,12 +106,14 @@ void Canon::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::C
 {
 
 	if (!this->hitted) {
-		if (!(impactor->GetEntityId() == EntityId::NotorBanger_ID || impactor->GetEntityId() == EntityId::Canon_ID)) {
+		if (!(impactor->GetEntityId() == EntityId::NotorBanger_ID || impactor->GetEntityId() == EntityId::LeftFaceHeadGunner_ID || impactor->GetEntityId() == EntityId::RightFaceHeadGunner_ID || impactor->GetEntityId() == EntityId::Canon_ID)) {
 			this->SetVelocity(0, 0);
 			sprite = new AnimatedSprite(15, 1, false);
 			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
 				0, 7, 8, 50, 50);
 			this->SetSprite(sprite);
+			Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_canon");
+			Sound::getInstance()->play("explosion_canon", false, 1);
 			this->hitted = true;
 		}
 	}
