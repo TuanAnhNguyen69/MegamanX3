@@ -57,8 +57,8 @@ void EntityManager::Render()
 	quadTree->GetEntitiesCollideAble(collidableEntity, camera->GetBound());
 	int size = collidableEntity.size();
 	for (int index = 0; index < size; index++) {
-		if (collidableEntity[index]->entityId == Canon_ID) {
-			int a = 0;
+		if (collidableEntity[index]->entityId == EntityId::CargoSole_ID) {
+			continue;
 		}
 		collidableEntity[index]->Render();
 	}
@@ -327,21 +327,46 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 			case EntityId::DoubleBox_ID:
 			{
+				Box *doubleBox = new Box(EntityId::DoubleBox_ID, player);
+				doubleBox->SetPosition(posX + width / 2, posY + height / 2);
+				doubleBox->SetBound(width, height);
+				doubleBox->Initialize(false);
+				break;
+			}
+
+			case EntityId::TrippleBox_ID:
+			{
+				Box *trippleBox = new Box(EntityId::TrippleBox_ID, player);
+				trippleBox->SetPosition(posX + width / 2, posY + height / 2);
+				trippleBox->SetBound(width, height);
+				trippleBox->Initialize(false);
 				break;
 			}
 				
 			case EntityId::QuadraBox_ID:
 			{
+				Box *quadraBox = new Box(EntityId::QuadraBox_ID, player);
+				quadraBox->SetPosition(posX + width / 2, posY + height / 2);
+				quadraBox->SetBound(width, height);
+				quadraBox->Initialize(false);
 				break;
 			}
 
 			case EntityId::VerticalBombBox_ID:
 			{
+				Box *verticalBox = new Box(EntityId::VerticalBombBox_ID, player);
+				verticalBox->SetPosition(posX + width / 2, posY + height / 2);
+				verticalBox->SetBound(width, height);
+				verticalBox->Initialize(false);
 				break;
 			}
 
 			case EntityId::HorizontalBombBox_ID:
 			{
+				Box *horizoltalBox = new Box(EntityId::HorizontalBombBox_ID, player);
+				horizoltalBox->SetPosition(posX + width / 2, posY + height / 2);
+				horizoltalBox->SetBound(width, height);
+				horizoltalBox->Initialize(false);
 				break;
 			}
 	
@@ -379,7 +404,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			case EntityId::Cargo_ID:
 			{
 				CargoShip *cargo = new CargoShip(player);
-				cargo->SetPosition((posX + width / 2) - 150, (posY + height / 2));
+				cargo->SetPosition((posX + width / 2) - 150, (posY + height / 2) + 150);
 				cargo->SetScale(2, 2);
 				cargo->SetBound(256, 88);
 				cargo->Initialize(camera);

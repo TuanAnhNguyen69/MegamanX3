@@ -2,7 +2,7 @@
 #include "HelitRocket.h"
 
 
-HelitRocket::HelitRocket() : Entity(EntityId::Helit_ID)
+HelitRocket::HelitRocket(Player *player) : Enemy(EntityId::Helit_ID, player)
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"helit_rocket", 20, 14);
@@ -19,6 +19,7 @@ HelitRocket::~HelitRocket()
 
 void HelitRocket::Initialize(bool isLeft)
 {
+	this->damage = 1;
 	this->hitted = false;
 	this->SetSprite(sprite);
 	this->isLeft = isLeft;

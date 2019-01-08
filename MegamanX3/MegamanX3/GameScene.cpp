@@ -42,8 +42,9 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(300, 1700);
-	//player->SetPosition(4700, 2100);
+	//player->SetPosition(300, 1700);
+
+	player->SetPosition(9800, 2200);
 	camera->SetCenter(player->GetPosition());
 
 	//EntityManager::GetInstance()->Initialize(player, camera, "testDoor", map->GetWidth(), map->GetHeight());

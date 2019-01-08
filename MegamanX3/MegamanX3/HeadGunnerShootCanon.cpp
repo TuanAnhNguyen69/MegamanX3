@@ -37,7 +37,7 @@ void HeadGunnerShootCanon::Update()
 	if (!hadShoot && dt > 1)*/
 	if(!hadShoot)
 	{
-		Canon *canon = new Canon();
+		Canon *canon = new Canon(((Enemy*)entity)->player);
 		if(isLeft)
 			canon->SetPosition(entity->GetPosition().x + 30, entity->GetPosition().y - 20);
 		else

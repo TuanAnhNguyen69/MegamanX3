@@ -2,10 +2,8 @@
 #include "CargoSole.h"
 
 
-CargoSole::CargoSole()
+CargoSole::CargoSole() : Entity(EntityId::CargoSole_ID)
 {
-	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
-		"cargo_sole", 144, 88);
 	sprite = new AnimatedSprite(10, 1, true);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "cargo_sole",
 		0, 0, 1, 144, 88);

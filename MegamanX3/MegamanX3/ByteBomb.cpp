@@ -62,7 +62,7 @@ void ByteBomb::Update()
 void ByteBomb::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	if (!this->hitted) {
-		if (impactor->GetEntityId() == EntityId::Platform_ID)
+		if (impactor->GetEntityId() == EntityId::Platform_ID || impactor->GetEntityId() == EntityId::Door_ID)
 		{
 			switch (side)
 			{

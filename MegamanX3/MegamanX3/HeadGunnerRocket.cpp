@@ -2,7 +2,7 @@
 #include "HeadGunnerRocket.h"
 
 
-HeadGunnerRocket::HeadGunnerRocket() : Entity(EntityId::GunnerRocket_ID)
+HeadGunnerRocket::HeadGunnerRocket(Player *player) : Enemy(EntityId::GunnerRocket_ID, player)
 {
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
 		"head_gunner_rocket", 25, 9);
@@ -19,6 +19,7 @@ HeadGunnerRocket::~HeadGunnerRocket()
 
 void HeadGunnerRocket::Initialize(bool isLeft)
 {
+	this->damage = 1;
 	this->hitted = false;
 	this->SetSprite(sprite);
 	this->isLeft = isLeft;

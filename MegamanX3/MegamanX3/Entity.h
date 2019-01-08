@@ -3,6 +3,7 @@
 
 #include <d3d9.h>
 #include "Sprite.h"
+#include "Sound.h"
 
 enum EntityId{
 	// Player
@@ -57,7 +58,9 @@ enum EntityId{
 	SmallEnergy_ID,
 	BigEnergy_ID,
 	ChimeraArmor_ID,
-	CameraRange_ID
+	CameraRange_ID,
+
+	CargoSole_ID
 };
 
 class Entity

@@ -58,7 +58,7 @@ void NotorBangerShoot::Update()
 		{
 			if (!hadShoot) 
 			{
-				Canon *canon = new Canon();
+				Canon *canon = new Canon(((Enemy*)entity)->player);
 				if(isLeft)
 					canon->SetPosition(entity->GetPosition().x + 10, entity->GetPosition().y + 5);
 				else

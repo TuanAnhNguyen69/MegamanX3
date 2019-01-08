@@ -45,7 +45,7 @@ void HelitShooting::Update()
 			if (ammo > 0) {
 				if (sprite->GetCurrentFrame() == 1) {
 					if (!hadShoot) {
-						HelitRocket *rocket = new HelitRocket();
+						HelitRocket *rocket = new HelitRocket(((Enemy*)entity)->player);
 						rocket->SetPosition(entity->GetPosition().x, entity->GetPosition().y + 22);
 						rocket->Initialize(handler->GetLeftTarget());
 						rocket->SetScale(2, 2);
@@ -76,7 +76,7 @@ void HelitShooting::Update()
 			if (ammo > 0) {
 				if (sprite->GetCurrentFrame() == 1) {
 					if (!hadShoot) {
-						HelitRocket *rocket = new HelitRocket();
+						HelitRocket *rocket = new HelitRocket(((Enemy*)entity)->player);
 						rocket->SetPosition(entity->GetPosition().x, entity->GetPosition().y + 22);
 						rocket->Initialize(handler->GetLeftTarget());
 						rocket->SetScale(2, 2);

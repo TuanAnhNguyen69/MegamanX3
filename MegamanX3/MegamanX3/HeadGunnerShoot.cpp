@@ -37,7 +37,7 @@ void HeadGunnerShoot::Update()
 		if (sprite->GetCurrentFrame() == 2 || sprite->GetCurrentFrame() == 6)
 		{
 			if (!hadShootRocket) {
-				HeadGunnerRocket *rocket = new HeadGunnerRocket();
+				HeadGunnerRocket *rocket = new HeadGunnerRocket(((Enemy*)entity)->player);
 				rocket->SetPosition(entity->GetPosition().x, entity->GetPosition().y - 10);
 				rocket->Initialize(false);
 				rocket->SetScale(2, 2);
@@ -74,7 +74,7 @@ void HeadGunnerShoot::Update()
 		if (sprite->GetCurrentFrame() == 2 || sprite->GetCurrentFrame() == 6)
 		{
 			if (!hadShootRocket) {
-				HeadGunnerRocket *rocket = new HeadGunnerRocket();
+				HeadGunnerRocket *rocket = new HeadGunnerRocket(((Enemy*)entity)->player);
 				rocket->SetPosition(entity->GetPosition().x, entity->GetPosition().y - 10);
 				rocket->Initialize(true);
 				rocket->SetScale(2, 2);

@@ -2,7 +2,7 @@
 #include "Bee.h"
 
 
-Bee::Bee(Player *player) : Entity(EntityId::Bee_ID)
+Bee::Bee(Player *player) : Enemy(EntityId::Bee_ID, player)
 {
 	isFollow = true;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
@@ -13,7 +13,7 @@ Bee::Bee(Player *player) : Entity(EntityId::Bee_ID)
 	this->player = player;
 }
 
-Bee::Bee(D3DXVECTOR3 desPos) : Entity(EntityId::Bee_ID)
+Bee::Bee(Player *player, D3DXVECTOR3 desPos) : Enemy(EntityId::Bee_ID, player)
 {
 	isFollow = false;
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
@@ -32,6 +32,7 @@ Bee::~Bee()
 
 void Bee::Initailize()
 {
+	damage = 1;
 	this->hitted = false;
 	timeBorn = clock();
 	this->SetSprite(sprite);
@@ -89,7 +90,7 @@ void Bee::Update()
 		
 	}
 
-	Entity::Update();
+	Enemy::Update();
 }
 
 void Bee::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)

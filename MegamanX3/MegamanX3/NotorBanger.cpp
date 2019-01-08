@@ -43,8 +43,6 @@ NotorBanger::~NotorBanger()
 		delete changeBarrelState;
 		changeBarrelState = nullptr;
 	}
-
-	Entity::~Entity();
 }
 
 void NotorBanger::Initialize()
