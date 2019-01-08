@@ -6,7 +6,7 @@ Enemy::Enemy(EntityId entityId, Player * player) : Entity(entityId)
 {
 	this->player = player;
 	this->active = false;
-	this->activeRange = 0;
+	this->activeRange = 400;
 }
 
 

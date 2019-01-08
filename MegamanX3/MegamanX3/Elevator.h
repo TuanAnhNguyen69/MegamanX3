@@ -7,7 +7,7 @@ namespace Define
 	const float ELEVATOR_SPEED = 20.0f;		//Vận tốc
 }
 
-class Elevator : Entity
+class Elevator : public Entity
 {
 public:
 	Elevator();
