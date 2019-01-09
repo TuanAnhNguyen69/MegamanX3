@@ -5,7 +5,7 @@
 #include <vector>
 
 const int PLAYER_AUTO_MOVE_DISTANCE = 176;
-const int CAMERA_AUTO_MOVE_DISTANCE = 528;
+const int CAMERA_AUTO_MOVE_DISTANCE_DOOR = 528;
 
 GameScene::GameScene()
 {
@@ -31,21 +31,18 @@ GameScene::~GameScene()
 
 bool GameScene::Initialize()
 {
-
 	map = new Background();
 	map->Initialize("blast_hornet_state", 4);
-	
+
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 	camera->Initialize("blast_hornet_state");
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	/*player->SetPosition(2614 * 4, 566 * 4);*/
-	player->SetPosition(6100, 2000);
+	player->SetPosition(11944, 2151);
 	camera->SetCenter(player->GetPosition());
 
-	x_health = new HealthX(player);
-	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());	
+	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());
 
 	Sound::getInstance()->loadSound((char*)"sound/aircraft.wav", "aircraft");
 	Sound::getInstance()->loadSound((char*)"sound/BlastHornet.wav", "blasthornet");
@@ -61,6 +58,9 @@ bool GameScene::Initialize()
 	Sound::getInstance()->loadSound((char*)"sound/shoot_canon.wav", "shoot_canon");
 	Sound::getInstance()->loadSound((char*)"sound/shoot_rocket.wav", "shoot_rocket");
 
+	x_health = new HealthBar(EntityId::HealthX_ID);
+	boss_health = new HealthBar(EntityId::HealthBoss_ID);
+	
 	debugDraw = new DebugDraw();
 	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));
 	debugDraw->SetLineSize(5);
@@ -104,32 +104,68 @@ void GameScene::Update()
 		Revive();
 	}
 
-	if (currentBoss && currentBoss->GetHP() > 0) {
-		doorLock = true;
+	if (currentBoss) {
+		if (currentBoss->GetEntityId() == Cargo_ID) {
+			camera->Lock();
+			if (player->GetReverse()) {
+				camera->AutoMoveReverse();
+			}
+			else {
+				camera->AutoMoveFoward();
+			}
+
+			if (camera->GetAutoMovedDistance() >= SCREEN_WIDTH / 2 - 50) {
+				camera->StopAutoMove();
+				player->SetMovable(true);
+			}
+			else {
+				player->SetMovable(false);
+			}
+		}
+		else if (currentBoss->GetHP() > 0) {
+			doorLock = true;
+		}
+		else {
+			doorLock = false;
+			currentBoss = nullptr;
+		}
 	}
 	else {
+		camera->Unlock();
+		if (!camera->IsAutoMoving()) {
+			camera->ResetDistance();
+		}
 		doorLock = false;
 	}
 
 	if (currentDoor && currentDoor->GetState() == Door::DoorState::OPENED) {
 		if (!player->GetMovable()) {
-			player->AutoMove();
-			camera->AutoMove();
+			player->AutoMoveFoward();
+			camera->AutoMoveFoward();
 			if (player->GetAutoMovedDistance() >= PLAYER_AUTO_MOVE_DISTANCE) {
 				player->SetMovable(true);
 			}
 		}
 
-		if (camera->GetAutoMovedDistance() >= CAMERA_AUTO_MOVE_DISTANCE) {
+		if (camera->GetAutoMovedDistance() >= CAMERA_AUTO_MOVE_DISTANCE_DOOR) {
 			camera->StopAutoMove();
+			camera->ResetDistance();
 			currentDoor->SetState(Door::DoorState::CLOSING);
 		}
 	}
+
 	CheckCollision();
 	EntityManager::GetInstance()->CheckCollide();
 	camera->Update(player->GetPosition());
 	player->Update();
-	x_health->Update();
+
+	x_health->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+		SCREEN_HEIGHT / 2 - camera->GetCenter().y);
+	x_health->Update(player->GetHP(), camera->GetCenter());
+
+	/*boss_health->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+		SCREEN_HEIGHT / 2 - camera->GetCenter().y);
+	boss_health->Update(currentBoss->GetHP(), camera->GetCenter());*/
 	EntityManager::GetInstance()->Update();
 }
 
@@ -153,7 +189,6 @@ void GameScene::CheckCollision()
 			RECT broadphase = Collision::GetSweptBroadphaseRect(player);
 			if (Collision::IsCollide(broadphase, collidableEntity.at(index)->GetBound()))
 			{
-				
 				Entity::CollisionReturn collideData;
 				float collisionTime = Collision::SweptAABB(player, collidableEntity.at(index), collideData);
 				if (collisionTime < 1.0f) //collisiontime > 0 &&
@@ -183,7 +218,6 @@ void GameScene::CheckCollision()
 				}
 			}
 		}
-		
 	}
 
 	if (widthBottom < Define::PLAYER_BOTTOM_RANGE_FALLING) {
@@ -195,11 +229,13 @@ void GameScene::Render()
 {
 	map->RenderBackground(camera);
 	player->Render();
-	x_health->Render();
+	
 	auto list = EntityManager::GetInstance()->GetAllEntities();
-	for (int index = 0; index < list.size(); index++) {
-		debugDraw->DrawRect(list.at(index)->GetBound(), camera);
-	}
+	//for (int index = 0; index < list.size(); index++) {
+	//	debugDraw->DrawRect(list.at(index)->GetBound(), camera);
+	//}
 	EntityManager::GetInstance()->Render();
-	DrawQuadtree(EntityManager::GetInstance()->GetQuadTree());
+	//DrawQuadtree(EntityManager::GetInstance()->GetQuadTree());
+	x_health->Render();
+	//boss_health->Render();
 }

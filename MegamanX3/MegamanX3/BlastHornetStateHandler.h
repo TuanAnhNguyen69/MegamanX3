@@ -1,13 +1,14 @@
 #pragma once
 #ifndef _BLAST_HORNET_STATE_HANDLER_H
 #define _BLAST_HORNET_STATE_HANDLER_H
+#include "Explosive.h"
 
 namespace Define
 {
 	const float BLASTHORNET_PRICK_SPEED = 50.0f;
 	const float BLASTHORNET_RETURN_SPEED = 20.0f;
 	const float BLASTHORNET_FLY_SPEED = 20.0f;
-	const int BLASTHORNET_HP = 40;
+	const int BLASTHORNET_HP = 48;
 }
 
 class BlastHornetStateHandler

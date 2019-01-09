@@ -312,16 +312,18 @@
     <ClCompile Include="GameGlobal.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="HealthBar.cpp">
-      <Filter>World</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerDieState.cpp">
       <Filter>Entities\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerReviveState.cpp">
       <Filter>Entities\Player</Filter>
     </ClCompile>
-    <ClCompile Include="HealthX.cpp" />
+    <ClCompile Include="HealthX.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="Explosive.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -673,16 +675,18 @@
     <ClInclude Include="GameGlobal.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="HealthBar.h">
-      <Filter>World</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerDieState.h">
       <Filter>Entities\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerReviveState.h">
       <Filter>Entities\Player</Filter>
     </ClInclude>
-    <ClInclude Include="HealthX.h" />
+    <ClInclude Include="HealthX.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Explosive.h">
+      <Filter>World</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

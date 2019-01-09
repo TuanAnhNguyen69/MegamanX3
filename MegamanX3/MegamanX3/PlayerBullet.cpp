@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "PlayerBullet.h"
 #include "Engine.h"
+#include "Enemy.h"
 
 PlayerBullet::PlayerBullet() : Entity(EntityId::MegamanBullet_ID)
 {
@@ -63,7 +64,6 @@ void PlayerBullet::Update()
 	
 	}
 
-	
 
 	if (hitted) {
 		
@@ -75,10 +75,10 @@ void PlayerBullet::Update()
 	else
 	{
 		if (this->GetReverse()) {
-			this->AddVelocityX(-10);
+			this->AddVelocityX(-20);
 		}
 		else {
-			this->AddVelocityX(10);
+			this->AddVelocityX(20);
 		}
 	}
 
@@ -88,12 +88,36 @@ void PlayerBullet::Update()
 
 void PlayerBullet::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() != EntityId::Megaman_ID && impactor->GetEntityId()!=  EntityId::MegamanBullet_ID) {
-		this->SetVelocityX(0);		
-		Sound::getInstance()->play("explosion", false, 1);
-		this->hitted = true;
+	switch (impactor->GetEntityId()) {
+	case EntityId::Shurikein_ID:
+	case EntityId::Byte_ID:
+	case EntityId::BlastHornet_ID:
+	case EntityId::Helit_ID:
+	case EntityId::NotorBanger_ID:
+	case EntityId::RightFaceHeadGunner_ID:
+	case EntityId::LeftFaceHeadGunner_ID:
+	case EntityId::Box_ID:
+	case EntityId::DoubleBox_ID:
+	case EntityId::TrippleBox_ID:
+	case EntityId::QuadraBox_ID:
+	case EntityId::VerticalBombBox_ID:
+	case EntityId::HorizontalBombBox_ID:
+	{
+		if (impactor->GetEntityId() != EntityId::Megaman_ID && impactor->GetEntityId() != EntityId::MegamanBullet_ID) {
+			this->SetVelocityX(0);
+			Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_bullet");
+			Sound::getInstance()->play("explosion_bullet", false, 1);
+
+			if (!hitted) {
+				((Enemy *)impactor)->SubHP(damage);
+			}
+			this->hitted = true;
+		}
 	}
-	
+	default:
+		break;
+
+	}
 }
 
 bool PlayerBullet::IsHitted()

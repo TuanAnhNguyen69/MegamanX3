@@ -41,5 +41,9 @@ private:
 	ByteStateHandler::StateName currentStateName, preAction;
 	bool seen;
 	bool dead;
+
+	clock_t timeStartDie, timeDoneDie;
+
+	Explosive *explosive;
 };
 

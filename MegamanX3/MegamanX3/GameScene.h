@@ -32,7 +32,8 @@ private:
 	Enemy *currentBoss;
 	Door * currentDoor;
 	Entity * checkPoint;
-	Entity *x_health;
+	HealthBar *x_health;
+	HealthBar *boss_health;
 
 	bool doorLock;
 };

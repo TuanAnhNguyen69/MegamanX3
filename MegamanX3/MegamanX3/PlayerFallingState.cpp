@@ -139,6 +139,12 @@ void PlayerFallingState::OnCollision(Entity * impactor, Entity::CollisionSide si
 	switch (impactor->GetEntityId()) {
 		case Platform_ID:
 		case EntityId::BigElevator_ID:
+		case Box_ID:
+		case DoubleBox_ID:
+		case TrippleBox_ID:
+		case QuadraBox_ID:
+		case VerticalBombBox_ID:
+		case HorizontalBombBox_ID:
 			OnPlatformCollide(impactor, side, data);
 			break;
 		case Door_ID:

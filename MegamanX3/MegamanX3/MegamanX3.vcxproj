@@ -23,7 +23,7 @@
     <ProjectGuid>{E42C9130-1CC9-448D-91FD-3531680F95EE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>MegamanX3</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -207,6 +207,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityImport.h" />
     <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="Explosive.h" />
     <ClInclude Include="FrameWork.h" />
     <ClInclude Include="GameComponent.h" />
     <ClInclude Include="GameGlobal.h" />
@@ -222,7 +223,6 @@
     <ClInclude Include="HeadGunnerStanding.h" />
     <ClInclude Include="HeadGunnerState.h" />
     <ClInclude Include="HeadGunnerStateHandler.h" />
-    <ClInclude Include="HealthBar.h" />
     <ClInclude Include="HealthX.h" />
     <ClInclude Include="Helit.h" />
     <ClInclude Include="HelitDie.h" />
@@ -325,6 +325,7 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="Explosive.cpp" />
     <ClCompile Include="FrameWork.cpp" />
     <ClCompile Include="GameGlobal.cpp" />
     <ClCompile Include="GameLog.cpp" />
@@ -338,7 +339,6 @@
     <ClCompile Include="HeadGunnerShootRocket.cpp" />
     <ClCompile Include="HeadGunnerStanding.cpp" />
     <ClCompile Include="HeadGunnerState.cpp" />
-    <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="HealthX.cpp" />
     <ClCompile Include="Helit.cpp" />
     <ClCompile Include="HelitDie.cpp" />

@@ -3,17 +3,17 @@
 
 class Entity;
 
-class HealthX : public Entity
+class HealthBar : public Entity
 {
 public:
-	HealthX(Player *player);
-	~HealthX();
+	HealthBar(EntityId id);
+	~HealthBar();
 
-	void Update();
+	void Update(int value, D3DXVECTOR3 pos);
 	void Initialize();
 
 private:
 	AnimatedSprite * sprite;
-	Player *player;
+	EntityId id;
 };
 

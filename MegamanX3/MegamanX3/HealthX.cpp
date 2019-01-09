@@ -2,31 +2,60 @@
 #include "HealthX.h"
 
 
-HealthX::HealthX(Player *player) : Entity(EntityId::HealthX_ID)
+HealthBar::HealthBar(EntityId id) : Entity(id)
 {
 	sprite = new AnimatedSprite(10, 1, false);
-	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x_health",
-		0, 16, 17, 14, 52);
+	this->id = id;
+	switch (id)
+	{
+	case EntityId::HealthX_ID:
+	{
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "x_health", 14, 52);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x_health",
+			0, 16, 17, 14, 52);
+		break;
+	}
 
-	this->player = player;
+	case EntityId::HealthBoss_ID:
+	{
+		this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "x_health", 14, 52);
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "boss_health",
+			0, 24, 25, 14, 52);
+		break;
+	}
+	}
+	
 
 	this->SetSprite(sprite);
+
+	this->SetScale(2, 2);
 }
 
 
-HealthX::~HealthX()
+HealthBar::~HealthBar()
 {
 
 }
 
-void HealthX::Update()
+void HealthBar::Update(int value, D3DXVECTOR3 pos)
 {
+	
+	if (id == EntityId::HealthX_ID)
+	{
+		this->SetPosition(pos.x - SCREEN_WIDTH / 2 + 24, pos.y - SCREEN_HEIGHT / 2 + 120);
+		this->sprite->SetFrameRange(value, value);
+	}
+	else if (id == EntityId::HealthBoss_ID)
+	{
+		this->SetPosition(pos.x + SCREEN_WIDTH / 2 - 24, pos.y - SCREEN_HEIGHT / 2 + 120);
+		this->sprite->SetFrameRange(value / 2, value / 2);
+	}
 	Entity::Update();
-	this->SetPosition(player->GetPosition().x - 100, player->GetPosition().y - 100);
-	this->sprite->SetFrame(((Enemy*)player)->GetHP() / 2);
 }
 
-void HealthX::Initialize()
+void HealthBar::Initialize()
 {
 	
 }
+
+

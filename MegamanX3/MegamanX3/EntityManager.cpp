@@ -29,13 +29,13 @@ void EntityManager::Update()
 	for (int index = 0; index < size; index++) {
 		if (Collision::IsCollide(collidableEntity[index]->GetBound(), camera->GetBound()))
 		{
+			if (collidableEntity[index]->entityId == Canon_ID) {
+				int a = 0;
+			}
+
 			if (camera) {
 				collidableEntity[index]->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 					SCREEN_HEIGHT / 2 - camera->GetCenter().y);
-			}
-
-			if (collidableEntity[index]->entityId == Canon_ID) {
-				int a = 0;
 			}
 
 			collidableEntity[index]->Update();
@@ -48,6 +48,7 @@ void EntityManager::Update()
 				RemoveEntity(collidableEntity[index]);
 			}
 		}
+
 	}
 }
 
@@ -57,10 +58,13 @@ void EntityManager::Render()
 	quadTree->GetEntitiesCollideAble(collidableEntity, camera->GetBound());
 	int size = collidableEntity.size();
 	for (int index = 0; index < size; index++) {
-		if (collidableEntity[index]->entityId == EntityId::CargoSole_ID) {
-			continue;
+		if (Collision::IsCollide(collidableEntity[index]->GetBound(), camera->GetBound()))
+		{
+			if (collidableEntity[index]->entityId == EntityId::CargoSole_ID) {
+				continue;
+			}
+			collidableEntity[index]->Render();
 		}
-		collidableEntity[index]->Render();
 	}
 }
 
@@ -253,7 +257,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			case EntityId::Helit_ID:
 			{
 				Helit * helit = new Helit(player);
-				helit->Initialize();
+				
 				helit->SetPosition(posX + width / 2, (posY + height / 2));
 				helit->SetScale(2, 2);
 				helit->SetBound(width, height);
@@ -275,10 +279,10 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			case EntityId::RightFaceHeadGunner_ID:
 			{
 				HeadGunner * headGunner = new HeadGunner(this->player, EntityId::RightFaceHeadGunner_ID);
-				headGunner->Initialize(true);
 				headGunner->SetPosition(posX + width / 2, posY + height / 2);
 				headGunner->SetScale(2, 2);
-				headGunner->SetBound(width, height);
+				headGunner->SetBound(50, 100);
+				headGunner->Initialize(false);
 				AddEntity(headGunner);
 				break;
 			}
@@ -286,10 +290,10 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			case EntityId::LeftFaceHeadGunner_ID:
 			{
 				HeadGunner * headGunner = new HeadGunner(this->player, EntityId::LeftFaceHeadGunner_ID);
-				headGunner->Initialize(true);
 				headGunner->SetPosition(posX + width / 2, posY + height / 2);
 				headGunner->SetScale(2, 2);
-				headGunner->SetBound(width, height);
+				headGunner->SetBound(50, 100);
+				headGunner->Initialize(true);
 				AddEntity(headGunner);
 				break;
 			}												
@@ -516,6 +520,10 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			}
 		}
 	}
+}
+
+void EntityManager::DisableEntity()
+{
 }
 
 QuadTree * EntityManager::GetQuadTree()
