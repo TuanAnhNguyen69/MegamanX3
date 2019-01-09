@@ -55,6 +55,10 @@ Shuriken::~Shuriken()
 
 void Shuriken::Initialize()
 {
+	this->activeRange = 500;
+	this->seen = false;
+	this->remove = false;
+	this->dead = false;
 	this->SetScale(2, 2);
 	this->SetBound(50 * 2, 50 * 2);
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(),
@@ -66,16 +70,16 @@ void Shuriken::Initialize()
 
 void Shuriken::Update()
 {
-	if (this->IsRemove())
-	{
-		Sound::getInstance()->play("explosion", false, 5);
+	if (this->remove)
+	{		
 		EntityManager::GetInstance()->RemoveEntity(this);
 		return;
 	}
 
-	if (this->GetHP() <= 0)
+	if (this->GetHP() <= 0 && !dead)
 	{
 		this->ChangeState(ShurikenStateHandler::StateName::Die);
+		dead = true;
 	}
 
 	Enemy::Update();
@@ -142,6 +146,7 @@ ShurikenStateHandler::MoveDirection Shuriken::GetMoveDirection()
 
 void Shuriken::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	Enemy::OnCollision(impactor, side, data);
 	if (currentState)
 	{
 		currentState->OnCollision(impactor, side, data);
@@ -171,4 +176,19 @@ bool Shuriken::GetLeftTarget()
 bool Shuriken::GetAboveTarget()
 {
 	return this->targetIsAbout;
+}
+
+void Shuriken::Seen()
+{
+	seen = true;
+}
+
+bool Shuriken::GetSeen()
+{
+	return this->seen;
+}
+
+void Shuriken::SetRemove()
+{
+	this->remove = true;
 }

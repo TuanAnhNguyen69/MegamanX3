@@ -106,7 +106,14 @@ void Canon::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::C
 {
 
 	if (!this->hitted) {
-		if (!(impactor->GetEntityId() == EntityId::NotorBanger_ID || impactor->GetEntityId() == EntityId::LeftFaceHeadGunner_ID || impactor->GetEntityId() == EntityId::RightFaceHeadGunner_ID || impactor->GetEntityId() == EntityId::Canon_ID)) {
+		if (!(impactor->GetEntityId() == EntityId::NotorBanger_ID 
+			|| impactor->GetEntityId() == EntityId::LeftFaceHeadGunner_ID
+			|| impactor->GetEntityId() == EntityId::RightFaceHeadGunner_ID 
+			|| impactor->GetEntityId() == EntityId::Canon_ID)) {
+
+			if (impactor->GetEntityId() == EntityId::Megaman_ID && ((Player *)impactor)->IsImmute()) {
+				return;
+			}
 			this->SetVelocity(0, 0);
 			sprite = new AnimatedSprite(15, 1, false);
 			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",

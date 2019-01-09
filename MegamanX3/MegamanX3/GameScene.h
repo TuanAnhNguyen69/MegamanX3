@@ -7,6 +7,7 @@
 #include "Background.h"
 #include "DebugDraw.h"
 #include "Door.h"
+#include "HealthX.h"
 
 class GameScene :
 	public GameComponent
@@ -28,8 +29,12 @@ private:
 	Camera *camera;
 	Background *map;
 	Player *player;
+	Enemy *currentBoss;
 	Door * currentDoor;
 	Entity * checkPoint;
+	Entity *x_health;
+
+	bool doorLock;
 };
 
 #endif

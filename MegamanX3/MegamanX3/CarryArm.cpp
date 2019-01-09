@@ -44,7 +44,7 @@ void CarryArm::Initialize()
 
 
 	this->box = new Box(EntityId::Box_ID, ((Enemy*)this)->player);
-	this->box->SetPosition(this->GetPosition().x, this->GetPosition().y + 50);
+	this->box->SetPosition(this->GetPosition().x, this->GetPosition().y + this->GetHeight() / 2 + this->box->GetHeight() / 2);
 	this->box->SetScale(1, 1);
 	//this->box->SetBound(50 * 1, 50 * 1);
 	this->box->Initialize(false);

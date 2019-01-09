@@ -72,6 +72,10 @@ void HeadGunnerRocket::OnCollision(Entity * impactor,  Entity::CollisionSide sid
 			&& impactor->GetEntityId() != EntityId::RightFaceHeadGunner_ID
 			&& impactor->GetEntityId() != EntityId::GunnerRocket_ID) {
 
+			if (impactor->GetEntityId() == EntityId::Megaman_ID && ((Player *)impactor)->IsImmute()) {
+				return;
+			}
+
 			this->SetVelocityX(0);
 			sprite = new AnimatedSprite(15, 1, false);
 			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",

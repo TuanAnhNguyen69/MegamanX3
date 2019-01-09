@@ -12,6 +12,8 @@ public:
 	void Initialize();
 	void OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	DoorState GetState();
+	void SetLock(bool lock);
+	bool IsLock();
 	void SetState(DoorState state);
 
 private:
@@ -20,5 +22,6 @@ private:
 	AnimatedSprite * closingSprite;
 	AnimatedSprite * openedSprite;
 	DoorState state;
+	bool lock;
 };
 

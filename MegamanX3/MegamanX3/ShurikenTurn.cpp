@@ -24,38 +24,27 @@ void ShurikenTurn::Load()
 {
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
-	startState = clock();
+	timeStartState = clock();
+	timeCreated = clock();
 }
 
 void ShurikenTurn::Update()
 {
-	//switch (handler->GetPreAction())
-	//{
-	//case ShurikenStateHandler::StateName::Jump:
-	//	clock_t cout = clock();
-	//	int dt = (cout - startState) / 40;
-	//	if ((dt > 2) && (dt % 2 == 0))
-	//	{
-	//		handler->ChangeState(ShurikenStateHandler::StateName::Attack1);
-	//	}
-	//	break;
-	//case ShurikenStateHandler::StateName::Attack1:
-	//	handler->ChangeState(ShurikenStateHandler::StateName::Attack2);
-	//	break;
-	//case ShurikenStateHandler::StateName::Attack2:
-	//	handler->ChangeState(ShurikenStateHandler::StateName::Move);
-	//	break;
-	///*case ShurikenStateHandler::StateName::Move:
-	//	handler->ChangeState(ShurikenStateHandler::StateName::Flip);
-	//	break;*/
-	//}
-
-
+	if (!handler->GetSeen())
+	{
+		timeSeen = clock();
+		float dt = (timeSeen - timeCreated) / 1000;
+		if (dt > 7)
+		{
+			handler->Seen();
+		}
+		return;
+	}
 
 	if (handler->GetPreAction() == ShurikenStateHandler::StateName::Jump)
 	{
-		clock_t cout = clock();
-		int dt = (cout - startState) / 1000;
+		timeCount = clock();
+		int dt = (timeCount - timeStartState) / 1000;
 		if (dt > 3)
 		{
 			handler->ChangeState(ShurikenStateHandler::StateName::Attack1);
@@ -71,8 +60,8 @@ void ShurikenTurn::Update()
 	}
 	else if (handler->GetPreAction() == ShurikenStateHandler::StateName::Move)
 	{
-		clock_t cout = clock();
-		int dt = (cout - startState) / 1000;
+		timeCount = clock();
+		int dt = (timeCount - timeStartState) / 1000;
 		if (dt > 2)
 		{
 			handler->ChangeState(ShurikenStateHandler::StateName::Flip);

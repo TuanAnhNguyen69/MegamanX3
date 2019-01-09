@@ -45,6 +45,9 @@ public:
 
 	virtual int GetHP() = 0;
 
+	virtual void Seen() = 0;
+	virtual bool GetSeen() = 0;
+
 };
 
 #endif

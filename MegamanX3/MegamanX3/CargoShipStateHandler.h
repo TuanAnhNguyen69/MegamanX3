@@ -18,4 +18,6 @@ public:
 
 	CargoSole *sole;
 
+	virtual void SetRemove() = 0;
+
 };

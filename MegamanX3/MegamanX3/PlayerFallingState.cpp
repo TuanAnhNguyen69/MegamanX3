@@ -139,13 +139,18 @@ void PlayerFallingState::OnCollision(Entity * impactor, Entity::CollisionSide si
 	switch (impactor->GetEntityId()) {
 		case Platform_ID:
 		case EntityId::BigElevator_ID:
+			OnPlatformCollide(impactor, side, data);
+			break;
+		case Door_ID:
+			OnDoorCollide(impactor, side, data);
+			break;
 		case EntityId::LeftBlueConveyor_ID:
 		case EntityId::RightBlueConveyor_ID:
 		case EntityId::LeftYellowConveyor_ID:
 		case EntityId::RightYellowConveyor_ID:
 		case EntityId::LeftSmallConveyor_ID:
 		case EntityId::RightSmallConveyor_ID:
-			OnPlatformCollide(impactor, side, data);
+			OnConveyorCollide(impactor, side, data);
 			break;
 		case Roof_ID:
 			OnRoofCollide(impactor, side, data);
@@ -155,6 +160,8 @@ void PlayerFallingState::OnCollision(Entity * impactor, Entity::CollisionSide si
 			break;
 		case DownPlatform_ID:
 			OnDownPlatformCollide(impactor, side, data);
+			break;
+		default:
 			break;
 	}
 }
@@ -205,6 +212,35 @@ void PlayerFallingState::OnPlatformCollide(Entity * impactor, Entity::CollisionS
 		break;
 	}
 }
+
+void PlayerFallingState::OnDoorCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side)
+	{
+	case Entity::Left:
+		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
+		{
+			entity->blockType = Player::BlockLeft;
+			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+			entity->SetVelocityX(0);
+		}
+		entity->isJumping = false;
+		break;
+
+	case Entity::Right:
+		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
+		{
+			entity->blockType = Player::BlockRight;
+			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+			entity->SetVelocityX(0);
+		}
+		entity->isJumping = false;
+		break;
+	default:
+		break;
+	}
+}
+
 
 void PlayerFallingState::OnRoofCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
@@ -295,6 +331,48 @@ void PlayerFallingState::OnDownPlatformCollide(Entity * impactor, Entity::Collis
 
 	default:
 		entity->blockType = Player::None;
+		break;
+	}
+}
+
+void PlayerFallingState::OnConveyorCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side)
+	{
+	case Entity::Left:
+		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
+		{
+			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+			entity->SetVelocityX(0);
+		}
+		entity->isJumping = false;
+		break;
+
+	case Entity::Right:
+		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
+		{
+			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+			entity->SetVelocityX(0);
+		}
+		entity->isJumping = false;
+		break;
+
+	case Entity::Top:
+		entity->isJumping = false;
+		break;
+
+	case Entity::Bottom:
+	case Entity::BottomRight:
+	case Entity::BottomLeft:
+		if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
+		{
+			entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+			acceleratorY = 0.0f;
+			isFalling = false;
+		}
+		entity->isJumping = false;
+		return;
+	default:
 		break;
 	}
 }

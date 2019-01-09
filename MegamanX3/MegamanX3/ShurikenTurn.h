@@ -10,6 +10,7 @@ public:
 	void Update();
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 private:
-	clock_t startState;
+
+	clock_t timeCreated, timeSeen;
 };
 

@@ -315,6 +315,13 @@
     <ClCompile Include="HealthBar.cpp">
       <Filter>World</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerDieState.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerReviveState.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthX.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -669,6 +676,13 @@
     <ClInclude Include="HealthBar.h">
       <Filter>World</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerDieState.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerReviveState.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthX.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

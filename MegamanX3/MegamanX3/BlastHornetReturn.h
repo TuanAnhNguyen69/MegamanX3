@@ -22,5 +22,7 @@ private:
 	D3DXVECTOR3 curPos;
 	bool isChangePos;
 	Route route;
+
+	clock_t timeCreated, timeSeen;
 };
 

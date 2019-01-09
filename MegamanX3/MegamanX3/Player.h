@@ -34,8 +34,14 @@ public:
 	void Render();
 	void AutoMove();
 	int GetAutoMovedDistance();
+	bool NeedRevive();
+	void RequireRevive();
 	bool GetMovable();
 	void SetMovable(bool movable);
+	void SetImmute(bool immute);
+	void AllowJump();
+	bool IsImmute();
+	void Revive();
 	enum BlockType
 	{
 		BlockLeft,
@@ -46,7 +52,7 @@ public:
 private:
 
 	PlayerState *currentState;
-	PlayerState *standingState, *runningState, *jumpingState, *fallingState, *damagedState, *slidingState, *climbingState;
+	PlayerState *standingState, *runningState, *jumpingState, *fallingState, *damagedState, *slidingState, *climbingState, *dieState, *immuteState, *reviveState;
 	PlayerStateHandler::StateName currentStateName;
 	//Entity *entity;
 	Camera *camera;
@@ -58,7 +64,10 @@ private:
 	int autoMovedDistance;
 	int hp;
 	int life;
-
+	bool immute;
+	int immuteTime;
+	bool reviving;
+	bool noBottomCollide;
 	void OnConveyorCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	void OnDoorCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	void OnElevatorCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);

@@ -4,7 +4,7 @@
 
 PlayerDamagedState::PlayerDamagedState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
-	sprite = new AnimatedSprite(15, 1.5, false);
+	sprite = new AnimatedSprite(15, 4, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
 		77, 85, 10, 50, 50);
 }
@@ -24,12 +24,13 @@ void PlayerDamagedState::Load()
 {
 	entity->SetSprite(sprite);
 	sprite->ResetFrame();
+	entity->SetImmute(true);
 }
 
 void PlayerDamagedState::Update()
 {
 	if (sprite->IsFinished()) {
-		handler->ChangeState(PlayerStateHandler::StateName::Standing);
+		handler->ChangeState(PlayerStateHandler::StateName::Falling);
 	}
 }
 

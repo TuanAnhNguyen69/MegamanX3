@@ -30,6 +30,7 @@ void PlayerSlidingState::Load()
 {
 	sprite = slideSprite;
 	entity->SetSprite(sprite);
+	entity->AllowJump();
 	if (entity->GetReverse()) {
 		acceleratorX = -30.0f;
 	}
@@ -82,6 +83,7 @@ void PlayerSlidingState::OnCollision(Entity * impactor, Entity::CollisionSide si
 	switch (impactor->GetEntityId())
 	{
 	case Platform_ID:
+	case Door_ID:
 		OnPlatformCollide(impactor, side, data);
 		break;
 	case Roof_ID:
@@ -132,8 +134,6 @@ void PlayerSlidingState::OnPlatformCollide(Entity * impactor, Entity::CollisionS
 
 	case Entity::Bottom: case Entity::BottomLeft: case Entity::BottomRight:
 	{
-		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
-
 		entity->SetVelocityY(0);
 
 		return;

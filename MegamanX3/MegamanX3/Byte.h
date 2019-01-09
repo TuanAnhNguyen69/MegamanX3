@@ -32,9 +32,14 @@ public:
 	bool IsFaceLeft();
 	void SetFace(bool isLeft);
 
+	void Seen();
+	bool GetSeen();
+
 private:
 	ByteState *currentState;
 	ByteState *standingState, *attackState, *throwState, *dieState;
 	ByteStateHandler::StateName currentStateName, preAction;
+	bool seen;
+	bool dead;
 };
 

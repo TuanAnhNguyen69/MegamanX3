@@ -137,9 +137,7 @@ void PlayerJumpingState::UpdateInput()
 
 void PlayerJumpingState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() != Platform_ID) {
-		return;
-	}
+	
 	switch (side)
 	{
 	case Entity::Left:
@@ -158,6 +156,10 @@ void PlayerJumpingState::OnCollision(Entity * impactor, Entity::CollisionSide si
 
 	case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
 	{
+		if (impactor->GetEntityId() == Roof_ID || impactor->GetEntityId() == UpPlatform_ID || impactor->GetEntityId() == DownPlatform_ID) {
+			return;
+		}
+
 		entity->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top);
 		entity->SetVelocityY(0);
 		break;
@@ -165,6 +167,9 @@ void PlayerJumpingState::OnCollision(Entity * impactor, Entity::CollisionSide si
 
 	case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
 	{
+		if (impactor->GetEntityId() == Roof_ID || impactor->GetEntityId() == UpPlatform_ID || impactor->GetEntityId() == DownPlatform_ID) {
+			return;
+		}
 		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
 		noPressed = false;
 		entity->SetVelocityY(0);

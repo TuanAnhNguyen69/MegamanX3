@@ -25,7 +25,7 @@ public:
 
 	D3DXVECTOR3 GetOriginalSolePos();
 	void SetRemoveSole();
-
+	void SetRemove();
 	void Render();
 
 private:
@@ -33,5 +33,6 @@ private:
 	CargoShipStateHandler::StateName currentStateName;
 	Camera *camera;
 	D3DXVECTOR3 originalSolePos;
+	bool remove;
 };
 

@@ -63,7 +63,10 @@ enum EntityId{
 	ChimeraArmor_ID,
 	CameraRange_ID,
 
-	CargoSole_ID
+	CargoSole_ID,
+
+	HealthX_ID,
+	HealthBoss_ID,
 };
 
 class Entity

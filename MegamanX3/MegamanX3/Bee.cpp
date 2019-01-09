@@ -132,7 +132,7 @@ void Bee::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::Col
 	}
 
 	if (!this->hitted) {
-		if (impactor->GetEntityId() == EntityId::Megaman_ID) {
+		if (impactor->GetEntityId() == EntityId::Megaman_ID && !((Player *) impactor)->IsImmute()) {
 
 			this->SetVelocity(0, 0);
 			sprite = new AnimatedSprite(15, 1, false);

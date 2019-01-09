@@ -51,7 +51,6 @@ void Entity::InitializeAnimatedSprite(LPDIRECT3DDEVICE9 device, LPCTSTR textureN
 void Entity::Update()
 {
 	float dt = Timer::GetDeltaTime();
-
 	position += velocity * dt;
 	velocity *= 0.96f;
 
