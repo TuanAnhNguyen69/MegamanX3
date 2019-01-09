@@ -306,6 +306,11 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 			case EntityId::Thorn_ID:
 			{
+				Thorn * thorn = new Thorn();
+				thorn->Initialize(true);
+				thorn->SetPosition(posX + width / 2, posY + height / 2);
+				thorn->SetBound(width, height);
+				AddEntity(thorn);
 				break;
 			}
 

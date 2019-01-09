@@ -15,4 +15,5 @@
 #include "Shuriken.h"
 #include "Door.h"
 #include "CargoShip.h"
+#include "Thorn.h"
 

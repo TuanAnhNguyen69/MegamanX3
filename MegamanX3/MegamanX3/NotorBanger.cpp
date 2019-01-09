@@ -141,20 +141,7 @@ NotorBangerStateHandler::MoveDirection NotorBanger::GetMoveDirection()
 }
 
 void NotorBanger::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
-{
-	switch (impactor->GetEntityId()) {
-	case EntityId::LeftBlueConveyor_ID:
-	case EntityId::RightBlueConveyor_ID:
-	case EntityId::LeftYellowConveyor_ID:
-	case EntityId::RightYellowConveyor_ID:
-	case EntityId::LeftSmallConveyor_ID:
-	case EntityId::RightSmallConveyor_ID:
-		OnConveyorCollision(impactor, side, data);
-		break;
-	default:
-		break;
-	}
-
+{	
 	Enemy::OnCollision(impactor, side, data);
 	if (currentState)
 	{
@@ -212,7 +199,8 @@ void NotorBanger::OnConveyorCollision(Entity * impactor, Entity::CollisionSide s
 	case Entity::Bottom:
 	case Entity::BottomRight:
 	case Entity::BottomLeft:
-		this->AddPosition(((Conveyor*)(impactor))->GetSpeed() / 10, 0);
+		this->SetVelocityY(0);
+		this->SetVelocityX(((Conveyor*)(impactor))->GetSpeed() * 4);
 		break;
 	default:
 		break;

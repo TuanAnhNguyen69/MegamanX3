@@ -1,5 +1,7 @@
 ﻿#include "pch.h"
 #include "NotorBangerJump.h"
+#include "Conveyor.h"
+#include "Roof.h"
 
 NotorBangerJump::NotorBangerJump(NotorBangerStateHandler *handler, Entity *entity) : NotorBangerState(handler, entity)
 {
@@ -71,8 +73,8 @@ void NotorBangerJump::Update()
 
 void NotorBangerJump::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() == EntityId::Platform_ID 
-		|| impactor->GetEntityId() == EntityId::Roof_ID)
+	if (impactor->GetEntityId() == EntityId::Platform_ID
+		|| impactor->GetEntityId() == EntityId::Thorn_ID)
 	{
 		switch (side)
 		{
@@ -119,6 +121,89 @@ void NotorBangerJump::OnCollision(Entity *impactor, Entity::CollisionSide side, 
 
 
 		}
-	}		
+	}
+
+	if (impactor->GetEntityId() == EntityId::Roof_ID) {
+		switch (side) {
+		case Entity::Left:
+		{
+			if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
+			{
+				entity->AddPosition(-5, -5);
+			}
+			return;
+		}
+
+		case Entity::Right:
+		{
+			if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
+			{
+				entity->AddPosition(5, -5);
+			}
+			return;
+		}
+
+		case Entity::Top:
+			break;
+
+		case Entity::Bottom: case Entity::BottomLeft: case Entity::BottomRight:
+		{
+			//entity->SetPosition(entity->GetPosition().x, ((Roof *)impactor)->GetCollidePosition(entity) - entity->GetWidth() / 2);
+			entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
+			entity->SetVelocity(0, 0);
+			handler->ChangeState(NotorBangerStateHandler::StateName::Standing);
+			return;
+		}
+		}
+	}
+
+	if (impactor->GetEntityId() == EntityId::RightBlueConveyor_ID
+		|| impactor->GetEntityId() == EntityId::RightYellowConveyor_ID
+		|| impactor->GetEntityId() == EntityId::RightSmallConveyor_ID
+		|| impactor->GetEntityId() == EntityId::LeftYellowConveyor_ID
+		|| impactor->GetEntityId() == EntityId::LeftYellowConveyor_ID
+		|| impactor->GetEntityId() == EntityId::LeftYellowConveyor_ID)
+	{
+		switch (side)
+		{
+
+		case Entity::Left:
+		{			
+			break;
+		}
+
+		case Entity::Right:
+		{			
+			break;
+		}
+
+		case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
+		{
+			entity->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top);
+			entity->SetVelocityX(0);
+			entity->AddVelocityY(5.0f);
+			break;
+		}
+
+		case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
+		{
+			//if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
+			{
+				if (hadJump)
+				{
+					entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));					
+					entity->SetVelocity(0, 0);
+					sprite->ResetFrame();
+					handler->ChangeState(NotorBangerStateHandler::StateName::Standing);
+					return;
+				}
+			}
+			break;
+
+		}
+
+		}
+	}
+
 
 }

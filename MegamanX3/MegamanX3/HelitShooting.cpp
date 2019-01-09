@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "HelitShooting.h"
 #include "HelitRocket.h"
+#include "Roof.h"
 
 
 HelitShooting::HelitShooting(HelitStateHandler *handler, Entity *entity) : HelitState(handler, entity)
@@ -28,7 +29,7 @@ void HelitShooting::Load()
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	hadShoot = false;
-	ammo = 6;
+	ammo = 2;
 }
 
 void HelitShooting::Update()
@@ -125,38 +126,70 @@ void HelitShooting::Update()
 
 void HelitShooting::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() == EntityId::Platform_ID || impactor->GetEntityId() == EntityId::Megaman_ID || impactor->GetEntityId() == EntityId::Roof_ID)
+	if (impactor->GetEntityId() == EntityId::Platform_ID
+		|| impactor->GetEntityId() == EntityId::Megaman_ID)
 	{
 		switch (side)
 		{
 
 		case Entity::Left:
 		{
-		
 			break;
 		}
 
 		case Entity::Right:
 		{
-			
 			break;
 		}
 
 		case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
-		{			
+		{
+
+			/*entity->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top + 1);
+			entity->SetVelocity(0, 0);	*/
 			entity->AddVelocityY(+20.0f);
 			break;
 		}
 
 		case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
 		{
-			/*entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
-			entity->SetVelocity(0, 0);*/
+
 			entity->AddVelocityY(-20.0f);
-			//handler->ChangeState(HelitStateHandler::StateName::Die);
 			break;
 		}
 		}
 	}
 
+	if (impactor->GetEntityId() == EntityId::Roof_ID)
+	{
+		switch (side)
+		{
+
+		case Entity::Left:
+		{
+			break;
+		}
+
+		case Entity::Right:
+		{
+			break;
+		}
+
+		case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
+		{
+
+			/*entity->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top + 1);
+			entity->SetVelocity(0, 0);	*/
+			entity->AddVelocityY(+20.0f);
+			break;
+		}
+
+		case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
+		{
+			entity->SetPosition(entity->GetPosition().x, ((Roof *)impactor)->GetCollidePosition(entity) - entity->GetWidth() / 2);
+			entity->AddVelocityY(-20.0f);
+			break;
+		}
+		}
+	}
 }

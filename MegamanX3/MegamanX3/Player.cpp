@@ -251,8 +251,14 @@ PlayerStateHandler::MoveDirection Player::GetMoveDirection() {
 void Player::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	switch (impactor->GetEntityId()) {
+	case EntityId::BigEnergy_ID :
+		this->hp += 8;
+		break;
 	case EntityId::MegamanBullet_ID:
 		return;	
+	case EntityId::Thorn_ID:
+		this->hp = 0;
+		break;
 	case EntityId::LeftBlueConveyor_ID:
 	case EntityId::RightBlueConveyor_ID:
 	case EntityId::LeftYellowConveyor_ID:

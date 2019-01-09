@@ -68,9 +68,9 @@ void HeadGunnerRocket::Update()
 void HeadGunnerRocket::OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	if (!hitted) {
-		if (impactor->GetEntityId() != EntityId::LeftFaceHeadGunner_ID
-			&& impactor->GetEntityId() != EntityId::RightFaceHeadGunner_ID
-			&& impactor->GetEntityId() != EntityId::GunnerRocket_ID) {
+		if (!(impactor->GetEntityId() == EntityId::LeftFaceHeadGunner_ID
+			|| impactor->GetEntityId() == EntityId::RightFaceHeadGunner_ID
+			|| impactor->GetEntityId() == EntityId::GunnerRocket_ID)) {
 
 			if (impactor->GetEntityId() == EntityId::Megaman_ID && ((Player *)impactor)->IsImmute()) {
 				return;

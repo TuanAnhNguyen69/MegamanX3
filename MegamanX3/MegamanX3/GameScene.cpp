@@ -40,9 +40,11 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(2614 * 4, 566 * 4);
+	/*player->SetPosition(2614 * 4, 566 * 4);*/
+	player->SetPosition(6100, 2000);
 	camera->SetCenter(player->GetPosition());
 
+	x_health = new HealthX(player);
 	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());	
 
 	Sound::getInstance()->loadSound((char*)"sound/aircraft.wav", "aircraft");
@@ -107,12 +109,6 @@ void GameScene::Update()
 	}
 	else {
 		doorLock = false;
-	}
-
-	if (checkPoint) {
-			std::cout << "vel" << checkPoint->GetVelocity().x << std::endl;
-			std::cout << "posX" << checkPoint->GetPosition().x << std::endl;
-			std::cout << "posY" << checkPoint->GetPosition().y << std::endl;
 	}
 
 	if (currentDoor && currentDoor->GetState() == Door::DoorState::OPENED) {
