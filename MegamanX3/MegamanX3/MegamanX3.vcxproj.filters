@@ -312,9 +312,6 @@
     <ClCompile Include="GameGlobal.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="HealthBar.cpp">
-      <Filter>World</Filter>
-    </ClCompile>
     <ClCompile Include="HealthX.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -666,9 +663,6 @@
     </ClInclude>
     <ClInclude Include="GameGlobal.h">
       <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthBar.h">
-      <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="HealthX.h" />
   </ItemGroup>

@@ -3,18 +3,17 @@
 
 class Entity;
 
-class HealthX : public Entity
+class HealthBar : public Entity
 {
 public:
-	HealthX(Player *player);
-	~HealthX();
+	HealthBar();
+	~HealthBar();
 
-	void Update();
+	void Update(int value, D3DXVECTOR3 pos);
 	void Initialize();
 	void OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 
 private:
 	AnimatedSprite * sprite;
-	Player *player;
 };
 

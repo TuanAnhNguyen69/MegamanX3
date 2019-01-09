@@ -31,7 +31,7 @@ private:
 	Player *player;
 	Door * currentDoor;
 	Entity * checkPoint;
-	Entity *x_health;
+	HealthBar *x_health;
 };
 
 #endif

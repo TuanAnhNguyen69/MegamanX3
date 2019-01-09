@@ -60,9 +60,7 @@ bool GameScene::Initialize()
 	Sound::getInstance()->setVolume(90.0f, "soundtrack");
 
 	
-	x_health = new HealthX(player);
-	x_health->SetPosition(player->GetPosition().x - 100, player->GetPosition().y - 100);
-	x_health->SetBound(14, 52);
+	x_health = new HealthBar();
 
 
 
@@ -123,7 +121,9 @@ void GameScene::Update()
 	EntityManager::GetInstance()->CheckCollide();
 	camera->Update(player->GetPosition());
 	player->Update();
-	x_health->Update();
+	x_health->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+		SCREEN_HEIGHT / 2 - camera->GetCenter().y);
+	x_health->Update(16, camera->GetCenter());
 	EntityManager::GetInstance()->Update();
 }
 
@@ -181,11 +181,12 @@ void GameScene::Render()
 {
 	map->RenderBackground(camera);
 	player->Render();
-	x_health->Render();
+	
 	auto list = EntityManager::GetInstance()->GetAllEntities();
-	for (int index = 0; index < list.size(); index++) {
-		debugDraw->DrawRect(list.at(index)->GetBound(), camera);
-	}
+	//for (int index = 0; index < list.size(); index++) {
+	//	debugDraw->DrawRect(list.at(index)->GetBound(), camera);
+	//}
 	EntityManager::GetInstance()->Render();
-	DrawQuadtree(EntityManager::GetInstance()->GetQuadTree());
+	//DrawQuadtree(EntityManager::GetInstance()->GetQuadTree());
+	x_health->Render();
 }
