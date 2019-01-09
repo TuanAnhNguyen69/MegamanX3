@@ -246,8 +246,10 @@
     <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="PlayerClimbingState.h" />
     <ClInclude Include="PlayerDamagedState.h" />
+    <ClInclude Include="PlayerDieState.h" />
     <ClInclude Include="PlayerFallingState.h" />
     <ClInclude Include="PlayerJumpingState.h" />
+    <ClInclude Include="PlayerReviveState.h" />
     <ClInclude Include="PlayerRunningState.h" />
     <ClInclude Include="PlayerSlidingState.h" />
     <ClInclude Include="PlayerStandingState.h" />
@@ -363,8 +365,10 @@
     <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="PlayerClimbingState.cpp" />
     <ClCompile Include="PlayerDamagedState.cpp" />
+    <ClCompile Include="PlayerDieState.cpp" />
     <ClCompile Include="PlayerFallingState.cpp" />
     <ClCompile Include="PlayerJumpingState.cpp" />
+    <ClCompile Include="PlayerReviveState.cpp" />
     <ClCompile Include="PlayerRunningState.cpp" />
     <ClCompile Include="PlayerSlidingState.cpp" />
     <ClCompile Include="PlayerStandingState.cpp" />

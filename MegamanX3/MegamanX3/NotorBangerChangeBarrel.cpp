@@ -87,4 +87,12 @@ void NotorBangerChangeBarrel::Update()
 
 void NotorBangerChangeBarrel::OnCollision(Entity * impactor,  Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	if ((impactor->GetEntityId() == EntityId::Platform_ID
+		|| impactor->GetEntityId() == EntityId::Roof_ID))
+	{
+		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+		entity->SetVelocity(0, 0);
+		//handler->ChangeState(NotorBangerStateHandler::StateName::Standing);
+		return;
+	}
 }

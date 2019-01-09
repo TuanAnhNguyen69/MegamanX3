@@ -1,9 +1,7 @@
 #include "pch.h"
 #include "PlayerRunningState.h"
 #include "Engine.h"
-#include "Roof.h"
-#include "DownPlatform.h"
-#include "UpPlatform.h"
+#include "EntityImport.h"
 
 PlayerRunningState::PlayerRunningState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
@@ -26,6 +24,7 @@ PlayerRunningState::~PlayerRunningState()
 void PlayerRunningState::Load()
 {
 	entity->SetSprite(sprite);
+	entity->AllowJump();
 	acceleratorX = 25.0f;
 }
 
@@ -87,6 +86,7 @@ void PlayerRunningState::OnCollision(Entity * impactor, Entity::CollisionSide si
 	switch (impactor->GetEntityId())
 	{
 	case Platform_ID:
+	case Door_ID:
 		OnPlatformCollide(impactor, side, data);
 		break;
 	case Roof_ID:
@@ -98,6 +98,13 @@ void PlayerRunningState::OnCollision(Entity * impactor, Entity::CollisionSide si
 	case DownPlatform_ID:
 		OnDownPlatformCollide(impactor, side, data);
 		break;
+	case EntityId::LeftBlueConveyor_ID:
+	case EntityId::RightBlueConveyor_ID:
+	case EntityId::LeftYellowConveyor_ID:
+	case EntityId::RightYellowConveyor_ID:
+	case EntityId::LeftSmallConveyor_ID:
+	case EntityId::RightSmallConveyor_ID:
+		OnConveyorCollision(impactor, side, data);
 	default:
 		break;
 	}
@@ -137,8 +144,6 @@ void PlayerRunningState::OnPlatformCollide(Entity * impactor, Entity::CollisionS
 
 		case Entity::Bottom: case Entity::BottomLeft: case Entity::BottomRight:
 		{
-			entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
-
 			entity->SetVelocityY(0);
 
 			return;
@@ -262,6 +267,25 @@ void PlayerRunningState::OnDownPlatformCollide(Entity * impactor, Entity::Collis
 			entity->SetVelocityY(0);
 			return;
 		}
+	}
+}
+
+void PlayerRunningState::OnConveyorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side)
+	{
+	case Entity::Left:
+	case Entity::Right:
+	case Entity::Top:
+		break;
+	case Entity::Bottom:
+	case Entity::BottomRight:
+	case Entity::BottomLeft:
+		entity->SetVelocityY(0);
+		entity->AddVelocityX(((Conveyor*)(impactor))->GetSpeed());
+		break;
+	default:
+		break;
 	}
 }
 

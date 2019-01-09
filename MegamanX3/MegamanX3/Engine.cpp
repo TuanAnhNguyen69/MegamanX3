@@ -111,6 +111,8 @@ bool Engine::Initialize(HINSTANCE instance, HWND hwnd)
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "hall_hole.png", D3DCOLOR_XRGB(255, 255, 255));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "wall_hole_left.png", D3DCOLOR_XRGB(255, 255, 255));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "wall_hole_right.png", D3DCOLOR_XRGB(255, 255, 255));
+	resourceManager->LoadTextureResource(graphics->GetDevice(), "x_die.png", D3DCOLOR_XRGB(255, 255, 255));
+
 
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "boss_health.png", D3DCOLOR_XRGB(255, 255, 255));
 	resourceManager->LoadTextureResource(graphics->GetDevice(), "x_health.png", D3DCOLOR_XRGB(255, 255, 255));

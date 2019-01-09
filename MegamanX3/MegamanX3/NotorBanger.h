@@ -24,6 +24,7 @@ public:
 	void ChangeState(StateName stateName);
 	NotorBangerStateHandler::MoveDirection GetMoveDirection();
 	void OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
+	void OnConveyorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 	void OnNoCollisionWithBottom();
 
 	StateName GetPreAction();

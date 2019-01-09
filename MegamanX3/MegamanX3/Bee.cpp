@@ -132,15 +132,14 @@ void Bee::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::Col
 	}
 
 	if (!this->hitted) {
-		if (impactor->GetEntityId() == EntityId::Megaman_ID) {
+		if (impactor->GetEntityId() == EntityId::Megaman_ID && !((Player *) impactor)->IsImmute()) {
 
 			this->SetVelocity(0, 0);
 			sprite = new AnimatedSprite(15, 1, false);
 			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
 				0, 7, 8, 50, 50);
 			this->SetSprite(sprite);
-			Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_bee");
-			Sound::getInstance()->play("explosion_bee", false, 1);
+			Sound::getInstance()->play("explosion", false, 1);
 			this->hitted = true;
 		}
 	}

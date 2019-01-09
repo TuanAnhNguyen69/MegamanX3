@@ -28,4 +28,8 @@ void Life::Update()
 
 void Life::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	if (impactor->GetEntityId() == EntityId::Megaman_ID) {		
+		Sound::getInstance()->play("health_up", false, 1);
+		EntityManager::GetInstance()->RemoveEntity(this);
+	}
 }

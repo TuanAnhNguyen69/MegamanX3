@@ -43,8 +43,7 @@ void Helit::Update()
 {
 	if (this->IsRemove())
 	{
-		Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_helit");
-		Sound::getInstance()->play("explosion_helit", false, 1);
+		Sound::getInstance()->play("explosion", false, 1);
 		EntityManager::GetInstance()->RemoveEntity(this);
 		return;
 	}

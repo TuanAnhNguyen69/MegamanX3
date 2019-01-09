@@ -71,7 +71,7 @@ void Shuriken::Initialize()
 void Shuriken::Update()
 {
 	if (this->remove)
-	{
+	{		
 		EntityManager::GetInstance()->RemoveEntity(this);
 		return;
 	}

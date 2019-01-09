@@ -62,17 +62,18 @@ void HelitRocket::OnCollision(Entity * impactor, Entity::CollisionSide side, Ent
 	if(!hitted){
 		if (!(impactor->GetEntityId() == EntityId::Helit_ID || impactor->GetEntityId() == EntityId::HeliRocket_ID))
 		{
+			if (impactor->GetEntityId() == EntityId::Megaman_ID && ((Player *)impactor)->IsImmute()) {
+				return;
+			}
+
 			this->SetVelocityX(0);
 			sprite = new AnimatedSprite(15, 1, false);
 			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
 				0, 7, 8, 50, 50);
 			this->SetSprite(sprite);
-			Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_helitrocket");
-			Sound::getInstance()->play("explosion_helitrocket", false, 1);
+			Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion");
+			Sound::getInstance()->play("explosion", false, 1);
 			this->hitted = true;
-		}
-		else {
-			return;
 		}
 	}	
 }

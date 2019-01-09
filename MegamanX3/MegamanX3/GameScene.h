@@ -29,9 +29,12 @@ private:
 	Camera *camera;
 	Background *map;
 	Player *player;
+	Enemy *currentBoss;
 	Door * currentDoor;
 	Entity * checkPoint;
 	HealthBar *x_health;
+
+	bool doorLock;
 };
 
 #endif

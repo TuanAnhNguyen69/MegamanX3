@@ -34,43 +34,37 @@ bool GameScene::Initialize()
 
 	map = new Background();
 	map->Initialize("blast_hornet_state", 4);
-	//map->Initialize("testBoss", 2);
 	
-
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 	camera->Initialize("blast_hornet_state");
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	//player->SetPosition(4680, 2300);
-	player->SetPosition(14000, 3860);
-	//player->SetPosition(300, 1700);
-
-
-	//player->SetPosition(9800, 2200);
+	player->SetPosition(2614 * 4, 566 * 4);
 	camera->SetCenter(player->GetPosition());
 
-	//EntityManager::GetInstance()->Initialize(player, camera, "testDoor", map->GetWidth(), map->GetHeight());
 	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());	
 
-	Sound::getInstance()->loadSound((char*)"sound/normal_bullet.wav", "normal_Bullet");
-	Sound::getInstance()->setVolume(120.0f, "normal_Bullet");
-
-	Sound::getInstance()->loadSound((char*)"sound/soundtrack.wav", "soundtrack");
-	Sound::getInstance()->setVolume(90.0f, "soundtrack");
-
-	
+	Sound::getInstance()->loadSound((char*)"sound/aircraft.wav", "aircraft");
+	Sound::getInstance()->loadSound((char*)"sound/BlastHornet.wav", "blasthornet");
+	Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion");
+	Sound::getInstance()->loadSound((char*)"sound/health_up.wav", "health_up");
+	Sound::getInstance()->loadSound((char*)"sound/item.wav", "item");
+	Sound::getInstance()->loadSound((char*)"sound/normal_bullet.wav", "normal_bullet");
+	Sound::getInstance()->loadSound((char*)"sound/player_climb.wav", "player_climb");
+	Sound::getInstance()->loadSound((char*)"sound/player_damaged.wav", "player_damaged");
+	Sound::getInstance()->loadSound((char*)"sound/player_die.wav", "player_die");
+	Sound::getInstance()->loadSound((char*)"sound/player_load_power.wav", "blasthornet");
+	Sound::getInstance()->loadSound((char*)"sound/power_bullet.wav", "power_bullet");
+	Sound::getInstance()->loadSound((char*)"sound/shoot_canon.wav", "shoot_canon");
+	Sound::getInstance()->loadSound((char*)"sound/shoot_rocket.wav", "shoot_rocket");
 	x_health = new HealthBar();
-
-
-
-	Sound::getInstance()->play("soundtrack", true, 0);
-
+	
 	debugDraw = new DebugDraw();
 	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));
 	debugDraw->SetLineSize(5);
 
-	
+	doorLock = false;
 
 	return true;
 }
@@ -99,10 +93,29 @@ void GameScene::DrawQuadtree(QuadTree *quadtree)
 void GameScene::Revive()
 {
 	player->SetPosition(checkPoint->GetPosition().x, checkPoint->GetPosition().y - 100);
+	player->Revive();
+	camera->SetCenter(player->GetPosition());
 }
 
 void GameScene::Update()
 {
+	if (player->NeedRevive()) {
+		Revive();
+	}
+
+	if (currentBoss && currentBoss->GetHP() > 0) {
+		doorLock = true;
+	}
+	else {
+		doorLock = false;
+	}
+
+	if (checkPoint) {
+			std::cout << "vel" << checkPoint->GetVelocity().x << std::endl;
+			std::cout << "posX" << checkPoint->GetPosition().x << std::endl;
+			std::cout << "posY" << checkPoint->GetPosition().y << std::endl;
+	}
+
 	if (currentDoor && currentDoor->GetState() == Door::DoorState::OPENED) {
 		if (!player->GetMovable()) {
 			player->AutoMove();
@@ -135,25 +148,33 @@ void GameScene::CheckCollision()
 	int size = collidableEntity.size();
 	for (size_t index = 0; index < size; index++) {
 		if (Collision::IsCollide(collidableEntity.at(index)->GetBound(), camera->GetBound())) {
+			if (collidableEntity.at(index)->GetEntityId() == EntityId::BlastHornet_ID
+				|| collidableEntity.at(index)->GetEntityId() == EntityId::Byte_ID
+				|| collidableEntity.at(index)->GetEntityId() == EntityId::Shurikein_ID
+				|| collidableEntity.at(index)->GetEntityId() == EntityId::Cargo_ID) {
+				if (((Enemy *)collidableEntity.at(index))->IsActive()) {
+					currentBoss = (Enemy *)collidableEntity.at(index);
+				}
+			}
+
 			RECT broadphase = Collision::GetSweptBroadphaseRect(player);
 			if (Collision::IsCollide(broadphase, collidableEntity.at(index)->GetBound()))
 			{
-				if (collidableEntity.at(index)->GetEntityId() == EntityId::DownPlatform_ID) {
-					int a = 0;
-				}
+				
 				Entity::CollisionReturn collideData;
 				float collisionTime = Collision::SweptAABB(player, collidableEntity.at(index), collideData);
 				if (collisionTime < 1.0f) //collisiontime > 0 &&
 				{
+					if (collidableEntity.at(index)->GetEntityId() == EntityId::Door_ID) {
+						currentDoor = (Door *)collidableEntity.at(index);
+						currentDoor->SetLock(doorLock);
+					}
+
 					Entity::CollisionSide sidePlayer = Collision::GetSideCollision(player, collideData);
 					Entity::CollisionSide sideImpactor = Collision::GetSideCollision(collidableEntity.at(index), collideData);
 
 					player->OnCollision(collidableEntity.at(index), sidePlayer, collideData);
 					collidableEntity.at(index)->OnCollision(player, sideImpactor, collideData);
-
-					if (collidableEntity.at(index)->GetEntityId() == EntityId::Door_ID) {
-						currentDoor = (Door *)collidableEntity.at(index);
-					}
 
 					if (collidableEntity.at(index)->GetEntityId() == EntityId::CheckPoint_ID) {
 						checkPoint = collidableEntity.at(index);

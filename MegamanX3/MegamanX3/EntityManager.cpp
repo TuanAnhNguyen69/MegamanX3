@@ -242,6 +242,11 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 			case EntityId::CheckPoint_ID:
 			{
+				Entity * checkPoint = new Entity(CheckPoint_ID);
+				checkPoint->SetPosition(posX + width / 2, (posY + height / 2));
+				checkPoint->SetBound(width, height);
+				checkPoint->SetVelocity(0, 0);
+				AddEntity(checkPoint);
 				break;
 			}
 
@@ -452,7 +457,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 			case EntityId::HallHole_ID:
 			{
-				Entity * hallHole = new Entity(CheckPoint_ID);
+				Entity * hallHole = new Entity(HallHole_ID);
 				hallHole->SetPosition(posX + width / 2, (posY + height / 2));
 				hallHole->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "hall_hole", width, height);
 				hallHole->SetBound(width, height);
@@ -462,7 +467,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 			case EntityId::WallHoleLeft_ID:
 			{
-				Entity * wallHoleLeft = new Entity(CheckPoint_ID);
+				Entity * wallHoleLeft = new Entity(WallHoleLeft_ID);
 				wallHoleLeft->SetPosition(posX + width / 2, (posY + height / 2));
 				wallHoleLeft->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "wall_hole_left", width, height);
 				wallHoleLeft->SetBound(width, height);
@@ -472,7 +477,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 
 			case EntityId::WallHoleRight_ID:
 			{
-				Entity * wallHoleRight = new Entity(CheckPoint_ID);
+				Entity * wallHoleRight = new Entity(WallHoleRight_ID);
 				wallHoleRight->SetPosition(posX + width / 2, (posY + height / 2));
 				wallHoleRight->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "wall_hole_right", width, height);
 				wallHoleRight->SetBound(width, height);
