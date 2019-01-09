@@ -222,10 +222,10 @@ float Collision::GetCollidePercent(RECT rect1, RECT rect2)
 	//chon max top
 	collisionRegion.top = rect1.top > rect2.top ? rect1.top : rect2.top;
 
-	float rect2Area = GetRectArea(rect2);
+	float rect1Area = GetRectArea(rect1);
 	float collisionRegionArea = GetRectArea(collisionRegion);
 
-	return (collisionRegionArea / rect2Area) * 100.0;
+	return (collisionRegionArea / rect1Area) * 100.0;
 }
 
 RECT Collision::GetSweptBroadphaseRect(Entity * entity)

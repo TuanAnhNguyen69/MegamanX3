@@ -26,7 +26,7 @@ Conveyor::Conveyor(EntityId id) : Entity(id)
 		break;
 	case RightBlueConveyor_ID:
 		sprite = new AnimatedSprite(Define::CONVEYOR_SPEED, 1, true);
-		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "small_conveyor",
+		sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "right_blue_conveyor",
 			0, 3, 1, 380, 64);
 		speed = Define::CONVEYOR_SPEED;
 		break;

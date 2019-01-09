@@ -372,7 +372,7 @@ void Player::Render()
 	}
 }
 
-void Player::AutoMove()
+void Player::AutoMoveFoward()
 {
 	int moveDistance = 1;
 	autoMovedDistance += 1;

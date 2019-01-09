@@ -122,12 +122,12 @@ public:
 	void SetReverse(bool reverse);
 	void SetPositionX(float x);
 	void SetPositionY(float y);
-
 	void SetVelocityX(float x);
 	void SetVelocityY(float y);
 	void AddVelocityX(float x);
 	void AddVelocityY(float y);
-
+	void SetInitialRect(int left, int top, int right, int bottom);
+	RECT GetInitialRect();
 	void AddPosition(float x, float y);
 
 	void GoTo(D3DXVECTOR3 curPoint, D3DXVECTOR3 desPoint, float speed);

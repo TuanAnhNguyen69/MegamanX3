@@ -5,7 +5,7 @@
 #include <vector>
 
 const int PLAYER_AUTO_MOVE_DISTANCE = 176;
-const int CAMERA_AUTO_MOVE_DISTANCE = 528;
+const int CAMERA_AUTO_MOVE_DISTANCE_DOOR = 528;
 
 GameScene::GameScene()
 {
@@ -39,7 +39,7 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(8736, 2151);
+	player->SetPosition(11944, 2151);
 	camera->SetCenter(player->GetPosition());
 
 	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());
@@ -102,7 +102,20 @@ void GameScene::Update()
 	if (currentBoss) {
 		if (currentBoss->GetEntityId() == Cargo_ID) {
 			camera->Lock();
-			doorLock = true;
+			if (player->GetReverse()) {
+				camera->AutoMoveReverse();
+			}
+			else {
+				camera->AutoMoveFoward();
+			}
+
+			if (camera->GetAutoMovedDistance() >= SCREEN_WIDTH / 2 - 50) {
+				camera->StopAutoMove();
+				player->SetMovable(true);
+			}
+			else {
+				player->SetMovable(false);
+			}
 		}
 		else if (currentBoss->GetHP() > 0) {
 			doorLock = true;
@@ -114,23 +127,28 @@ void GameScene::Update()
 	}
 	else {
 		camera->Unlock();
+		if (!camera->IsAutoMoving()) {
+			camera->ResetDistance();
+		}
 		doorLock = false;
 	}
 
 	if (currentDoor && currentDoor->GetState() == Door::DoorState::OPENED) {
 		if (!player->GetMovable()) {
-			player->AutoMove();
-			camera->AutoMove();
+			player->AutoMoveFoward();
+			camera->AutoMoveFoward();
 			if (player->GetAutoMovedDistance() >= PLAYER_AUTO_MOVE_DISTANCE) {
 				player->SetMovable(true);
 			}
 		}
 
-		if (camera->GetAutoMovedDistance() >= CAMERA_AUTO_MOVE_DISTANCE) {
+		if (camera->GetAutoMovedDistance() >= CAMERA_AUTO_MOVE_DISTANCE_DOOR) {
 			camera->StopAutoMove();
+			camera->ResetDistance();
 			currentDoor->SetState(Door::DoorState::CLOSING);
 		}
 	}
+
 	CheckCollision();
 	EntityManager::GetInstance()->CheckCollide();
 	camera->Update(player->GetPosition());

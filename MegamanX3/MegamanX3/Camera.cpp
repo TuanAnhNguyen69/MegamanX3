@@ -145,14 +145,21 @@ void Camera::CheckCameraPath()
 void Camera::StopAutoMove()
 {
 	autoMoving = false;
-	autoMovedDistance = 0;
 }
 
-void Camera::AutoMove()
+void Camera::AutoMoveFoward()
 {
 	autoMoving = true;
 	D3DXVECTOR3 center = GetCenter();
 	this->SetCenter(center.x + 3, center.y);
+	autoMovedDistance += 3;
+}
+
+void Camera::AutoMoveReverse()
+{
+	autoMoving = true;
+	D3DXVECTOR3 center = GetCenter();
+	this->SetCenter(center.x - 3, center.y);
 	autoMovedDistance += 3;
 }
 
@@ -185,6 +192,11 @@ bool Camera::IsAutoMoving()
 int Camera::GetAutoMovedDistance()
 {
 	return autoMovedDistance;
+}
+
+void Camera::ResetDistance()
+{
+	autoMovedDistance = 0;
 }
 
 D3DXVECTOR3 Camera::GetCenter()
