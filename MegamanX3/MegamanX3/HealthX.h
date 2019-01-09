@@ -11,7 +11,6 @@ public:
 
 	void Update();
 	void Initialize();
-	void OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 
 private:
 	AnimatedSprite * sprite;

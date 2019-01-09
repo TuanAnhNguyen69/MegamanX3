@@ -39,6 +39,7 @@ public:
 	bool GetMovable();
 	void SetMovable(bool movable);
 	void SetImmute(bool immute);
+	void AllowJump();
 	bool IsImmute();
 	void Revive();
 	enum BlockType

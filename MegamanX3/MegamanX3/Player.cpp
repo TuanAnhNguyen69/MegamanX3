@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "pch.h"
 #include "Player.h"
 #include "PlayerStandingState.h"
 #include "PlayerRunningState.h"
@@ -134,8 +135,10 @@ void Player::Update()
 		movable = false;
 	}
 
-
-	if (movable ) {
+	if (!movable && currentStateName != Reviving) {
+		SetVelocity(0, 0);
+	}
+	else {
 		if (currentState) {
 			currentState->UpdateInput();
 		}
@@ -247,7 +250,6 @@ PlayerStateHandler::MoveDirection Player::GetMoveDirection() {
 
 void Player::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	
 	switch (impactor->GetEntityId()) {
 	case EntityId::MegamanBullet_ID:
 		return;	
@@ -412,6 +414,11 @@ void Player::SetImmute(bool immute)
 	this->immute = true;
 }
 
+void Player::AllowJump()
+{
+	this->isJumping = false;
+}
+
 bool Player::IsImmute()
 {
 	return immute;
@@ -420,7 +427,7 @@ bool Player::IsImmute()
 void Player::Revive()
 {
 	ChangeState(Reviving);
-	isJumping = false;
+	isJumping = true;
 	allowSlide = true;
 	autoMovedDistance = 0;
 	this->bulletCharging = 0;
@@ -436,12 +443,9 @@ void Player::OnConveyorCollision(Entity * impactor, Entity::CollisionSide side, 
 	case Entity::Left:
 	case Entity::Right:
 	case Entity::Top:
-		break;
 	case Entity::Bottom:
 	case Entity::BottomRight:
 	case Entity::BottomLeft:
-		this->AddPosition(((Conveyor*)(impactor))->GetSpeed() / 10, 0);
-		break;
 	default:
 		break;
 	}
@@ -449,6 +453,10 @@ void Player::OnConveyorCollision(Entity * impactor, Entity::CollisionSide side, 
 
 void Player::OnDoorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	if (((Door *)impactor)->IsLock()) {
+		return;
+	}
+
 	switch (side)
 	{
 	case Entity::Left:

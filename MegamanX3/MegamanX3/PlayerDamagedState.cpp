@@ -30,7 +30,7 @@ void PlayerDamagedState::Load()
 void PlayerDamagedState::Update()
 {
 	if (sprite->IsFinished()) {
-		handler->ChangeState(PlayerStateHandler::StateName::Standing);
+		handler->ChangeState(PlayerStateHandler::StateName::Falling);
 	}
 }
 

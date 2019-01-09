@@ -2,7 +2,6 @@
 #include "PlayerClimbingState.h"
 #include "Engine.h"
 
-
 PlayerClimbingState::PlayerClimbingState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
 	climbSprite = new AnimatedSprite(15, 0.5, false);
@@ -13,7 +12,6 @@ PlayerClimbingState::PlayerClimbingState(PlayerStateHandler *handler, Player *en
 	fireSprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x",
 		54, 55, 10, 50, 50);
 }
-
 
 PlayerClimbingState::~PlayerClimbingState()
 {
@@ -94,14 +92,14 @@ void PlayerClimbingState::UpdateInput()
 	{
 		handler->ChangeState(PlayerStateHandler::StateName::Jumping);
 	}
-
 }
 
 void PlayerClimbingState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() != Platform_ID) {
+	if (impactor->GetEntityId() != Platform_ID && impactor->GetEntityId() != Door_ID) {
 		return;
 	}
+
 	Input *input = Engine::GetEngine()->GetInput();
 	switch (side)
 	{
@@ -118,6 +116,7 @@ void PlayerClimbingState::OnCollision(Entity * impactor, Entity::CollisionSide s
 		else
 		{
 			handler->ChangeState(PlayerStateHandler::StateName::Falling);
+			entity->blockType = Player::BlockType::None;
 		}
 		break;
 	case Entity::CollisionSide::Right:
@@ -133,13 +132,14 @@ void PlayerClimbingState::OnCollision(Entity * impactor, Entity::CollisionSide s
 		else
 		{
 			handler->ChangeState(PlayerStateHandler::StateName::Falling);
+			entity->blockType = Player::BlockType::None;
 		}
 		break;
 	case Entity::CollisionSide::Top:
 		break;
 	case Entity::CollisionSide::Bottom:
-	//case Entity::TopRight:
-	//case Entity::BottomLeft:
+		//case Entity::TopRight:
+		//case Entity::BottomLeft:
 		isStanding = true;
 		if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
 		{
@@ -148,15 +148,18 @@ void PlayerClimbingState::OnCollision(Entity * impactor, Entity::CollisionSide s
 			if (isKeyLeft || isKeyRight)
 			{
 				handler->ChangeState(PlayerStateHandler::Running);
+				entity->blockType = Player::BlockType::None;
 			}
 			else
 			{
 				handler->ChangeState(PlayerStateHandler::Standing);
+				entity->blockType = Player::BlockType::None;
 			}
 		}
-		return;
 		break;
 	default:
+		handler->ChangeState(PlayerStateHandler::StateName::Falling);
+		entity->blockType = Player::BlockType::None;
 		break;
 	}
 }

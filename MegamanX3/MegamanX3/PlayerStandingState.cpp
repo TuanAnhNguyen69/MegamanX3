@@ -3,6 +3,7 @@
 #include "AnimatedSprite.h"
 #include "Engine.h"
 #include "PlayerBullet.h"
+#include "EntityImport.h"
 
 PlayerStandingState::PlayerStandingState(PlayerStateHandler *handler, Player *entity) : PlayerState(handler, entity)
 {
@@ -30,6 +31,87 @@ void PlayerStandingState::Load()
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	entity->SetMovable(true);
+	entity->AllowJump();
+}
+
+void PlayerStandingState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (impactor->GetEntityId()) {
+	case EntityId::Platform_ID:
+		OnPlatformCollide(impactor, side, data);
+		break;
+	case EntityId::LeftBlueConveyor_ID:
+	case EntityId::RightBlueConveyor_ID:
+	case EntityId::LeftYellowConveyor_ID:
+	case EntityId::RightYellowConveyor_ID:
+	case EntityId::LeftSmallConveyor_ID:
+	case EntityId::RightSmallConveyor_ID:
+		OnConveyorCollision(impactor, side, data);
+		break;
+	default:
+		break;
+	}
+}
+
+void PlayerStandingState::OnPlatformCollide(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side) {
+	case Entity::Left:
+	{
+		//va cham phia ben trai player
+		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToLeft)
+		{
+			//day Player ra phia ben phai de cho player khong bi xuyen qua object
+			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+
+			//handler->ChangeState(PlayerStateHandler::Standing);
+		}
+
+		return;
+	}
+
+	case Entity::Right:
+	{
+		//va cham phia ben phai player
+		if (handler->GetMoveDirection() == PlayerStateHandler::MoveToRight)
+		{
+			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+			//handler->ChangeState(PlayerStateHandler::Standing);
+		}
+		return;
+	}
+
+	case Entity::Top:
+		break;
+
+	case Entity::Bottom: case Entity::BottomLeft: case Entity::BottomRight:
+	{
+		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+
+		entity->SetVelocityY(0);
+
+		return;
+	}
+	}
+}
+
+void PlayerStandingState::OnConveyorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side)
+	{
+	case Entity::Left:
+	case Entity::Right:
+	case Entity::Top:
+		break;
+	case Entity::Bottom:
+	case Entity::BottomRight:
+	case Entity::BottomLeft:
+		entity->SetVelocityY(0);
+		entity->SetVelocityX(((Conveyor*)(impactor))->GetSpeed() * 4);
+		break;
+	default:
+		break;
+	}
 }
 
 void PlayerStandingState::Update()

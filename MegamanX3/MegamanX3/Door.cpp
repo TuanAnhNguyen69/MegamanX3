@@ -63,7 +63,11 @@ void Door::Initialize()
 
 void Door::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() == EntityId::Megaman_ID && side == CollisionSide::Left || side == CollisionSide::Right) {
+	if (lock) {
+		return;
+	}
+
+	if (impactor->GetEntityId() == EntityId::Megaman_ID && (side == CollisionSide::Left || side == CollisionSide::Right)) {
 		if (state == DoorState::OPENED) {
 			return;
 		}
@@ -77,6 +81,16 @@ void Door::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::Co
 Door::DoorState Door::GetState()
 {
 	return this->state;
+}
+
+void Door::SetLock(bool lock)
+{
+	this->lock = lock;
+}
+
+bool Door::IsLock()
+{
+	return lock;
 }
 
 void Door::SetState(DoorState state)
