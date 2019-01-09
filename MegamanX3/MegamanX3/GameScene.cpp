@@ -40,7 +40,8 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(2614 * 4, 566 * 4);
+	//player->SetPosition(2614 * 4, 566 * 4);
+	player->SetPosition(15450, 3850);
 	camera->SetCenter(player->GetPosition());
 
 	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());	
@@ -58,7 +59,9 @@ bool GameScene::Initialize()
 	Sound::getInstance()->loadSound((char*)"sound/power_bullet.wav", "power_bullet");
 	Sound::getInstance()->loadSound((char*)"sound/shoot_canon.wav", "shoot_canon");
 	Sound::getInstance()->loadSound((char*)"sound/shoot_rocket.wav", "shoot_rocket");
-	x_health = new HealthBar();
+
+	x_health = new HealthBar(EntityId::HealthX_ID);
+	boss_health = new HealthBar(EntityId::HealthBoss_ID);
 	
 	debugDraw = new DebugDraw();
 	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));
@@ -134,9 +137,14 @@ void GameScene::Update()
 	EntityManager::GetInstance()->CheckCollide();
 	camera->Update(player->GetPosition());
 	player->Update();
+
 	x_health->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 		SCREEN_HEIGHT / 2 - camera->GetCenter().y);
-	x_health->Update(16, camera->GetCenter());
+	x_health->Update(player->GetHP(), camera->GetCenter());
+
+	/*boss_health->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+		SCREEN_HEIGHT / 2 - camera->GetCenter().y);
+	boss_health->Update(currentBoss->GetHP(), camera->GetCenter());*/
 	EntityManager::GetInstance()->Update();
 }
 
@@ -210,4 +218,5 @@ void GameScene::Render()
 	EntityManager::GetInstance()->Render();
 	//DrawQuadtree(EntityManager::GetInstance()->GetQuadTree());
 	x_health->Render();
+	//boss_health->Render();
 }

@@ -207,6 +207,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityImport.h" />
     <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="Explosive.h" />
     <ClInclude Include="FrameWork.h" />
     <ClInclude Include="GameComponent.h" />
     <ClInclude Include="GameGlobal.h" />
@@ -324,6 +325,7 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="Explosive.cpp" />
     <ClCompile Include="FrameWork.cpp" />
     <ClCompile Include="GameGlobal.cpp" />
     <ClCompile Include="GameLog.cpp" />

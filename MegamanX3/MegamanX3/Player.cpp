@@ -84,7 +84,7 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 	movable = true;
 	this->bulletCharging = 0;
 	this->fireCoolDown = 10;
-	this->hp = 30;
+	this->hp = 16;
 	autoMovedDistance = 0;
 	reviving = false;
 	noBottomCollide = false;
@@ -92,6 +92,10 @@ void Player::Initialize(LPDIRECT3DDEVICE9 device, Camera *camera)
 
 void Player::Update()
 {
+	if (hp >= 16)
+	{
+		hp = 16;
+	}
 	if (camera) {
 		this->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 			SCREEN_HEIGHT / 2 - camera->GetCenter().y);
@@ -430,8 +434,13 @@ void Player::Revive()
 	autoMovedDistance = 0;
 	this->bulletCharging = 0;
 	this->fireCoolDown = 10;
-	this->hp = 30;
+	this->hp = 16;
 	reviving = false;
+}
+
+int Player::GetHP()
+{
+	return this->hp;
 }
 
 void Player::OnConveyorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)

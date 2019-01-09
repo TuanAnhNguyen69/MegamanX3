@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Explosive.h"
 
 namespace Define
 {
@@ -9,6 +10,8 @@ namespace Define
 	const float SHURIKEN_SPEED_JUMP_Y = 60.0f;
 
 	const float SHURIKEN_ACCELERATION_FALL_Y = 15.0f;	//Gia tốc rơi
+
+	const int SHURIKEN_HP = 48;
 }
 
 class ShurikenStateHandler

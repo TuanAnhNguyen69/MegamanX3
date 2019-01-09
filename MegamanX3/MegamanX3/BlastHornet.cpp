@@ -68,7 +68,6 @@ void BlastHornet::Initialize()
 	this->SetPreAction(BlastHornetStateHandler::StateName::Drop);
 	this->ChangeState(BlastHornetStateHandler::StateName::Return);
 	HP = Define::BLASTHORNET_HP;
-	//HP = 0;
 }
 
 void BlastHornet::Update()
@@ -86,8 +85,22 @@ void BlastHornet::Update()
 	}
 	else if (this->GetHP() <= 0 && !hadDie)
 	{
+		timeStartDie = clock();
 		hadDie = true;
 		this->ChangeState(BlastHornetStateHandler::StateName::Die);
+	}
+
+	if (hadDie)
+	{
+		timeDoneDie = clock();
+		int numAdd = (timeDoneDie - timeStartDie) % 100;
+		if (numAdd == 0)
+		{
+			explosive = new Explosive();
+			explosive->SetPosition(this->GetPosition().x, this->GetPosition().y);
+			EntityManager::GetInstance()->AddEntity(explosive);
+		}
+
 	}
 
 	Enemy::Update();

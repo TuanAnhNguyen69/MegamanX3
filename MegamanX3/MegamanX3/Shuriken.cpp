@@ -65,7 +65,9 @@ void Shuriken::Initialize()
 		"shuriken", 50, 50);
 	this->SetPreAction(ShurikenStateHandler::StateName::Jump);
 	this->ChangeState(ShurikenStateHandler::StateName::Turn);
-	this->HP = 40;
+	this->HP = Define::SHURIKEN_HP;
+
+	
 }
 
 void Shuriken::Update()
@@ -78,8 +80,22 @@ void Shuriken::Update()
 
 	if (this->GetHP() <= 0 && !dead)
 	{
+		timeStartDie = clock();
 		this->ChangeState(ShurikenStateHandler::StateName::Die);
 		dead = true;
+	}
+
+	if (dead)
+	{
+		timeDoneDie = clock();
+		int numAdd = (timeDoneDie - timeStartDie) % 100;
+		if (numAdd == 0)
+		{
+			explosive = new Explosive();
+			explosive->SetPosition(this->GetPosition().x, this->GetPosition().y);
+			EntityManager::GetInstance()->AddEntity(explosive);
+		}
+			
 	}
 
 	Enemy::Update();
@@ -192,3 +208,4 @@ void Shuriken::SetRemove()
 {
 	this->remove = true;
 }
+

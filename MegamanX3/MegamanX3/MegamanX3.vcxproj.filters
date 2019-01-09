@@ -1,235 +1,756 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AnimatedSprite.cpp" />
-    <ClCompile Include="Bee.cpp" />
-    <ClCompile Include="BlastHornet.cpp" />
-    <ClCompile Include="BlastHornetDie.cpp" />
-    <ClCompile Include="BlastHornetDrop.cpp" />
-    <ClCompile Include="BlastHornetFly.cpp" />
-    <ClCompile Include="BlastHornetPrepare.cpp" />
-    <ClCompile Include="BlastHornetPrick.cpp" />
-    <ClCompile Include="BlastHornetReturn.cpp" />
-    <ClCompile Include="Box.cpp" />
-    <ClCompile Include="BoxWall.cpp" />
-    <ClCompile Include="Byte.cpp" />
-    <ClCompile Include="ByteAttack.cpp" />
-    <ClCompile Include="ByteBomb.cpp" />
-    <ClCompile Include="ByteDie.cpp" />
-    <ClCompile Include="ByteStanding.cpp" />
-    <ClCompile Include="ByteState.cpp" />
-    <ClCompile Include="ByteThrow.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Canon.cpp" />
-    <ClCompile Include="Cargo.cpp" />
-    <ClCompile Include="CargoShip.cpp" />
-    <ClCompile Include="CargoShipDownState.cpp" />
-    <ClCompile Include="CargoShipDropState.cpp" />
-    <ClCompile Include="CargoShipState.cpp" />
-    <ClCompile Include="CargoShipUpState.cpp" />
-    <ClCompile Include="CargoSole.cpp" />
-    <ClCompile Include="CarryArm.cpp" />
-    <ClCompile Include="CarryArmDie.cpp" />
-    <ClCompile Include="CarryArmDropping.cpp" />
-    <ClCompile Include="CarryArmFlying.cpp" />
-    <ClCompile Include="CarryArmState.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="Conveyor.cpp" />
-    <ClCompile Include="DebugDraw.cpp" />
-    <ClCompile Include="Door.cpp" />
-    <ClCompile Include="DownPlatform.cpp" />
-    <ClCompile Include="DXManager.cpp" />
-    <ClCompile Include="Elevator.cpp" />
-    <ClCompile Include="BlastHornetState.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Energy.cpp" />
-    <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="EntityManager.cpp" />
-    <ClCompile Include="FrameWork.cpp" />
-    <ClCompile Include="GameGlobal.cpp" />
-    <ClCompile Include="GameLog.cpp" />
-    <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="Graphics.cpp" />
-    <ClCompile Include="HeadGunner.cpp" />
-    <ClCompile Include="HeadGunnerDie.cpp" />
-    <ClCompile Include="HeadGunnerRocket.cpp" />
-    <ClCompile Include="HeadGunnerShoot.cpp" />
-    <ClCompile Include="HeadGunnerShootCanon.cpp" />
-    <ClCompile Include="HeadGunnerShootRocket.cpp" />
-    <ClCompile Include="HeadGunnerStanding.cpp" />
-    <ClCompile Include="HeadGunnerState.cpp" />
-    <ClCompile Include="HealthX.cpp" />
-    <ClCompile Include="Helit.cpp" />
-    <ClCompile Include="HelitDie.cpp" />
-    <ClCompile Include="HelitFlying.cpp" />
-    <ClCompile Include="HelitRocket.cpp" />
-    <ClCompile Include="HelitShooting.cpp" />
-    <ClCompile Include="HelitState.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Life.cpp" />
-    <ClCompile Include="Background.cpp" />
     <ClCompile Include="MegamanX3.cpp" />
-    <ClCompile Include="NotorBanger.cpp" />
-    <ClCompile Include="NotorBangerChangeBarrel.cpp" />
-    <ClCompile Include="NotorBangerDie.cpp" />
-    <ClCompile Include="NotorBangerJump.cpp" />
-    <ClCompile Include="NotorBangerShoot.cpp" />
-    <ClCompile Include="NotorBangerStanding.cpp" />
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Platform.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerBullet.cpp" />
-    <ClCompile Include="PlayerClimbingState.cpp" />
-    <ClCompile Include="PlayerDamagedState.cpp" />
-    <ClCompile Include="PlayerDieState.cpp" />
-    <ClCompile Include="PlayerFallingState.cpp" />
-    <ClCompile Include="PlayerJumpingState.cpp" />
-    <ClCompile Include="PlayerReviveState.cpp" />
-    <ClCompile Include="PlayerRunningState.cpp" />
-    <ClCompile Include="PlayerSlidingState.cpp" />
-    <ClCompile Include="PlayerStandingState.cpp" />
-    <ClCompile Include="PlayerState.cpp" />
-    <ClCompile Include="QuadTree.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="Roof.cpp" />
-    <ClCompile Include="Shuriken.cpp" />
-    <ClCompile Include="ShurikenAttack1.cpp" />
-    <ClCompile Include="ShurikenAttack2.cpp" />
-    <ClCompile Include="ShurikenDie.cpp" />
-    <ClCompile Include="ShurikenFlip.cpp" />
-    <ClCompile Include="ShurikenJump.cpp" />
-    <ClCompile Include="ShurikenMove.cpp" />
-    <ClCompile Include="ShurikenState.cpp" />
-    <ClCompile Include="ShurikenTurn.cpp" />
-    <ClCompile Include="Sound.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="NotorBangerState.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Thorn.cpp" />
-    <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="UpPlatform.cpp" />
+    <ClCompile Include="Player.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerRunningState.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStandingState.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerFallingState.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJumpingState.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedSprite.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="DXManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWork.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugDraw.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDamagedState.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSlidingState.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="UpPlatform.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Thorn.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Elevator.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="DownPlatform.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Conveyor.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Cargo.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxWall.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Life.cpp">
+      <Filter>Entities\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Energy.cpp">
+      <Filter>Entities\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornet.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArm.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadGunner.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
+    <ClCompile Include="Helit.cpp">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClCompile>
+    <ClCompile Include="NotorBanger.cpp">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClCompile>
+    <ClCompile Include="Bee.cpp">
+      <Filter>Entities\Enemy\Bee</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetState.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="NotorBangerState.cpp">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadGunnerState.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerClimbingState.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="NotorBangerDie.cpp">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClCompile>
+    <ClCompile Include="NotorBangerJump.cpp">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClCompile>
+    <ClCompile Include="NotorBangerShoot.cpp">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClCompile>
+    <ClCompile Include="NotorBangerStanding.cpp">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadGunnerDie.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadGunnerShoot.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadGunnerStanding.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
+    <ClCompile Include="HelitState.cpp">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClCompile>
+    <ClCompile Include="HelitDie.cpp">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClCompile>
+    <ClCompile Include="HelitFlying.cpp">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClCompile>
+    <ClCompile Include="HelitShooting.cpp">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadGunnerRocket.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
+    <ClCompile Include="NotorBangerChangeBarrel.cpp">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBullet.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Entities\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Canon.cpp">
+      <Filter>Entities\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Byte.cpp">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteState.cpp">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteAttack.cpp">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteDie.cpp">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteStanding.cpp">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteThrow.cpp">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteBomb.cpp">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClCompile>
+    <ClCompile Include="Shuriken.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenState.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenAttack1.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenAttack2.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenDie.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenFlip.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenJump.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenMove.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="ShurikenTurn.cpp">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClCompile>
+    <ClCompile Include="Roof.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="HelitRocket.cpp">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArmDropping.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArmFlying.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArmState.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
+    <ClCompile Include="CarryArmDie.cpp">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetDrop.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetPrepare.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetPrick.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetReturn.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetFly.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornetDie.cpp">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadGunnerShootCanon.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadGunnerShootRocket.cpp">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClCompile>
+    <ClCompile Include="CargoShip.cpp">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClCompile>
+    <ClCompile Include="CargoShipState.cpp">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClCompile>
+    <ClCompile Include="CargoShipDownState.cpp">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClCompile>
+    <ClCompile Include="CargoShipDropState.cpp">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClCompile>
+    <ClCompile Include="CargoShipUpState.cpp">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClCompile>
+    <ClCompile Include="CargoSole.cpp">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Core\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLog.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GameGlobal.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDieState.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerReviveState.cpp">
+      <Filter>Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthX.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="Explosive.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimatedSprite.h" />
-    <ClInclude Include="Bee.h" />
-    <ClInclude Include="BlastHornet.h" />
-    <ClInclude Include="BlastHornetDie.h" />
-    <ClInclude Include="BlastHornetDrop.h" />
-    <ClInclude Include="BlastHornetFly.h" />
-    <ClInclude Include="BlastHornetPrepare.h" />
-    <ClInclude Include="BlastHornetPrick.h" />
-    <ClInclude Include="BlastHornetReturn.h" />
-    <ClInclude Include="BlastHornetStateHandler.h" />
-    <ClInclude Include="Box.h" />
-    <ClInclude Include="BoxWall.h" />
-    <ClInclude Include="Byte.h" />
-    <ClInclude Include="ByteAttack.h" />
-    <ClInclude Include="ByteBomb.h" />
-    <ClInclude Include="ByteDie.h" />
-    <ClInclude Include="ByteStanding.h" />
-    <ClInclude Include="ByteState.h" />
-    <ClInclude Include="ByteStateHandler.h" />
-    <ClInclude Include="ByteThrow.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Canon.h" />
-    <ClInclude Include="Cargo.h" />
-    <ClInclude Include="CargoShip.h" />
-    <ClInclude Include="CargoShipDownState.h" />
-    <ClInclude Include="CargoShipDropState.h" />
-    <ClInclude Include="CargoShipState.h" />
-    <ClInclude Include="CargoShipStateHandler.h" />
-    <ClInclude Include="CargoShipUpState.h" />
-    <ClInclude Include="CargoSole.h" />
-    <ClInclude Include="CarryArm.h" />
-    <ClInclude Include="CarryArmDie.h" />
-    <ClInclude Include="CarryArmDropping.h" />
-    <ClInclude Include="CarryArmFlying.h" />
-    <ClInclude Include="CarryArmState.h" />
-    <ClInclude Include="CarryArmStateHandler.h" />
-    <ClInclude Include="Collision.h" />
-    <ClInclude Include="Conveyor.h" />
-    <ClInclude Include="DebugDraw.h" />
-    <ClInclude Include="Door.h" />
-    <ClInclude Include="DownPlatform.h" />
-    <ClInclude Include="DXManager.h" />
-    <ClInclude Include="Elevator.h" />
-    <ClInclude Include="BlastHornetState.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Energy.h" />
-    <ClInclude Include="Engine.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="EntityImport.h" />
-    <ClInclude Include="EntityManager.h" />
-    <ClInclude Include="FrameWork.h" />
-    <ClInclude Include="GameComponent.h" />
-    <ClInclude Include="GameGlobal.h" />
-    <ClInclude Include="GameLog.h" />
-    <ClInclude Include="GameScene.h" />
-    <ClInclude Include="Graphics.h" />
-    <ClInclude Include="HeadGunner.h" />
-    <ClInclude Include="HeadGunnerDie.h" />
-    <ClInclude Include="HeadGunnerRocket.h" />
-    <ClInclude Include="HeadGunnerShoot.h" />
-    <ClInclude Include="HeadGunnerShootCanon.h" />
-    <ClInclude Include="HeadGunnerShootRocket.h" />
-    <ClInclude Include="HeadGunnerStanding.h" />
-    <ClInclude Include="HeadGunnerState.h" />
-    <ClInclude Include="HeadGunnerStateHandler.h" />
-    <ClInclude Include="HealthX.h" />
-    <ClInclude Include="Helit.h" />
-    <ClInclude Include="HelitDie.h" />
-    <ClInclude Include="HelitFlying.h" />
-    <ClInclude Include="HelitRocket.h" />
-    <ClInclude Include="HelitShooting.h" />
-    <ClInclude Include="HelitState.h" />
-    <ClInclude Include="HelitStateHandler.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="Life.h" />
-    <ClInclude Include="Background.h" />
-    <ClInclude Include="NotorBanger.h" />
-    <ClInclude Include="NotorBangerChangeBarrel.h" />
-    <ClInclude Include="NotorBangerDie.h" />
-    <ClInclude Include="NotorBangerJump.h" />
-    <ClInclude Include="NotorBangerShoot.h" />
-    <ClInclude Include="NotorBangerStanding.h" />
-    <ClInclude Include="NotorBangerStateHandler.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Platform.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerBullet.h" />
-    <ClInclude Include="PlayerClimbingState.h" />
-    <ClInclude Include="PlayerDamagedState.h" />
-    <ClInclude Include="PlayerDieState.h" />
-    <ClInclude Include="PlayerFallingState.h" />
-    <ClInclude Include="PlayerJumpingState.h" />
-    <ClInclude Include="PlayerReviveState.h" />
-    <ClInclude Include="PlayerRunningState.h" />
-    <ClInclude Include="PlayerSlidingState.h" />
-    <ClInclude Include="PlayerStandingState.h" />
-    <ClInclude Include="PlayerStateHandler.h" />
-    <ClInclude Include="PlayerState.h" />
-    <ClInclude Include="QuadTree.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Roof.h" />
-    <ClInclude Include="Shuriken.h" />
-    <ClInclude Include="ShurikenAttack1.h" />
-    <ClInclude Include="ShurikenAttack2.h" />
-    <ClInclude Include="ShurikenDie.h" />
-    <ClInclude Include="ShurikenFlip.h" />
-    <ClInclude Include="ShurikenJump.h" />
-    <ClInclude Include="ShurikenMove.h" />
-    <ClInclude Include="ShurikenState.h" />
-    <ClInclude Include="ShurikenTurn.h" />
-    <ClInclude Include="Sound.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="NotorBangerState.h" />
-    <ClInclude Include="ShurikenStateHandler.h" />
-    <ClInclude Include="SweptAABB.h" />
-    <ClInclude Include="SystemDefs.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="Thorn.h" />
-    <ClInclude Include="Timer.h" />
-    <ClInclude Include="UpPlatform.h" />
+    <ClInclude Include="Player.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStateHandler.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRunningState.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStandingState.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerFallingState.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJumpingState.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedSprite.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemDefs.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="DXManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWork.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponent.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SweptAABB.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugDraw.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDamagedState.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSlidingState.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="UpPlatform.h">
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Thorn.h">
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform.h">
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Elevator.h">
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="DownPlatform.h">
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Conveyor.h">
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Cargo.h">
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxWall.h">
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Life.h">
+      <Filter>Entities\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Energy.h">
+      <Filter>Entities\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornet.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArm.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunner.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="Helit.h">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBanger.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="Bee.h">
+      <Filter>Entities\Enemy\Bee</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetState.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetStateHandler.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBangerState.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBangerStateHandler.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerStateHandler.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerState.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerClimbingState.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityImport.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBangerDie.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBangerJump.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBangerShoot.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBangerStanding.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerDie.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerShoot.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerStanding.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="HelitState.h">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClInclude>
+    <ClInclude Include="HelitDie.h">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClInclude>
+    <ClInclude Include="HelitFlying.h">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClInclude>
+    <ClInclude Include="HelitShooting.h">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClInclude>
+    <ClInclude Include="HelitStateHandler.h">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerRocket.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="NotorBangerChangeBarrel.h">
+      <Filter>Entities\Enemy\NotorBanger</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBullet.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Entities\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Canon.h">
+      <Filter>Entities\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Byte.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteStateHandler.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteState.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteAttack.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteDie.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteStanding.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteThrow.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteBomb.h">
+      <Filter>Entities\Enemy\Byte</Filter>
+    </ClInclude>
+    <ClInclude Include="Shuriken.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenStateHandler.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenState.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenAttack1.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenAttack2.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenDie.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenFlip.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenJump.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenMove.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="ShurikenTurn.h">
+      <Filter>Entities\Enemy\Shuriken</Filter>
+    </ClInclude>
+    <ClInclude Include="Roof.h">
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="HelitRocket.h">
+      <Filter>Entities\Enemy\Helit</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmDropping.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmFlying.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmState.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmStateHandler.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="CarryArmDie.h">
+      <Filter>Entities\Enemy\CarryArm</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetDrop.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetPrepare.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetPrick.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetReturn.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetFly.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornetDie.h">
+      <Filter>Entities\Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerShootCanon.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadGunnerShootRocket.h">
+      <Filter>Entities\Enemy\HeadGunner</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoShipState.h">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoShipStateHandler.h">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoShipDownState.h">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoShipDropState.h">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoShipUpState.h">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoShip.h">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoSole.h">
+      <Filter>Entities\Enemy\CargoShip</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Core\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLog.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GameGlobal.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDieState.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerReviveState.h">
+      <Filter>Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthX.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Explosive.h">
+      <Filter>World</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{f2600390-74ca-499d-99af-a9cce5ac2cb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper">
+      <UniqueIdentifier>{60ff3288-7cb8-4da0-8aa4-14b0467c87f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{67b71165-da6c-4d69-8985-0034bb4ae2fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{849587b6-be79-4417-ad83-9cd107111439}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World">
+      <UniqueIdentifier>{7dda6e4c-eb92-422b-a3dc-6d9b0a2dc219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{1b280b5a-576c-4e23-99dd-afa6af513317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{48d15e3b-a7f3-47e6-a8d7-7f366816b643}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemy">
+      <UniqueIdentifier>{1e98a3be-5707-4592-bb2f-b38391d83745}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Ground">
+      <UniqueIdentifier>{df43c6b1-6e39-453f-8a44-adf82eb63ae3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Item">
+      <UniqueIdentifier>{9773de87-0d07-434f-8d43-ff03bfb1eeb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemy\BlastHornet">
+      <UniqueIdentifier>{8264c7f4-5185-4d1c-9e18-a4d20dedb089}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemy\CarryArm">
+      <UniqueIdentifier>{55724f17-8ea1-4c8e-9dab-c7f09b31f1ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemy\HeadGunner">
+      <UniqueIdentifier>{e5f94147-340e-4e79-b208-c18573185277}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemy\Helit">
+      <UniqueIdentifier>{86000a7e-a606-4e89-93e5-45353a0b572c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemy\NotorBanger">
+      <UniqueIdentifier>{5c2c7b7d-14ed-4816-9550-f11484970fcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemy\Bee">
+      <UniqueIdentifier>{feec22ce-2c58-48e0-95cd-26483fe4d6a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Player">
+      <UniqueIdentifier>{7564f464-34bb-4ac0-97c2-4b61affc44f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemy\Byte">
+      <UniqueIdentifier>{e4d925f7-3923-4289-bf2d-288df3e55766}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemy\Shuriken">
+      <UniqueIdentifier>{355ebffe-196e-4a8f-857f-cfc32506640c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemy\CargoShip">
+      <UniqueIdentifier>{f6dd8fa4-6bca-4834-acfb-9f35d383ce44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Sound">
+      <UniqueIdentifier>{2412c1db-1a83-49f7-80e5-87bf3a1eb4cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

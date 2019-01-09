@@ -1,9 +1,12 @@
 ﻿#pragma once
+#include "Explosive.h"
 
 namespace Define
 {
 	const float BYTE_SPEED = 400.0f;		//Vận tốc húc
 	const float BYTE_ACCELERATION = 10.0f;	//Gia tốc húc
+
+	const int BYTE_HP = 48;
 }
 
 class ByteStateHandler

@@ -33,6 +33,7 @@ private:
 	Door * currentDoor;
 	Entity * checkPoint;
 	HealthBar *x_health;
+	HealthBar *boss_health;
 
 	bool doorLock;
 };

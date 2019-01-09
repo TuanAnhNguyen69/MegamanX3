@@ -46,7 +46,7 @@ void Byte::Initialize()
 	this->InitializeSprite(Engine::GetEngine()->GetGraphics()->GetDevice(), "byte", 100, 100);
 	this->SetFace(true);
 	this->ChangeState(ByteStateHandler::StateName::Standing);
-	this->HP = 40;
+	this->HP = Define::BYTE_HP;
 }
 
 
@@ -62,8 +62,22 @@ void Byte::Update()
 
 	if (this->GetHP() <= 0 && !dead)
 	{
+		timeStartDie = clock();
 		this->ChangeState(ByteStateHandler::StateName::Die);
 		dead = true;
+	}
+
+	if (dead)
+	{
+		timeDoneDie = clock();
+		int numAdd = (timeDoneDie - timeStartDie) % 100;
+		if (numAdd == 0)
+		{
+			explosive = new Explosive();
+			explosive->SetPosition(this->GetPosition().x, this->GetPosition().y);
+			EntityManager::GetInstance()->AddEntity(explosive);
+		}
+
 	}
 
 	Enemy::Update();

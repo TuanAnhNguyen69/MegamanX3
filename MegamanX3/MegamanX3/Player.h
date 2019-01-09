@@ -48,6 +48,9 @@ public:
 		BlockRight,
 		None
 	};
+
+	int GetHP();
+
 	BlockType blockType;
 private:
 

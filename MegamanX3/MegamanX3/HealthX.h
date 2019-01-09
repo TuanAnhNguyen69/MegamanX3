@@ -6,7 +6,7 @@ class Entity;
 class HealthBar : public Entity
 {
 public:
-	HealthBar();
+	HealthBar(EntityId id);
 	~HealthBar();
 
 	void Update(int value, D3DXVECTOR3 pos);
@@ -14,5 +14,6 @@ public:
 
 private:
 	AnimatedSprite * sprite;
+	EntityId id;
 };
 

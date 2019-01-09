@@ -53,4 +53,8 @@ private:
 
 	D3DXVECTOR3 playerPos;
 	D3DXVECTOR3 pointA, pointB;
+
+	clock_t timeStartDie, timeDoneDie;
+
+	Explosive *explosive;
 };

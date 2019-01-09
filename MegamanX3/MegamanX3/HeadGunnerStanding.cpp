@@ -20,16 +20,20 @@ HeadGunnerStanding::~HeadGunnerStanding()
 
 void HeadGunnerStanding::Load()
 {
+	isColliBot = false;
 	isLeft = handler->GetIsLeft();
 	entity->SetSprite(sprite);
 	entity->SetVelocity(0, 0);
 	timeStartState = clock();
 	entity->SetReverse(!isLeft);
-	entity->AddVelocityY(10.0f);
 }
 
 void HeadGunnerStanding::Update()
 {
+	if (!isColliBot)
+	{
+		entity->AddVelocityY(10.0f);
+	}
 	timeCount = clock();
 	int dt = (timeCount - timeStartState) / 1000;
 
@@ -51,6 +55,7 @@ void HeadGunnerStanding::Update()
 	}
 
 
+
 	
 }
 
@@ -64,6 +69,7 @@ void HeadGunnerStanding::OnCollision(Entity * impactor, Entity::CollisionSide si
 		{
 			entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top + 1));
 			entity->SetVelocity(0, 0);
+			isColliBot = true;
 			break;
 		}
 		}

@@ -277,8 +277,8 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				HeadGunner * headGunner = new HeadGunner(this->player, EntityId::RightFaceHeadGunner_ID);
 				headGunner->SetPosition(posX + width / 2, posY + height / 2);
 				headGunner->SetScale(2, 2);
-				headGunner->SetBound(width, height);
-				headGunner->Initialize(true);
+				headGunner->SetBound(50, 100);
+				headGunner->Initialize(false);
 				AddEntity(headGunner);
 				break;
 			}
@@ -288,7 +288,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 				HeadGunner * headGunner = new HeadGunner(this->player, EntityId::LeftFaceHeadGunner_ID);
 				headGunner->SetPosition(posX + width / 2, posY + height / 2);
 				headGunner->SetScale(2, 2);
-				headGunner->SetBound(width, height);
+				headGunner->SetBound(50, 100);
 				headGunner->Initialize(true);
 				AddEntity(headGunner);
 				break;

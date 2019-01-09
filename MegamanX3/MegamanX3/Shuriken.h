@@ -47,5 +47,9 @@ private:
 	bool seen;
 	bool remove;
 	bool dead;
+
+	clock_t timeStartDie, timeDoneDie;
+
+	Explosive *explosive;
 };
 
