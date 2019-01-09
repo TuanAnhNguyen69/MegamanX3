@@ -68,7 +68,9 @@ void Camera::Update(D3DXVECTOR3 center)
 		return;
 	}
 
-	CheckCameraPath();
+	if (!lock) {
+		CheckCameraPath();
+	}
 
 	D3DXVECTOR3 cameraCenter = center;
 	
@@ -152,6 +154,27 @@ void Camera::AutoMove()
 	D3DXVECTOR3 center = GetCenter();
 	this->SetCenter(center.x + 3, center.y);
 	autoMovedDistance += 3;
+}
+
+void Camera::Lock()
+{
+	lock = true;
+	this->range = new RECT();
+	range->top =  GetBound().top;
+	range->bottom = GetBound().bottom;
+	range->left = GetBound().left;
+	range->right = GetBound().right;
+
+}
+
+void Camera::Unlock()
+{
+	lock = false;
+}
+
+bool Camera::IsLock()
+{
+	return lock;
 }
 
 bool Camera::IsAutoMoving()

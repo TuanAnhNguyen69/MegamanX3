@@ -242,6 +242,10 @@ bool Entity::IsRemove()
 	return isRemove;
 }
 
+void Entity::Reset()
+{
+}
+
 void Entity::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 

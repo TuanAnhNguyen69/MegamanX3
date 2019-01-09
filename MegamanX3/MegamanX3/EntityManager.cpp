@@ -29,13 +29,13 @@ void EntityManager::Update()
 	for (int index = 0; index < size; index++) {
 		if (Collision::IsCollide(collidableEntity[index]->GetBound(), camera->GetBound()))
 		{
+			if (collidableEntity[index]->entityId == Canon_ID) {
+				int a = 0;
+			}
+
 			if (camera) {
 				collidableEntity[index]->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
 					SCREEN_HEIGHT / 2 - camera->GetCenter().y);
-			}
-
-			if (collidableEntity[index]->entityId == Canon_ID) {
-				int a = 0;
 			}
 
 			collidableEntity[index]->Update();
@@ -48,6 +48,7 @@ void EntityManager::Update()
 				RemoveEntity(collidableEntity[index]);
 			}
 		}
+
 	}
 }
 
@@ -57,10 +58,13 @@ void EntityManager::Render()
 	quadTree->GetEntitiesCollideAble(collidableEntity, camera->GetBound());
 	int size = collidableEntity.size();
 	for (int index = 0; index < size; index++) {
-		if (collidableEntity[index]->entityId == EntityId::CargoSole_ID) {
-			continue;
+		if (Collision::IsCollide(collidableEntity[index]->GetBound(), camera->GetBound()))
+		{
+			if (collidableEntity[index]->entityId == EntityId::CargoSole_ID) {
+				continue;
+			}
+			collidableEntity[index]->Render();
 		}
-		collidableEntity[index]->Render();
 	}
 }
 
@@ -511,6 +515,10 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			}
 		}
 	}
+}
+
+void EntityManager::DisableEntity()
+{
 }
 
 QuadTree * EntityManager::GetQuadTree()

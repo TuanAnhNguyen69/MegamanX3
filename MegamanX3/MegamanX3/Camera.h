@@ -22,6 +22,9 @@ public:
 	void CheckCameraPath();
 	void StopAutoMove();
 	void AutoMove();
+	void Lock();
+	void Unlock();
+	bool IsLock();
 	bool IsAutoMoving();
 	int GetAutoMovedDistance();
 
@@ -33,6 +36,7 @@ private:
 	RECT * range;
 	int width;
 	int height;
+	bool lock;
 	D3DXVECTOR3 center;
 	void SetRange(RECT * rect);
 	bool autoMoving;

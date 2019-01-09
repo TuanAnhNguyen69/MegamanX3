@@ -31,19 +31,18 @@ GameScene::~GameScene()
 
 bool GameScene::Initialize()
 {
-
 	map = new Background();
 	map->Initialize("blast_hornet_state", 4);
-	
+
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 	camera->Initialize("blast_hornet_state");
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	player->SetPosition(2614 * 4, 566 * 4);
+	player->SetPosition(8736, 2151);
 	camera->SetCenter(player->GetPosition());
 
-	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());	
+	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());
 
 	Sound::getInstance()->loadSound((char*)"sound/normal_bullet.wav", "normal_Bullet");
 	Sound::getInstance()->setVolume(120.0f, "normal_Bullet");
@@ -51,12 +50,9 @@ bool GameScene::Initialize()
 	Sound::getInstance()->loadSound((char*)"sound/soundtrack.wav", "soundtrack");
 	Sound::getInstance()->setVolume(90.0f, "soundtrack");
 
-	
 	x_health = new HealthX(player);
 	x_health->SetPosition(player->GetPosition().x - 100, player->GetPosition().y - 100);
 	x_health->SetBound(14, 52);
-
-
 
 	Sound::getInstance()->play("soundtrack", true, 0);
 
@@ -103,17 +99,22 @@ void GameScene::Update()
 		Revive();
 	}
 
-	if (currentBoss && currentBoss->GetHP() > 0) {
-		doorLock = true;
+	if (currentBoss) {
+		if (currentBoss->GetEntityId() == Cargo_ID) {
+			camera->Lock();
+			doorLock = true;
+		}
+		else if (currentBoss->GetHP() > 0) {
+			doorLock = true;
+		}
+		else {
+			doorLock = false;
+			currentBoss = nullptr;
+		}
 	}
 	else {
+		camera->Unlock();
 		doorLock = false;
-	}
-
-	if (checkPoint) {
-			std::cout << "vel" << checkPoint->GetVelocity().x << std::endl;
-			std::cout << "posX" << checkPoint->GetPosition().x << std::endl;
-			std::cout << "posY" << checkPoint->GetPosition().y << std::endl;
 	}
 
 	if (currentDoor && currentDoor->GetState() == Door::DoorState::OPENED) {
@@ -158,7 +159,6 @@ void GameScene::CheckCollision()
 			RECT broadphase = Collision::GetSweptBroadphaseRect(player);
 			if (Collision::IsCollide(broadphase, collidableEntity.at(index)->GetBound()))
 			{
-				
 				Entity::CollisionReturn collideData;
 				float collisionTime = Collision::SweptAABB(player, collidableEntity.at(index), collideData);
 				if (collisionTime < 1.0f) //collisiontime > 0 &&
@@ -188,7 +188,6 @@ void GameScene::CheckCollision()
 				}
 			}
 		}
-		
 	}
 
 	if (widthBottom < Define::PLAYER_BOTTOM_RANGE_FALLING) {

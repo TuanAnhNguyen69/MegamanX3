@@ -138,6 +138,7 @@ public:
 protected:
 	int width;
 	int height;
+	virtual void Reset();
 private:
 	D3DXMATRIX transformMatrix;
 	D3DXVECTOR2 scale;
@@ -147,8 +148,8 @@ private:
 	EntityId entityId;
 	Sprite *sprite;
 	bool reverse;
-
 	bool isRemove;
+	RECT initialRect;
 };
 
 #endif
