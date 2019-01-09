@@ -275,7 +275,7 @@ void Player::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::C
 		OnElevatorCollision(impactor, side, data);
 		break;
 	case EntityId::Door_ID:
-		OnDoorCollision(impactor, side, data);
+		OnPlatformCollision(impactor, side, data);
 		break;
 	case EntityId::GunnerRocket_ID:
 	case EntityId::HeliRocket_ID:
@@ -464,7 +464,7 @@ void Player::OnConveyorCollision(Entity * impactor, Entity::CollisionSide side, 
 	}
 }
 
-void Player::OnDoorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+void Player::OnPlatformCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
 	if (((Door *)impactor)->IsLock()) {
 		return;
