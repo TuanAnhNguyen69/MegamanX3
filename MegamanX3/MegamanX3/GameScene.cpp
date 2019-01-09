@@ -42,18 +42,29 @@ bool GameScene::Initialize()
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	/*player->SetPosition(300, 1700);*/	
+	player->SetPosition(300, 1700);	
 	/*player->SetPosition(15651, 3860);*/
 	//player->SetPosition(300, 1700);
 
-	player->SetPosition(9800, 2200);
+	/*player->SetPosition(6200, 1800);*/
 	camera->SetCenter(player->GetPosition());
 
 	//EntityManager::GetInstance()->Initialize(player, camera, "testDoor", map->GetWidth(), map->GetHeight());
 	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());	
 
-	//Sound::getInstance()->loadSound((char*)"sound/BlastHornet.wav", "blasthornet");
-	//Sound::getInstance()->play("blasthornet", false, 1);
+	Sound::getInstance()->loadSound((char*)"sound/aircraft.wav", "aircraft");
+	Sound::getInstance()->loadSound((char*)"sound/BlastHornet.wav", "blasthornet");
+	Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion");
+	Sound::getInstance()->loadSound((char*)"sound/health_up.wav", "health_up");
+	Sound::getInstance()->loadSound((char*)"sound/item.wav", "item");
+	Sound::getInstance()->loadSound((char*)"sound/normal_bullet.wav", "normal_bullet");
+	Sound::getInstance()->loadSound((char*)"sound/player_climb.wav", "player_climb");
+	Sound::getInstance()->loadSound((char*)"sound/player_damaged.wav", "player_damaged");
+	Sound::getInstance()->loadSound((char*)"sound/player_die.wav", "player_die");
+	Sound::getInstance()->loadSound((char*)"sound/player_load_power.wav", "blasthornet");
+	Sound::getInstance()->loadSound((char*)"sound/power_bullet.wav", "power_bullet");
+	Sound::getInstance()->loadSound((char*)"sound/shoot_canon.wav", "shoot_canon");
+	Sound::getInstance()->loadSound((char*)"sound/shoot_rocket.wav", "shoot_rocket");
 
 	debugDraw = new DebugDraw();
 	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));

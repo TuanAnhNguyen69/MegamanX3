@@ -66,9 +66,8 @@ void NotorBangerShoot::Update()
 				canon->Initialize(isHigh, isLeft);
 				canon->SetScale(2, 2);
 				canon->SetBound(7, 7);
-				EntityManager::GetInstance()->AddEntity(canon);
-				Sound::getInstance()->loadSound((char*)"sound/shoot_canon.wav", "canon");
-				Sound::getInstance()->play("canon", false, 1);
+				EntityManager::GetInstance()->AddEntity(canon);			
+				Sound::getInstance()->play("shoot_canon", false, 1);
 
 				hadShoot = true;
 				ammo--;
@@ -88,4 +87,12 @@ void NotorBangerShoot::Update()
 
 void NotorBangerShoot::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	if ((impactor->GetEntityId() == EntityId::Platform_ID
+		|| impactor->GetEntityId() == EntityId::Roof_ID))
+	{
+		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+		entity->SetVelocity(0, 0);
+		//handler->ChangeState(NotorBangerStateHandler::StateName::Standing);		
+		return;
+	}
 }

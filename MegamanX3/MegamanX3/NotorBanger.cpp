@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "NotorBanger.h"
+#include "Conveyor.h"
 
 
 NotorBanger::NotorBanger(Player *_player) : Enemy(EntityId::NotorBanger_ID, _player)
@@ -57,9 +58,8 @@ void NotorBanger::Initialize()
 void NotorBanger::Update()
 {
 	if (this->IsRemove())
-	{
-		Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_notorbanger");
-		Sound::getInstance()->play("explosion_notorbanger", false, 1);
+	{	
+		Sound::getInstance()->play("explosion", false, 1);
 		EntityManager::GetInstance()->RemoveEntity(this);		
 		return;
 	}
@@ -142,6 +142,19 @@ NotorBangerStateHandler::MoveDirection NotorBanger::GetMoveDirection()
 
 void NotorBanger::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
+	switch (impactor->GetEntityId()) {
+	case EntityId::LeftBlueConveyor_ID:
+	case EntityId::RightBlueConveyor_ID:
+	case EntityId::LeftYellowConveyor_ID:
+	case EntityId::RightYellowConveyor_ID:
+	case EntityId::LeftSmallConveyor_ID:
+	case EntityId::RightSmallConveyor_ID:
+		OnConveyorCollision(impactor, side, data);
+		break;
+	default:
+		break;
+	}
+
 	Enemy::OnCollision(impactor, side, data);
 	if (currentState)
 	{
@@ -186,4 +199,22 @@ bool NotorBanger::HadChangeHigh()
 void NotorBanger::SetHadChangeHigh(bool hadChangeHigh)
 {
 	this->hadChangeHigh = hadChangeHigh;
+}
+
+void NotorBanger::OnConveyorCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
+	switch (side)
+	{
+	case Entity::Left:
+	case Entity::Right:
+	case Entity::Top:
+		break;
+	case Entity::Bottom:
+	case Entity::BottomRight:
+	case Entity::BottomLeft:
+		this->AddPosition(((Conveyor*)(impactor))->GetSpeed() / 10, 0);
+		break;
+	default:
+		break;
+	}
 }

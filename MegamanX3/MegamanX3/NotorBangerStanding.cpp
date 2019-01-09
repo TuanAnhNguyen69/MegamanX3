@@ -25,15 +25,20 @@ void NotorBangerStanding::Load()
 
 void NotorBangerStanding::Update()
 {
-	handler->ChangeState(NotorBangerStateHandler::StateName::ChangeBarrel);
+	entity->AddVelocityY(5.0f);
+	
 }
 
 void NotorBangerStanding::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	//if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
+	if ((impactor->GetEntityId() == EntityId::Platform_ID
+		|| impactor->GetEntityId() == EntityId::Roof_ID))
 	{
 		entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
-		entity->SetVelocityY(0);
-		handler->ChangeState(NotorBangerStateHandler::StateName::Standing);
+		entity->SetVelocity(0, 0);
+		//handler->ChangeState(NotorBangerStateHandler::StateName::Standing);
+		handler->ChangeState(NotorBangerStateHandler::StateName::ChangeBarrel);
+		return;
 	}
+
 }
