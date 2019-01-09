@@ -31,6 +31,4 @@ void HealthBar::Initialize()
 	
 }
 
-void HealthBar::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
-{
-}
+
