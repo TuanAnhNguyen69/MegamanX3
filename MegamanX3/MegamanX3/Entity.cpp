@@ -192,6 +192,19 @@ void Entity::AddVelocityY(float y)
 	velocity.y += y;
 }
 
+void Entity::SetInitialRect(int left, int top, int right, int bottom)
+{
+	initialRect.left = left;
+	initialRect.right = right;
+	initialRect.top = top;
+	initialRect.bottom = bottom;
+}
+
+RECT Entity::GetInitialRect()
+{
+	return initialRect;
+}
+
 void Entity::AddPosition(float x, float y)
 {
 	position.x += x;
@@ -240,6 +253,10 @@ void Entity::SetRemove()
 bool Entity::IsRemove()
 {
 	return isRemove;
+}
+
+void Entity::Reset()
+{
 }
 
 void Entity::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)

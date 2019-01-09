@@ -43,6 +43,8 @@ private:
 	QuadTree *quadTree;
 	void LoadQuadtree(LPCTSTR filePath);
 	Player * player;
+	std::vector<Entity*> disableEntities;
+	void DisableEntity();
 };
 
 #endif

@@ -30,12 +30,7 @@ void Enemy::Update()
 
 void Enemy::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() == EntityId::MegamanBullet_ID)
-	{
-		if (this->GetHP() > 0 && !((PlayerBullet*) impactor)->IsHitted()) {
-			this->SubHP(((PlayerBullet*)impactor)->GetDamage());
-		}
-	}
+	
 }
 
 bool Enemy::IsActive()

@@ -32,7 +32,7 @@ public:
 	void Shoot();
 	void ChangeBulletState();
 	void Render();
-	void AutoMove();
+	void AutoMoveFoward();
 	int GetAutoMovedDistance();
 	bool NeedRevive();
 	void RequireRevive();

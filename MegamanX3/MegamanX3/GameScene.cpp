@@ -5,7 +5,7 @@
 #include <vector>
 
 const int PLAYER_AUTO_MOVE_DISTANCE = 176;
-const int CAMERA_AUTO_MOVE_DISTANCE = 528;
+const int CAMERA_AUTO_MOVE_DISTANCE_DOOR = 528;
 
 GameScene::GameScene()
 {
@@ -31,20 +31,18 @@ GameScene::~GameScene()
 
 bool GameScene::Initialize()
 {
-
 	map = new Background();
 	map->Initialize("blast_hornet_state", 4);
-	
+
 	camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 	camera->Initialize("blast_hornet_state");
 
 	player = new Player();
 	player->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), camera);
-	//player->SetPosition(2614 * 4, 566 * 4);
-	player->SetPosition(15450, 3850);
+	player->SetPosition(11944, 2151);
 	camera->SetCenter(player->GetPosition());
 
-	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());	
+	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());
 
 	Sound::getInstance()->loadSound((char*)"sound/aircraft.wav", "aircraft");
 	Sound::getInstance()->loadSound((char*)"sound/BlastHornet.wav", "blasthornet");
@@ -106,33 +104,56 @@ void GameScene::Update()
 		Revive();
 	}
 
-	if (currentBoss && currentBoss->GetHP() > 0) {
-		doorLock = true;
+	if (currentBoss) {
+		if (currentBoss->GetEntityId() == Cargo_ID) {
+			camera->Lock();
+			if (player->GetReverse()) {
+				camera->AutoMoveReverse();
+			}
+			else {
+				camera->AutoMoveFoward();
+			}
+
+			if (camera->GetAutoMovedDistance() >= SCREEN_WIDTH / 2 - 50) {
+				camera->StopAutoMove();
+				player->SetMovable(true);
+			}
+			else {
+				player->SetMovable(false);
+			}
+		}
+		else if (currentBoss->GetHP() > 0) {
+			doorLock = true;
+		}
+		else {
+			doorLock = false;
+			currentBoss = nullptr;
+		}
 	}
 	else {
+		camera->Unlock();
+		if (!camera->IsAutoMoving()) {
+			camera->ResetDistance();
+		}
 		doorLock = false;
-	}
-
-	if (checkPoint) {
-			std::cout << "vel" << checkPoint->GetVelocity().x << std::endl;
-			std::cout << "posX" << checkPoint->GetPosition().x << std::endl;
-			std::cout << "posY" << checkPoint->GetPosition().y << std::endl;
 	}
 
 	if (currentDoor && currentDoor->GetState() == Door::DoorState::OPENED) {
 		if (!player->GetMovable()) {
-			player->AutoMove();
-			camera->AutoMove();
+			player->AutoMoveFoward();
+			camera->AutoMoveFoward();
 			if (player->GetAutoMovedDistance() >= PLAYER_AUTO_MOVE_DISTANCE) {
 				player->SetMovable(true);
 			}
 		}
 
-		if (camera->GetAutoMovedDistance() >= CAMERA_AUTO_MOVE_DISTANCE) {
+		if (camera->GetAutoMovedDistance() >= CAMERA_AUTO_MOVE_DISTANCE_DOOR) {
 			camera->StopAutoMove();
+			camera->ResetDistance();
 			currentDoor->SetState(Door::DoorState::CLOSING);
 		}
 	}
+
 	CheckCollision();
 	EntityManager::GetInstance()->CheckCollide();
 	camera->Update(player->GetPosition());
@@ -168,7 +189,6 @@ void GameScene::CheckCollision()
 			RECT broadphase = Collision::GetSweptBroadphaseRect(player);
 			if (Collision::IsCollide(broadphase, collidableEntity.at(index)->GetBound()))
 			{
-				
 				Entity::CollisionReturn collideData;
 				float collisionTime = Collision::SweptAABB(player, collidableEntity.at(index), collideData);
 				if (collisionTime < 1.0f) //collisiontime > 0 &&
@@ -198,7 +218,6 @@ void GameScene::CheckCollision()
 				}
 			}
 		}
-		
 	}
 
 	if (widthBottom < Define::PLAYER_BOTTOM_RANGE_FALLING) {

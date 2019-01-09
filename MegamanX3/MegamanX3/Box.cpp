@@ -182,13 +182,6 @@ void Box::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::Col
 		}
 		}
 	}
-
-	if (impactor->GetEntityId() == EntityId::MegamanBullet_ID)
-	{
-		if (this->GetHP() > 0 && !((PlayerBullet*)impactor)->IsHitted()) {
-			this->SubHP(((PlayerBullet*)impactor)->GetDamage());
-		}
-	}
 }
 
 void Box::SetFall(bool isFall)
