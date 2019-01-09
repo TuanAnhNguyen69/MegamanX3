@@ -28,8 +28,7 @@ void ByteDie::Load()
 	entity->SetVelocity(0, 0);
 	timeStartState = clock();
 
-	Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_die");
-	Sound::getInstance()->play("explosion_die", true, 0);
+	Sound::getInstance()->play("explosion", false, 1);
 }
 
 void ByteDie::Update()

@@ -44,9 +44,21 @@ void HeadGunnerRocket::Update()
 	else {
 		if (isLeft) {
 			this->AddVelocityX(-10.0);
+			if (this->GetPosition().y > player->GetPosition().y) {
+				this->AddVelocityY(-10.0f);
+			}
+			else {
+				this->AddVelocityY(10.0f);
+			}
 		}
 		else {
 			this->AddVelocityX(+10.0);
+			if (this->GetPosition().y > player->GetPosition().y) {
+				this->AddVelocityY(-10.0f);
+			}
+			else {
+				this->AddVelocityY(10.0f);
+			}
 		}
 	}
 
@@ -69,8 +81,7 @@ void HeadGunnerRocket::OnCollision(Entity * impactor,  Entity::CollisionSide sid
 			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
 				0, 7, 8, 50, 50);
 			this->SetSprite(sprite);
-			Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_headgunner");
-			Sound::getInstance()->play("explosion_headgunner", false, 1);
+			Sound::getInstance()->play("explosion", false, 1);
 			this->hitted = true;
 		}
 	}

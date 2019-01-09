@@ -41,9 +41,8 @@ void HeadGunnerShootRocket::Update()
 			rocket->Initialize(isLeft);
 			rocket->SetScale(2, 2);
 			rocket->SetBound(25, 9);
-			EntityManager::GetInstance()->AddEntity(rocket);
-			Sound::getInstance()->loadSound((char*)"sound/shoot_rocket.wav", "rocket_headgunner");
-			Sound::getInstance()->play("rocket_headgunner", false, 1);
+			EntityManager::GetInstance()->AddEntity(rocket);		
+			Sound::getInstance()->play("shoot_rocket", false, 1);
 			hadShoot = true;
 		}
 	}

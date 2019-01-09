@@ -44,18 +44,21 @@ bool GameScene::Initialize()
 
 	EntityManager::GetInstance()->Initialize(player, camera, "blast_hornet_state", map->GetWidth(), map->GetHeight());
 
-	Sound::getInstance()->loadSound((char*)"sound/normal_bullet.wav", "normal_Bullet");
-	Sound::getInstance()->setVolume(120.0f, "normal_Bullet");
-
-	Sound::getInstance()->loadSound((char*)"sound/soundtrack.wav", "soundtrack");
-	Sound::getInstance()->setVolume(90.0f, "soundtrack");
-
-	x_health = new HealthX(player);
-	x_health->SetPosition(player->GetPosition().x - 100, player->GetPosition().y - 100);
-	x_health->SetBound(14, 52);
-
-	Sound::getInstance()->play("soundtrack", true, 0);
-
+	Sound::getInstance()->loadSound((char*)"sound/aircraft.wav", "aircraft");
+	Sound::getInstance()->loadSound((char*)"sound/BlastHornet.wav", "blasthornet");
+	Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion");
+	Sound::getInstance()->loadSound((char*)"sound/health_up.wav", "health_up");
+	Sound::getInstance()->loadSound((char*)"sound/item.wav", "item");
+	Sound::getInstance()->loadSound((char*)"sound/normal_bullet.wav", "normal_bullet");
+	Sound::getInstance()->loadSound((char*)"sound/player_climb.wav", "player_climb");
+	Sound::getInstance()->loadSound((char*)"sound/player_damaged.wav", "player_damaged");
+	Sound::getInstance()->loadSound((char*)"sound/player_die.wav", "player_die");
+	Sound::getInstance()->loadSound((char*)"sound/player_load_power.wav", "blasthornet");
+	Sound::getInstance()->loadSound((char*)"sound/power_bullet.wav", "power_bullet");
+	Sound::getInstance()->loadSound((char*)"sound/shoot_canon.wav", "shoot_canon");
+	Sound::getInstance()->loadSound((char*)"sound/shoot_rocket.wav", "shoot_rocket");
+	x_health = new HealthBar();
+	
 	debugDraw = new DebugDraw();
 	debugDraw->SetColor(D3DCOLOR_XRGB(50, 96, 55));
 	debugDraw->SetLineSize(5);
@@ -153,7 +156,9 @@ void GameScene::Update()
 	EntityManager::GetInstance()->CheckCollide();
 	camera->Update(player->GetPosition());
 	player->Update();
-	x_health->Update();
+	x_health->SetTranslation(SCREEN_WIDTH / 2 - camera->GetCenter().x,
+		SCREEN_HEIGHT / 2 - camera->GetCenter().y);
+	x_health->Update(16, camera->GetCenter());
 	EntityManager::GetInstance()->Update();
 }
 
@@ -217,11 +222,12 @@ void GameScene::Render()
 {
 	map->RenderBackground(camera);
 	player->Render();
-	x_health->Render();
+	
 	auto list = EntityManager::GetInstance()->GetAllEntities();
-	for (int index = 0; index < list.size(); index++) {
-		debugDraw->DrawRect(list.at(index)->GetBound(), camera);
-	}
+	//for (int index = 0; index < list.size(); index++) {
+	//	debugDraw->DrawRect(list.at(index)->GetBound(), camera);
+	//}
 	EntityManager::GetInstance()->Render();
-	DrawQuadtree(EntityManager::GetInstance()->GetQuadTree());
+	//DrawQuadtree(EntityManager::GetInstance()->GetQuadTree());
+	x_health->Render();
 }

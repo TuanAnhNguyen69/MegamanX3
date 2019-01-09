@@ -2,31 +2,33 @@
 #include "HealthX.h"
 
 
-HealthX::HealthX(Player *player) : Entity(EntityId::HealthX_ID)
+HealthBar::HealthBar() : Entity()
 {
 	sprite = new AnimatedSprite(10, 1, false);
 	sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "x_health",
 		0, 16, 17, 14, 52);
 
-	this->player = player;
-
 	this->SetSprite(sprite);
+
+	this->SetScale(2, 2);
 }
 
 
-HealthX::~HealthX()
+HealthBar::~HealthBar()
 {
 
 }
 
-void HealthX::Update()
+void HealthBar::Update(int value, D3DXVECTOR3 pos)
 {
+	this->SetPosition(pos.x - SCREEN_WIDTH / 2  + 24, pos.y - SCREEN_HEIGHT / 2 + 120);
+	this->sprite->SetFrameRange(value, value);
 	Entity::Update();
-	this->SetPosition(player->GetPosition().x - 100, player->GetPosition().y - 100);
-	this->sprite->SetFrame(((Enemy*)player)->GetHP() / 2);
 }
 
-void HealthX::Initialize()
+void HealthBar::Initialize()
 {
 	
 }
+
+

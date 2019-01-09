@@ -119,8 +119,7 @@ void Canon::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::C
 			sprite->Initialize(Engine::GetEngine()->GetGraphics()->GetDevice(), "die",
 				0, 7, 8, 50, 50);
 			this->SetSprite(sprite);
-			Sound::getInstance()->loadSound((char*)"sound/explosion.wav", "explosion_canon");
-			Sound::getInstance()->play("explosion_canon", false, 1);
+			Sound::getInstance()->play("explosion", false, 1);
 			this->hitted = true;
 		}
 	}

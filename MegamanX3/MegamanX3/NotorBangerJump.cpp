@@ -71,51 +71,54 @@ void NotorBangerJump::Update()
 
 void NotorBangerJump::OnCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() != EntityId::Platform_ID)
+	if (impactor->GetEntityId() == EntityId::Platform_ID 
+		|| impactor->GetEntityId() == EntityId::Roof_ID)
 	{
-		return;
-	}
-	switch (side)
-	{
-
-	case Entity::Left:
-	{
-		entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
-		entity->SetVelocityX(0);
-		break;
-	}
-
-	case Entity::Right:
-	{
-		entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
-		entity->SetVelocityX(0);
-		break;
-	}
-
-	case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
-	{
-		entity->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top);
-		entity->SetVelocityY(0);
-		break;
-	}
-
-	case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
-	{
-		//if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
+		switch (side)
 		{
-			if (hadJump)
-			{
-				entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
-				entity->SetVelocityY(0);
-				sprite->ResetFrame();
-				handler->ChangeState(NotorBangerStateHandler::StateName::Standing);
-				return;
-			}
+
+		case Entity::Left:
+		{
+			entity->AddPosition(data.RegionCollision.right - data.RegionCollision.left, 0);
+			entity->SetVelocityX(0);
+			entity->AddVelocityY(5.0f);
+			break;
 		}
-		break;
-		
-	}
+
+		case Entity::Right:
+		{
+			entity->AddPosition(-(data.RegionCollision.right - data.RegionCollision.left), 0);
+			entity->SetVelocityX(0);
+			entity->AddVelocityY(5.0f);
+			break;
+		}
+
+		case Entity::TopRight: case Entity::TopLeft: case Entity::Top:
+		{
+			entity->AddPosition(0, data.RegionCollision.bottom - data.RegionCollision.top);
+			entity->AddVelocityY(5.0f);
+			break;
+		}
+
+		case Entity::BottomRight: case Entity::BottomLeft: case Entity::Bottom:
+		{
+			//if (data.RegionCollision.right - data.RegionCollision.left >= 8.0f)
+			{
+				if (hadJump)
+				{
+					entity->AddPosition(0, -(data.RegionCollision.bottom - data.RegionCollision.top));
+					entity->SetVelocity(0, 0);
+					sprite->ResetFrame();
+					handler->ChangeState(NotorBangerStateHandler::StateName::Standing);
+					return;
+				}
+			}
+			break;
+
+		}
 
 
-	}
+		}
+	}		
+
 }

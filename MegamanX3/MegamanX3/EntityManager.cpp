@@ -257,7 +257,7 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			case EntityId::Helit_ID:
 			{
 				Helit * helit = new Helit(player);
-				helit->Initialize();
+				
 				helit->SetPosition(posX + width / 2, (posY + height / 2));
 				helit->SetScale(2, 2);
 				helit->SetBound(width, height);
@@ -279,10 +279,10 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			case EntityId::RightFaceHeadGunner_ID:
 			{
 				HeadGunner * headGunner = new HeadGunner(this->player, EntityId::RightFaceHeadGunner_ID);
-				headGunner->Initialize(true);
 				headGunner->SetPosition(posX + width / 2, posY + height / 2);
 				headGunner->SetScale(2, 2);
 				headGunner->SetBound(width, height);
+				headGunner->Initialize(true);
 				AddEntity(headGunner);
 				break;
 			}
@@ -290,10 +290,10 @@ void EntityManager::LoadQuadtree(LPCTSTR filePath)
 			case EntityId::LeftFaceHeadGunner_ID:
 			{
 				HeadGunner * headGunner = new HeadGunner(this->player, EntityId::LeftFaceHeadGunner_ID);
-				headGunner->Initialize(true);
 				headGunner->SetPosition(posX + width / 2, posY + height / 2);
 				headGunner->SetScale(2, 2);
 				headGunner->SetBound(width, height);
+				headGunner->Initialize(true);
 				AddEntity(headGunner);
 				break;
 			}												

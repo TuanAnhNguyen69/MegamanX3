@@ -45,9 +45,8 @@ void HeadGunnerShootCanon::Update()
 		canon->Initialize(false, isLeft);
 		canon->SetScale(2, 2);
 		canon->SetBound(9, 9);
-		EntityManager::GetInstance()->AddEntity(canon);		
-		Sound::getInstance()->loadSound((char*)"sound/shoot_canon.wav", "canon_headgunner");
-		Sound::getInstance()->play("canon_headgunner", false, 1);
+		EntityManager::GetInstance()->AddEntity(canon);			
+		Sound::getInstance()->play("shoot_canon", false, 1);
 		hadShoot = true;
 		handler->ChangeState(HeadGunnerStateHandler::StateName::Standing);
 	}
