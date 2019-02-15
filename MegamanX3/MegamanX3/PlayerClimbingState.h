@@ -31,5 +31,6 @@ protected:
 	bool isKeyRight;
 	AnimatedSprite *climbSprite;
 	AnimatedSprite *fireSprite;
+	void OnPlatformCollision(Entity *impactor, Entity::CollisionSide side, Entity::CollisionReturn data);
 };
 

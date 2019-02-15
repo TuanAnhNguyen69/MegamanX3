@@ -96,10 +96,30 @@ void PlayerClimbingState::UpdateInput()
 
 void PlayerClimbingState::OnCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
 {
-	if (impactor->GetEntityId() != Platform_ID && impactor->GetEntityId() != Door_ID) {
+	if (impactor->GetEntityId() != Platform_ID && impactor->GetEntityId() != Door_ID && impactor->GetEntityId() != Door_ID) {
 		return;
 	}
+	switch (impactor->GetEntityId())
+	{
+	case Platform_ID:
+	case Door_ID:
+	case EntityId::LeftBlueConveyor_ID:
+	case EntityId::RightBlueConveyor_ID:
+	case EntityId::LeftYellowConveyor_ID:
+	case EntityId::RightYellowConveyor_ID:
+	case EntityId::LeftSmallConveyor_ID:
+	case EntityId::RightSmallConveyor_ID:
+		OnPlatformCollision(impactor, side, data);
+		break;
+	default:
+		break;
+	}
 
+	
+}
+
+void PlayerClimbingState::OnPlatformCollision(Entity * impactor, Entity::CollisionSide side, Entity::CollisionReturn data)
+{
 	Input *input = Engine::GetEngine()->GetInput();
 	switch (side)
 	{
